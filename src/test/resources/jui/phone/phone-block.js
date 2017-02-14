@@ -29,6 +29,12 @@ function choiceItem(choiceBox, item, childPage, dataUrl){
 	}
 }
 
+function selectItem(self, choiceBox, value) {
+	$("#" + choiceBox + "choice").hide();
+	$("#" + choiceBox + "input").val(value);
+	$("#" + choiceBox + "input").next().text($(self).text());
+}
+
 /*加号*/
 function addClick(){
 	var n = 0;
