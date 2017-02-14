@@ -59,4 +59,12 @@ public class Block306 extends Component {
 		}
 		items.add(line);
 	}
+
+	public void addItem(String format, Object... args) {
+		if (items.size() > 2) {
+			throw new RuntimeException("最多只能放3行信息");
+		}
+		items.add(String.format(format, args));
+	}
+
 }
