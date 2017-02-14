@@ -46,8 +46,14 @@ public class Block122 extends Component {
 		if (!"".equals(placeholder))
 			html.println("placeholder='%s'", placeholder);
 		html.println(">");
-		if (!"".equals(content))
+		if (content != null && !"".equals(content))
 			html.println(content);
+		else if(items.size() > 0){
+			input.setValue(items.keySet().iterator().next());
+			html.println(items.get(input.getValue()));
+		}else{
+			html.print("");
+		}
 		html.println("</div>");
 		image.output(html);
 		html.println("</div>");
