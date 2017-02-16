@@ -13,7 +13,6 @@ public class UrlRecord {
 	private Map<String, String> params = new HashMap<>();
 
 	public UrlRecord() {
-
 	}
 
 	public UrlRecord(String site, String caption) {
@@ -33,6 +32,11 @@ public class UrlRecord {
 
 	public UrlRecord setSite(String site) {
 		this.site = site;
+		return this;
+	}
+
+	public UrlRecord setSite(String format, Object... args) {
+		this.site = String.format(format, args);
 		return this;
 	}
 
