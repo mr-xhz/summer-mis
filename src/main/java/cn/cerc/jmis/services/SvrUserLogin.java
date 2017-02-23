@@ -453,6 +453,7 @@ public class SvrUserLogin extends CustomService {
 		rs.setField("Account_", getUserCode());
 		rs.setField("LoginID_", this.getProperty("ID"));
 		rs.setField("Computer_", computer);
+		rs.setField("clientIP_", (String) this.getProperty(Application.clientIP));
 		rs.setField("LoginTime_", TDateTime.Now());
 		rs.setField("ParamValue_", handle.getCorpNo());
 		rs.setField("KeyCardID_", GuidNull);
