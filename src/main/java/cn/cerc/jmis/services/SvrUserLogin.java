@@ -463,7 +463,6 @@ public class SvrUserLogin extends CustomService {
 			// 先将此认证记录删除
 			ds1.delete();
 			// 再将该认证码替换之前自动生成的认证码
-			// TODO 为何不更新 UpdateDate_ 字段？？？
 			ds.edit();
 			ds.setField("VerifyCode_", verifyCode);
 			ds.post();
