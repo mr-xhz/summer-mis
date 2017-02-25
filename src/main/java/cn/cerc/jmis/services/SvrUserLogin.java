@@ -127,11 +127,11 @@ public class SvrUserLogin extends CustomService {
 			else
 				sess.setProperty(Application.roleCode, dsUser.getString("RoleCode_"));
 
-			// 判断是否开启允许使用地藤客户端外的设备登录系统的参数设置
+			// 判断是否开启允许使用客户端外的设备登录系统的参数设置
 			boolean allowUseOtherClient = UserOptions.UserOptionEnabled(this, AllowUseOtherClient);
 			if (!allowUseOtherClient) {
 				if (Application.webclient.equals(deviceId) || !deviceId.equals(deviceId.toUpperCase()))
-					throw new SecurityCheckException("您已开启只允许使用地藤客户端的参数设置，请使用地藤桌面客户端登录系统！");
+					throw new SecurityCheckException("您已开启只允许使用客户端的参数设置，请使用桌面客户端登录系统！");
 			}
 
 			// 判断此帐号是否为附属帐号
@@ -145,7 +145,7 @@ public class SvrUserLogin extends CustomService {
 			//
 			try (MemoryBuffer Buff = new MemoryBuffer(BufferType.getSessionInfo, (String) getProperty("UserID"),
 					deviceId)) {
-				Buff.setField("UserID_", (String) getProperty("UserID"));
+				Buff.setField("UserID_", getProperty("UserID"));
 				Buff.setField("UserCode_", getUserCode());
 				Buff.setField("UserName_", getUserName());
 				Buff.setField("LoginTime_", sess.getProperty(Application.loginTime));
@@ -153,8 +153,8 @@ public class SvrUserLogin extends CustomService {
 				Buff.setField("VerifyMachine", false);
 			}
 			// 返回值于前台
-			getDataOut().getHead().setField("SessionID_", (String) getProperty("ID"));
-			getDataOut().getHead().setField("UserID_", (String) getProperty("UserID"));
+			getDataOut().getHead().setField("SessionID_", getProperty("ID"));
+			getDataOut().getHead().setField("UserID_", getProperty("UserID"));
 			getDataOut().getHead().setField("UserCode_", getUserCode());
 			getDataOut().getHead().setField("CorpNo_", handle.getCorpNo());
 			getDataOut().getHead().setField("YGUser", YGLogin);
@@ -181,7 +181,7 @@ public class SvrUserLogin extends CustomService {
 	// 获取登录状态
 	@Webfunc
 	public boolean getState() {
-		getDataOut().getHead().setField("UserID_", (String) getProperty("UserID"));
+		getDataOut().getHead().setField("UserID_", getProperty("UserID"));
 		getDataOut().getHead().setField("UserCode_", getUserCode());
 		getDataOut().getHead().setField("CorpNo_", handle.getCorpNo());
 		return true;
@@ -285,7 +285,7 @@ public class SvrUserLogin extends CustomService {
 			return false;
 		}
 		if (ds.getInt("Used_") == 2) {
-			throw new SecurityCheckException("您正在使用的这台设备，被管理员设置为禁止登入地藤系统！");
+			throw new SecurityCheckException("您正在使用的这台设备，被管理员设置为禁止登入系统！");
 		}
 		if (ds.getInt("Used_") == 1)
 			return true;
@@ -358,6 +358,30 @@ public class SvrUserLogin extends CustomService {
 		}
 	}
 
+	/**
+	 * 获取用户的移动设备信息
+	 * 
+	 * @throws DataValidateException
+	 */
+	public boolean getMachInfo() throws DataValidateException {
+		Record headIn = getDataIn().getHead();
+		String userCode = headIn.getString("UserCode_");
+		DataValidateException.stopRun("用户帐号不允许为空", "".equals(userCode));
+
+		String corpNo = headIn.getSafeString("CorpNo_");
+		DataValidateException.stopRun("用户帐套不允许为空", "".equals(corpNo));
+
+		SqlQuery cdsTmp = new SqlQuery(this);
+		cdsTmp.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
+		cdsTmp.add("where CorpNo_='%s'and UserCode_='%s'", corpNo, userCode);
+		cdsTmp.add("and Used_=1");
+		cdsTmp.open();
+
+		DataSet dataOut = getDataOut().appendDataSet(cdsTmp);
+		DataValidateException.stopRun(String.format("帐号 %s 还未进行认证，无法发送消息", userCode), dataOut.eof());
+		return true;
+	}
+
 	private void enrollMachineInfo(String corpNo, String userCode, String deviceId, String deviceName) {
 		SqlQuery ds = new SqlQuery(this);
 		ds.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
@@ -369,8 +393,19 @@ public class SvrUserLogin extends CustomService {
 			ds.setField("UserCode_", userCode);
 			ds.setField("VerifyCode_", intToStr(random(900000) + 100000));
 			ds.setField("DeadLine_", TDateTime.Now().incDay(1));
-			ds.setField("MachineType_", 0);
+
 			ds.setField("MachineCode_", deviceId);
+			if (deviceId.startsWith("i_")) {
+				// iOS
+				ds.setField("MachineType_", 6);
+			} else if (deviceId.startsWith("n_")) {
+				// Android
+				ds.setField("MachineType_", 7);
+			} else {
+				// 系统默认
+				ds.setField("MachineType_", 0);
+			}
+
 			ds.setField("MachineName_", deviceName);
 			ds.setField("Remark_", "");
 			ds.setField("Used_", 0);
@@ -378,13 +413,12 @@ public class SvrUserLogin extends CustomService {
 			ds.setField("UpdateDate_", TDateTime.Now());
 			ds.setField("AppUser_", userCode);
 			ds.setField("AppDate_", TDateTime.Now());
-			ds.setField("UpdateKey_", cn.cerc.jdb.other.utils.newGuid());
+			ds.setField("UpdateKey_", newGuid());
 			ds.post();
 		} else if (Application.webclient.equals(deviceId)) {
 			ds.edit();
 			ds.setField("Used_", 0);
 			ds.post();
-
 		}
 	}
 
@@ -448,7 +482,7 @@ public class SvrUserLogin extends CustomService {
 
 		// 增加新的记录
 		Record rs = new Record();
-		rs.setField("UserID_", (String) this.getProperty("UserID"));
+		rs.setField("UserID_", this.getProperty("UserID"));
 		rs.setField("CorpNo_", handle.getCorpNo());
 		rs.setField("Account_", getUserCode());
 		rs.setField("LoginID_", this.getProperty("ID"));

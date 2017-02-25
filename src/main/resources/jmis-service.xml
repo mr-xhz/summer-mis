@@ -44,6 +44,10 @@
 	<bean id="SvrUserLogin.exitSystem" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
 		<property name="funcCode" value="ExitSystem" />
 	</bean>
+	<!-- 获取设备信息-->
+	<bean id="SvrUserLogin.getMachInfo" class="cn.cerc.jmis.services.SvrUserLogin" scope="prototype">
+		<property name="funcCode" value="getMachInfo" />
+	</bean>
 
 	<!-- 异步消息处理 -->
 	<bean id="SvrUserMessages.getWaitList" class="cn.cerc.jmis.services.SvrUserMessages" scope="prototype">
