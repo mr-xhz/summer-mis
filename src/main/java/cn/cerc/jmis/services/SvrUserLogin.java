@@ -127,11 +127,11 @@ public class SvrUserLogin extends CustomService {
 			else
 				sess.setProperty(Application.roleCode, dsUser.getString("RoleCode_"));
 
-			// 判断是否开启允许使用地藤客户端外的设备登录系统的参数设置
+			// 判断是否开启允许使用客户端外的设备登录系统的参数设置
 			boolean allowUseOtherClient = UserOptions.UserOptionEnabled(this, AllowUseOtherClient);
 			if (!allowUseOtherClient) {
 				if (Application.webclient.equals(deviceId) || !deviceId.equals(deviceId.toUpperCase()))
-					throw new SecurityCheckException("您已开启只允许使用地藤客户端的参数设置，请使用地藤桌面客户端登录系统！");
+					throw new SecurityCheckException("您已开启只允许使用客户端的参数设置，请使用桌面客户端登录系统！");
 			}
 
 			// 判断此帐号是否为附属帐号
@@ -285,7 +285,7 @@ public class SvrUserLogin extends CustomService {
 			return false;
 		}
 		if (ds.getInt("Used_") == 2) {
-			throw new SecurityCheckException("您正在使用的这台设备，被管理员设置为禁止登入地藤系统！");
+			throw new SecurityCheckException("您正在使用的这台设备，被管理员设置为禁止登入系统！");
 		}
 		if (ds.getInt("Used_") == 1)
 			return true;
@@ -369,12 +369,12 @@ public class SvrUserLogin extends CustomService {
 		DataValidateException.stopRun("用户帐号不允许为空", "".equals(userCode));
 
 		String corpNo = headIn.getSafeString("CorpNo_");
-		DataValidateException.stopRun("地藤帐套不允许为空", "".equals(corpNo));
+		DataValidateException.stopRun("用户帐套不允许为空", "".equals(corpNo));
 
 		SqlQuery cdsTmp = new SqlQuery(this);
 		cdsTmp.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
 		cdsTmp.add("where CorpNo_='%s'and UserCode_='%s'", corpNo, userCode);
-		cdsTmp.add("and Used_=1 ");
+		cdsTmp.add("and Used_=1");
 		cdsTmp.open();
 
 		DataSet dataOut = getDataOut().appendDataSet(cdsTmp);
