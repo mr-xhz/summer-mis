@@ -54,7 +54,7 @@ public class JPushRecord {
 				push.send(ClientType.Android, machineCode);
 				break;
 			default:
-				throw new RuntimeException("不支持的设备类型 " + machineType);
+				break;
 			}
 		}
 
