@@ -374,7 +374,7 @@ public class SvrUserLogin extends CustomService {
 		SqlQuery cdsTmp = new SqlQuery(this);
 		cdsTmp.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
 		cdsTmp.add("where CorpNo_='%s'and UserCode_='%s'", corpNo, userCode);
-		cdsTmp.add("and Used_=1 and MachineType_>5");
+		cdsTmp.add("and Used_=1 ");
 		cdsTmp.open();
 
 		DataSet dataOut = getDataOut().appendDataSet(cdsTmp);
