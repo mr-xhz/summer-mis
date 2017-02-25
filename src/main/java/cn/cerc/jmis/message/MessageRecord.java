@@ -77,6 +77,11 @@ public class MessageRecord {
 		return this;
 	}
 
+	public MessageRecord setSubject(String format, Object... args) {
+		this.subject = String.format(format, args);
+		return this;
+	}
+
 	public MessageRecord setContent(String content) {
 		this.content = new StringBuffer(content);
 		return this;
