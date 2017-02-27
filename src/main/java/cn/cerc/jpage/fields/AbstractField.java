@@ -43,6 +43,8 @@ public abstract class AbstractField extends Component implements IField {
 	protected String role;
 	//
 	protected String dialog;
+	//dialog 小图标
+	protected String icon;
 	// 栏位说明
 	private HtmlText mark;
 	//
@@ -257,7 +259,10 @@ public abstract class AbstractField extends Component implements IField {
 			if (this.dialog != null) {
 				html.print("<span>");
 				html.print("<a href=\"javascript:%s('%s')\">", this.dialog, this.getId());
-				html.print("<img src=\"images/select-pic.png\">");
+				if(this.icon != null)
+					html.print("<img src=\"%s\">",this.icon);
+				else
+					html.print("<img src=\"images/searchIocn.png\">");
 				html.print("</a>");
 				html.println("</span>");
 			} else {
@@ -523,6 +528,14 @@ public abstract class AbstractField extends Component implements IField {
 				json.put("dateFormat", this.dateFormat);
 			return json.toString().replace("\"", "'");
 		}
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }

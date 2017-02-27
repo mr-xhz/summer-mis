@@ -87,7 +87,8 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		else
 			app = new LocalService(form.getHandle());
 		app.setService("SvrUserLogin.check");
-		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId)) {
+		String IP = getIPAddress();
+		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId, "ClientIP_", IP)) {
 			String sid = app.getDataOut().getHead().getString("SessionID_");
 			if (sid != null && !sid.equals("")) {
 				log.debug(String.format("认证成功，取得sid(%s)", sid));
@@ -131,5 +132,27 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			throw new RuntimeException(headOut.getString("Msg_"));
 		} else
 			return app.getDataOut().getHead().getString("UserCode_");
+	}
+
+	/**
+	 * 获取客户端IP地址
+	 * 
+	 * @return
+	 */
+	public String getIPAddress() {
+		String ip = this.getRequest().getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = this.getRequest().getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = this.getRequest().getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = this.getRequest().getRemoteAddr();
+		}
+		if (ip.equals("0:0:0:0:0:0:0:1")) {
+			ip = "0.0.0.0";
+		}
+		return ip;
 	}
 }
