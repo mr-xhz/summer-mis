@@ -27,6 +27,8 @@ public abstract class AbstractField extends Component implements IField {
 	private String value;
 	// 只读否
 	private boolean readonly;
+	// 自动完成（默认为 off）
+	private boolean autocomplete = false;
 	// 焦点否
 	protected boolean autofocus;
 	//
@@ -190,6 +192,15 @@ public abstract class AbstractField extends Component implements IField {
 		return this;
 	}
 
+	public boolean isAutocomplete() {
+		return autocomplete;
+	}
+
+	public AbstractField setAutocomplete(boolean autocomplete) {
+		this.autocomplete = autocomplete;
+		return this;
+	}
+
 	public boolean isAutofocus() {
 		return autofocus;
 	}
@@ -278,6 +289,11 @@ public abstract class AbstractField extends Component implements IField {
 			}
 			if (this.isReadonly())
 				html.print(" readonly=\"readonly\"");
+			if (this.autocomplete) {
+				html.print("autocomplete=\"on\"");
+			} else {
+				html.print("autocomplete=\"off\"");
+			}
 			if (this.autofocus)
 				html.print(" autofocus");
 			if (this.required)
