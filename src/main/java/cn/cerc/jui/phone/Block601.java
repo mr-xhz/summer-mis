@@ -36,8 +36,14 @@ public class Block601 extends Component {
 		}
 		html.println("<!-- %s -->", this.getClass().getName());
 		html.println("<div class=\"block601\">");
-		for (Image image : items)
+		html.println("<div class=\"swiper-wrapper\">");
+		for (Image image : items){
+			html.println("<div class=\"swiper-slide\">");
 			image.output(html);
+			html.println("</div>");
+		}
+		html.println("</div>");
+		html.println("<div class=\"swiper-pagination\"></div>");
 		html.println("</div>");
 	}
 
