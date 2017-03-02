@@ -22,6 +22,7 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDateTime;
+import cn.cerc.jdb.jiguang.ClientType;
 import cn.cerc.jdb.mysql.BuildQuery;
 import cn.cerc.jdb.mysql.SqlOperator;
 import cn.cerc.jdb.mysql.SqlQuery;
@@ -398,15 +399,17 @@ public class SvrUserLogin extends CustomService {
 			if (deviceId.startsWith("i_")) {
 				// iOS
 				ds.setField("MachineType_", 6);
+				ds.setField("MachineName_", ClientType.IOS);
 			} else if (deviceId.startsWith("n_")) {
 				// Android
 				ds.setField("MachineType_", 7);
+				ds.setField("MachineName_", ClientType.Android);
 			} else {
 				// 系统默认
 				ds.setField("MachineType_", 0);
+				ds.setField("MachineName_", deviceName);
 			}
 
-			ds.setField("MachineName_", deviceName);
 			ds.setField("Remark_", "");
 			ds.setField("Used_", 0);
 			ds.setField("UpdateUser_", userCode);
@@ -497,4 +500,5 @@ public class SvrUserLogin extends CustomService {
 		opear.setTableName(SystemTable.get(SystemTable.getCurrentUser));
 		opear.insert(rs);
 	}
+
 }
