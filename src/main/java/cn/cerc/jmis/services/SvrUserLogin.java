@@ -399,11 +399,11 @@ public class SvrUserLogin extends CustomService {
 			if (deviceId.startsWith("i_")) {
 				// iOS
 				ds.setField("MachineType_", 6);
-				ds.setField("MachineName_", ClientType.IOS);
+				ds.setField("MachineName_", ClientType.IOS.toString());
 			} else if (deviceId.startsWith("n_")) {
 				// Android
 				ds.setField("MachineType_", 7);
-				ds.setField("MachineName_", ClientType.Android);
+				ds.setField("MachineName_", ClientType.Android.toString());
 			} else {
 				// 系统默认
 				ds.setField("MachineType_", 0);
