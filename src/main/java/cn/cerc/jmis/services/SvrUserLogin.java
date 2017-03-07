@@ -246,7 +246,7 @@ public class SvrUserLogin extends CustomService {
 		ds.add("where (%s)", sql);
 		ds.open();
 		if (ds.size() == 0) {
-			headOut.setField("Msg_", "没有找到您的手机号！");
+			headOut.setField("Msg_", "您的手机号码不存在于系统中，如果您需要注册帐号，请 <a href='TFrmContact'>联系客服</a> 进行咨询");
 			return false;
 		}
 
