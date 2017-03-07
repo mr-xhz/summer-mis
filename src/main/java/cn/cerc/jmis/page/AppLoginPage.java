@@ -47,12 +47,6 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			if (form.logon())
 				return true;
 		} catch (Exception e) {
-			if (!e.getMessage().contains("</a>")) {
-				if (password == null || "".equals(password)) {
-					getResponse().sendRedirect("TFrmEasyReg?phone=" + userCode);
-					return false;
-				}
-			}
 			this.add("loginMsg", e.getMessage());
 		}
 		this.execute();
@@ -71,6 +65,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		req.setAttribute("userCode", userCode);
 		req.setAttribute("password", password);
 		req.setAttribute("needVerify", "false");
+
 		// 如长度大于10表示用手机号码登入
 		if (userCode.length() > 10) {
 			String oldCode = userCode;
@@ -86,6 +81,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			app = new LocalService((AbstractForm) form);
 		else
 			app = new LocalService(form.getHandle());
+
 		app.setService("SvrUserLogin.check");
 		String IP = getIPAddress();
 		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId, "ClientIP_", IP)) {
@@ -119,7 +115,6 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	 * 根据电话号码返回用户帐号，用于普及版登入
 	 * 
 	 * @param tel
-	 * @return
 	 * @throws IOException
 	 * @throws ServletException
 	 */
