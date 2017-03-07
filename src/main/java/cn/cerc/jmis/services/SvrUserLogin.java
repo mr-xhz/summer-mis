@@ -68,12 +68,14 @@ public class SvrUserLogin extends CustomService {
 		String userCode = headIn.getSafeString("Account_");
 		if (userCode.equals(""))
 			throw new SecurityCheckException("用户帐号不允许为空！");
+
 		SqlQuery dsUser = new SqlQuery(this);
 		dsUser.setCommandText(
 				String.format("select CorpNo_,ID_,Code_,Name_,Mobile_,DeptCode_,Enabled_,Password_,BelongAccount_,"
 						+ "Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,PCMachine3_,RoleCode_,DiyRole_ "
 						+ "from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo), userCode));
 		dsUser.open();
+
 		if (dsUser.eof())
 			throw new SecurityCheckException(String.format("该帐号(%s)并不存在，禁止登录！", userCode));
 		if (dsUser.getInt("Enabled_") < 1)
@@ -230,10 +232,11 @@ public class SvrUserLogin extends CustomService {
 		String userCode = headIn.getSafeString("UserCode_");
 
 		Record headOut = getDataOut().getHead();
-		if (userCode.equals("")) {
+		if ("".equals(userCode)) {
 			headOut.setField("Msg_", "手机号不允许为空！");
 			return false;
 		}
+
 		SqlQuery ds = new SqlQuery(this);
 		String sql = String.format("a.Mobile_='%s' and ((a.BelongAccount_ is null) or (a.BelongAccount_=''))",
 				userCode);
@@ -246,6 +249,7 @@ public class SvrUserLogin extends CustomService {
 			headOut.setField("Msg_", "没有找到您的手机号！");
 			return false;
 		}
+
 		if (ds.size() != 1) {
 			headOut.setField("Msg_",
 					String.format(
@@ -490,7 +494,7 @@ public class SvrUserLogin extends CustomService {
 		rs.setField("Account_", getUserCode());
 		rs.setField("LoginID_", this.getProperty("ID"));
 		rs.setField("Computer_", computer);
-		rs.setField("clientIP_", (String) this.getProperty(Application.clientIP));
+		rs.setField("clientIP_", this.getProperty(Application.clientIP));
 		rs.setField("LoginTime_", TDateTime.Now());
 		rs.setField("ParamValue_", handle.getCorpNo());
 		rs.setField("KeyCardID_", GuidNull);
