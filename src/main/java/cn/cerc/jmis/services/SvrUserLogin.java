@@ -48,11 +48,11 @@ public class SvrUserLogin extends CustomService {
 		Record headIn = getDataIn().getHead();
 		getDataOut().getHead().setField("errorNo", 0);
 
-		String deviceId = headIn.getSafeString("MachineID_");
+		String deviceId = headIn.getString("MachineID_");
 
 		String device_name = "";
 		if (headIn.exists("ClientName_"))
-			device_name = headIn.getSafeString("ClientName_");
+			device_name = headIn.getString("ClientName_");
 		else if (deviceId != null && deviceId.equals(Application.webclient))
 			device_name = "Web浏览器";
 		else
@@ -60,19 +60,18 @@ public class SvrUserLogin extends CustomService {
 
 		CustomHandle sess = (CustomHandle) this.getProperty(null);
 		if (headIn.exists("ClientIP_"))
-			sess.setProperty(Application.clientIP, headIn.getSafeString("ClientIP_"));
+			sess.setProperty(Application.clientIP, headIn.getString("ClientIP_"));
 		else
 			sess.setProperty(Application.clientIP, "0.0.0.0");
 
 		// 开始进行用户验证
-		String userCode = headIn.getSafeString("Account_");
+		String userCode = headIn.getString("Account_");
 		if (userCode.equals(""))
 			throw new SecurityCheckException("用户帐号不允许为空！");
 		SqlQuery dsUser = new SqlQuery(this);
-		dsUser.setCommandText(
-				String.format("select CorpNo_,ID_,Code_,Name_,Mobile_,DeptCode_,Enabled_,Password_,BelongAccount_,"
-						+ "Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,PCMachine3_,RoleCode_,DiyRole_ "
-						+ "from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo), userCode));
+		dsUser.add("select CorpNo_,ID_,Code_,Name_,Mobile_,DeptCode_,Enabled_,Password_,BelongAccount_,"
+				+ "Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,PCMachine3_,RoleCode_,DiyRole_ "
+				+ "from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo), userCode);
 		dsUser.open();
 		if (dsUser.eof())
 			throw new SecurityCheckException(String.format("该帐号(%s)并不存在，禁止登录！", userCode));
@@ -141,7 +140,7 @@ public class SvrUserLogin extends CustomService {
 						String.format("该帐号已被设置为附属帐号，不允许登录，请使用主帐号 %s 登录系统！", dsUser.getString("BelongAccount_")));
 
 			// 更新当前用户总数
-			String screen = headIn.getSafeString("Screen_");
+			String screen = headIn.getString("Screen_");
 			updateCurrentUser(device_name, screen);
 			//
 			try (MemoryBuffer Buff = new MemoryBuffer(BufferType.getSessionInfo, (String) getProperty("UserID"),
@@ -227,7 +226,7 @@ public class SvrUserLogin extends CustomService {
 	@Webfunc
 	public boolean getTelToUserCode() {
 		Record headIn = getDataIn().getHead();
-		String userCode = headIn.getSafeString("UserCode_");
+		String userCode = headIn.getString("UserCode_");
 
 		Record headOut = getDataOut().getHead();
 		if (userCode.equals("")) {
@@ -369,7 +368,7 @@ public class SvrUserLogin extends CustomService {
 		String userCode = headIn.getString("UserCode_");
 		DataValidateException.stopRun("用户帐号不允许为空", "".equals(userCode));
 
-		String corpNo = headIn.getSafeString("CorpNo_");
+		String corpNo = headIn.getString("CorpNo_");
 		DataValidateException.stopRun("用户帐套不允许为空", "".equals(corpNo));
 
 		SqlQuery cdsTmp = new SqlQuery(this);
