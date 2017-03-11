@@ -237,12 +237,10 @@ public class SvrUserLogin extends CustomService {
 		}
 
 		SqlQuery ds = new SqlQuery(this);
-		String sql = String.format("a.Mobile_='%s' and ((a.BelongAccount_ is null) or (a.BelongAccount_=''))",
-				userCode);
 		ds.add("select a.Code_ from %s oi ", SystemTable.get(SystemTable.getBookInfo));
 		ds.add("inner join %s a on oi.CorpNo_=a.CorpNo_ and oi.Status_ in(1,2)",
 				SystemTable.get(SystemTable.getUserInfo));
-		ds.add("where (%s)", sql);
+		ds.add("where a.Mobile_='%s' and ((a.BelongAccount_ is null) or (a.BelongAccount_=''))", userCode);
 		ds.open();
 		if (ds.size() == 0) {
 			headOut.setField("Msg_", "您的手机号码不存在于系统中，如果您需要注册帐号，请 <a href='TFrmContact'>联系客服</a> 进行咨询");
