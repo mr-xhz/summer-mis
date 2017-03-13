@@ -12,6 +12,7 @@ import cn.cerc.jpage.grid.lines.AbstractGridLine;
 
 public class DoubleField extends AbstractField implements IColumn {
 	private ColumnEditor editor;
+	private String format = "0.####";
 
 	public DoubleField(Component owner, String title, String field) {
 		super(owner, title, 4);
@@ -36,7 +37,7 @@ public class DoubleField extends AbstractField implements IColumn {
 		}
 		try {
 			double val = dataSet.getDouble(field);
-			DecimalFormat df = new DecimalFormat("0.####");
+			DecimalFormat df = new DecimalFormat(format);
 			return df.format(val);
 		} catch (NumberFormatException e) {
 			return "0";
@@ -86,5 +87,14 @@ public class DoubleField extends AbstractField implements IColumn {
 		if (editor == null)
 			editor = new ColumnEditor(this);
 		return editor;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public DoubleField setFormat(String format) {
+		this.format = format;
+		return this;
 	}
 }
