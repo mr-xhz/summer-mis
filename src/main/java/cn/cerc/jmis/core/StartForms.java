@@ -264,11 +264,10 @@ public class StartForms implements Filter {
 				}
 			}
 
-			// FIXME: 此处代码用于ee关闭问题，后续改进
-			if (funcCode.equals("execute")) {
-				if (ClientDevice.device_ee.equals(form.getClient().getDevice()))
-					request.getSession().setAttribute(form.getClass().getName(), true);
-			}
+//			if (funcCode.equals("execute")) {
+//				if (ClientDevice.device_ee.equals(form.getClient().getDevice()))
+//					request.getSession().setAttribute(form.getClass().getName(), true);
+//			}
 
 			// 处理返回值
 			if (pageOutput != null) {
