@@ -57,7 +57,7 @@ public class ClientDevice implements IClient {
 
 	@Override
 	public String getDevice() {
-		return deviceType == null ? device_ee : deviceType;
+		return deviceType == null ? device_pc : deviceType;
 	}
 
 	@Override
