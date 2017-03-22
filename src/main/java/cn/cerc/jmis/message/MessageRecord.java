@@ -9,10 +9,12 @@ import cn.cerc.jdb.core.IHandle;
 public class MessageRecord {
 	// 收信帐套
 	private String corpNo;
+
 	// 收信用户
 	private String userCode;
+
 	private String subject;
-	private StringBuffer content = new StringBuffer();
+	private StringBuilder content = new StringBuilder();
 	private MessageLevel level = MessageLevel.General;
 	private int process;
 
@@ -42,6 +44,10 @@ public class MessageRecord {
 
 	public void append(String content) {
 		this.content.append(content);
+	}
+
+	public void append(String format, Object... args) {
+		content.append(String.format(format, args));
 	}
 
 	public MessageLevel getLevel() {
@@ -83,7 +89,7 @@ public class MessageRecord {
 	}
 
 	public MessageRecord setContent(String content) {
-		this.content = new StringBuffer(content);
+		this.content = new StringBuilder(content);
 		return this;
 	}
 
