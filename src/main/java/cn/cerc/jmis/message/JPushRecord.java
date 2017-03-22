@@ -101,6 +101,11 @@ public class JPushRecord {
 		return this;
 	}
 
+	public JPushRecord setAlert(String format, Object... args) {
+		this.alert = String.format(format, args);
+		return this;
+	}
+
 	public int getMsgId() {
 		return msgId;
 	}
