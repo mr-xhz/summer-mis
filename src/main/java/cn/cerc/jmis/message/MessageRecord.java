@@ -61,24 +61,27 @@ public class MessageRecord {
 		return level;
 	}
 
-	public void setLevel(MessageLevel level) {
+	public MessageRecord setLevel(MessageLevel level) {
 		this.level = level;
+		return this;
 	}
 
 	public String getUserCode() {
 		return userCode;
 	}
 
-	public void setUserCode(String userCode) {
+	public MessageRecord setUserCode(String userCode) {
 		this.userCode = userCode;
+		return this;
 	}
 
 	public String getCorpNo() {
 		return corpNo;
 	}
 
-	public void setCorpNo(String corpNo) {
+	public MessageRecord setCorpNo(String corpNo) {
 		this.corpNo = corpNo;
+		return this;
 	}
 
 	public String getSubject() {
@@ -134,8 +137,9 @@ public class MessageRecord {
 		return process;
 	}
 
-	public void setProcess(int process) {
+	public MessageRecord setProcess(int process) {
 		this.process = process;
+		return this;
 	}
 
 }
