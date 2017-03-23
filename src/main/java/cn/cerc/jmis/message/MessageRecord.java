@@ -63,9 +63,9 @@ public class MessageRecord {
 		Record headIn = svr.getDataIn().getHead();
 		headIn.setField("corpNo", sendCorpNo);
 		headIn.setField("userCode", userCode);
-		headIn.setField("level", level);
+		headIn.setField("level", level.ordinal());
 		headIn.setField("subject", subject);
-		headIn.setField("content", content);
+		headIn.setField("content", content.toString());
 		headIn.setField("process", process);
 		if (!svr.exec()) {
 			throw new RuntimeException(svr.getMessage());
