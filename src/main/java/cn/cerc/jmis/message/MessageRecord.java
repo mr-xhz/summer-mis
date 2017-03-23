@@ -45,6 +45,36 @@ public class MessageRecord {
 		}
 	}
 
+	public int send(IHandle handle) {
+		if (subject == null || "".equals(subject)) {
+			throw new RuntimeException("消息标题不允许为空");
+		}
+
+		if (userCode == null || "".equals(userCode)) {
+			throw new RuntimeException("用户代码不允许为空");
+		}
+
+		String sendCorpNo = corpNo != null ? corpNo : handle.getCorpNo();
+		if ("".equals(sendCorpNo)) {
+			throw new RuntimeException("公司别不允许为空");
+		}
+
+		LocalService svr = new LocalService(handle, "SvrUserMessages.appendRecord");
+		Record headIn = svr.getDataIn().getHead();
+		headIn.setField("corpNo", sendCorpNo);
+		headIn.setField("userCode", userCode);
+		headIn.setField("level", level);
+		headIn.setField("subject", subject);
+		headIn.setField("content", content);
+		headIn.setField("process", process);
+		if (!svr.exec()) {
+			throw new RuntimeException(svr.getMessage());
+		}
+
+		// 返回消息的编号
+		return svr.getDataOut().getHead().getInt("msgId");
+	}
+
 	public String getContent() {
 		return content.toString();
 	}
@@ -101,36 +131,6 @@ public class MessageRecord {
 	public MessageRecord setContent(String content) {
 		this.content = new StringBuilder(content);
 		return this;
-	}
-
-	public int send(IHandle handle) {
-		if (subject == null || "".equals(subject)) {
-			throw new RuntimeException("消息标题不允许为空");
-		}
-
-		if (userCode == null || "".equals(userCode)) {
-			throw new RuntimeException("用户代码不允许为空");
-		}
-
-		String sendCorpNo = corpNo != null ? corpNo : handle.getCorpNo();
-		if ("".equals(sendCorpNo)) {
-			throw new RuntimeException("公司别不允许为空");
-		}
-
-		LocalService svr = new LocalService(handle, "SvrUserMessages.appendRecord");
-		Record headIn = svr.getDataIn().getHead();
-		headIn.setField("corpNo", sendCorpNo);
-		headIn.setField("userCode", userCode);
-		headIn.setField("level", level);
-		headIn.setField("subject", subject);
-		headIn.setField("content", content);
-		headIn.setField("process", process);
-		if (!svr.exec()) {
-			throw new RuntimeException(svr.getMessage());
-		}
-
-		// 返回消息的编号
-		return svr.getDataOut().getHead().getInt("msgId");
 	}
 
 	public int getProcess() {
