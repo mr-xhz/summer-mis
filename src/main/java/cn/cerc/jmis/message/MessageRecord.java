@@ -2,6 +2,7 @@ package cn.cerc.jmis.message;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jdb.core.IHandle;
+import cn.cerc.jdb.core.Record;
 
 /*
  * 专用于消息发送
@@ -27,8 +28,14 @@ public class MessageRecord {
 	}
 
 	public MessageRecord(String userCode, String subject) {
-		if (subject == null)
-			throw new RuntimeException("消息标题不允许为空！");
+		if (subject == null || "".equals(subject)) {
+			throw new RuntimeException("消息标题不允许为空");
+		}
+
+		if (userCode == null || "".equals(userCode)) {
+			throw new RuntimeException("用户代码不允许为空");
+		}
+
 		this.userCode = userCode;
 		if (subject.length() > 80) {
 			this.subject = subject.substring(0, 77) + "...";
@@ -94,14 +101,30 @@ public class MessageRecord {
 	}
 
 	public int send(IHandle handle) {
-		if (subject == null)
-			throw new RuntimeException("消息标题不允许为空！");
+		if (subject == null || "".equals(subject)) {
+			throw new RuntimeException("消息标题不允许为空");
+		}
+
+		if (userCode == null || "".equals(userCode)) {
+			throw new RuntimeException("用户代码不允许为空");
+		}
 
 		String sendCorpNo = corpNo != null ? corpNo : handle.getCorpNo();
+		if ("".equals(sendCorpNo)) {
+			throw new RuntimeException("公司别不允许为空");
+		}
+
 		LocalService svr = new LocalService(handle, "SvrUserMessages.appendRecord");
-		if (!svr.exec("corpNo", sendCorpNo, "userCode", this.userCode, "level", this.level.ordinal(), "subject",
-				this.subject, "content", this.content.toString(), "process", this.process))
+		Record headIn = svr.getDataIn().getHead();
+		headIn.setField("corpNo", sendCorpNo);
+		headIn.setField("userCode", userCode);
+		headIn.setField("level", level);
+		headIn.setField("subject", subject);
+		headIn.setField("content", content);
+		headIn.setField("process", process);
+		if (!svr.exec()) {
 			throw new RuntimeException(svr.getMessage());
+		}
 
 		// 返回消息的编号
 		return svr.getDataOut().getHead().getInt("msgId");
