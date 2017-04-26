@@ -42,8 +42,8 @@ public abstract class AbstractField extends Component implements IField {
 	// 角色
 	protected String role;
 	//
-	protected String dialog;
-	//dialog 小图标
+	protected DialogField dialog;
+	// dialog 小图标
 	protected String icon;
 	// 栏位说明
 	private HtmlText mark;
@@ -258,11 +258,13 @@ public abstract class AbstractField extends Component implements IField {
 			outputInput(html, record);
 			if (this.dialog != null) {
 				html.print("<span>");
-				html.print("<a href=\"javascript:%s('%s')\">", this.dialog, this.getId());
-				if(this.icon != null)
-					html.print("<img src=\"%s\">",this.icon);
+				html.print("<a href=\"%s\">", dialog.getUrl());
+
+				if (this.icon != null)
+					html.print("<img src=\"%s\">", this.icon);
 				else
 					html.print("<img src=\"images/searchIocn.png\">");
+
 				html.print("</a>");
 				html.println("</span>");
 			} else {
@@ -317,12 +319,22 @@ public abstract class AbstractField extends Component implements IField {
 		}
 	}
 
-	public String getDialog() {
+	public DialogField getDialog() {
 		return dialog;
 	}
 
-	public AbstractField setDialog(String dialog) {
-		this.dialog = dialog;
+	public AbstractField setDialog(String dialogfun) {
+		this.dialog = new DialogField(dialogfun);
+		dialog.setInputId(this.getId());
+		return this;
+	}
+
+	public AbstractField setDialog(String dialogfun, String... params) {
+		this.dialog = new DialogField(dialogfun);
+		dialog.setInputId(this.getId());
+		for (String string : params) {
+			this.dialog.add(string);
+		}
 		return this;
 	}
 
