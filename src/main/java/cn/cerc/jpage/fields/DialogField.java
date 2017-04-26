@@ -13,12 +13,11 @@ public class DialogField {
 	}
 
 	public String getUrl() {
-		StringBuilder build = new StringBuilder();
-
 		if (dialogfun == null) {
 			throw new RuntimeException("dialogfun is null");
 		}
 
+		StringBuilder build = new StringBuilder();
 		build.append("javascript:");
 		build.append(dialogfun);
 		build.append("(");
@@ -26,7 +25,6 @@ public class DialogField {
 		build.append("'");
 		build.append(inputId);
 		build.append("'");
-
 		if (params.size() > 0) {
 			build.append(",");
 		}
