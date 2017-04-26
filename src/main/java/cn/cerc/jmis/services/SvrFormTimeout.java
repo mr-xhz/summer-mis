@@ -16,8 +16,8 @@ public class SvrFormTimeout extends CustomService {
 		ds.open();
 		ds.append();
 		ds.setField("CorpNo_", this.getCorpNo());
-		ds.setField("Page_", headIn.getSafeString("pageCode"));
-		ds.setField("DataIn_", headIn.getSafeString("dataIn"));
+		ds.setField("Page_", headIn.getString("pageCode"));
+		ds.setField("DataIn_", headIn.getString("dataIn"));
 		ds.setField("TickCount_", headIn.getDouble("tickCount"));
 		ds.setField("AppUser_", this.getUserCode());
 		ds.post();

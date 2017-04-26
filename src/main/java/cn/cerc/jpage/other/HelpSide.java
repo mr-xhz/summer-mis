@@ -32,6 +32,10 @@ public class HelpSide extends Component {
 		lines.add(value);
 	}
 
+	public void addLine(String format, Object... args) {
+		lines.add(String.format(format, args));
+	}
+
 	public String getTitle() {
 		return title;
 	}

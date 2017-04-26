@@ -12,7 +12,7 @@ public class SvrCustomMenus extends CustomService {
 
 	public boolean append() {
 		DataSet dataIn = getDataIn();
-		String corpNo = dataIn.getHead().getSafeString("CorpNo_");
+		String corpNo = dataIn.getHead().getString("CorpNo_");
 		BuildQuery f1 = new BuildQuery(this);
 		BuildQuery f2 = new BuildQuery(this);
 

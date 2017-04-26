@@ -27,6 +27,8 @@ public abstract class AbstractField extends Component implements IField {
 	private String value;
 	// 只读否
 	private boolean readonly;
+	// 自动完成（默认为 off）
+	private boolean autocomplete = false;
 	// 焦点否
 	protected boolean autofocus;
 	//
@@ -40,7 +42,9 @@ public abstract class AbstractField extends Component implements IField {
 	// 角色
 	protected String role;
 	//
-	protected String dialog;
+	protected DialogField dialog;
+	// dialog 小图标
+	protected String icon;
 	// 栏位说明
 	private HtmlText mark;
 	//
@@ -190,6 +194,15 @@ public abstract class AbstractField extends Component implements IField {
 		return this;
 	}
 
+	public boolean isAutocomplete() {
+		return autocomplete;
+	}
+
+	public AbstractField setAutocomplete(boolean autocomplete) {
+		this.autocomplete = autocomplete;
+		return this;
+	}
+
 	public boolean isAutofocus() {
 		return autofocus;
 	}
@@ -245,8 +258,13 @@ public abstract class AbstractField extends Component implements IField {
 			outputInput(html, record);
 			if (this.dialog != null) {
 				html.print("<span>");
-				html.print("<a href=\"javascript:%s('%s')\">", this.dialog, this.getId());
-				html.print("<img src=\"images/select-pic.png\">");
+				html.print("<a href=\"%s\">", dialog.getUrl());
+
+				if (this.icon != null)
+					html.print("<img src=\"%s\">", this.icon);
+				else
+					html.print("<img src=\"images/searchIocn.png\">");
+
 				html.print("</a>");
 				html.println("</span>");
 			} else {
@@ -278,6 +296,11 @@ public abstract class AbstractField extends Component implements IField {
 			}
 			if (this.isReadonly())
 				html.print(" readonly=\"readonly\"");
+			if (this.autocomplete) {
+				html.print("autocomplete=\"on\"");
+			} else {
+				html.print("autocomplete=\"off\"");
+			}
 			if (this.autofocus)
 				html.print(" autofocus");
 			if (this.required)
@@ -296,12 +319,22 @@ public abstract class AbstractField extends Component implements IField {
 		}
 	}
 
-	public String getDialog() {
+	public DialogField getDialog() {
 		return dialog;
 	}
 
-	public AbstractField setDialog(String dialog) {
-		this.dialog = dialog;
+	public AbstractField setDialog(String dialogfun) {
+		this.dialog = new DialogField(dialogfun);
+		dialog.setInputId(this.getId());
+		return this;
+	}
+
+	public AbstractField setDialog(String dialogfun, String... params) {
+		this.dialog = new DialogField(dialogfun);
+		dialog.setInputId(this.getId());
+		for (String string : params) {
+			this.dialog.add(string);
+		}
 		return this;
 	}
 
@@ -507,6 +540,14 @@ public abstract class AbstractField extends Component implements IField {
 				json.put("dateFormat", this.dateFormat);
 			return json.toString().replace("\"", "'");
 		}
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }

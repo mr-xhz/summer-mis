@@ -78,8 +78,10 @@ public class CodeNameField extends AbstractField {
 
 			html.print("<span>");
 			if (this.getDialog() != null) {
-				html.print("<a href=\"javascript:%s('%s,%s')\">", this.getDialog(), this.getId(), getNameField());
-				html.print("<img src=\"images/select-pic.png\">");
+				this.getDialog().setInputId(getId());
+				this.getDialog().add(getNameField());
+				html.print("<a href=\"%s\">", getDialog().getUrl());
+				html.print("<img src=\"images/searchIocn.png\">");
 				html.print("</a>");
 			}
 			html.print("</span>");

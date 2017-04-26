@@ -151,8 +151,8 @@ public class StartForms implements Filter {
 
 	// 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
 	private boolean passDevice(IForm form) {
-		// 91100128暂时跳过验证
-		if ("91100128".equals(form.getHandle().getUserCode()))
+		// 15202406暂时跳过验证
+		if ("15202406".equals(form.getHandle().getUserCode()))
 			return true;
 		String deviceId = form.getClient().getId();
 		String verifyCode = form.getRequest().getParameter("verifyCode");
@@ -225,8 +225,8 @@ public class StartForms implements Filter {
 						form.getParam("procCode", null)))
 					throw new RuntimeException("对不起，您没有权限执行此功能！");
 			}
-			// 增加91100128账号跳过设备认证的判断，用于苹果公司测试，后需删除此判断
-			if ("91100128".equals(request.getParameter("login_usr"))) {
+			// 增加15202406账号跳过设备认证的判断，用于地藤专用测试账号
+			if ("15202406".equals(request.getParameter("login_usr"))) {
 				try {
 					if (form.getClient().isPhone()) {
 						try {
@@ -264,11 +264,10 @@ public class StartForms implements Filter {
 				}
 			}
 
-			// FIXME: 此处代码用于ee关闭问题，后续改进
-			if (funcCode.equals("execute")) {
-				if (ClientDevice.device_ee.equals(form.getClient().getDevice()))
-					request.getSession().setAttribute(form.getClass().getName(), true);
-			}
+//			if (funcCode.equals("execute")) {
+//				if (ClientDevice.device_ee.equals(form.getClient().getDevice()))
+//					request.getSession().setAttribute(form.getClass().getName(), true);
+//			}
 
 			// 处理返回值
 			if (pageOutput != null) {

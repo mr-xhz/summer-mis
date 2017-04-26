@@ -118,6 +118,7 @@ public class PhonePage extends AbstractJspPage {
 		out.printf("<title>%s</title>\n", this.getForm().getTitle());
 		out.printf("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n");
 		out.printf("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>\n");
+		out.printf("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\"/>\n");
 		out.printf("<link href=\"css/style-phone.css\" rel=\"stylesheet\">\n");
 		if (!form.getClient().isPhone())
 			out.printf("<link href=\"css/style-pc.css\" rel=\"stylesheet\">\n");

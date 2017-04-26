@@ -65,11 +65,13 @@ public class ColumnEditor {
 			this.init = true;
 		}
 		HtmlWriter html = new HtmlWriter();
+		String inputStyle = "";
 		html.print("<input");
 		if (gridLine instanceof MasterGridLine)
 			html.print(" id='%s'", this.getDataId());
 		else
-			html.print(" style=\"width:80%;\"");
+			inputStyle = "width:80%;";
+		inputStyle += "border: 1px solid #dcdcdc;";
 		html.print(" type='text'");
 		html.print(" name='%s'", owner.getField());
 		html.print(" value='%s'", data);
@@ -77,12 +79,14 @@ public class ColumnEditor {
 		if (gridLine instanceof MasterGridLine) {
 			html.print(" data-focus='[%s]'", this.getDataFocus());
 			if (owner.getAlign() != null)
-				html.print(" style='text-align:%s;'", owner.getAlign());
+				inputStyle += String.format("text-align:%s;", owner.getAlign());
 			if (owner.getOnclick() != null) {
 				html.print(" onclick=\"%s\"", owner.getOnclick());
 			} else
 				html.print(" onclick='this.select()'");
 		}
+		if (!"".equals(inputStyle))
+			html.print(" style='%s'", inputStyle);
 		html.print(" onkeydown='return tableDirection(event,this)'");
 		if (dataField.size() > 0) {
 			for (String field : dataField) {

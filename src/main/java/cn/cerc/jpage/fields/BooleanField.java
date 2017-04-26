@@ -112,4 +112,21 @@ public class BooleanField extends AbstractField implements SearchItem, IColumn {
 			editor = new CheckEditor(this);
 		return editor;
 	}
+
+	public String getTrueText() {
+		return trueText;
+	}
+
+	public void setTrueText(String trueText) {
+		this.trueText = trueText;
+	}
+
+	public String getFalseText() {
+		return falseText;
+	}
+
+	public void setFalseText(String falseText) {
+		this.falseText = falseText;
+	}
+
 }

@@ -8,7 +8,7 @@ import cn.cerc.jdb.mysql.SqlQuery;
 public class SvrBookInfo extends CustomService {
 
 	public boolean getRecord() {
-		String corpNo = getDataIn().getHead().getSafeString("corpNo");
+		String corpNo = getDataIn().getHead().getString("corpNo");
 		SqlQuery ds = new SqlQuery(handle);
 		ds.add("select CorpNo_, Type_,ShortName_,Name_,Address_,Tel_,Status_,ManagerPhone_,StartHost_,Contact_,Authentication_ "
 				+ "from %s where CorpNo_=N'%s'", SystemTable.get(SystemTable.getBookInfo), corpNo);

@@ -2,6 +2,7 @@ package cn.cerc.jmis.message;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jdb.core.IHandle;
+import cn.cerc.jdb.core.Record;
 
 /*
  * 专用于消息发送
@@ -9,10 +10,12 @@ import cn.cerc.jdb.core.IHandle;
 public class MessageRecord {
 	// 收信帐套
 	private String corpNo;
+
 	// 收信用户
 	private String userCode;
+
 	private String subject;
-	private StringBuffer content = new StringBuffer();
+	private StringBuilder content = new StringBuilder();
 	private MessageLevel level = MessageLevel.General;
 	private int process;
 
@@ -25,8 +28,14 @@ public class MessageRecord {
 	}
 
 	public MessageRecord(String userCode, String subject) {
-		if (subject == null)
-			throw new RuntimeException("消息标题不允许为空！");
+		if (subject == null || "".equals(subject)) {
+			throw new RuntimeException("消息标题不允许为空");
+		}
+
+		if (userCode == null || "".equals(userCode)) {
+			throw new RuntimeException("用户代码不允许为空");
+		}
+
 		this.userCode = userCode;
 		if (subject.length() > 80) {
 			this.subject = subject.substring(0, 77) + "...";
@@ -34,6 +43,36 @@ public class MessageRecord {
 		} else {
 			this.subject = subject;
 		}
+	}
+
+	public int send(IHandle handle) {
+		if (subject == null || "".equals(subject)) {
+			throw new RuntimeException("消息标题不允许为空");
+		}
+
+		if (userCode == null || "".equals(userCode)) {
+			throw new RuntimeException("用户代码不允许为空");
+		}
+
+		String sendCorpNo = corpNo != null ? corpNo : handle.getCorpNo();
+		if ("".equals(sendCorpNo)) {
+			throw new RuntimeException("公司别不允许为空");
+		}
+
+		LocalService svr = new LocalService(handle, "SvrUserMessages.appendRecord");
+		Record headIn = svr.getDataIn().getHead();
+		headIn.setField("corpNo", sendCorpNo);
+		headIn.setField("userCode", userCode);
+		headIn.setField("level", level.ordinal());
+		headIn.setField("subject", subject);
+		headIn.setField("content", content.toString());
+		headIn.setField("process", process);
+		if (!svr.exec()) {
+			throw new RuntimeException(svr.getMessage());
+		}
+
+		// 返回消息的编号
+		return svr.getDataOut().getHead().getInt("msgId");
 	}
 
 	public String getContent() {
@@ -44,28 +83,35 @@ public class MessageRecord {
 		this.content.append(content);
 	}
 
+	public void append(String format, Object... args) {
+		content.append(String.format(format, args));
+	}
+
 	public MessageLevel getLevel() {
 		return level;
 	}
 
-	public void setLevel(MessageLevel level) {
+	public MessageRecord setLevel(MessageLevel level) {
 		this.level = level;
+		return this;
 	}
 
 	public String getUserCode() {
 		return userCode;
 	}
 
-	public void setUserCode(String userCode) {
+	public MessageRecord setUserCode(String userCode) {
 		this.userCode = userCode;
+		return this;
 	}
 
 	public String getCorpNo() {
 		return corpNo;
 	}
 
-	public void setCorpNo(String corpNo) {
+	public MessageRecord setCorpNo(String corpNo) {
 		this.corpNo = corpNo;
+		return this;
 	}
 
 	public String getSubject() {
@@ -77,31 +123,23 @@ public class MessageRecord {
 		return this;
 	}
 
-	public MessageRecord setContent(String content) {
-		this.content = new StringBuffer(content);
+	public MessageRecord setSubject(String format, Object... args) {
+		this.subject = String.format(format, args);
 		return this;
 	}
 
-	public int send(IHandle handle) {
-		if (subject == null)
-			throw new RuntimeException("消息标题不允许为空！");
-
-		String sendCorpNo = corpNo != null ? corpNo : handle.getCorpNo();
-		LocalService svr = new LocalService(handle, "SvrUserMessages.appendRecord");
-		if (!svr.exec("corpNo", sendCorpNo, "userCode", this.userCode, "level", this.level.ordinal(), "subject",
-				this.subject, "content", this.content.toString(), "process", this.process))
-			throw new RuntimeException(svr.getMessage());
-
-		// 返回消息的编号
-		return svr.getDataOut().getHead().getInt("msgId");
+	public MessageRecord setContent(String content) {
+		this.content = new StringBuilder(content);
+		return this;
 	}
 
 	public int getProcess() {
 		return process;
 	}
 
-	public void setProcess(int process) {
+	public MessageRecord setProcess(int process) {
 		this.process = process;
+		return this;
 	}
 
 }

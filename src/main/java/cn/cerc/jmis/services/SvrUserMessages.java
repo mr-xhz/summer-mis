@@ -97,7 +97,7 @@ public class SvrUserMessages extends CustomService {
 	 * @return 读取指定的消息记录
 	 */
 	public boolean readAsyncService() {
-		String msgId = getDataIn().getHead().getSafeString("msgId");
+		String msgId = getDataIn().getHead().getString("msgId");
 
 		SqlQuery ds = new SqlQuery(this);
 		ds.add("select * from %s", SystemTable.get(SystemTable.getUserMessages));
@@ -121,7 +121,7 @@ public class SvrUserMessages extends CustomService {
 	 * @return 更新异步服务进度
 	 */
 	public boolean updateAsyncService() {
-		String msgId = getDataIn().getHead().getSafeString("msgId");
+		String msgId = getDataIn().getHead().getString("msgId");
 		String content = getDataIn().getHead().getString("content");
 		int process = getDataIn().getHead().getInt("process");
 

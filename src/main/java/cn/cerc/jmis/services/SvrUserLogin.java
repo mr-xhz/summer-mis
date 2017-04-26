@@ -22,6 +22,7 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDateTime;
+import cn.cerc.jdb.jiguang.ClientType;
 import cn.cerc.jdb.mysql.BuildQuery;
 import cn.cerc.jdb.mysql.SqlOperator;
 import cn.cerc.jdb.mysql.SqlQuery;
@@ -47,11 +48,11 @@ public class SvrUserLogin extends CustomService {
 		Record headIn = getDataIn().getHead();
 		getDataOut().getHead().setField("errorNo", 0);
 
-		String deviceId = headIn.getSafeString("MachineID_");
+		String deviceId = headIn.getString("MachineID_");
 
 		String device_name = "";
 		if (headIn.exists("ClientName_"))
-			device_name = headIn.getSafeString("ClientName_");
+			device_name = headIn.getString("ClientName_");
 		else if (deviceId != null && deviceId.equals(Application.webclient))
 			device_name = "Web浏览器";
 		else
@@ -59,20 +60,21 @@ public class SvrUserLogin extends CustomService {
 
 		CustomHandle sess = (CustomHandle) this.getProperty(null);
 		if (headIn.exists("ClientIP_"))
-			sess.setProperty(Application.clientIP, headIn.getSafeString("ClientIP_"));
+			sess.setProperty(Application.clientIP, headIn.getString("ClientIP_"));
 		else
 			sess.setProperty(Application.clientIP, "0.0.0.0");
 
 		// 开始进行用户验证
-		String userCode = headIn.getSafeString("Account_");
+		String userCode = headIn.getString("Account_");
 		if (userCode.equals(""))
 			throw new SecurityCheckException("用户帐号不允许为空！");
+
 		SqlQuery dsUser = new SqlQuery(this);
-		dsUser.setCommandText(
-				String.format("select CorpNo_,ID_,Code_,Name_,Mobile_,DeptCode_,Enabled_,Password_,BelongAccount_,"
-						+ "Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,PCMachine3_,RoleCode_,DiyRole_ "
-						+ "from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo), userCode));
+		dsUser.add("select CorpNo_,ID_,Code_,Name_,Mobile_,DeptCode_,Enabled_,Password_,BelongAccount_,"
+				+ "Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,PCMachine3_,RoleCode_,DiyRole_ "
+				+ "from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo), userCode);
 		dsUser.open();
+
 		if (dsUser.eof())
 			throw new SecurityCheckException(String.format("该帐号(%s)并不存在，禁止登录！", userCode));
 		if (dsUser.getInt("Enabled_") < 1)
@@ -127,11 +129,11 @@ public class SvrUserLogin extends CustomService {
 			else
 				sess.setProperty(Application.roleCode, dsUser.getString("RoleCode_"));
 
-			// 判断是否开启允许使用地藤客户端外的设备登录系统的参数设置
+			// 判断是否开启允许使用客户端外的设备登录系统的参数设置
 			boolean allowUseOtherClient = UserOptions.UserOptionEnabled(this, AllowUseOtherClient);
 			if (!allowUseOtherClient) {
 				if (Application.webclient.equals(deviceId) || !deviceId.equals(deviceId.toUpperCase()))
-					throw new SecurityCheckException("您已开启只允许使用地藤客户端的参数设置，请使用地藤桌面客户端登录系统！");
+					throw new SecurityCheckException("您已开启只允许使用客户端的参数设置，请使用桌面客户端登录系统！");
 			}
 
 			// 判断此帐号是否为附属帐号
@@ -140,12 +142,12 @@ public class SvrUserLogin extends CustomService {
 						String.format("该帐号已被设置为附属帐号，不允许登录，请使用主帐号 %s 登录系统！", dsUser.getString("BelongAccount_")));
 
 			// 更新当前用户总数
-			String screen = headIn.getSafeString("Screen_");
+			String screen = headIn.getString("Screen_");
 			updateCurrentUser(device_name, screen);
 			//
 			try (MemoryBuffer Buff = new MemoryBuffer(BufferType.getSessionInfo, (String) getProperty("UserID"),
 					deviceId)) {
-				Buff.setField("UserID_", (String) getProperty("UserID"));
+				Buff.setField("UserID_", getProperty("UserID"));
 				Buff.setField("UserCode_", getUserCode());
 				Buff.setField("UserName_", getUserName());
 				Buff.setField("LoginTime_", sess.getProperty(Application.loginTime));
@@ -153,8 +155,8 @@ public class SvrUserLogin extends CustomService {
 				Buff.setField("VerifyMachine", false);
 			}
 			// 返回值于前台
-			getDataOut().getHead().setField("SessionID_", (String) getProperty("ID"));
-			getDataOut().getHead().setField("UserID_", (String) getProperty("UserID"));
+			getDataOut().getHead().setField("SessionID_", getProperty("ID"));
+			getDataOut().getHead().setField("UserID_", getProperty("UserID"));
 			getDataOut().getHead().setField("UserCode_", getUserCode());
 			getDataOut().getHead().setField("CorpNo_", handle.getCorpNo());
 			getDataOut().getHead().setField("YGUser", YGLogin);
@@ -181,7 +183,7 @@ public class SvrUserLogin extends CustomService {
 	// 获取登录状态
 	@Webfunc
 	public boolean getState() {
-		getDataOut().getHead().setField("UserID_", (String) getProperty("UserID"));
+		getDataOut().getHead().setField("UserID_", getProperty("UserID"));
 		getDataOut().getHead().setField("UserCode_", getUserCode());
 		getDataOut().getHead().setField("CorpNo_", handle.getCorpNo());
 		return true;
@@ -226,25 +228,25 @@ public class SvrUserLogin extends CustomService {
 	@Webfunc
 	public boolean getTelToUserCode() {
 		Record headIn = getDataIn().getHead();
-		String userCode = headIn.getSafeString("UserCode_");
+		String userCode = headIn.getString("UserCode_");
 
 		Record headOut = getDataOut().getHead();
-		if (userCode.equals("")) {
+		if ("".equals(userCode)) {
 			headOut.setField("Msg_", "手机号不允许为空！");
 			return false;
 		}
+
 		SqlQuery ds = new SqlQuery(this);
-		String sql = String.format("a.Mobile_='%s' and ((a.BelongAccount_ is null) or (a.BelongAccount_=''))",
-				userCode);
 		ds.add("select a.Code_ from %s oi ", SystemTable.get(SystemTable.getBookInfo));
 		ds.add("inner join %s a on oi.CorpNo_=a.CorpNo_ and oi.Status_ in(1,2)",
 				SystemTable.get(SystemTable.getUserInfo));
-		ds.add("where (%s)", sql);
+		ds.add("where a.Mobile_='%s' and ((a.BelongAccount_ is null) or (a.BelongAccount_=''))", userCode);
 		ds.open();
 		if (ds.size() == 0) {
-			headOut.setField("Msg_", "没有找到您的手机号！");
+			headOut.setField("Msg_", "您的手机号码不存在于系统中，如果您需要注册帐号，请 <a href='TFrmContact'>联系客服</a> 进行咨询");
 			return false;
 		}
+
 		if (ds.size() != 1) {
 			headOut.setField("Msg_",
 					String.format(
@@ -285,7 +287,7 @@ public class SvrUserLogin extends CustomService {
 			return false;
 		}
 		if (ds.getInt("Used_") == 2) {
-			throw new SecurityCheckException("您正在使用的这台设备，被管理员设置为禁止登入地藤系统！");
+			throw new SecurityCheckException("您正在使用的这台设备，被管理员设置为禁止登入系统！");
 		}
 		if (ds.getInt("Used_") == 1)
 			return true;
@@ -358,6 +360,30 @@ public class SvrUserLogin extends CustomService {
 		}
 	}
 
+	/**
+	 * 获取用户的移动设备信息
+	 * 
+	 * @throws DataValidateException
+	 */
+	public boolean getMachInfo() throws DataValidateException {
+		Record headIn = getDataIn().getHead();
+		String userCode = headIn.getString("UserCode_");
+		DataValidateException.stopRun("用户帐号不允许为空", "".equals(userCode));
+
+		String corpNo = headIn.getString("CorpNo_");
+		DataValidateException.stopRun("用户帐套不允许为空", "".equals(corpNo));
+
+		SqlQuery cdsTmp = new SqlQuery(this);
+		cdsTmp.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
+		cdsTmp.add("where CorpNo_='%s'and UserCode_='%s'", corpNo, userCode);
+		cdsTmp.add("and Used_=1");
+		cdsTmp.open();
+
+		DataSet dataOut = getDataOut().appendDataSet(cdsTmp);
+		DataValidateException.stopRun(String.format("帐号 %s 还未进行认证，无法发送消息", userCode), dataOut.eof());
+		return true;
+	}
+
 	private void enrollMachineInfo(String corpNo, String userCode, String deviceId, String deviceName) {
 		SqlQuery ds = new SqlQuery(this);
 		ds.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
@@ -369,22 +395,34 @@ public class SvrUserLogin extends CustomService {
 			ds.setField("UserCode_", userCode);
 			ds.setField("VerifyCode_", intToStr(random(900000) + 100000));
 			ds.setField("DeadLine_", TDateTime.Now().incDay(1));
-			ds.setField("MachineType_", 0);
+
 			ds.setField("MachineCode_", deviceId);
-			ds.setField("MachineName_", deviceName);
+			if (deviceId.startsWith("i_")) {
+				// iOS
+				ds.setField("MachineType_", 6);
+				ds.setField("MachineName_", ClientType.IOS.toString());
+			} else if (deviceId.startsWith("n_")) {
+				// Android
+				ds.setField("MachineType_", 7);
+				ds.setField("MachineName_", ClientType.Android.toString());
+			} else {
+				// 系统默认
+				ds.setField("MachineType_", 0);
+				ds.setField("MachineName_", deviceName);
+			}
+
 			ds.setField("Remark_", "");
 			ds.setField("Used_", 0);
 			ds.setField("UpdateUser_", userCode);
 			ds.setField("UpdateDate_", TDateTime.Now());
 			ds.setField("AppUser_", userCode);
 			ds.setField("AppDate_", TDateTime.Now());
-			ds.setField("UpdateKey_", cn.cerc.jdb.other.utils.newGuid());
+			ds.setField("UpdateKey_", newGuid());
 			ds.post();
 		} else if (Application.webclient.equals(deviceId)) {
 			ds.edit();
 			ds.setField("Used_", 0);
 			ds.post();
-
 		}
 	}
 
@@ -448,11 +486,12 @@ public class SvrUserLogin extends CustomService {
 
 		// 增加新的记录
 		Record rs = new Record();
-		rs.setField("UserID_", (String) this.getProperty("UserID"));
+		rs.setField("UserID_", this.getProperty("UserID"));
 		rs.setField("CorpNo_", handle.getCorpNo());
 		rs.setField("Account_", getUserCode());
 		rs.setField("LoginID_", this.getProperty("ID"));
 		rs.setField("Computer_", computer);
+		rs.setField("clientIP_", this.getProperty(Application.clientIP));
 		rs.setField("LoginTime_", TDateTime.Now());
 		rs.setField("ParamValue_", handle.getCorpNo());
 		rs.setField("KeyCardID_", GuidNull);
@@ -463,4 +502,5 @@ public class SvrUserLogin extends CustomService {
 		opear.setTableName(SystemTable.get(SystemTable.getCurrentUser));
 		opear.insert(rs);
 	}
+
 }

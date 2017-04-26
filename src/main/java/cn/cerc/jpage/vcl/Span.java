@@ -38,6 +38,10 @@ public class Span extends Component {
 		this.text = text;
 	}
 
+	public void setText(String format, Object... args) {
+		this.text = String.format(format, args);
+	}
+
 	public String getRole() {
 		return role;
 	}

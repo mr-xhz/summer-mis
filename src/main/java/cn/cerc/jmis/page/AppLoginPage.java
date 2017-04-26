@@ -47,12 +47,6 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			if (form.logon())
 				return true;
 		} catch (Exception e) {
-			if (!e.getMessage().contains("</a>")) {
-				if (password == null || "".equals(password)) {
-					getResponse().sendRedirect("TFrmEasyReg?phone=" + userCode);
-					return false;
-				}
-			}
 			this.add("loginMsg", e.getMessage());
 		}
 		this.execute();
@@ -71,6 +65,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 		req.setAttribute("userCode", userCode);
 		req.setAttribute("password", password);
 		req.setAttribute("needVerify", "false");
+
 		// 如长度大于10表示用手机号码登入
 		if (userCode.length() > 10) {
 			String oldCode = userCode;
@@ -86,8 +81,10 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			app = new LocalService((AbstractForm) form);
 		else
 			app = new LocalService(form.getHandle());
+
 		app.setService("SvrUserLogin.check");
-		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId)) {
+		String IP = getIPAddress();
+		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId, "ClientIP_", IP)) {
 			String sid = app.getDataOut().getHead().getString("SessionID_");
 			if (sid != null && !sid.equals("")) {
 				log.debug(String.format("认证成功，取得sid(%s)", sid));
@@ -97,7 +94,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			}
 		} else {
 			// 登陆验证失败，进行判断，手机号为空，则回到登陆页，手机不为空，密码为空，则跳到发送验证码页面
-			String mobile = app.getDataOut().getHead().getSafeString("Mobile_");
+			String mobile = app.getDataOut().getHead().getString("Mobile_");
 			if (mobile == null || "".equals(mobile)) {
 				log.debug(String.format("用户帐号(%s)与密码认证失败", userCode));
 				req.setAttribute("loginMsg", app.getMessage());
@@ -118,7 +115,6 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	 * 根据电话号码返回用户帐号，用于普及版登入
 	 * 
 	 * @param tel
-	 * @return
 	 * @throws IOException
 	 * @throws ServletException
 	 */
@@ -131,5 +127,27 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 			throw new RuntimeException(headOut.getString("Msg_"));
 		} else
 			return app.getDataOut().getHead().getString("UserCode_");
+	}
+
+	/**
+	 * 获取客户端IP地址
+	 * 
+	 * @return
+	 */
+	public String getIPAddress() {
+		String ip = this.getRequest().getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = this.getRequest().getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = this.getRequest().getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = this.getRequest().getRemoteAddr();
+		}
+		if (ip.equals("0:0:0:0:0:0:0:1")) {
+			ip = "0.0.0.0";
+		}
+		return ip;
 	}
 }

@@ -36,7 +36,7 @@
 				<ref bean="rule" />
 			</list>
 		</property>
-		<property name="startupDelay" value="10" />
+		<property name="startupDelay" value="15" />
 	</bean>
 
 	<!-- 定义具体的业务逻辑处理类 -->

@@ -19,6 +19,8 @@ public class TextBox extends Component {
 	protected String pattern;
 	private String maxlength;
 	private String placeholder;
+	// 自动完成（默认为 off）
+	private boolean autocomplete = false;
 	private boolean autofocus;
 	private boolean readonly;
 	private boolean required;
@@ -56,6 +58,13 @@ public class TextBox extends Component {
 			html.print(" oninput='%s'", this.oninput);
 		if (placeholder != null)
 			html.print(" placeholder='%s'", this.placeholder);
+
+		if (this.autocomplete) {
+			html.print("autocomplete=\"on\"");
+		} else {
+			html.print("autocomplete=\"off\"");
+		}
+
 		if (this.autofocus)
 			html.print(" autofocus");
 		if (this.required)
@@ -121,6 +130,14 @@ public class TextBox extends Component {
 
 	public void setRequired(boolean required) {
 		this.required = required;
+	}
+
+	public boolean isAutocomplete() {
+		return autocomplete;
+	}
+
+	public void setAutocomplete(boolean autocomplete) {
+		this.autocomplete = autocomplete;
 	}
 
 	public boolean isAutofocus() {

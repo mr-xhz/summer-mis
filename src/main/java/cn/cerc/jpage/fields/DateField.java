@@ -10,6 +10,7 @@ public class DateField extends AbstractField {
 		super(owner, name, 5);
 		this.setField(field);
 		this.setDialog("showDateDialog");
+		this.setIcon("images/dateIocn.png");
 	}
 
 	@Override
