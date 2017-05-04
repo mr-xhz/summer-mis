@@ -379,8 +379,7 @@ public class SvrUserLogin extends CustomService {
 		cdsTmp.add("and Used_=1");
 		cdsTmp.open();
 
-		DataSet dataOut = getDataOut().appendDataSet(cdsTmp);
-		DataValidateException.stopRun(String.format("帐号 %s 还未进行认证，无法发送消息", userCode), dataOut.eof());
+		getDataOut().appendDataSet(cdsTmp);
 		return true;
 	}
 
