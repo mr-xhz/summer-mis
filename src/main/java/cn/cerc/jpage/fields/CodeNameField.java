@@ -6,6 +6,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 
 public class CodeNameField extends AbstractField {
 	private String nameField;
+	private String param;
 
 	public CodeNameField(Component owner, String name, String field) {
 		super(owner, name, 0);
@@ -78,8 +79,12 @@ public class CodeNameField extends AbstractField {
 
 			html.print("<span>");
 			if (this.getDialog() != null) {
-				html.print("<a href=\"%s\">", getDialog().getUrl());
-				html.print("<a href=\"javascript:%s('%s,%s')\">", getDialog().getDialogfun(), getId(), getNameField());
+				if (this.getParam() != null)
+					html.print("<a href=\"javascript:%s('%s,%s','%s')\">", getDialog().getDialogfun(), getId(),
+							getNameField(), getParam());
+				else
+					html.print("<a href=\"javascript:%s('%s,%s')\">", getDialog().getDialogfun(), getId(),
+							getNameField());
 				html.print("<img src=\"images/searchIocn.png\">");
 				html.print("</a>");
 			}
@@ -96,5 +101,13 @@ public class CodeNameField extends AbstractField {
 	public CodeNameField setNameField(String nameField) {
 		this.nameField = nameField;
 		return this;
+	}
+
+	public String getParam() {
+		return param;
+	}
+
+	public void setParam(String param) {
+		this.param = param;
 	}
 }
