@@ -11,6 +11,7 @@ public class UrlRecord {
 	private String title;
 	private String target;
 	private Map<String, String> params = new HashMap<>();
+	private String hintMsg;
 
 	public UrlRecord() {
 	}
@@ -98,6 +99,14 @@ public class UrlRecord {
 
 	public void setTarget(String target) {
 		this.target = target;
+	}
+
+	public String getHintMsg() {
+		return hintMsg;
+	}
+
+	public void setHintMsg(String hintMsg) {
+		this.hintMsg = hintMsg;
 	}
 
 }
