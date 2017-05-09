@@ -9,11 +9,6 @@ import cn.cerc.jpage.vcl.Button;
 import cn.cerc.jpage.vcl.Image;
 import cn.cerc.jpage.vcl.Span;
 
-/**
- * 
- * @author 张弓
- *
- */
 public class Block401 extends Component {
 	private String title = "(title)";
 	private Image product = new Image();
@@ -72,6 +67,10 @@ public class Block401 extends Component {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public void setTitle(String format, Object... args) {
+		this.title = String.format(format, args);
 	}
 
 	public Button getButton() {
