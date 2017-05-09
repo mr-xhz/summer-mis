@@ -6,7 +6,6 @@ import cn.cerc.jpage.core.HtmlWriter;
 
 public class CodeNameField extends AbstractField {
 	private String nameField;
-	private String param;
 
 	public CodeNameField(Component owner, String name, String field) {
 		super(owner, name, 0);
@@ -79,12 +78,7 @@ public class CodeNameField extends AbstractField {
 
 			html.print("<span>");
 			if (this.getDialog() != null) {
-				if (this.getParam() != null)
-					html.print("<a href=\"javascript:%s('%s,%s','%s')\">", getDialog().getDialogfun(), getId(),
-							getNameField(), getParam());
-				else
-					html.print("<a href=\"javascript:%s('%s,%s')\">", getDialog().getDialogfun(), getId(),
-							getNameField());
+				html.print("<a href=\"%s\">", getUrl(this.getDialog()));
 				html.print("<img src=\"images/searchIocn.png\">");
 				html.print("</a>");
 			}
@@ -92,6 +86,40 @@ public class CodeNameField extends AbstractField {
 		}
 	}
 
+	public String getUrl(DialogField dialog) {
+		if (dialog.getDialogfun() == null) {
+			throw new RuntimeException("dialogfun is null");
+		}
+
+		StringBuilder build = new StringBuilder();
+		build.append("javascript:");
+		build.append(dialog.getDialogfun());
+		build.append("(");
+
+		build.append("'");
+		build.append(getId());
+		build.append(",");
+		build.append(getNameField());
+		build.append("'");
+
+		if (dialog.getParams().size() > 0) {
+			build.append(",");
+		}
+
+		int i = 0;
+		for (String param : dialog.getParams()) {
+			build.append("'");
+			build.append(param);
+			build.append("'");
+			if (i != dialog.getParams().size() - 1) {
+				build.append(",");
+			}
+			i++;
+		}
+		build.append(")");
+
+		return build.toString();
+	}
 	public String getNameField() {
 		if (nameField != null)
 			return nameField;
@@ -103,11 +131,4 @@ public class CodeNameField extends AbstractField {
 		return this;
 	}
 
-	public String getParam() {
-		return param;
-	}
-
-	public void setParam(String param) {
-		this.param = param;
-	}
 }
