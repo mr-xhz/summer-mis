@@ -77,7 +77,7 @@ public class CodeNameField extends AbstractField {
 			html.println("/>");
 
 			html.print("<span>");
-			if (this.getDialog() != null) {
+			if (this.getDialog() != null && this.getDialog().isOpen()) {
 				html.print("<a href=\"%s\">", getUrl(this.getDialog()));
 				html.print("<img src=\"images/searchIocn.png\">");
 				html.print("</a>");
@@ -120,6 +120,7 @@ public class CodeNameField extends AbstractField {
 
 		return build.toString();
 	}
+
 	public String getNameField() {
 		if (nameField != null)
 			return nameField;

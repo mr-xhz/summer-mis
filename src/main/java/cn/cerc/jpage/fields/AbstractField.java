@@ -256,7 +256,7 @@ public abstract class AbstractField extends Component implements IField {
 		} else {
 			html.println("<label for=\"%s\">%s</label>", this.getId(), this.getName() + "：");
 			outputInput(html, record);
-			if (this.dialog != null) {
+			if (this.dialog != null && this.dialog.isOpen()) {
 				html.print("<span>");
 				html.print("<a href=\"%s\">", dialog.getUrl());
 
