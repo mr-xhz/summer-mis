@@ -55,9 +55,15 @@ public class OptionField extends AbstractField {
 		String current = this.getText(record);
 		html.println("<label for=\"%s\">%s</label>", this.getId(), this.getName() + "：");
 		if (size > 0) {
-			html.println("<select id=\"%s\" name=\"%s\" size=\"%s\">", this.getId(), this.getId(), this.getSize());
+			html.print("<select id=\"%s\" name=\"%s\" size=\"%s\"", this.getId(), this.getId(), this.getSize());
+			if (this.isReadonly())
+				html.print(" disabled");
+			html.print(">");
 		} else {
-			html.println("<select id=\"%s\" name=\"%s\">", this.getId(), this.getId());
+			html.print("<select id=\"%s\" name=\"%s\"", this.getId(), this.getId());
+			if (this.isReadonly())
+				html.print(" disabled");
+			html.print(">");
 		}
 		for (String key : items.keySet()) {
 			String value = items.get(key);
