@@ -21,6 +21,7 @@ public class ChildGridLine extends AbstractGridLine {
 			html.print(" style=\"display:none\"");
 		html.println(">");
 		for (RowCell item : this.getCells()) {
+			IField objField = item.getFields().get(0);
 			html.print("<td");
 			if (item.getColSpan() > 1)
 				html.print(" colspan=\"%d\"", item.getColSpan());
@@ -28,6 +29,8 @@ public class ChildGridLine extends AbstractGridLine {
 				html.print(" style=\"%s\"", item.getStyle());
 			if (item.getAlign() != null)
 				html.print(" align=\"%s\"", item.getAlign());
+			else if (objField.getAlign() != null)
+				html.print(" align=\"%s\"", objField.getAlign());
 
 			if (item.getRole() != null)
 				html.print(" role=\"%s\"", item.getRole());
