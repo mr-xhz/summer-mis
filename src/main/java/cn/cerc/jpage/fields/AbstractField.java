@@ -13,6 +13,7 @@ import cn.cerc.jpage.other.BuildUrl;
 import net.sf.json.JSONObject;
 
 public abstract class AbstractField extends Component implements IField {
+	private String htmlTag = "input";
 	private String name;
 	private String shortName;
 	private String align;
@@ -57,6 +58,16 @@ public abstract class AbstractField extends Component implements IField {
 	protected String oninput;
 
 	protected String onclick;
+
+	// TODO 专用于textarea标签，需要拆分该标签出来，黄荣君 2016-05-31
+	// 最大字符串数
+	private int maxlength;
+	// 可见行数
+	private int rows;
+	// 可见宽度
+	private int cols;
+	// 是否禁用
+	private boolean resize = true;
 
 	public AbstractField(Component owner, String name, int width) {
 		super(owner);
@@ -274,6 +285,11 @@ public abstract class AbstractField extends Component implements IField {
 	}
 
 	protected void outputInput(HtmlWriter html, Record dataSet) {
+		if ("textarea".equals(htmlTag)) {
+			outputTextArea(html, dataSet);
+			return;
+		}
+
 		if (this.hidden) {
 			html.print("<input");
 			html.print(" type=\"hidden\"");
@@ -317,6 +333,46 @@ public abstract class AbstractField extends Component implements IField {
 				html.print(" onclick=\"%s\"", this.onclick);
 			html.println("/>");
 		}
+	}
+
+	private void outputTextArea(HtmlWriter html, Record dataSet) {
+		html.print("<textarea");
+		html.print(" id=\"%s\"", this.getId());
+		html.print(" name=\"%s\"", this.getId());
+		String value = this.getText(dataSet);
+
+		if (readonly) {
+			html.print(" readonly=\"readonly\"");
+		}
+		if (autofocus) {
+			html.print(" autofocus");
+		}
+		if (required) {
+			html.print(" required");
+		}
+		if (placeholder != null) {
+			html.print(" placeholder=\"%s\"", placeholder);
+		}
+		if (maxlength > 0) {
+			html.print(" maxlength=\"%s\"", maxlength);
+		}
+		if (rows > 0) {
+			html.print(" rows=\"%s\"", rows);
+		}
+		if (cols > 0) {
+			html.print(" cols=\"%s\"", cols);
+		}
+		if (resize) {
+			html.println("style=\"resize: none;\"");
+		}
+		html.println(">");
+
+		if (value != null)
+			html.print("%s", value);
+		if (this.getValue() != null) {
+			html.print("%s", this.getValue());
+		}
+		html.println("</textarea>");
 	}
 
 	public DialogField getDialog() {
@@ -548,6 +604,42 @@ public abstract class AbstractField extends Component implements IField {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public String getHtmlTag() {
+		return htmlTag;
+	}
+
+	public AbstractField setHtmlTag(String htmlTag) {
+		this.htmlTag = htmlTag;
+		return this;
+	}
+
+	public int getMaxlength() {
+		return maxlength;
+	}
+
+	public AbstractField setMaxlength(int maxlength) {
+		this.maxlength = maxlength;
+		return this;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public AbstractField setRows(int rows) {
+		this.rows = rows;
+		return this;
+	}
+
+	public int getCols() {
+		return cols;
+	}
+
+	public AbstractField setCols(int cols) {
+		this.cols = cols;
+		return this;
 	}
 
 }
