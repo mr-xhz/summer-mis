@@ -82,7 +82,7 @@ public class DialogField {
 	}
 
 	public static void main(String[] args) {
-		DialogField obj = new DialogField("showVIpInfo");
+		DialogField obj = new DialogField("showVipInfo");
 		obj.setInputId("inputid");
 		obj.add("1");
 		obj.add("2");
