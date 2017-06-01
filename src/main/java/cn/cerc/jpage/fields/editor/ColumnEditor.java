@@ -75,6 +75,7 @@ public class ColumnEditor {
 		html.print(" type='text'");
 		html.print(" name='%s'", owner.getField());
 		html.print(" value='%s'", data);
+		html.print(" autocomplete='off'");
 		html.print(" data-%s='[%s]'", owner.getField(), data);
 		if (gridLine instanceof MasterGridLine) {
 			html.print(" data-focus='[%s]'", this.getDataFocus());
