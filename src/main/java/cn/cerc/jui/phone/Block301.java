@@ -6,9 +6,7 @@ import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.vcl.Image;
 
 /**
- * 
- * @author 张弓
- *
+ * 用于生成厂商、客户、帐套选择
  */
 public class Block301 extends Component {
 	private Image leftIcon = new Image();
@@ -16,13 +14,8 @@ public class Block301 extends Component {
 	private String describe = "(describe)";
 	private Image rightIcon = new Image();
 	private UrlRecord operator;
+	private StringBuilder builder = new StringBuilder();
 
-	/**
-	 * 用于生成厂商、客户、帐套选择
-	 * 
-	 * @param owner
-	 *            内容显示区
-	 */
 	public Block301(Component owner) {
 		super(owner);
 		operator = new UrlRecord();
@@ -44,7 +37,13 @@ public class Block301 extends Component {
 		html.print("<span role='title'>%s</span>", this.title);
 		rightIcon.output(html);
 		html.print("</div>");
-		html.print("<div role='describe'>%s</div>", this.describe);
+
+		if (builder.length() > 0) {
+			html.print("<div role='describe'>%s</div>", builder.toString());
+		} else {
+			html.print("<div role='describe'>%s</div>", describe);
+		}
+
 		html.print("</div>");
 		html.print("</a>");
 		html.print("<div style='clear: both'></div>");
@@ -81,5 +80,15 @@ public class Block301 extends Component {
 
 	public Image getRightIcon() {
 		return rightIcon;
+	}
+
+	public Block301 add(String describe) {
+		builder.append(describe);
+		return this;
+	}
+
+	public Block301 add(String format, Object... args) {
+		builder.append(String.format(format, args));
+		return this;
 	}
 }
