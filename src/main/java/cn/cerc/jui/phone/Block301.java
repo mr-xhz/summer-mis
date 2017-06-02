@@ -1,5 +1,10 @@
 package cn.cerc.jui.phone;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
@@ -11,10 +16,10 @@ import cn.cerc.jpage.vcl.Image;
 public class Block301 extends Component {
 	private Image leftIcon = new Image();
 	private String title = "(title)";
-	private String describe = "(describe)";
+	List<Image> list = new ArrayList<>();
 	private Image rightIcon = new Image();
 	private UrlRecord operator;
-	private StringBuilder builder = new StringBuilder();
+	private Map<String, String> items = new LinkedHashMap<>();
 
 	public Block301(Component owner) {
 		super(owner);
@@ -33,16 +38,27 @@ public class Block301 extends Component {
 		leftIcon.output(html);
 		html.print("<a href='%s'>", operator.getUrl());
 		html.print("<div>");
+
 		html.print("<div role='title'>");
-		html.print("<span role='title'>%s</span>", this.title);
+		html.print("<span role='title'>");
+		for (Image image : list) {
+			html.print(image.toString());
+		}
+		html.print("%s</span>", title);
+
 		rightIcon.output(html);
 		html.print("</div>");
 
-		if (builder.length() > 0) {
-			html.print("<div role='describe'>%s</div>", builder.toString());
-		} else {
-			html.print("<div role='describe'>%s</div>", describe);
+		html.print("<div role='describe'>");
+		int i = 0;
+		for (String key : items.keySet()) {
+			html.println("<span>%s：%s</span>", key, items.get(key));
+			i++;
+			if (i % 2 == 0) {
+				html.println("<br />");
+			}
 		}
+		html.print("</div>");
 
 		html.print("</div>");
 		html.print("</a>");
@@ -58,37 +74,37 @@ public class Block301 extends Component {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public Block301 setTitle(String title) {
 		this.title = title;
+		return this;
 	}
 
-	public String getDescribe() {
-		return describe;
-	}
-
-	public void setDescribe(String describe) {
-		this.describe = describe;
+	public Block301 setTitle(String format, Object... args) {
+		this.title = String.format(format, args);
+		return this;
 	}
 
 	public UrlRecord getOperator() {
 		return operator;
 	}
 
-	public void setOperator(UrlRecord operator) {
+	public Block301 setOperator(UrlRecord operator) {
 		this.operator = operator;
+		return this;
 	}
 
 	public Image getRightIcon() {
 		return rightIcon;
 	}
 
-	public Block301 add(String describe) {
-		builder.append(describe);
+	public Block301 addIcon(Image img) {
+		list.add(img);
 		return this;
 	}
 
-	public Block301 add(String format, Object... args) {
-		builder.append(String.format(format, args));
+	public Block301 add(String key, String value) {
+		items.put(key, value);
 		return this;
 	}
+
 }
