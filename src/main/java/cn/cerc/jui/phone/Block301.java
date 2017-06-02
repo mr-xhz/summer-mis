@@ -74,11 +74,6 @@ public class Block301 extends Component {
 		return title;
 	}
 
-	public Block301 setTitle(String title) {
-		this.title = title;
-		return this;
-	}
-
 	public Block301 setTitle(String format, Object... args) {
 		this.title = String.format(format, args);
 		return this;
