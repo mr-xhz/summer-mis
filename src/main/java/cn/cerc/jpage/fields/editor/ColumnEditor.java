@@ -69,8 +69,11 @@ public class ColumnEditor {
 		html.print("<input");
 		if (gridLine instanceof MasterGridLine)
 			html.print(" id='%s'", this.getDataId());
-		else
+		else {
+			if (owner.getId() != null)
+				html.print(" id='%s'", owner.getId());
 			inputStyle = "width:80%;";
+		}
 		inputStyle += "border: 1px solid #dcdcdc;";
 		html.print(" type='text'");
 		html.print(" name='%s'", owner.getField());
