@@ -313,9 +313,9 @@ public abstract class AbstractField extends Component implements IField {
 			if (this.isReadonly())
 				html.print(" readonly=\"readonly\"");
 			if (this.autocomplete) {
-				html.print("autocomplete=\"on\"");
+				html.print(" autocomplete=\"on\"");
 			} else {
-				html.print("autocomplete=\"off\"");
+				html.print(" autocomplete=\"off\"");
 			}
 			if (this.autofocus)
 				html.print(" autofocus");
