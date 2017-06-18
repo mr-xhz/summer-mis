@@ -16,10 +16,10 @@ public class UrlRecord {
 	public UrlRecord() {
 	}
 
-	public UrlRecord(String site, String caption) {
+	public UrlRecord(String site, String name) {
 		super();
 		this.site = site;
-		this.name = caption;
+		this.name = name;
 	}
 
 	public UrlRecord addParam(String key, String value) {
