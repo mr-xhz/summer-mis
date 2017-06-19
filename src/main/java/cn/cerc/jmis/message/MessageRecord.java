@@ -4,16 +4,14 @@ import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 
-/*
+/**
  * 专用于消息发送
+ * 
+ * 注意：公司别和用户代码必须配套
  */
 public class MessageRecord {
-	// 收信帐套
 	private String corpNo;
-
-	// 收信用户
 	private String userCode;
-
 	private String subject;
 	private StringBuilder content = new StringBuilder();
 	private MessageLevel level = MessageLevel.General;
