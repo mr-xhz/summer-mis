@@ -4,6 +4,7 @@ import cn.cerc.jbean.core.AppHandle;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDate;
+import cn.cerc.jdb.queue.QueueDB;
 import cn.cerc.jdb.queue.QueueMode;
 import cn.cerc.jdb.queue.QueueQuery;
 import cn.cerc.jpage.core.UrlRecord;
@@ -51,7 +52,7 @@ public class MessageQueue {
 		// 将消息发送至阿里云MNS
 		QueueQuery query = new QueueQuery(handle);
 		query.setQueueMode(QueueMode.append);
-		query.add("select * from %s", QueueDB.TEST);
+		query.add("select * from %s", QueueDB.MESSAGE);
 		query.open();
 
 		Record headIn = query.getHead();
