@@ -376,6 +376,11 @@ public class SvrUserLogin extends CustomService {
 		SqlQuery cdsTmp = new SqlQuery(this);
 		cdsTmp.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
 		cdsTmp.add("where CorpNo_='%s'and UserCode_='%s'", corpNo, userCode);
+		/*
+		 * FIXME MachineType_代表设备类型，6-iOS、7-Android，用于极光推送 JPushRecord
+		 * 
+		 * 黄荣君 2017-06-19
+		 */
 		cdsTmp.add("and Used_=1 and MachineType_ in (6,7)");
 		cdsTmp.open();
 

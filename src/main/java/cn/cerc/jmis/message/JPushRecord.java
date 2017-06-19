@@ -50,7 +50,6 @@ public class JPushRecord {
 				break;
 			}
 		}
-
 	}
 
 	public String getCorpNo() {
