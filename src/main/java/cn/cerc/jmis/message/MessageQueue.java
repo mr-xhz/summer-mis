@@ -1,14 +1,16 @@
 package cn.cerc.jmis.message;
 
-import cn.cerc.jbean.core.AppHandle;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.queue.QueueDB;
 import cn.cerc.jdb.queue.QueueMode;
 import cn.cerc.jdb.queue.QueueQuery;
-import cn.cerc.jpage.core.UrlRecord;
 
+/**
+ * 消息发送队列
+ * 
+ * 注意：公司别和用户代码必须配套
+ */
 public class MessageQueue {
 	private String corpNo;
 	private String userCode;
@@ -125,30 +127,6 @@ public class MessageQueue {
 	public MessageQueue setProcess(int process) {
 		this.process = process;
 		return this;
-	}
-
-	public static void main(String[] args) {
-		AppHandle handle = new AppHandle();
-		MessageQueue queue = new MessageQueue("91100124");
-		queue.setCorpNo("911001");
-
-		// 发送消息给上游
-		queue.append("单据日期：%s ", TDate.Today());
-		queue.append("<br />");
-		queue.append("订货单号：%s ", "DE170617001");
-		queue.append("<br />");
-		queue.append("订货说明：%s", "(空)");
-		queue.append("<br />");
-
-		UrlRecord url = new UrlRecord();
-		url.setName("点击查看");
-		url.setSite("TFrmTranOE.modify");
-		url.addParam("tbNo", "DE170617001");
-		queue.append(String.format("订货明细：<a href=\"%s\">%s</a>", url.getUrl(), url.getName()));
-
-		String subject = String.format("您的客户已向您采购商品，请接收并给予确认，谢谢！");
-		queue.setSubject(subject);
-		queue.send(handle);
 	}
 
 }
