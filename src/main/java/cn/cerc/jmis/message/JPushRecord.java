@@ -44,7 +44,9 @@ public class JPushRecord {
 				push.send(ClientType.IOS, machineCode);
 				break;
 			case 7:
-				push.send(ClientType.Android, machineCode);
+				if (!"n_null".equals(machineCode)) {
+					push.send(ClientType.Android, machineCode);
+				}
 				break;
 			default:
 				break;
