@@ -14,14 +14,11 @@ import cn.cerc.jpage.vcl.Label;
  * 标题
  * <p>
  * 文字信息（最多6行）
- * 
- * @author HuangRongjun
- *
  */
 public class Block604 extends Component {
 	private Label title;
 	private UrlRecord url;
-	private Map<String, String> items = new LinkedHashMap<>();
+	private Map<String, Object> items = new LinkedHashMap<>();
 
 	public Block604(Component owner) {
 		super(owner);
@@ -70,7 +67,7 @@ public class Block604 extends Component {
 		this.url = url;
 	}
 
-	public void addItem(String left, String right) {
+	public void addItem(String left, Object right) {
 		if (items.size() > 5) {
 			throw new RuntimeException("一个菜单组件最多容纳6个对象");
 		}
