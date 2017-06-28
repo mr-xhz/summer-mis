@@ -382,6 +382,7 @@ public class SvrUserLogin extends CustomService {
 		 * 黄荣君 2017-06-19
 		 */
 		cdsTmp.add("and Used_=1 and MachineType_ in (6,7)");
+		cdsTmp.add("and ifnull(MachineCode_,'')<>''");
 		cdsTmp.open();
 
 		getDataOut().appendDataSet(cdsTmp);
