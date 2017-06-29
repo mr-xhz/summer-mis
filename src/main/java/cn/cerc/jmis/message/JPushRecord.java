@@ -44,7 +44,8 @@ public class JPushRecord {
 				push.send(ClientType.IOS, machineCode);
 				break;
 			case 7:
-				if (!"n_null".equals(machineCode)) {
+				// 过滤掉没有注册IMEI码的移动设备
+				if (!"n_null".equals(machineCode) && !"n_000000000000000".equals(machineCode)) {
 					push.send(ClientType.Android, machineCode);
 				}
 				break;
