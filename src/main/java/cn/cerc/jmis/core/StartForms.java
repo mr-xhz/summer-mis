@@ -114,7 +114,7 @@ public class StartForms implements Filter {
 							new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
 						}
 						// 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
-						if (checkEnableTime())
+						//if (checkEnableTime())
 							call(form, funcCode);
 					}
 				} catch (Exception e) {
