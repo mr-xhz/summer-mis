@@ -114,8 +114,8 @@ public class StartForms implements Filter {
 							new HistoryRecord(tempStr).setLevel(HistoryLevel.General).save(handle);
 						}
 						// 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
-						if (checkEnableTime())
-							call(form, funcCode);
+						// if (checkEnableTime())
+						call(form, funcCode);
 					}
 				} catch (Exception e) {
 					Throwable err = e.getCause();
@@ -264,10 +264,11 @@ public class StartForms implements Filter {
 				}
 			}
 
-//			if (funcCode.equals("execute")) {
-//				if (ClientDevice.device_ee.equals(form.getClient().getDevice()))
-//					request.getSession().setAttribute(form.getClass().getName(), true);
-//			}
+			// if (funcCode.equals("execute")) {
+			// if (ClientDevice.device_ee.equals(form.getClient().getDevice()))
+			// request.getSession().setAttribute(form.getClass().getName(),
+			// true);
+			// }
 
 			// 处理返回值
 			if (pageOutput != null) {
