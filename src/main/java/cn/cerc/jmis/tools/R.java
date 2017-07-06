@@ -10,13 +10,13 @@ import cn.cerc.jdb.mysql.SqlQuery;
 
 public class R {
 	private static final Logger log = Logger.getLogger(R.class);
-	private static String langage = null;
 
 	public static String asString(IHandle handle, String text) {
-		if (langage == null) {
-			langage = Application.getLangage();
-			log.info("application current langage: " + langage);
-		}
+		Object temp = handle.getProperty(Application.deviceLanguage);
+		if (temp == null)
+			log.info("handle langage is null");
+		String langage = temp == null ? Application.getLangage() : (String) temp;
+		log.info("application current langage: " + langage);
 
 		if (Application.defaultLangage.equals(langage))
 			return text;
