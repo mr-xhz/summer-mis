@@ -84,7 +84,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 
 		app.setService("SvrUserLogin.check");
 		String IP = getIPAddress();
-		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId, "ClientIP_", IP)) {
+		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId, "ClientIP_", IP, "Language_", form.getClient().getLanguage())) {
 			String sid = app.getDataOut().getHead().getString("SessionID_");
 			if (sid != null && !sid.equals("")) {
 				log.debug(String.format("认证成功，取得sid(%s)", sid));

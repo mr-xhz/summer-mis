@@ -142,8 +142,7 @@ public class SvrUserLogin extends CustomService {
 						String.format("该帐号已被设置为附属帐号，不允许登录，请使用主帐号 %s 登录系统！", dsUser.getString("BelongAccount_")));
 
 			// 更新当前用户总数
-			String screen = headIn.getString("Screen_");
-			updateCurrentUser(device_name, screen);
+			updateCurrentUser(device_name, headIn.getString("Screen_"), headIn.getString("Language_"));
 			//
 			try (MemoryBuffer Buff = new MemoryBuffer(BufferType.getSessionInfo, (String) getProperty("UserID"),
 					deviceId)) {
@@ -481,7 +480,7 @@ public class SvrUserLogin extends CustomService {
 			throw new RuntimeException("您输入的验证码有误，请重新输入！");
 	}
 
-	private void updateCurrentUser(String computer, String screen) {
+	private void updateCurrentUser(String computer, String screen, String language) {
 		getConnection().execute(String.format(
 				"Update %s Set Viability_=0 Where Viability_>0 and (TIME_TO_SEC(TIMEDIFF(LogoutTime_,now())))>%d",
 				SystemTable.get(SystemTable.getCurrentUser), 3600));
@@ -503,6 +502,7 @@ public class SvrUserLogin extends CustomService {
 		rs.setField("Viability_", intToStr(Max_Viability));
 		rs.setField("LoginServer_", ServerConfig.getAppName());
 		rs.setField("Screen_", screen);
+		rs.setField("Language_", language);
 		SqlOperator opear = new SqlOperator(this);
 		opear.setTableName(SystemTable.get(SystemTable.getCurrentUser));
 		opear.insert(rs);
