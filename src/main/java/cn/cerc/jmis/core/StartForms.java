@@ -221,6 +221,8 @@ public class StartForms implements Filter {
 
 			// 是否拥有此菜单调用权限
 			if ("true".equals(form.getParam("security", "false"))) {
+				if (!Application.getPassport(form.getHandle()).passsMenu(form.getMenu().getId()))
+					throw new RuntimeException(String.format("对不起，该菜单 %s 还未订购，无法使用！", form.getMenu().getTitle()));
 				if (!Application.getPassport(form.getHandle()).passProc(form.getParam("versions", null),
 						form.getParam("procCode", null)))
 					throw new RuntimeException("对不起，您没有权限执行此功能！");
