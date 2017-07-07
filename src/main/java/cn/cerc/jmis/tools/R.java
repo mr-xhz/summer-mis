@@ -1,5 +1,7 @@
 package cn.cerc.jmis.tools;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 
 import cn.cerc.jbean.core.Application;
@@ -11,14 +13,25 @@ import cn.cerc.jdb.mysql.SqlQuery;
 public class R {
 	private static final Logger log = Logger.getLogger(R.class);
 
-	public static String asString(IHandle handle, String text) {
+	public static String getLanguage(IHandle handle) {
 		Object temp = handle.getProperty(Application.deviceLanguage);
-		if (temp == null)
+		if (temp == null) {
 			log.info("handle langage is null");
+			Object request = handle.getProperty("request");
+			if (request != null) {
+				HttpServletRequest req = (HttpServletRequest) request;
+				temp = req.getSession().getAttribute(Application.deviceLanguage);
+				log.info("session langage value " + temp);
+			}
+		}
 		String langage = temp == null ? Application.getLangage() : (String) temp;
 		log.info("application current langage: " + langage);
+		return langage;
+	}
 
-		if (Application.defaultLangage.equals(langage))
+	public static String asString(IHandle handle, String text) {
+		String langage = getLanguage(handle);
+		if (Application.LangageDefault.equals(langage))
 			return text;
 
 		// 处理英文界面

@@ -13,6 +13,7 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.other.utils;
+import cn.cerc.jmis.tools.R;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -94,16 +95,14 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		String newFile = String.format("%s-%s.%s", fileName, "pc", extName);
 		if (fileExists(rootPath + newFile)) {
 			// 检查是否存在相对应的语言版本
-			Object temp = this.getForm().getHandle().getProperty(Application.deviceLanguage);
-			String langCode = temp == null ? Application.getLangage() : (String) temp;
+			String langCode = form == null ? Application.LangageDefault : R.getLanguage(form.getHandle());
 			String langFile = String.format("%s-%s-%s.%s", fileName, "pc", langCode, extName);
 			if (fileExists(rootPath + langFile))
 				return langFile;
 			return newFile;
 		} else {
 			// 检查是否存在相对应的语言版本
-			Object temp = this.getForm().getHandle().getProperty(Application.deviceLanguage);
-			String langCode = temp == null ? Application.getLangage() : (String) temp;
+			String langCode = form == null ? Application.LangageDefault : R.getLanguage(form.getHandle());
 			String langFile = String.format("%s-%s.%s", fileName, langCode, extName);
 			if (fileExists(rootPath + langFile))
 				return langFile;
