@@ -94,14 +94,16 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		String newFile = String.format("%s-%s.%s", fileName, "pc", extName);
 		if (fileExists(rootPath + newFile)) {
 			// 检查是否存在相对应的语言版本
-			String langCode = Application.getLangage();
+			Object temp = this.getForm().getHandle().getProperty(Application.deviceLanguage);
+			String langCode = temp == null ? Application.getLangage() : (String) temp;
 			String langFile = String.format("%s-%s-%s.%s", fileName, "pc", langCode, extName);
 			if (fileExists(rootPath + langFile))
 				return langFile;
 			return newFile;
 		} else {
 			// 检查是否存在相对应的语言版本
-			String langCode = Application.getLangage();
+			Object temp = this.getForm().getHandle().getProperty(Application.deviceLanguage);
+			String langCode = temp == null ? Application.getLangage() : (String) temp;
 			String langFile = String.format("%s-%s.%s", fileName, langCode, extName);
 			if (fileExists(rootPath + langFile))
 				return langFile;
