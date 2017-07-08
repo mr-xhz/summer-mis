@@ -19,13 +19,16 @@ public class R {
 			log.info("handle langage is null");
 			Object request = handle.getProperty("request");
 			if (request != null) {
-				HttpServletRequest req = (HttpServletRequest) request;
-				temp = req.getSession().getAttribute(Application.deviceLanguage);
-				log.info("session langage value " + temp);
+				log.info(request.getClass().getName());
+				if (request instanceof HttpServletRequest) {
+					HttpServletRequest req = (HttpServletRequest) request;
+					temp = req.getSession().getAttribute(Application.deviceLanguage);
+					log.info("session langage value " + temp);
+				}
 			}
 		}
 		String langage = temp == null ? Application.getLangage() : (String) temp;
-		log.info("application current langage: " + langage);
+		log.info("application langage: " + langage);
 		return langage;
 	}
 
