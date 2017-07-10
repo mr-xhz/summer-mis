@@ -2,7 +2,7 @@ package cn.cerc.jmis.core;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Calendar;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,8 +11,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
+
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.AppConfig;
 import cn.cerc.jbean.core.AppHandle;
@@ -27,7 +30,6 @@ import cn.cerc.jbean.other.HistoryRecord;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jbean.tools.IAppLogin;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jdb.core.TDate;
 import cn.cerc.jmis.form.Webpage;
 import cn.cerc.jmis.page.ErrorPage;
 import cn.cerc.jmis.page.JspPage;
@@ -36,6 +38,7 @@ import cn.cerc.jmis.page.RedirectPage;
 public class StartForms implements Filter {
 	private static final Logger log = Logger.getLogger(StartForms.class);
 
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
@@ -136,6 +139,7 @@ public class StartForms implements Filter {
 		}
 	}
 
+	/*
 	private boolean checkEnableTime() {
 		Calendar cal = Calendar.getInstance();
 		// 月底最后一天
@@ -149,6 +153,7 @@ public class StartForms implements Filter {
 				throw new RuntimeException("系统现正在进行月初例行维护，维护时间为月底晚上23点至月初早上5点，请您在这段时间内不要使用系统，谢谢！");
 		return true;
 	}
+	*/
 
 	// 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
 	private boolean passDevice(IForm form) {
