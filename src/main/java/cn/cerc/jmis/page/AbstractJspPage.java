@@ -85,28 +85,27 @@ public abstract class AbstractJspPage extends Component implements IPage {
 		if (jspFile.indexOf(".jsp") == -1)
 			return jspFile;
 
-		if (this.getForm().getClient().isPhone())
-			return jspFile;
-
-		// 检查是否存在 PC 专用版本的jsp文件
 		String rootPath = String.format("/WEB-INF/%s/", Application.getAppConfig().getPathForms());
 		String fileName = jspFile.substring(0, jspFile.indexOf(".jsp"));
 		String extName = jspFile.substring(jspFile.indexOf(".jsp") + 1);
+
+		// 检查是否存在 PC 专用版本的jsp文件
 		String newFile = String.format("%s-%s.%s", fileName, "pc", extName);
-		if (fileExists(rootPath + newFile)) {
+		if (!this.getForm().getClient().isPhone() && fileExists(rootPath + newFile)) {
 			// 检查是否存在相对应的语言版本
 			String langCode = form == null ? Application.LangageDefault : R.getLanguage(form.getHandle());
 			String langFile = String.format("%s-%s-%s.%s", fileName, "pc", langCode, extName);
 			if (fileExists(rootPath + langFile))
 				return langFile;
 			return newFile;
-		} else {
-			// 检查是否存在相对应的语言版本
-			String langCode = form == null ? Application.LangageDefault : R.getLanguage(form.getHandle());
-			String langFile = String.format("%s-%s.%s", fileName, langCode, extName);
-			if (fileExists(rootPath + langFile))
-				return langFile;
 		}
+
+		// 检查是否存在相对应的语言版本
+		String langCode = form == null ? Application.LangageDefault : R.getLanguage(form.getHandle());
+		String langFile = String.format("%s-%s.%s", fileName, langCode, extName);
+		if (fileExists(rootPath + langFile))
+			return langFile;
+
 		return jspFile;
 	}
 
