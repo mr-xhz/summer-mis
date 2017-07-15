@@ -1,5 +1,6 @@
 package cn.cerc.jmis.message;
 
+import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.queue.QueueDB;
@@ -54,7 +55,11 @@ public class MessageQueue {
 		// 将消息发送至阿里云MNS
 		QueueQuery query = new QueueQuery(handle);
 		query.setQueueMode(QueueMode.append);
-		query.add("select * from %s", QueueDB.MESSAGE);
+		if (ServerConfig.getAppLevel() == ServerConfig.appTest) {
+			query.add("select * from %s", QueueDB.TEST);
+		} else {
+			query.add("select * from %s", QueueDB.MESSAGE);
+		}
 		query.open();
 
 		Record headIn = query.getHead();
