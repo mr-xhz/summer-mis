@@ -360,9 +360,10 @@ public class SvrUserLogin extends CustomService {
 	}
 
 	/**
-	 * 获取用户的移动设备信息
 	 * 
+	 * @return 获取用户的移动设备信息
 	 * @throws DataValidateException
+	 *             参数效验异常
 	 */
 	public boolean getMachInfo() throws DataValidateException {
 		Record headIn = getDataIn().getHead();

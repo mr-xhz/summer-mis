@@ -48,7 +48,12 @@ public class MemoryBookInfo {
 	}
 
 	/**
-	 * 返回帐套状态
+	 * 
+	 * @param handle
+	 *            环境变量
+	 * @param corpNo
+	 *            帐套代码
+	 * @return 返回帐套状态
 	 */
 	public static int getStatus(IHandle handle, String corpNo) {
 		BookInfoRecord item = get(handle, corpNo);
@@ -58,7 +63,10 @@ public class MemoryBookInfo {
 	}
 
 	/**
-	 * 返回当前帐套的版本：基础版还是其它版本
+	 * 
+	 * @param handle
+	 *            环境变量
+	 * @return 返回当前帐套的版本类型
 	 */
 	public static BookVersion getBookType(IHandle handle) {
 		String corpNo = handle.getCorpNo();
@@ -66,7 +74,12 @@ public class MemoryBookInfo {
 	}
 
 	/**
-	 * 返回指定帐套的版本：基础版还是其它版本
+	 * 
+	 * @param handle
+	 *            环境变量
+	 * @param corpNo
+	 *            帐套代码
+	 * @return 返回指定帐套的版本类型
 	 */
 	public static BookVersion getCorpType(IHandle handle, String corpNo) {
 		BookInfoRecord item = get(handle, corpNo);
@@ -77,7 +90,12 @@ public class MemoryBookInfo {
 	}
 
 	/**
-	 * 返回帐套简称
+	 * 
+	 * @param handle
+	 *            环境变量
+	 * @param corpNo
+	 *            帐套代码
+	 * @return 返回帐套简称
 	 */
 	public static String getShortName(IHandle handle, String corpNo) {
 		BookInfoRecord item = get(handle, corpNo);

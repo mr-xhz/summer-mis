@@ -84,7 +84,8 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 
 		app.setService("SvrUserLogin.check");
 		String IP = getIPAddress();
-		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId, "ClientIP_", IP, "Language_", form.getClient().getLanguage())) {
+		if (app.exec("Account_", userCode, "Password_", password, "MachineID_", deviceId, "ClientIP_", IP, "Language_",
+				form.getClient().getLanguage())) {
 			String sid = app.getDataOut().getHead().getString("SessionID_");
 			if (sid != null && !sid.equals("")) {
 				log.debug(String.format("认证成功，取得sid(%s)", sid));
@@ -112,11 +113,15 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	}
 
 	/**
-	 * 根据电话号码返回用户帐号，用于普及版登入
 	 * 
-	 * @param tel
-	 * @throws IOException
+	 * @param handle
+	 *            环境变量
+	 * @param 电话号码
+	 * @return 根据电话号码返回用户帐号，用于普及版登入
 	 * @throws ServletException
+	 *             异常
+	 * @throws IOException
+	 *             异常
 	 */
 	private String getAccountFromTel(IHandle handle, String tel) throws ServletException, IOException {
 		LocalService app = new LocalService(handle);
@@ -130,9 +135,9 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
 	}
 
 	/**
-	 * 获取客户端IP地址
 	 * 
-	 * @return
+	 * 
+	 * @return 获取客户端IP地址
 	 */
 	public String getIPAddress() {
 		String ip = this.getRequest().getHeader("x-forwarded-for");

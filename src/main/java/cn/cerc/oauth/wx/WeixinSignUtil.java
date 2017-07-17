@@ -10,14 +10,7 @@ import java.util.Arrays;
  */
 public class WeixinSignUtil {
 
-	/**
-	 * 验证签名
-	 * 
-	 * @param signature
-	 * @param timestamp
-	 * @param nonce
-	 * @return
-	 */
+	// 验证签名
 	public static boolean checkSignature(String token, String signature, String timestamp, String nonce) {
 		String[] arr = new String[] { token, timestamp, nonce };
 		// 将token、timestamp、nonce三个参数进行字典序排序
@@ -41,12 +34,7 @@ public class WeixinSignUtil {
 		return tmpStr != null ? tmpStr.equals(signature.toUpperCase()) : false;
 	}
 
-	/**
-	 * 将字节数组转换为十六进制字符串
-	 * 
-	 * @param byteArray
-	 * @return
-	 */
+	// 将字节数组转换为十六进制字符串
 	private static String byteToStr(byte[] byteArray) {
 		String strDigest = "";
 		for (int i = 0; i < byteArray.length; i++) {
@@ -55,12 +43,7 @@ public class WeixinSignUtil {
 		return strDigest;
 	}
 
-	/**
-	 * 将字节转换为十六进制字符串
-	 * 
-	 * @param mByte
-	 * @return
-	 */
+	// 将字节转换为十六进制字符串
 	private static String byteToHexStr(byte mByte) {
 		char[] Digit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 		char[] tempArr = new char[2];
