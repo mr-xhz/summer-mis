@@ -2,6 +2,7 @@ package cn.cerc.jmis.core;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IClient;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.other.BufferType;
@@ -13,6 +14,7 @@ public class ClientDevice implements IClient {
 	private String sid; // application session id;
 	private String deviceId; // device id
 	private String deviceType; // phone/pad/ee/pc
+	private String languageId; //device language: cn/en
 	private HttpServletRequest request;
 
 	public static final String deviceId_key = "CLIENTID";
@@ -58,6 +60,11 @@ public class ClientDevice implements IClient {
 	@Override
 	public String getDevice() {
 		return deviceType == null ? device_pc : deviceType;
+	}
+	
+	@Override
+	public String getLanguage(){
+		return languageId == null ? "cn" : languageId;
 	}
 
 	@Override
@@ -154,6 +161,13 @@ public class ClientDevice implements IClient {
 
 		request.setAttribute(deviceId_key, deviceId);
 		request.getSession().setAttribute(deviceId_key, deviceId);
+		
+		languageId = request.getParameter(Application.deviceLanguage);
+		if (languageId == null || "".equals(languageId))
+			languageId = (String) request.getSession().getAttribute(Application.deviceLanguage);
+		
+		request.setAttribute(Application.deviceLanguage, languageId);
+		request.getSession().setAttribute(Application.deviceLanguage, languageId);
 
 		// 取得并保存token(sid)
 		String sid = request.getParameter(RequestData.appSession_Key);

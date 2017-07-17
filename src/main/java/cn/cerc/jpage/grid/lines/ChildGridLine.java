@@ -21,6 +21,7 @@ public class ChildGridLine extends AbstractGridLine {
 			html.print(" style=\"display:none\"");
 		html.println(">");
 		for (RowCell item : this.getCells()) {
+			IField objField = item.getFields().get(0);
 			html.print("<td");
 			if (item.getColSpan() > 1)
 				html.print(" colspan=\"%d\"", item.getColSpan());
@@ -28,6 +29,8 @@ public class ChildGridLine extends AbstractGridLine {
 				html.print(" style=\"%s\"", item.getStyle());
 			if (item.getAlign() != null)
 				html.print(" align=\"%s\"", item.getAlign());
+			else if (objField.getAlign() != null)
+				html.print(" align=\"%s\"", objField.getAlign());
 
 			if (item.getRole() != null)
 				html.print(" role=\"%s\"", item.getRole());
@@ -38,14 +41,14 @@ public class ChildGridLine extends AbstractGridLine {
 			for (IField obj : item.getFields()) {
 				if (obj instanceof AbstractField) {
 					AbstractField field = (AbstractField) obj;
-					if (field.getTitle() != null && !"".equals(field.getTitle()))
-						html.print("%s： ", field.getTitle());
 					if (field instanceof IColumn)
 						html.print(((IColumn) field).format(dataSource.getDataSet().getCurrent()));
 					else if (field instanceof AbstractField)
 						outputField(html, field);
 					else
 						throw new RuntimeException("暂不支持的数据类型：" + field.getClass().getName());
+					if (field.getTitle() != null && !"".equals(field.getTitle()))
+						html.print("<span style='float: left;'>%s：</span> ", field.getTitle());
 				}
 			}
 			html.println("</td>");

@@ -35,6 +35,13 @@ function selectItem(self, choiceBox, value) {
 	$("#" + choiceBox + "input").next().text($(self).text());
 }
 
+function postItem(self, choiceBox, value, formid ) {
+	$("#" + choiceBox + "choice").hide();
+	$("#" + choiceBox + "input").val(value);
+	$("#" + choiceBox + "input").next().text($(self).text());
+	submitForm(formid, value);
+}
+
 /*加号*/
 function addClick(){
 	var n = 0;

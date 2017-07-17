@@ -77,14 +77,48 @@ public class CodeNameField extends AbstractField {
 			html.println("/>");
 
 			html.print("<span>");
-			if (this.getDialog() != null) {
-				html.print("<a href=\"%s\">", getDialog().getUrl());
-				html.print("<a href=\"javascript:%s('%s,%s')\">", getDialog().getDialogfun(), getId(), getNameField());
+			if (this.getDialog() != null && this.getDialog().isOpen()) {
+				html.print("<a href=\"%s\">", getUrl(this.getDialog()));
 				html.print("<img src=\"images/searchIocn.png\">");
 				html.print("</a>");
 			}
 			html.print("</span>");
 		}
+	}
+
+	public String getUrl(DialogField dialog) {
+		if (dialog.getDialogfun() == null) {
+			throw new RuntimeException("dialogfun is null");
+		}
+
+		StringBuilder build = new StringBuilder();
+		build.append("javascript:");
+		build.append(dialog.getDialogfun());
+		build.append("(");
+
+		build.append("'");
+		build.append(getId());
+		build.append(",");
+		build.append(getNameField());
+		build.append("'");
+
+		if (dialog.getParams().size() > 0) {
+			build.append(",");
+		}
+
+		int i = 0;
+		for (String param : dialog.getParams()) {
+			build.append("'");
+			build.append(param);
+			build.append("'");
+			if (i != dialog.getParams().size() - 1) {
+				build.append(",");
+			}
+			i++;
+		}
+		build.append(")");
+
+		return build.toString();
 	}
 
 	public String getNameField() {
@@ -97,4 +131,5 @@ public class CodeNameField extends AbstractField {
 		this.nameField = nameField;
 		return this;
 	}
+
 }
