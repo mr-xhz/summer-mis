@@ -57,8 +57,9 @@ public class Image extends Component {
 		return src;
 	}
 
-	public void setSrc(String src) {
+	public Image setSrc(String src) {
 		this.src = src;
+		return this;
 	}
 
 	public String getRole() {
@@ -73,15 +74,17 @@ public class Image extends Component {
 		return onclick;
 	}
 
-	public void setOnclick(String onclick) {
+	public Image setOnclick(String onclick) {
 		this.onclick = onclick;
+		return this;
 	}
 
 	public String getAlt() {
 		return alt;
 	}
 
-	public void setAlt(String alt) {
+	public Image setAlt(String alt) {
 		this.alt = alt;
+		return this;
 	}
 }

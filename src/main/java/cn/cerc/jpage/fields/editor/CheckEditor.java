@@ -29,6 +29,7 @@ public class CheckEditor {
 		html.print(" type='checkbox'");
 		html.print(" name='%s'", owner.getField());
 		html.print(" value='true'");
+		html.print(" autocomplete='off'");
 		html.print(" data-%s='[%s]'", owner.getField(), data);
 		if (ds.getBoolean(owner.getField()))
 			html.print(" checked");

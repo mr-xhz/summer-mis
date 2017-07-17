@@ -45,6 +45,9 @@ public class UrlSide extends Component {
 			if (url.getTitle() != null) {
 				html.print(" title=\"%s\"", url.getTitle());
 			}
+			if (url.getHintMsg() != null) {
+				html.print(" onClick=\"return confirm('%s');\"", url.getHintMsg());
+			}
 			if (url.getTarget() != null) {
 				html.print(" target=\"%s\"", url.getTarget());
 			}

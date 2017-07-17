@@ -7,6 +7,7 @@ public class DialogField {
 	private List<String> params = new ArrayList<>();
 	private String inputId;
 	private String dialogfun;
+	private boolean show = true;
 
 	public DialogField(String dialogfun) {
 		this.dialogfun = dialogfun;
@@ -57,8 +58,9 @@ public class DialogField {
 		return dialogfun;
 	}
 
-	public void setDialogfun(String dialogfun) {
+	public DialogField setDialogfun(String dialogfun) {
 		this.dialogfun = dialogfun;
+		return this;
 	}
 
 	public String getInputId() {
@@ -70,8 +72,17 @@ public class DialogField {
 		return this;
 	}
 
+	public DialogField close() {
+		this.show = false;
+		return this;
+	}
+
+	public boolean isOpen() {
+		return show;
+	}
+
 	public static void main(String[] args) {
-		DialogField obj = new DialogField("showVIpInfo");
+		DialogField obj = new DialogField("showVipInfo");
 		obj.setInputId("inputid");
 		obj.add("1");
 		obj.add("2");

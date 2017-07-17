@@ -7,7 +7,7 @@ import cn.cerc.jdb.jiguang.ClientType;
 import cn.cerc.jdb.jiguang.JiguangPush;
 
 /**
- * 获取用户的设备信息
+ * 往指定用户的所有移动设备发送消息
  */
 public class JPushRecord {
 	private String corpNo;
@@ -16,13 +16,6 @@ public class JPushRecord {
 	private String alert;
 	private int msgId;
 
-	/**
-	 * 往指定用户的所有移动设备发送消息
-	 * 
-	 * @param corpNo
-	 * @param userCode
-	 * @param msgId
-	 */
 	public JPushRecord(String corpNo, String userCode, int msgId) {
 		this.corpNo = corpNo;
 		this.userCode = userCode;
@@ -30,9 +23,9 @@ public class JPushRecord {
 	}
 
 	public void send(IHandle handle) {
-		LocalService srv = new LocalService(handle, "SvrUserLogin.getMachInfo");
-		if (!srv.exec("CorpNo_", corpNo, "UserCode_", userCode)) {
-			throw new RuntimeException(srv.getMessage());
+		LocalService svr = new LocalService(handle, "SvrUserLogin.getMachInfo");
+		if (!svr.exec("CorpNo_", corpNo, "UserCode_", userCode)) {
+			throw new RuntimeException(svr.getMessage());
 		}
 
 		// 设置极光推送平台
@@ -42,7 +35,7 @@ public class JPushRecord {
 		push.setTitle(title);
 
 		// 将消息推送到极光平台
-		DataSet dataOut = srv.getDataOut();
+		DataSet dataOut = svr.getDataOut();
 		while (dataOut.fetch()) {
 			String machineCode = dataOut.getString("MachineCode_");
 			int machineType = dataOut.getInt("MachineType_");
@@ -51,13 +44,15 @@ public class JPushRecord {
 				push.send(ClientType.IOS, machineCode);
 				break;
 			case 7:
-				push.send(ClientType.Android, machineCode);
+				// 过滤掉没有注册IMEI码的移动设备
+				if (!"n_null".equals(machineCode) && !"n_000000000000000".equals(machineCode)) {
+					push.send(ClientType.Android, machineCode);
+				}
 				break;
 			default:
 				break;
 			}
 		}
-
 	}
 
 	public String getCorpNo() {

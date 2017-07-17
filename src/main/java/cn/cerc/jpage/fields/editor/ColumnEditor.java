@@ -69,12 +69,16 @@ public class ColumnEditor {
 		html.print("<input");
 		if (gridLine instanceof MasterGridLine)
 			html.print(" id='%s'", this.getDataId());
-		else
+		else {
+			if (owner.getId() != null)
+				html.print(" id='%s'", owner.getId());
 			inputStyle = "width:80%;";
+		}
 		inputStyle += "border: 1px solid #dcdcdc;";
 		html.print(" type='text'");
 		html.print(" name='%s'", owner.getField());
 		html.print(" value='%s'", data);
+		html.print(" autocomplete='off'");
 		html.print(" data-%s='[%s]'", owner.getField(), data);
 		if (gridLine instanceof MasterGridLine) {
 			html.print(" data-focus='[%s]'", this.getDataFocus());

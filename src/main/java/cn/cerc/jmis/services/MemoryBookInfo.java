@@ -47,7 +47,7 @@ public class MemoryBookInfo {
 		}
 	}
 
-	/*
+	/**
 	 * 返回帐套状态
 	 */
 	public static int getStatus(IHandle handle, String corpNo) {
@@ -57,7 +57,7 @@ public class MemoryBookInfo {
 		return item.getStatus();
 	}
 
-	/*
+	/**
 	 * 返回当前帐套的版本：基础版还是其它版本
 	 */
 	public static BookVersion getBookType(IHandle handle) {
@@ -65,7 +65,7 @@ public class MemoryBookInfo {
 		return getCorpType(handle, corpNo);
 	}
 
-	/*
+	/**
 	 * 返回指定帐套的版本：基础版还是其它版本
 	 */
 	public static BookVersion getCorpType(IHandle handle, String corpNo) {
@@ -76,7 +76,7 @@ public class MemoryBookInfo {
 		return BookVersion.values()[result];
 	}
 
-	/*
+	/**
 	 * 返回帐套简称
 	 */
 	public static String getShortName(IHandle handle, String corpNo) {

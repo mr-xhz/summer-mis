@@ -11,14 +11,15 @@ public class UrlRecord {
 	private String title;
 	private String target;
 	private Map<String, String> params = new HashMap<>();
+	private String hintMsg;
 
 	public UrlRecord() {
 	}
 
-	public UrlRecord(String site, String caption) {
+	public UrlRecord(String site, String name) {
 		super();
 		this.site = site;
-		this.name = caption;
+		this.name = name;
 	}
 
 	public UrlRecord addParam(String key, String value) {
@@ -98,6 +99,14 @@ public class UrlRecord {
 
 	public void setTarget(String target) {
 		this.target = target;
+	}
+
+	public String getHintMsg() {
+		return hintMsg;
+	}
+
+	public void setHintMsg(String hintMsg) {
+		this.hintMsg = hintMsg;
 	}
 
 }

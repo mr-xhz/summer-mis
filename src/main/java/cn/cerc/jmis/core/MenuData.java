@@ -22,6 +22,7 @@ public class MenuData {
 	private String formNo = "000";
 	private boolean web; // 是否支持Web调用
 	private boolean win; // 是否支持Window调用
+	private boolean phone; // 是否支持phone调用
 	private boolean hide; // 是否隐藏菜单
 	private String process; // Web化进度
 	private boolean folder; // 是否为目录结构
@@ -174,5 +175,13 @@ public class MenuData {
 
 	public void setFuncCode(String funcCode) {
 		this.funcCode = funcCode;
+	}
+
+	public boolean isPhone() {
+		return phone;
+	}
+
+	public void setPhone(boolean phone) {
+		this.phone = phone;
 	}
 }
