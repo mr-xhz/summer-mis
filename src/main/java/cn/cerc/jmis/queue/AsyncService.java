@@ -12,6 +12,7 @@ import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.queue.QueueDB;
 import cn.cerc.jdb.queue.QueueQuery;
+import cn.cerc.jdb.queue.QueueSession;
 import cn.cerc.jmis.message.MessageLevel;
 import cn.cerc.jmis.message.MessageRecord;
 import net.sf.json.JSONObject;
@@ -99,7 +100,7 @@ public class AsyncService implements IServiceProxy {
 			if (ServerConfig.getAppLevel() == ServerConfig.appTest) {
 				ds.add("select * from %s", QueueDB.TEST);
 			} else {
-				ds.add("select * from %s", QueueDB.MESSAGE);
+				ds.add("select * from %s", QueueSession.defaultQueue);
 			}
 			ds.open();
 			ds.appendDataSet(this.getDataIn(), true);
