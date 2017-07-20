@@ -1,5 +1,7 @@
 package cn.cerc.jmis.services;
 
+import static cn.cerc.jdb.other.utils.copy;
+
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomService;
 import cn.cerc.jbean.other.BufferType;
@@ -9,9 +11,11 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.mysql.SqlOperator;
 import cn.cerc.jdb.mysql.SqlQuery;
+import cn.cerc.jmis.message.JPushRecord;
 import cn.cerc.jmis.message.MessageLevel;
 import cn.cerc.jmis.message.MessageProcess;
 import cn.cerc.jmis.message.MessageRecord;
+import cn.cerc.jmis.queue.AsyncService;
 
 //用户消息操作
 public class SvrUserMessages extends CustomService {
@@ -125,19 +129,40 @@ public class SvrUserMessages extends CustomService {
 		String content = getDataIn().getHead().getString("content");
 		int process = getDataIn().getHead().getInt("process");
 
-		SqlQuery ds = new SqlQuery(this);
-		ds.add("select * from %s", SystemTable.get(SystemTable.getUserMessages));
-		ds.add("where UID_='%s'", msgId);
-		ds.open();
-		if (ds.eof()) {
+		SqlQuery cdsMsg = new SqlQuery(this);
+		cdsMsg.add("select * from %s", SystemTable.get(SystemTable.getUserMessages));
+		cdsMsg.add("where UID_='%s'", msgId);
+		cdsMsg.open();
+		if (cdsMsg.eof()) {
 			// 此任务可能被其它主机抢占
 			this.setMessage(String.format("消息号UID_ %s 不存在", msgId));
 			return false;
 		}
-		ds.edit();
-		ds.setField("Content_", content);
-		ds.setField("Process_", process);
-		ds.post();
+		cdsMsg.edit();
+		cdsMsg.setField("Content_", content);
+		cdsMsg.setField("Process_", process);
+		cdsMsg.post();
+
+		// 极光推送
+		pushToJiGuang(cdsMsg);
 		return true;
+	}
+
+	private void pushToJiGuang(SqlQuery cdsMsg) {
+		String subject = cdsMsg.getString("Subject_");
+		if ("".equals(subject)) {
+			subject = copy(cdsMsg.getString("Content_"), 1, 80);
+		}
+		if (cdsMsg.getInt("Level_") == MessageLevel.Service.ordinal()) {
+			subject += "【" + AsyncService.getProcessTitle(cdsMsg.getInt("Process_")) + "】";
+		}
+
+		String corpNo = cdsMsg.getString("CorpNo_");
+		String userCode = cdsMsg.getString("UserCode_");
+		int msgId = cdsMsg.getInt("UID_");
+
+		JPushRecord jPush = new JPushRecord(corpNo, userCode, msgId);
+		jPush.setAlert(subject);
+		jPush.send(this);
 	}
 }
