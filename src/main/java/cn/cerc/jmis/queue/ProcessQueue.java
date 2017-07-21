@@ -6,6 +6,7 @@ import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.BookHandle;
 import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jdb.core.TDateTime;
+import cn.cerc.jdb.queue.QueueDB;
 import cn.cerc.jdb.queue.QueueMode;
 import cn.cerc.jdb.queue.QueueQuery;
 import cn.cerc.jdb.queue.QueueSession;
@@ -20,7 +21,11 @@ public class ProcessQueue extends AbstractTask {
 	public void execute() throws Exception {
 		QueueQuery ds = new QueueQuery(this);
 		ds.setQueueMode(QueueMode.recevie);
-		ds.add("select * from %s ", QueueSession.defaultQueue);
+		if (ServerConfig.getAppLevel() == ServerConfig.appTest) {
+			ds.add("select * from %s", QueueDB.TEST);
+		} else {
+			ds.add("select * from %s ", QueueSession.defaultQueue);
+		}
 		ds.open();
 		if (!ds.getActive())
 			return;
