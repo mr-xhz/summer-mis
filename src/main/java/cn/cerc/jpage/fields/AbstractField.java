@@ -14,6 +14,7 @@ import net.sf.json.JSONObject;
 
 public abstract class AbstractField extends Component implements IField {
 	private String htmlTag = "input";
+	private String htmType;
 	private String name;
 	private String shortName;
 	private String align;
@@ -127,6 +128,15 @@ public abstract class AbstractField extends Component implements IField {
 
 	public AbstractField setName(String name) {
 		this.name = name;
+		return this;
+	}
+
+	public String getHtmType() {
+		return htmType;
+	}
+
+	public AbstractField setHtmType(String htmType) {
+		this.htmType = htmType;
 		return this;
 	}
 
@@ -301,7 +311,11 @@ public abstract class AbstractField extends Component implements IField {
 			html.println("/>");
 		} else {
 			html.print("<input");
-			html.print(" type=\"text\"");
+			if (htmType != null) {
+				html.print(" type=\"%s\"", this.getHtmType());
+			} else {
+				html.print(" type=\"text\"");
+			}
 			html.print(" name=\"%s\"", this.getId());
 			html.print(" id=\"%s\"", this.getId());
 			String value = this.getText(dataSet);
