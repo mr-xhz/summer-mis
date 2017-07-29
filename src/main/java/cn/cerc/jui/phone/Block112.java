@@ -31,6 +31,14 @@ public class Block112 extends Component {
 		html.println("</div>");
 	}
 
+	public Span getLeft() {
+		return left;
+	}
+
+	public Span getRight() {
+		return right;
+	}
+
 	public Block112 setLeftText(String text) {
 		left.setText(text);
 		return this;
