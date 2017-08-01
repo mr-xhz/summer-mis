@@ -6,7 +6,6 @@ import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.BookHandle;
 import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jdb.core.TDateTime;
-import cn.cerc.jdb.queue.QueueDB;
 import cn.cerc.jdb.queue.QueueMode;
 import cn.cerc.jdb.queue.QueueQuery;
 import cn.cerc.jdb.queue.QueueSession;
@@ -19,43 +18,43 @@ public class ProcessQueue extends AbstractTask {
 
 	@Override
 	public void execute() throws Exception {
-		QueueQuery ds = new QueueQuery(this);
-		ds.setQueueMode(QueueMode.recevie);
-		if (ServerConfig.getAppLevel() == ServerConfig.appTest) {
-			ds.add("select * from %s", QueueDB.TEST);
-		} else {
-			ds.add("select * from %s ", QueueSession.defaultQueue);
-		}
-		ds.open();
-		if (!ds.getActive())
+		QueueQuery query = new QueueQuery(this);
+		query.setQueueMode(QueueMode.recevie);
+		query.add("select * from %s ", QueueSession.defaultQueue);
+		query.open();
+		if (!query.getActive())
 			return;
-		ds.remove();
-
-		String msgId = ds.getHead().getString("_queueId_");
-		JSONObject content = JSONObject.fromObject(ds.getHead().getString("_content_"));
+		query.remove();
 
 		// 建立服务执行环境
-		String corpNo = ds.getHead().getString("_corpNo_");
-		String userCode = ds.getHead().getString("_userCode_");
-		String service = ds.getHead().getString("_service_");
+		String corpNo = query.getHead().getString("_corpNo_");
 		if ("".equals(corpNo)) {
 			log.error("_corpNo_ is null");
 			return;
 		}
+
+		String userCode = query.getHead().getString("_userCode_");
 		if ("".equals(userCode)) {
 			log.error("_userCode_ is null");
 			return;
 		}
+
+		String service = query.getHead().getString("_service_");
 		if ("".equals(service)) {
 			log.error("_service_ is null");
 			return;
 		}
+
 		// 调用队列内容中指定的服务
 		BookHandle bh = new BookHandle(this, corpNo);
 		bh.setUserCode(userCode);
 		LocalService svr = new LocalService(bh);
 		svr.setService(service);
-		svr.getDataIn().appendDataSet(ds, true);
+		svr.getDataIn().appendDataSet(query, true);
+
+		String msgId = query.getHead().getString("_queueId_");
+		JSONObject content = JSONObject.fromObject(query.getHead().getString("_content_"));
+
 		LocalService app = new LocalService(bh, "SvrUserMessages.updateAsyncService");
 		if (svr.exec()) {
 			content.element("processTime", TDateTime.Now());
