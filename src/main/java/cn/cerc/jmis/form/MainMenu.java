@@ -61,6 +61,7 @@ public class MainMenu {
 		rightMenus.add(new UrlRecord(url, name));
 	}
 
+	@Deprecated
 	public void setExitUrl(String url) {
 		if (exitPage == null)
 			exitPage = new UrlRecord();
