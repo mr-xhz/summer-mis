@@ -29,13 +29,16 @@ public class MainMenu {
 		if (this.pageTitle != null) {
 			leftMenus.add(new UrlRecord("javascript:location.reload()", this.pageTitle));
 		}
-		// 设置退出
-		String tmp = (String) form.getRequest().getAttribute("exitPage");
-		if (exitPage != null && tmp != null && !tmp.equals(""))
-			exitPage.setName("<=").setSite(tmp);
 
-		if (exitPage != null)
-			rightMenus.add(exitPage);
+		// TODO 隐藏返回按钮的输出 黄荣君，2017-08-01，后期确认不需要，需要删除vine-app的设置项目
+
+		// 设置退出
+		// String tmp = (String) form.getRequest().getAttribute("exitPage");
+		// if (exitPage != null && tmp != null && !tmp.equals(""))
+		// exitPage.setName("<=").setSite(tmp);
+
+		// if (exitPage != null)
+		// rightMenus.add(exitPage);
 
 		if (leftMenus.size() > 0) {
 			if (form.getClient().isPhone() && leftMenus.size() > 2) {
