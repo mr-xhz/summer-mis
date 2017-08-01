@@ -75,9 +75,8 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 
 	@Override
 	public String getTitle() {
-		String formNo = this.getParam("formNo", "000");
 		String formCatpion = this.getParam("title", "");
-		return String.format("%s(%s)", formCatpion, formNo);
+		return String.format("%s", formCatpion);
 	}
 
 	@Override
