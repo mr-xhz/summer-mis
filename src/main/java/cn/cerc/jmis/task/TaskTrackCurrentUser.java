@@ -4,7 +4,9 @@ import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.mysql.SqlSession;
 
-//清理在线用户记录表
+/**
+ * 清理在线用户记录表
+ */
 public class TaskTrackCurrentUser extends AbstractTask {
 
 	@Override
