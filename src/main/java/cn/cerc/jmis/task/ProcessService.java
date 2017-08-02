@@ -29,18 +29,6 @@ public class ProcessService extends TimerTask {
 	// 运行环境
 	private ServletContext context = null;
 
-	public static AbstractTask getTask(IHandle handle, String beanId) {
-		if (taskApp == null)
-			taskApp = new FileSystemXmlApplicationContext(taskFile);
-		if (!taskApp.containsBean(beanId))
-			return null;
-
-		AbstractTask result = taskApp.getBean(beanId, AbstractTask.class);
-		if (result != null)
-			result.setHandle(handle);
-		return result;
-	}
-
 	public ProcessService(ServletContext context) {
 		this.context = context;
 	}
@@ -113,7 +101,18 @@ public class ProcessService extends TimerTask {
 				e.printStackTrace();
 				log.error(e.getMessage());
 			}
-
 		}
+	}
+
+	public static AbstractTask getTask(IHandle handle, String beanId) {
+		if (taskApp == null)
+			taskApp = new FileSystemXmlApplicationContext(taskFile);
+		if (!taskApp.containsBean(beanId))
+			return null;
+
+		AbstractTask result = taskApp.getBean(beanId, AbstractTask.class);
+		if (result != null)
+			result.setHandle(handle);
+		return result;
 	}
 }
