@@ -119,6 +119,18 @@ public class SvrUserLogin extends CustomService {
 					"update %s set LastTime_=Getdate() where UserCode_='%s' and MachineCode_='%s' and Used_=1",
 					SystemTable.get(SystemTable.getDeviceVerify), userCode, deviceId);
 			getConnection().execute(sql);
+			
+			// 若该账套是待安装，则改为已启用
+			SqlQuery dsCorp = new SqlQuery(this);
+			dsCorp.add("select * from %s ", SystemTable.getBookInfo);
+			dsCorp.add("where CorpNo_='%s' and Status_=1 ", corpNo);
+			dsCorp.open();
+			if (!dsCorp.eof()) {
+				dsCorp.edit();
+				dsCorp.setField("Status_", 2);
+				dsCorp.post();
+				MemoryBookInfo.clear(corpNo);
+			}
 
 			sess.setProperty(Application.token, GuidFixStr(newGuid()));
 			sess.setProperty(Application.userId, dsUser.getString("ID_"));
