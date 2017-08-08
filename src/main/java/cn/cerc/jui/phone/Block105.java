@@ -10,29 +10,29 @@ import cn.cerc.jpage.vcl.Span;
  *
  */
 public class Block105 extends Component {
-	private Span title = new Span();
+    private Span title = new Span();
 
-	/**
-	 * 普通的分段标题
-	 * 
-	 * @param owner
-	 *            内容显示区
-	 * 
-	 */
-	public Block105(Component owner) {
-		super(owner);
-		title.setText("(title)");
-	}
+    /**
+     * 普通的分段标题
+     * 
+     * @param owner
+     *            内容显示区
+     * 
+     */
+    public Block105(Component owner) {
+        super(owner);
+        title.setText("(title)");
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block105'>");
-		title.output(html);
-		html.println("</div>");
-	}
+    @Override
+    public void output(HtmlWriter html) {
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block105'>");
+        title.output(html);
+        html.println("</div>");
+    }
 
-	public Span getTitle() {
-		return title;
-	}
+    public Span getTitle() {
+        return title;
+    }
 }

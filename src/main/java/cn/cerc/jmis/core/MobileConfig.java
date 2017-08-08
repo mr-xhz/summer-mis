@@ -6,147 +6,146 @@ import java.util.List;
 import java.util.Map;
 
 public class MobileConfig {
-	// 根站点
-	private String rootSite = "http://127.0.0.1/";
-	// 配置版本
-	private String webVersion = "1.0.0";
-	// 前台版本
-	private String appVersion = "1.0.0";
-	// 前台升级时下载地址
-	private String appUpgrade = "http://127.0.0.1/download/android.apk";
+    // 根站点
+    private String rootSite = "http://127.0.0.1/";
+    // 配置版本
+    private String webVersion = "1.0.0";
+    // 前台版本
+    private String appVersion = "1.0.0";
+    // 前台升级时下载地址
+    private String appUpgrade = "http://127.0.0.1/download/android.apk";
 
-	// 启动页（每次启动时显示）
-	private String startImage;
-	// 欢迎页(第一次显示，至少1个)
-	private List<String> welcomeImages = new ArrayList<>();
-	// 广告页（在第一次时不显示，在启动页之后显示），可为空，可多个
-	private List<String> adImages = new ArrayList<>();
+    // 启动页（每次启动时显示）
+    private String startImage;
+    // 欢迎页(第一次显示，至少1个)
+    private List<String> welcomeImages = new ArrayList<>();
+    // 广告页（在第一次时不显示，在启动页之后显示），可为空，可多个
+    private List<String> adImages = new ArrayList<>();
 
-	// 首页地址，以及返回时是否可以按退出
-	private Map<String, Boolean> homePages = new HashMap<>();
-	// 推送服务商代码
-	private String msgService = "www.jiguang.cn";
-	// 推送服务商配置，如AppKey
-	private String msgConfig = "";
-	// 消息管理页
-	private String msgManage = "forms/FrmMessages";
-	// 静态文件列表
-	private List<String> cacheFiles = new ArrayList<>();
+    // 首页地址，以及返回时是否可以按退出
+    private Map<String, Boolean> homePages = new HashMap<>();
+    // 推送服务商代码
+    private String msgService = "www.jiguang.cn";
+    // 推送服务商配置，如AppKey
+    private String msgConfig = "";
+    // 消息管理页
+    private String msgManage = "forms/FrmMessages";
+    // 静态文件列表
+    private List<String> cacheFiles = new ArrayList<>();
 
-	// 最后更新时间，格式范例：2016-01-01 01:01:01
-	private String lastModified;
-	// Debug标志, true: 显示自定义首页框，否则不允许更改默认首页
-	private boolean debug;
-	
-	private String ocrDataPath;
+    // 最后更新时间，格式范例：2016-01-01 01:01:01
+    private String lastModified;
+    // Debug标志, true: 显示自定义首页框，否则不允许更改默认首页
+    private boolean debug;
 
-	public String getWebVersion() {
-		return webVersion;
-	}
+    private String ocrDataPath;
 
-	public void setWebVersion(String webVersion) {
-		this.webVersion = webVersion;
-	}
+    public String getWebVersion() {
+        return webVersion;
+    }
 
-	public String getAppVersion() {
-		return appVersion;
-	}
+    public void setWebVersion(String webVersion) {
+        this.webVersion = webVersion;
+    }
 
-	public void setAppVersion(String appVersion) {
-		this.appVersion = appVersion;
-	}
+    public String getAppVersion() {
+        return appVersion;
+    }
 
-	public String getAppUpgrade() {
-		return appUpgrade;
-	}
+    public void setAppVersion(String appVersion) {
+        this.appVersion = appVersion;
+    }
 
-	public void setAppUpgrade(String appUpgrade) {
-		this.appUpgrade = appUpgrade;
-	}
+    public String getAppUpgrade() {
+        return appUpgrade;
+    }
 
-	public List<String> getAdImages() {
-		return adImages;
-	}
+    public void setAppUpgrade(String appUpgrade) {
+        this.appUpgrade = appUpgrade;
+    }
 
-	public Map<String, Boolean> getHomePages() {
-		return homePages;
-	}
+    public List<String> getAdImages() {
+        return adImages;
+    }
 
-	public String getMsgService() {
-		return msgService;
-	}
+    public Map<String, Boolean> getHomePages() {
+        return homePages;
+    }
 
-	public void setMsgService(String msgService) {
-		this.msgService = msgService;
-	}
+    public String getMsgService() {
+        return msgService;
+    }
 
-	public String getRootSite() {
-		return rootSite;
-	}
+    public void setMsgService(String msgService) {
+        this.msgService = msgService;
+    }
 
-	public void setRootSite(String rootSite) {
-		this.rootSite = rootSite;
-	}
+    public String getRootSite() {
+        return rootSite;
+    }
 
-	public boolean isDebug() {
-		return debug;
-	}
+    public void setRootSite(String rootSite) {
+        this.rootSite = rootSite;
+    }
 
-	public void setDebug(boolean debug) {
-		this.debug = debug;
-	}
+    public boolean isDebug() {
+        return debug;
+    }
 
-	public String getMsgConfig() {
-		return msgConfig;
-	}
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
 
-	public void setMsgConfig(String msgConfig) {
-		this.msgConfig = msgConfig;
-	}
+    public String getMsgConfig() {
+        return msgConfig;
+    }
 
-	public List<String> getWelcomeImages() {
-		return welcomeImages;
-	}
+    public void setMsgConfig(String msgConfig) {
+        this.msgConfig = msgConfig;
+    }
 
-	public String getStartImage() {
-		return startImage;
-	}
+    public List<String> getWelcomeImages() {
+        return welcomeImages;
+    }
 
-	public void setStartImage(String startImage) {
-		this.startImage = startImage;
-	}
+    public String getStartImage() {
+        return startImage;
+    }
 
-	public String getLastModified() {
-		return lastModified;
-	}
+    public void setStartImage(String startImage) {
+        this.startImage = startImage;
+    }
 
-	public void setLastModified(String lastModified) {
-		this.lastModified = lastModified;
-	}
+    public String getLastModified() {
+        return lastModified;
+    }
 
-	public String getMsgManage() {
-		return msgManage;
-	}
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
 
-	public void setMsgManage(String msgManage) {
-		this.msgManage = msgManage;
-	}
+    public String getMsgManage() {
+        return msgManage;
+    }
 
-	public List<String> getCacheFiles() {
-		return cacheFiles;
-	}
+    public void setMsgManage(String msgManage) {
+        this.msgManage = msgManage;
+    }
 
-	public void setCacheFiles(List<String> cacheFiles) {
-		this.cacheFiles = cacheFiles;
-	}
+    public List<String> getCacheFiles() {
+        return cacheFiles;
+    }
 
-	public String getOcrDataPath() {
-		return ocrDataPath;
-	}
+    public void setCacheFiles(List<String> cacheFiles) {
+        this.cacheFiles = cacheFiles;
+    }
 
-	public void setOcrDataPath(String ocrDataPath) {
-		this.ocrDataPath = ocrDataPath;
-	}
+    public String getOcrDataPath() {
+        return ocrDataPath;
+    }
 
+    public void setOcrDataPath(String ocrDataPath) {
+        this.ocrDataPath = ocrDataPath;
+    }
 
 }

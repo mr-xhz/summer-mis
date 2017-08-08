@@ -15,83 +15,83 @@ import cn.cerc.jpage.vcl.TextBox;
  *
  */
 public class Block107 extends Component {
-	private TextBox input = new TextBox();
-	private Image image = new Image();
-	private List<String> items = new ArrayList<>();
-	private String childPage = "";
-	private String dataUrl = "";
+    private TextBox input = new TextBox();
+    private Image image = new Image();
+    private List<String> items = new ArrayList<>();
+    private String childPage = "";
+    private String dataUrl = "";
 
-	/**
-	 * 用于生成类别的开窗选择，如商品品牌、大中类、系列，地址等
-	 * 
-	 * @param owner
-	 *            内容显示区
-	 */
-	public Block107(Component owner) {
-		super(owner);
-		input.setPlaceholder("当前条件：");
-		input.setReadonly(true);
-		image.setSrc("jui/phone/block107-expand.png");
-	}
+    /**
+     * 用于生成类别的开窗选择，如商品品牌、大中类、系列，地址等
+     * 
+     * @param owner
+     *            内容显示区
+     */
+    public Block107(Component owner) {
+        super(owner);
+        input.setPlaceholder("当前条件：");
+        input.setReadonly(true);
+        image.setSrc("jui/phone/block107-expand.png");
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		String onclick = String.format("javascript:showChoice(\"%s\");", this.getId());
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block107'>", this.getId());
-		html.print("<div onclick='%s'>", onclick);
-		input.setId(this.getId() + "input");
-		input.output(html);
-		html.println("");
-		image.output(html);
-		html.println("</div>");
-		html.println("<div id='%schoice' class='choice2'>", this.getId());
-		html.print("<div class='choice3'>");
-		html.println("</div>");
-		html.print("<div id='%slist' class='choice4'>", this.getId());
-		html.print("<ul class=''>");
-		for (String item : items)
-			outputChoiceItem(html, item, this.getId(), this.childPage, this.dataUrl);
-		html.println("</ul>");
-		html.println("</div>");
-		html.println("</div>");
-		html.println("</div>");
-	}
+    @Override
+    public void output(HtmlWriter html) {
+        String onclick = String.format("javascript:showChoice(\"%s\");", this.getId());
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block107'>", this.getId());
+        html.print("<div onclick='%s'>", onclick);
+        input.setId(this.getId() + "input");
+        input.output(html);
+        html.println("");
+        image.output(html);
+        html.println("</div>");
+        html.println("<div id='%schoice' class='choice2'>", this.getId());
+        html.print("<div class='choice3'>");
+        html.println("</div>");
+        html.print("<div id='%slist' class='choice4'>", this.getId());
+        html.print("<ul class=''>");
+        for (String item : items)
+            outputChoiceItem(html, item, this.getId(), this.childPage, this.dataUrl);
+        html.println("</ul>");
+        html.println("</div>");
+        html.println("</div>");
+        html.println("</div>");
+    }
 
-	public TextBox getInput() {
-		return input;
-	}
+    public TextBox getInput() {
+        return input;
+    }
 
-	public Span getCaption() {
-		return input.getCaption();
-	}
+    public Span getCaption() {
+        return input.getCaption();
+    }
 
-	public List<String> getItems() {
-		return items;
-	}
+    public List<String> getItems() {
+        return items;
+    }
 
-	public String getChildPage() {
-		return childPage;
-	}
+    public String getChildPage() {
+        return childPage;
+    }
 
-	public Block107 setChildPage(String childPage) {
-		this.childPage = childPage;
-		return this;
-	}
+    public Block107 setChildPage(String childPage) {
+        this.childPage = childPage;
+        return this;
+    }
 
-	public String getDataUrl() {
-		return dataUrl;
-	}
+    public String getDataUrl() {
+        return dataUrl;
+    }
 
-	public void setDataUrl(String dataUrl) {
-		this.dataUrl = dataUrl;
-	}
+    public void setDataUrl(String dataUrl) {
+        this.dataUrl = dataUrl;
+    }
 
-	public static void outputChoiceItem(HtmlWriter html, String value, String choiceId, String childPage,
-			String dataUrl) {
-		html.print("<li onclick='javascript:choiceItem(\"%s\", \"%s\", \"%s\", \"%s\")'>%s</li>", choiceId, value,
-				childPage, dataUrl, value);
-	}
+    public static void outputChoiceItem(HtmlWriter html, String value, String choiceId, String childPage,
+            String dataUrl) {
+        html.print("<li onclick='javascript:choiceItem(\"%s\", \"%s\", \"%s\", \"%s\")'>%s</li>", choiceId, value,
+                childPage, dataUrl, value);
+    }
 }
 
 // 调用范例：

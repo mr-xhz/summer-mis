@@ -1,11 +1,11 @@
 package cn.cerc.jpage.core;
 
 public interface IField {
-	String getTitle();
+    String getTitle();
 
-	String getField();
+    String getField();
 
-	int getWidth();
+    int getWidth();
 
-	String getAlign();
+    String getAlign();
 }

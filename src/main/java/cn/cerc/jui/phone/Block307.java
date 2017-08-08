@@ -18,76 +18,76 @@ import cn.cerc.jpage.vcl.Span;
  *
  */
 public class Block307 extends Component {
-	private Span title;
-	private UrlRecord url;
-	private Image icon = new Image();
-	private List<String> items = new ArrayList<>();
+    private Span title;
+    private UrlRecord url;
+    private Image icon = new Image();
+    private List<String> items = new ArrayList<>();
 
-	public Block307(Component owner) {
-		super(owner);
-		title = new Span();
-		title.setText("(title)");
-		title.setRole("title");
+    public Block307(Component owner) {
+        super(owner);
+        title = new Span();
+        title.setText("(title)");
+        title.setRole("title");
 
-		url = new UrlRecord();
-		url.setName("(url)");
+        url = new UrlRecord();
+        url.setName("(url)");
 
-		icon.setSrc("jui/phone/block301-rightIcon.png");
-		icon.setRole("right");
-	}
+        icon.setSrc("jui/phone/block301-rightIcon.png");
+        icon.setRole("right");
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		if (items.size() == 0) {
-			for (int i = 0; i < 3; i++) {
-				items.add("line" + i);
-			}
-		}
+    @Override
+    public void output(HtmlWriter html) {
+        if (items.size() == 0) {
+            for (int i = 0; i < 3; i++) {
+                items.add("line" + i);
+            }
+        }
 
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block307'>");
-		html.print("<a href='%s'>", url.getUrl());
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block307'>");
+        html.print("<a href='%s'>", url.getUrl());
 
-		title.output(html);
+        title.output(html);
 
-		for (String line : items) {
-			html.print("<div role='line'>%s</div>", line);
-		}
+        for (String line : items) {
+            html.print("<div role='line'>%s</div>", line);
+        }
 
-		icon.output(html);
+        icon.output(html);
 
-		html.print("</a>");
-		html.print("</div>");
-	}
+        html.print("</a>");
+        html.print("</div>");
+    }
 
-	public Span getTitle() {
-		return title;
-	}
+    public Span getTitle() {
+        return title;
+    }
 
-	public UrlRecord getUrl() {
-		return url;
-	}
+    public UrlRecord getUrl() {
+        return url;
+    }
 
-	public void setUrl(UrlRecord url) {
-		this.url = url;
-	}
+    public void setUrl(UrlRecord url) {
+        this.url = url;
+    }
 
-	public Image getIcon() {
-		return icon;
-	}
+    public Image getIcon() {
+        return icon;
+    }
 
-	public void setIcon(Image icon) {
-		this.icon = icon;
-	}
+    public void setIcon(Image icon) {
+        this.icon = icon;
+    }
 
-	public int size() {
-		return items.size();
-	}
+    public int size() {
+        return items.size();
+    }
 
-	public void addItem(String line) {
-		if (items.size() > 2) {
-			throw new RuntimeException("最多只能放3行信息");
-		}
-		items.add(line);
-	}
+    public void addItem(String line) {
+        if (items.size() > 2) {
+            throw new RuntimeException("最多只能放3行信息");
+        }
+        items.add(line);
+    }
 }

@@ -7,41 +7,41 @@ import cn.cerc.jpage.vcl.Span;
 import cn.cerc.jpage.vcl.TextArea;
 
 public class Block111 extends Component {
-	private Span label = new Span();
-	private TextArea input = new TextArea();
-	private Button search = new Button();
+    private Span label = new Span();
+    private TextArea input = new TextArea();
+    private Button search = new Button();
 
-	/**
-	 * 文本 + 输入框 + 查询按钮
-	 * 
-	 * @param owner
-	 *            内容显示区
-	 */
-	public Block111(Component owner) {
-		super(owner);
-		label.setText("(label)");
-		search.setText("查询");
-	}
+    /**
+     * 文本 + 输入框 + 查询按钮
+     * 
+     * @param owner
+     *            内容显示区
+     */
+    public Block111(Component owner) {
+        super(owner);
+        label.setText("(label)");
+        search.setText("查询");
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block111'>");
-		label.output(html);
-		input.output(html);
-		search.output(html);
-		html.println("</div>");
-	}
+    @Override
+    public void output(HtmlWriter html) {
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block111'>");
+        label.output(html);
+        input.output(html);
+        search.output(html);
+        html.println("</div>");
+    }
 
-	public Span getLabel() {
-		return label;
-	}
+    public Span getLabel() {
+        return label;
+    }
 
-	public TextArea getInput() {
-		return input;
-	}
+    public TextArea getInput() {
+        return input;
+    }
 
-	public Button getSearch() {
-		return search;
-	}
+    public Button getSearch() {
+        return search;
+    }
 }

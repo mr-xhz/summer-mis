@@ -7,21 +7,21 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.other.UrlSide;
 
 public class PageLink {
-	private static ApplicationContext app;
-	private static String xmlFile = "classpath:page-link.xml";
+    private static ApplicationContext app;
+    private static String xmlFile = "classpath:page-link.xml";
 
-	public static UrlSide get(Component owner, String beanId) {
-		if (app == null)
-			app = new FileSystemXmlApplicationContext(xmlFile);
-		if (!app.containsBean(beanId))
-			return null;
-		UrlSide side = app.getBean(beanId, UrlSide.class);
-		side.setOwner(owner);
-		return side;
-	}
+    public static UrlSide get(Component owner, String beanId) {
+        if (app == null)
+            app = new FileSystemXmlApplicationContext(xmlFile);
+        if (!app.containsBean(beanId))
+            return null;
+        UrlSide side = app.getBean(beanId, UrlSide.class);
+        side.setOwner(owner);
+        return side;
+    }
 
-	public static void main(String[] args) {
-		UrlSide help = get(null, "TFrmPartBrand");
-		System.out.println(help.getHtml());
-	}
+    public static void main(String[] args) {
+        UrlSide help = get(null, "TFrmPartBrand");
+        System.out.println(help.getHtml());
+    }
 }

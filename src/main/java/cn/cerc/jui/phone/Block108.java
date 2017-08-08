@@ -6,34 +6,34 @@ import cn.cerc.jpage.vcl.Span;
 import cn.cerc.jpage.vcl.TextBox;
 
 public class Block108 extends Component {
-	private Span label = new Span();
-	private TextBox input = new TextBox();
+    private Span label = new Span();
+    private TextBox input = new TextBox();
 
-	/**
-	 * 文本 + 输入框
-	 * 
-	 * @param owner
-	 *            内容显示区
-	 */
-	public Block108(Component owner) {
-		super(owner);
-		label.setText("(label)");
-	}
+    /**
+     * 文本 + 输入框
+     * 
+     * @param owner
+     *            内容显示区
+     */
+    public Block108(Component owner) {
+        super(owner);
+        label.setText("(label)");
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block108'>");
-		label.output(html);
-		input.output(html);
-		html.println("</div>");
-	}
+    @Override
+    public void output(HtmlWriter html) {
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block108'>");
+        label.output(html);
+        input.output(html);
+        html.println("</div>");
+    }
 
-	public Span getLabel() {
-		return label;
-	}
+    public Span getLabel() {
+        return label;
+    }
 
-	public TextBox getInput() {
-		return input;
-	}
+    public TextBox getInput() {
+        return input;
+    }
 }

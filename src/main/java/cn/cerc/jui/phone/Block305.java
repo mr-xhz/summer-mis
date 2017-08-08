@@ -15,56 +15,56 @@ import cn.cerc.jpage.vcl.Image;
  *
  */
 public class Block305 extends Component {
-	private String title = "(title)";
-	private Image icon;
-	private String describe = "(describe)";
+    private String title = "(title)";
+    private Image icon;
+    private String describe = "(describe)";
 
-	public Block305(Component owner) {
-		super(owner);
-		icon = new Image();
-		icon.setSrc("jui/phone/block305-icon.png");
-	}
+    public Block305(Component owner) {
+        super(owner);
+        icon = new Image();
+        icon.setSrc("jui/phone/block305-icon.png");
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block305'>");
+    @Override
+    public void output(HtmlWriter html) {
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block305'>");
 
-		html.print("<div role='title'>");
+        html.print("<div role='title'>");
 
-		html.print("<span role='icon'>");
-		icon.output(html);
-		html.print("</span>");
+        html.print("<span role='icon'>");
+        icon.output(html);
+        html.print("</span>");
 
-		html.print("<span role='title'>%s</span>", this.title);
-		html.print("</div>");
+        html.print("<span role='title'>%s</span>", this.title);
+        html.print("</div>");
 
-		html.print("<div role='describe'>%s</div>", this.describe);
-		html.print("</div>");
-	}
+        html.print("<div role='describe'>%s</div>", this.describe);
+        html.print("</div>");
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Image getIcon() {
-		return icon;
-	}
+    public Image getIcon() {
+        return icon;
+    }
 
-	public void setIcon(Image icon) {
-		this.icon = icon;
-	}
+    public void setIcon(Image icon) {
+        this.icon = icon;
+    }
 
-	public String getDescribe() {
-		return describe;
-	}
+    public String getDescribe() {
+        return describe;
+    }
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
-	}
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
 
 }

@@ -11,23 +11,23 @@ import cn.cerc.jpage.vcl.Span;
  *
  */
 public class Block124 extends Component {
-	private Span title = new Span();
+    private Span title = new Span();
 
-	public Block124(Component owner) {
-		super(owner);
-		title.setText("提示:");
-	}
+    public Block124(Component owner) {
+        super(owner);
+        title.setText("提示:");
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block124'>");
-		this.title.output(html);
-		html.print("</div>");
-	}
+    @Override
+    public void output(HtmlWriter html) {
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block124'>");
+        this.title.output(html);
+        html.print("</div>");
+    }
 
-	public Span getTitle() {
-		return title;
-	}
+    public Span getTitle() {
+        return title;
+    }
 
 }
