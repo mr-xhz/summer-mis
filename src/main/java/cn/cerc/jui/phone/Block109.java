@@ -7,41 +7,41 @@ import cn.cerc.jpage.vcl.Span;
 import cn.cerc.jpage.vcl.TextBox;
 
 public class Block109 extends Component {
-	private Span label = new Span();
-	private TextBox input = new TextBox();
-	private Image select = new Image();
+    private Span label = new Span();
+    private TextBox input = new TextBox();
+    private Image select = new Image();
 
-	/**
-	 * 文本 + 输入框 + 弹窗选择按钮
-	 * 
-	 * @param owner
-	 *            内容显示区
-	 */
-	public Block109(Component owner) {
-		super(owner);
-		label.setText("(label)");
-		select.setSrc("jui/phone/block109-select.png");
-	}
+    /**
+     * 文本 + 输入框 + 弹窗选择按钮
+     * 
+     * @param owner
+     *            内容显示区
+     */
+    public Block109(Component owner) {
+        super(owner);
+        label.setText("(label)");
+        select.setSrc("jui/phone/block109-select.png");
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block109'>");
-		label.output(html);
-		input.output(html);
-		select.output(html);
-		html.println("</div>");
-	}
+    @Override
+    public void output(HtmlWriter html) {
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block109'>");
+        label.output(html);
+        input.output(html);
+        select.output(html);
+        html.println("</div>");
+    }
 
-	public Span getLabel() {
-		return label;
-	}
+    public Span getLabel() {
+        return label;
+    }
 
-	public TextBox getInput() {
-		return input;
-	}
+    public TextBox getInput() {
+        return input;
+    }
 
-	public Image getSelect() {
-		return select;
-	}
+    public Image getSelect() {
+        return select;
+    }
 }

@@ -8,5 +8,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Webpage {
-	long timeout() default 1000;
+    long timeout() default 1000;
 }

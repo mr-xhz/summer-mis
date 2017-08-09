@@ -14,109 +14,109 @@ import cn.cerc.jbean.form.IMenu;
 import cn.cerc.jmis.core.ClientDevice;
 
 public abstract class AbstractForm extends AbstractHandle implements IForm {
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private IClient client;
-	private IMenu menu;
-	private Map<String, String> params = new HashMap<>();
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    private IClient client;
+    private IMenu menu;
+    private Map<String, String> params = new HashMap<>();
 
-	public Map<String, String> getParams() {
-		return params;
-	}
+    public Map<String, String> getParams() {
+        return params;
+    }
 
-	public void setParams(Map<String, String> params) {
-		this.params = params;
-	}
+    public void setParams(Map<String, String> params) {
+        this.params = params;
+    }
 
-	public void init(AbstractForm owner) {
-		this.setHandle(owner.getHandle());
-		this.setClient(owner.getClient());
-		this.setRequest(owner.getRequest());
-		this.setResponse(owner.getResponse());
-	}
+    public void init(AbstractForm owner) {
+        this.setHandle(owner.getHandle());
+        this.setClient(owner.getClient());
+        this.setRequest(owner.getRequest());
+        this.setResponse(owner.getResponse());
+    }
 
-	@Override
-	public boolean logon() {
-		if (getHandle() == null)
-			return false;
-		CustomHandle sess = (CustomHandle) getHandle().getProperty(null);
-		return sess.logon();
-	}
+    @Override
+    public boolean logon() {
+        if (getHandle() == null)
+            return false;
+        CustomHandle sess = (CustomHandle) getHandle().getProperty(null);
+        return sess.logon();
+    }
 
-	@Override
-	public void setRequest(HttpServletRequest request) {
-		this.request = request;
-	}
+    @Override
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
 
-	@Override
-	public HttpServletRequest getRequest() {
-		return this.request;
-	}
+    @Override
+    public HttpServletRequest getRequest() {
+        return this.request;
+    }
 
-	@Override
-	public HttpServletResponse getResponse() {
-		return response;
-	}
+    @Override
+    public HttpServletResponse getResponse() {
+        return response;
+    }
 
-	@Override
-	public void setResponse(HttpServletResponse response) {
-		this.response = response;
-	}
+    @Override
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
 
-	@Override
-	public Object getProperty(String key) {
-		if ("request".equals(key))
-			return this.getRequest();
-		if ("session".equals(key))
-			return this.getRequest().getSession();
+    @Override
+    public Object getProperty(String key) {
+        if ("request".equals(key))
+            return this.getRequest();
+        if ("session".equals(key))
+            return this.getRequest().getSession();
 
-		return handle.getProperty(key);
-	}
+        return handle.getProperty(key);
+    }
 
-	@Override
-	public String getTitle() {
-		String formCatpion = this.getParam("title", "");
-		return String.format("%s", formCatpion);
-	}
+    @Override
+    public String getTitle() {
+        String formCatpion = this.getParam("title", "");
+        return String.format("%s", formCatpion);
+    }
 
-	@Override
-	public IClient getClient() {
-		if (client == null) {
-			client = new ClientDevice(this);
-		}
-		return client;
-	}
+    @Override
+    public IClient getClient() {
+        if (client == null) {
+            client = new ClientDevice(this);
+        }
+        return client;
+    }
 
-	@Override
-	public void setClient(IClient client) {
-		this.client = client;
-	}
+    @Override
+    public void setClient(IClient client) {
+        this.client = client;
+    }
 
-	@Override
-	public void setParam(String key, String value) {
-		params.put(key, value);
-	}
+    @Override
+    public void setParam(String key, String value) {
+        params.put(key, value);
+    }
 
-	@Override
-	public String getParam(String key, String def) {
-		if (params.containsKey(key))
-			return params.get(key);
-		else {
-			if (menu != null) {
-				String result = menu.getParam(key);
-				return result != null ? result : def;
-			} else
-				return def;
-		}
-	}
+    @Override
+    public String getParam(String key, String def) {
+        if (params.containsKey(key))
+            return params.get(key);
+        else {
+            if (menu != null) {
+                String result = menu.getParam(key);
+                return result != null ? result : def;
+            } else
+                return def;
+        }
+    }
 
-	@Override
-	public IMenu getMenu() {
-		return menu;
-	}
+    @Override
+    public IMenu getMenu() {
+        return menu;
+    }
 
-	@Override
-	public void setMenu(IMenu menu) {
-		this.menu = menu;
-	}
+    @Override
+    public void setMenu(IMenu menu) {
+        this.menu = menu;
+    }
 }

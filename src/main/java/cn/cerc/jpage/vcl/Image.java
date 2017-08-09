@@ -4,87 +4,87 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class Image extends Component {
-	private String width;
-	private String height;
-	private String src;
-	private String role;
-	private String onclick;
-	private String alt;
+    private String width;
+    private String height;
+    private String src;
+    private String role;
+    private String onclick;
+    private String alt;
 
-	public Image() {
-		super();
-	}
+    public Image() {
+        super();
+    }
 
-	public Image(Component owner) {
-		super(owner);
-	}
+    public Image(Component owner) {
+        super(owner);
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		html.print("<img src='%s'", this.src);
-		if (role != null)
-			html.print(" role='%s'", this.role);
-		if (alt != null)
-			html.print(" alt='%s'", this.alt);
-		if (width != null)
-			html.print(" width='%s'", this.width);
-		if (height != null)
-			html.print(" height='%s'", this.height);
-		if (onclick != null)
-			html.print(" onclick='%s'", this.onclick);
-		html.println("/>");
-	}
+    @Override
+    public void output(HtmlWriter html) {
+        html.print("<img src='%s'", this.src);
+        if (role != null)
+            html.print(" role='%s'", this.role);
+        if (alt != null)
+            html.print(" alt='%s'", this.alt);
+        if (width != null)
+            html.print(" width='%s'", this.width);
+        if (height != null)
+            html.print(" height='%s'", this.height);
+        if (onclick != null)
+            html.print(" onclick='%s'", this.onclick);
+        html.println("/>");
+    }
 
-	public String getWidth() {
-		return width;
-	}
+    public String getWidth() {
+        return width;
+    }
 
-	public Image setWidth(String width) {
-		this.width = width;
-		return this;
-	}
+    public Image setWidth(String width) {
+        this.width = width;
+        return this;
+    }
 
-	public String getHeight() {
-		return height;
-	}
+    public String getHeight() {
+        return height;
+    }
 
-	public Image setHeight(String height) {
-		this.height = height;
-		return this;
-	}
+    public Image setHeight(String height) {
+        this.height = height;
+        return this;
+    }
 
-	public String getSrc() {
-		return src;
-	}
+    public String getSrc() {
+        return src;
+    }
 
-	public Image setSrc(String src) {
-		this.src = src;
-		return this;
-	}
+    public Image setSrc(String src) {
+        this.src = src;
+        return this;
+    }
 
-	public String getRole() {
-		return role;
-	}
+    public String getRole() {
+        return role;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public String getOnclick() {
-		return onclick;
-	}
+    public String getOnclick() {
+        return onclick;
+    }
 
-	public Image setOnclick(String onclick) {
-		this.onclick = onclick;
-		return this;
-	}
+    public Image setOnclick(String onclick) {
+        this.onclick = onclick;
+        return this;
+    }
 
-	public String getAlt() {
-		return alt;
-	}
+    public String getAlt() {
+        return alt;
+    }
 
-	public Image setAlt(String alt) {
-		this.alt = alt;
-		return this;
-	}
+    public Image setAlt(String alt) {
+        this.alt = alt;
+        return this;
+    }
 }

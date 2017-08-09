@@ -6,14 +6,14 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import cn.cerc.jpage.core.HtmlText;
 
 public class FieldMark {
-	private static ApplicationContext app;
-	private static String xmlFile = "classpath:field-mark.xml";
+    private static ApplicationContext app;
+    private static String xmlFile = "classpath:field-mark.xml";
 
-	public static HtmlText get(String beanId) {
-		if (app == null)
-			app = new FileSystemXmlApplicationContext(xmlFile);
-		if (!app.containsBean(beanId))
-			return null;
-		return app.getBean(beanId, HtmlText.class);
-	}
+    public static HtmlText get(String beanId) {
+        if (app == null)
+            app = new FileSystemXmlApplicationContext(xmlFile);
+        if (!app.containsBean(beanId))
+            return null;
+        return app.getBean(beanId, HtmlText.class);
+    }
 }
