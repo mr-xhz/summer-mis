@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import jxl.write.WriteException;
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.other.BufferType;
 import cn.cerc.jbean.other.MemoryBuffer;
@@ -13,6 +12,7 @@ import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jexport.excel.AccreditException;
 import cn.cerc.jexport.excel.ExportExcel;
 import cn.cerc.jmis.form.AbstractForm;
+import jxl.write.WriteException;
 
 public class ExportService extends ExportExcel {
     private String service;
