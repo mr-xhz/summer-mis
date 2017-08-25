@@ -257,6 +257,10 @@ public class AsyncService implements IServiceProxy {
         getDataIn().getHead().setField("_subject_", subject);
     }
 
+    public void setSubject(String format, Object... args) {
+        getDataIn().getHead().setField("_subject_", String.format(format, args));
+    }
+
     public int getMsgId() {
         return msgId;
     }
