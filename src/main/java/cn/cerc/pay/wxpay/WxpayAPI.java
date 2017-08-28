@@ -32,6 +32,8 @@ public class WxpayAPI {
     public static final String config_appSecret = "wx.Open_ApiKey";
     // 商户代码
     public static final String config_appMachId = "wx.Open_MchId";
+    public static final String config_appRootSite = "app.rootSite";
+
     private String appId;
     private String appSecret;
     private String appMachId;
@@ -42,9 +44,11 @@ public class WxpayAPI {
         appId = config.getProperty(config_appId);
         appMachId = config.getProperty(config_appMachId);
         appSecret = config.getProperty(config_appSecret);
-        rootSite = config.getProperty("app.rootSite");
-        if (handle != null)
+        rootSite = config.getProperty(config_appRootSite);
+
+        if (handle != null) {
             this.corpNo = handle.getCorpNo();
+        }
     }
 
     @SuppressWarnings({ "static-access", "unchecked" })
@@ -137,16 +141,28 @@ public class WxpayAPI {
     }
 
     public static void main(String[] args) {
-        WxpayAPI pay = new WxpayAPI(null, (key, def) -> {
-            if (config_appId.equals(key))
-                return "wx880d8fc48ac1e88e";
-            else if (config_appSecret.equals(key))
-                return "e10adc3949ba59abbe56e057f20f883e";
-            else if (config_appMachId.equals(key))
-                return "1281260601";
-            else
-                return null;
+        WxpayAPI pay = new WxpayAPI(null, new IConfig() {
+
+            @Override
+            public String getProperty(String key) {
+                return this.getProperty(key, null);
+            }
+
+            @Override
+            public String getProperty(String key, String def) {
+                if (config_appId.equals(key))
+                    return "wx8302b6636974854e";
+                else if (config_appSecret.equals(key))
+                    return "529da5a3e26339bbf960e91879dfad5c";
+                else if (config_appMachId.equals(key))
+                    return "1262880401";
+                else if (config_appRootSite.equals(key))
+                    return "m.knowall.cn";
+                else
+                    return null;
+            }
         });
+
         pay.setAmount("0.01");
         pay.setOrderNo("165491961984");
         pay.setNotifyUrl("http://115.28.150.165/forms/FrmWxMessage");
