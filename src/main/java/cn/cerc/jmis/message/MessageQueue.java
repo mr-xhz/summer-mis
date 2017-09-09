@@ -56,7 +56,7 @@ public class MessageQueue {
         QueueQuery query = new QueueQuery(handle);
         query.setQueueMode(QueueMode.append);
         if (ServerConfig.getAppLevel() == ServerConfig.appTest) {
-            query.add("select * from %s", QueueDB.TEST);
+            query.add("select * from %s", QueueDB.MESSAGE_TEST);
         } else {
             query.add("select * from %s", QueueDB.MESSAGE);
         }
