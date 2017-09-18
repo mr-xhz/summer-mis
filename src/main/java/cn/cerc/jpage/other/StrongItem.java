@@ -33,7 +33,7 @@ public class StrongItem extends Component {
 
     @Override
     public void output(HtmlWriter html) {
-        DecimalFormat df = new DecimalFormat("###0.00");
+        DecimalFormat df = new DecimalFormat("0.##");
         html.print("%s：", this.getName());
         html.print("<strong");
         if (this.getId() != null)
