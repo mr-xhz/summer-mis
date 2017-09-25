@@ -74,6 +74,15 @@ public class SvrUserLogin extends CustomService {
                 + "Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,PCMachine3_,RoleCode_,DiyRole_ "
                 + "from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo), userCode);
         dsUser.open();
+        String corpNo = dsUser.getString("CorpNo_");
+
+        BookInfoRecord buff = MemoryBookInfo.get(this, corpNo);
+        if (buff == null)
+            throw new SecurityCheckException(String.format("没有找到注册的帐套  %s ", corpNo));
+        if (buff.getStatus() == 3)
+            throw new SecurityCheckException("对不起，您的账套处于暂停录入状态，禁止登陆！");
+        if (buff.getStatus() == 4)
+            throw new SecurityCheckException("对不起，您的帐套已过期，请联系客服续费！");
 
         if (dsUser.eof())
             throw new SecurityCheckException(String.format("该帐号(%s)并不存在，禁止登录！", userCode));
@@ -91,12 +100,6 @@ public class SvrUserLogin extends CustomService {
             }
         }
         // 检查是否为易购用户
-        String corpNo = dsUser.getString("CorpNo_");
-        BookInfoRecord buff = MemoryBookInfo.get(this, corpNo);
-        if (buff == null)
-            throw new SecurityCheckException(String.format("没有找到注册的帐套  %s ", corpNo));
-        if (buff.getStatus() == 4)
-            throw new SecurityCheckException("对不起，您的帐套已过期，请联系客服续费！");
         boolean YGLogin = buff.getCorpType() == BookVersion.ctFree.ordinal();
 
         enrollMachineInfo(dsUser.getString("CorpNo_"), userCode, deviceId, device_name);
@@ -259,9 +262,10 @@ public class SvrUserLogin extends CustomService {
         }
 
         if (ds.size() != 1) {
-            headOut.setField("Msg_", String.format(
-                    "您的手机绑定了 <a href=\"TSchUserAccount?mobile=%s\">多个帐号</a>，无法登录，建议您使用主账号登陆后，在【我的账号--更改我的资料】菜单中设置主附帐号关系后再使用手机号登录！",
-                    userCode));
+            headOut.setField("Msg_",
+                    String.format(
+                            "您的手机绑定了 <a href=\"TSchUserAccount?mobile=%s\">多个帐号</a>，无法登录，建议您使用主账号登陆后，在【我的账号--更改我的资料】菜单中设置主附帐号关系后再使用手机号登录！",
+                            userCode));
             headOut.setField("MoreAccount", true);
             return false;
         }
