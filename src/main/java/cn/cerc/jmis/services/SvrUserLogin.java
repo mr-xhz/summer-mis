@@ -80,7 +80,7 @@ public class SvrUserLogin extends CustomService {
         if (buff == null)
             throw new SecurityCheckException(String.format("没有找到注册的帐套  %s ", corpNo));
         if (buff.getStatus() == 3)
-            throw new SecurityCheckException("对不起，您的账套处于暂停录入状态，禁止登陆！");
+            throw new SecurityCheckException("对不起，您的账套处于暂停录入状态，禁止登录！");
         if (buff.getStatus() == 4)
             throw new SecurityCheckException("对不起，您的帐套已过期，请联系客服续费！");
 
