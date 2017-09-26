@@ -74,8 +74,10 @@ public class SvrUserLogin extends CustomService {
                 + "Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,PCMachine3_,RoleCode_,DiyRole_ "
                 + "from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo), userCode);
         dsUser.open();
-        String corpNo = dsUser.getString("CorpNo_");
+        if (dsUser.eof())
+            throw new SecurityCheckException(String.format("该帐号(%s)并不存在，禁止登录！", userCode));
 
+        String corpNo = dsUser.getString("CorpNo_");
         BookInfoRecord buff = MemoryBookInfo.get(this, corpNo);
         if (buff == null)
             throw new SecurityCheckException(String.format("没有找到注册的帐套  %s ", corpNo));
@@ -84,8 +86,6 @@ public class SvrUserLogin extends CustomService {
         if (buff.getStatus() == 4)
             throw new SecurityCheckException("对不起，您的帐套已过期，请联系客服续费！");
 
-        if (dsUser.eof())
-            throw new SecurityCheckException(String.format("该帐号(%s)并不存在，禁止登录！", userCode));
         if (dsUser.getInt("Enabled_") < 1)
             throw new SecurityCheckException(String.format("该帐号(%s)被暂停使用，禁止登录！", userCode));
 
