@@ -4,7 +4,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class StrongSide extends Component {
-    private String title;
+    private String title = "数据合计";
     private UrlMenu operaUrl;
 
     public StrongSide(Component owner) {

@@ -40,7 +40,11 @@ public class ColumnEditor {
 
     public String format(Record ds) {
         String data = ds.getString(owner.getField());
-        if (ds.getField(owner.getField()) instanceof Double) {
+        if (owner.getBuildText() != null) {
+            HtmlWriter html = new HtmlWriter();
+            owner.getBuildText().outputText(ds, html);
+            data = html.toString();
+        } else if (ds.getField(owner.getField()) instanceof Double) {
             DecimalFormat df = new DecimalFormat("0.####");
             data = df.format(ds.getDouble(owner.getField()));
         }
