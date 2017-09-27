@@ -11,6 +11,7 @@ public class DateField extends AbstractField {
         this.setField(field);
         this.setDialog("showDateDialog");
         this.setIcon("images/dateIocn.png");
+        this.setAlign("center");
     }
 
     @Override
