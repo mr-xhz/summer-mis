@@ -35,6 +35,9 @@ public abstract class AbstractField extends Component implements IField {
     protected boolean autofocus;
     //
     protected boolean required;
+
+    // 用于文件上传是否可以选则多个文件
+    protected boolean multiple = false;
     //
     protected String placeholder;
     // 正则过滤
@@ -335,6 +338,8 @@ public abstract class AbstractField extends Component implements IField {
                 html.print(" autofocus");
             if (this.required)
                 html.print(" required");
+            if (this.multiple)
+                html.print(" multiple");
             if (this.placeholder != null)
                 html.print(" placeholder=\"%s\"", this.placeholder);
             if (this.pattern != null)
@@ -654,6 +659,14 @@ public abstract class AbstractField extends Component implements IField {
     public AbstractField setCols(int cols) {
         this.cols = cols;
         return this;
+    }
+
+    public boolean isMultiple() {
+        return multiple;
+    }
+
+    public void setMultiple(boolean multiple) {
+        this.multiple = multiple;
     }
 
 }
