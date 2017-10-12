@@ -28,12 +28,14 @@ public class TaskTrackCurrentUser extends AbstractTask {
         sql2.append("(hour(timediff(now(),LoginTime_)) > 24 and LogoutTime_ is null)");
 
         // 在早上5点以后，清除昨天的用户
-        if (TDateTime.Now().getData().getHours() > 5)
+        if (TDateTime.Now().getHours() > 5) {
             sql2.append(" or (datediff(now(),LoginTime_)=1)");
+        }
 
         // 已登出超过4小时的用户
         sql2.append(" or (hour(timediff(now(),LogoutTime_)))");
         sql2.append(")");
         conn.execute(sql2.toString());
     }
+
 }
