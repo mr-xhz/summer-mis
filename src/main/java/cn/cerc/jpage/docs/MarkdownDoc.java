@@ -34,9 +34,10 @@ public class MarkdownDoc {
     }
 
     /**
-     * @category 读取指定文件内容
      * @param fileName
      *            带绝对路径的文件名
+     * @param def
+     *            默认文件路径
      * @return 返回文件内容，若文件不存在，则返回null
      */
     public String getContext(String fileName, String def) {
@@ -51,8 +52,8 @@ public class MarkdownDoc {
     }
 
     /**
-     * @category 将md转成html字符串
-     * @param md格式内容
+     * @param inputText
+     *            传入的md字符串
      * @return 返回经转化后的html
      */
     public String mdToHtml(String inputText) {
