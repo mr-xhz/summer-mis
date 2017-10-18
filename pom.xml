@@ -307,6 +307,12 @@
         <!-- <artifactId>plexus-interpolation</artifactId> -->
         <!-- <version>1.14</version> -->
         <!-- </dependency> -->
+        <!-- 支持docs,使用markdown技术 -->
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark</artifactId>
+            <version>0.27.0</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
