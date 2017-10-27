@@ -29,6 +29,13 @@ public class OptionField extends AbstractField {
         return this;
     }
 
+    public OptionField copyValues(Map<String, String> items) {
+        for (String key : items.keySet()) {
+            this.add(key, items.get(key));
+        }
+        return this;
+    }
+
     @Override
     public String getText(Record dataSet) {
         if (dataSet == null)
