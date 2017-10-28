@@ -48,4 +48,9 @@ public class Block112 extends Component {
         right.setText(text);
         return this;
     }
+
+    public Block112 setRightText(String format, Object... args) {
+        right.setText(String.format(format, args));
+        return this;
+    }
 }
