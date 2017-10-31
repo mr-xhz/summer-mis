@@ -1,5 +1,6 @@
 package cn.cerc.jpage.core;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class MutiGrid<T> {
             int i = pages.getBegin();
             while (i <= pages.getEnd()) {
                 dataSet.setRecNo(i + 1);
-                item = clazz.newInstance();
+                item = clazz.getDeclaredConstructor().newInstance();
                 if (defProcess)
                     defMake.build(item, dataSet.getCurrent());
                 if (make != null)
@@ -56,7 +57,8 @@ public class MutiGrid<T> {
                 i++;
             }
             return items.size();
-        } catch (InstantiationException | IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+                | NoSuchMethodException | SecurityException e) {
             throw new RuntimeException(e.getMessage());
         } finally {
             if (defMake != null)
