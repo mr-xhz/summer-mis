@@ -302,7 +302,7 @@ public class SvrUserLogin extends CustomService {
             throw new RuntimeException("没有找到用户账号：" + userCode);
         }
         if (dsUser.getInt("Enabled_") < 1) {
-            throw new RuntimeException("您现登陆的账号已被停止使用，请您联系客服启用后再重新登陆！");
+            throw new RuntimeException("您现登录的账号已被停止使用，请您联系客服启用后再重新登录！");
         }
         if (ds.eof()) {
             throw new RuntimeException(String.format("系统出错(id=%s)，请您重新进入系统！", deviceId));
