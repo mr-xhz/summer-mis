@@ -72,7 +72,7 @@ public class ProcessQueue extends AbstractTask {
 	@Override
 	public void run() {
 		ServerConfig config = ServerConfig.getInstance();
-		if ("1".equals(config.getProperty(ServerConfig.TaskServiceEnabled)))
+		if (config.enableTaskService())
 			super.run();
 	}
 
