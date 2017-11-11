@@ -221,7 +221,7 @@ public class SvrUserLogin extends CustomService {
 
         String token1 = headIn.getString("token");
         // 加入ABCD是为了仅允许内部调用
-        ServerConfig config = new ServerConfig();
+        ServerConfig config = ServerConfig.getInstance();
         String token2 = config.getProperty(OssSession.oss_accessKeySecret, "") + "ABCD";
         // 如果不是内部调用，则返回false
         if (!token2.equals(token1)) {

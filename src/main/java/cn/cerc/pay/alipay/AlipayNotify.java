@@ -16,7 +16,7 @@ public class AlipayNotify {
     private String alipay_public_key;
 
     public AlipayNotify(IHandle handle) {
-        ServerConfig config = new ServerConfig();
+        ServerConfig config = ServerConfig.getInstance();
         partner = config.getProperty("alipay.partner");
         alipay_public_key = config.getProperty("alipay.alipayPublicKey");
     }

@@ -37,11 +37,10 @@ public class AlipayJs {
     private String private_key;
 
     public AlipayJs(IHandle handle) {
-        ServerConfig config = new ServerConfig();
+        ServerConfig config = ServerConfig.getInstance();
         partner = config.getProperty("alipay.partner");
         seller_id = config.getProperty("alipay.sellerId");
         private_key = config.getProperty("alipay.privateKey");
-
     }
 
     @SuppressWarnings("static-access")
@@ -118,8 +117,8 @@ public class AlipayJs {
         sbHtml.append("<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + AlipayConfig.ALIPAY_GATEWAY_NEW
                 + "_input_charset=" + AlipayConfig.input_charset + "\" method=\"" + strMethod + "\">");
         for (int i = 0; i < keys.size(); i++) {
-            String name = (String) keys.get(i);
-            String value = (String) sPara.get(name);
+            String name = keys.get(i);
+            String value = sPara.get(name);
 
             sbHtml.append("<input type=\"hidden\" name=\"" + name + "\" value=\"" + value + "\"/>");
         }
