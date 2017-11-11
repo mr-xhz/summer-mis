@@ -1,6 +1,9 @@
 package cn.cerc.jmis.page;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -10,47 +13,71 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 
 public class JsonPage implements IPage {
-    private Object data;
+	private Object data;
+	private Map<String, Object> items = null;
+	protected IForm form;
 
-    protected IForm form;
+	public JsonPage() {
+		super();
+	}
 
-    public JsonPage() {
-        super();
-    }
+	public JsonPage(IForm form) {
+		super();
+		this.setForm(form);
+	}
 
-    public JsonPage(IForm form) {
-        super();
-        this.setForm(form);
-    }
+	@Deprecated
+	public JsonPage(IForm form, Object data) {
+		super();
+		this.setForm(form);
+		this.data = data;
+	}
 
-    @Deprecated
-    public JsonPage(IForm form, Object data) {
-        super();
-        this.setForm(form);
-        this.data = data;
-    }
+	@Override
+	public void setForm(IForm form) {
+		this.form = form;
+	}
 
-    @Override
-    public void setForm(IForm form) {
-        this.form = form;
-    }
+	@Override
+	public IForm getForm() {
+		return form;
+	}
 
-    @Override
-    public IForm getForm() {
-        return form;
-    }
+	@Override
+	public void execute() throws ServletException, IOException {
+		PrintWriter writer = getResponse().getWriter();
+		if (this.data == null) {
+			if (items == null)
+				items = new HashMap<>();
+			writer.print(new Gson().toJson(items));
+		} else {
+			writer.print(new Gson().toJson(this.data));
+		}
+	}
 
-    @Override
-    public void execute() throws ServletException, IOException {
-        getResponse().getWriter().print(new Gson().toJson(this.data));
-    }
+	public JsonPage add(String key, Object value) {
+		if (this.data != null)
+			throw new RuntimeException("data is not null");
+		if (items == null)
+			items = new HashMap<>();
+		items.put(key, value);
+		return this;
+	}
 
-    public Object getData() {
-        return data;
-    }
+	public Object getData() {
+		return data;
+	}
 
-    public JsonPage setData(Object data) {
-        this.data = data;
-        return this;
-    }
+	public JsonPage setData(Object data) {
+		if (this.items != null)
+			throw new RuntimeException("items is not null");
+		this.data = data;
+		return this;
+	}
+
+	public JsonPage setResultMessage(boolean result, String message) {
+		this.add("result", result);
+		this.add("message", message);
+		return this;
+	}
 }
