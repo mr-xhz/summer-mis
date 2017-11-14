@@ -60,9 +60,9 @@ public class TextBox extends Component {
             html.print(" placeholder='%s'", this.placeholder);
 
         if (this.autocomplete) {
-            html.print("autocomplete=\"on\"");
+            html.print(" autocomplete=\"on\"");
         } else {
-            html.print("autocomplete=\"off\"");
+            html.print(" autocomplete=\"off\"");
         }
 
         if (this.autofocus)
