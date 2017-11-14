@@ -73,10 +73,9 @@ public class SvrUserLogin extends CustomService {
         }
 
         SqlQuery dsUser = new SqlQuery(this);
-        dsUser.add("select UID_,CorpNo_,ID_,Code_,Name_,Mobile_,DeptCode_,Enabled_,Password_,BelongAccount_,");
-        dsUser.add("VerifyTimes_,Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,");
-        dsUser.add("PCMachine3_,RoleCode_,DiyRole_ from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo),
-                userCode);
+        dsUser.add("select CorpNo_,ID_,Code_,Name_,Mobile_,DeptCode_,Enabled_,Password_,BelongAccount_,"
+                + "Encrypt_,SecurityLevel_,SecurityMachine_,PCMachine1_,PCMachine2_,PCMachine3_,RoleCode_,DiyRole_ "
+                + "from %s where Code_='%s'", SystemTable.get(SystemTable.getUserInfo), userCode);
         dsUser.open();
         if (dsUser.eof()) {
             throw new SecurityCheckException(String.format("该帐号(%s)并不存在，禁止登录！", userCode));
@@ -87,8 +86,6 @@ public class SvrUserLogin extends CustomService {
         if (buff == null) {
             throw new SecurityCheckException(String.format("没有找到注册的帐套  %s ", corpNo));
         }
-
-        boolean YGLogin = buff.getCorpType() == BookVersion.ctFree.ordinal();
         if (buff.getStatus() == 3) {
             throw new SecurityCheckException("对不起，您的账套处于暂停录入状态，禁止登录！");
         }
@@ -97,11 +94,6 @@ public class SvrUserLogin extends CustomService {
         }
         if (dsUser.getInt("Enabled_") < 1) {
             throw new SecurityCheckException(String.format("该帐号(%s)被暂停使用，禁止登录！", userCode));
-        }
-        // 判断此帐号是否为附属帐号
-        if (dsUser.getString("BelongAccount_") != null && !"".equals(dsUser.getString("BelongAccount_"))) {
-            throw new SecurityCheckException(
-                    String.format("该帐号已被设置为附属帐号，不允许登录，请使用主帐号 %s 登录系统！", dsUser.getString("BelongAccount_")));
         }
 
         // 取得认证密码，若是微信入口进入，则免密码录入
@@ -114,6 +106,9 @@ public class SvrUserLogin extends CustomService {
                 throw new RuntimeException("用户密码不允许为空！");
             }
         }
+        // 检查是否为易购用户
+        boolean YGLogin = buff.getCorpType() == BookVersion.ctFree.ordinal();
+
         enrollMachineInfo(dsUser.getString("CorpNo_"), userCode, deviceId, device_name);
 
         if (dsUser.getBoolean("Encrypt_")) {
@@ -124,17 +119,7 @@ public class SvrUserLogin extends CustomService {
 
         if (!isAutoLogin(userCode, deviceId) && !"000000".equals(password)) {
             if (!dsUser.getString("Password_").equals(password)) {
-                dsUser.edit();
-                if (dsUser.getInt("VerifyTimes_") == 6) {
-                    // 该账号设置停用
-                    dsUser.setField("Enabled_", 0);
-                    dsUser.post();
-                    throw new RuntimeException("您输入密码的错误次数已超出规定次数，现账号已被自动停用，若需启用，请您联系客服处理！");
-                } else {
-                    dsUser.setField("VerifyTimes_", dsUser.getInt("VerifyTimes_") + 1);
-                    dsUser.post();
-                    throw new SecurityCheckException("您的登录密码错误，禁止登录！");
-                }
+                throw new SecurityCheckException("您的登录密码错误，禁止登录！");
             }
         }
 
@@ -171,6 +156,12 @@ public class SvrUserLogin extends CustomService {
                 sess.setProperty(Application.roleCode, dsUser.getString("RoleCode_"));
             }
 
+            // 判断此帐号是否为附属帐号
+            if (dsUser.getString("BelongAccount_") != null && !"".equals(dsUser.getString("BelongAccount_"))) {
+                throw new SecurityCheckException(
+                        String.format("该帐号已被设置为附属帐号，不允许登录，请使用主帐号 %s 登录系统！", dsUser.getString("BelongAccount_")));
+            }
+
             // 更新当前用户总数
             updateCurrentUser(device_name, headIn.getString("Screen_"), headIn.getString("Language_"));
 
@@ -190,10 +181,6 @@ public class SvrUserLogin extends CustomService {
             getDataOut().getHead().setField("CorpNo_", handle.getCorpNo());
             getDataOut().getHead().setField("YGUser", YGLogin);
 
-            // 验证成功，将验证次数赋值为0
-            dsUser.edit();
-            dsUser.setField("VerifyTimes_", 0);
-            dsUser.post();
             tx.commit();
             return true;
         }
@@ -285,8 +272,10 @@ public class SvrUserLogin extends CustomService {
         }
 
         if (ds.size() != 1) {
-            headOut.setField("Msg_",
-                    String.format("您的手机绑定了多个帐号，无法登录，建议您使用主账号登陆后，在【我的账号--更改我的资料】菜单中设置主附帐号关系后再使用手机号登录！", userCode));
+            headOut.setField("Msg_", String.format(
+                    "您的手机绑定了 <a href=\"TSchUserAccount?mobile=%s\">多个帐号</a>，无法登录，建议您使用主账号登陆后，在【我的账号--更改我的资料】菜单中设置主附帐号关系后再使用手机号登录！",
+                    userCode));
+            headOut.setField("MoreAccount", true);
             return false;
         }
         headOut.setField("UserCode_", ds.getString("Code_"));
@@ -310,10 +299,10 @@ public class SvrUserLogin extends CustomService {
         dsUser.add("where Code_='%s' ", userCode);
         dsUser.open();
         if (dsUser.eof()) {
-            throw new RuntimeException("没有找到用户帐号：" + userCode);
+            throw new RuntimeException("没有找到用户账号：" + userCode);
         }
         if (dsUser.getInt("Enabled_") < 1) {
-            throw new RuntimeException("您现登录的帐号已被停止使用，请您联系客服启用后再重新登录！");
+            throw new RuntimeException("您现登录的账号已被停止使用，请您联系客服启用后再重新登录！");
         }
         if (ds.eof()) {
             throw new RuntimeException(String.format("系统出错(id=%s)，请您重新进入系统！", deviceId));
