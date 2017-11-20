@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.cerc.jbean.core.ServerConfig;
+
 public class StartDocs extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -19,6 +21,10 @@ public class StartDocs extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int docLevel = ServerConfig.getDocLevel();
+        if (docLevel != 1) {
+            throw new RuntimeException("该功能不对正式服务器开放");
+        }
         String uri = req.getRequestURI();
         if ("/docs".equals(uri)) {
             uri += "/index.html";
