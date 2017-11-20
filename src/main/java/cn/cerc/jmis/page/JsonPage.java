@@ -55,7 +55,12 @@ public class JsonPage implements IPage {
         }
     }
 
+    @Deprecated
     public JsonPage add(String key, Object value) {
+        return put(key, value);
+    }
+
+    public JsonPage put(String key, Object value) {
         if (this.data != null)
             throw new RuntimeException("data is not null");
         if (items == null)
