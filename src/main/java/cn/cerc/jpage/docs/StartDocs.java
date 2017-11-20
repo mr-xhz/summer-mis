@@ -21,7 +21,7 @@ public class StartDocs extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (ServerConfig.openDocService()) {
+        if (!ServerConfig.openDocService()) {
             throw new RuntimeException("该功能不对正式服务器开放");
         }
         String uri = req.getRequestURI();
