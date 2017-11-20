@@ -82,6 +82,8 @@ public class JsonPage implements IPage {
     }
 
     public Map<String, Object> getItems() {
+        if (items == null)
+            items = new HashMap<>();
         return items;
     }
 }
