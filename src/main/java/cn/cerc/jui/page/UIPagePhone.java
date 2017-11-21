@@ -17,7 +17,6 @@ import cn.cerc.jmis.form.AbstractForm;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
-import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -307,9 +306,4 @@ public class UIPagePhone extends AbstractJspPage {
         }
         this.setHeader(header);
     }
-
-    public void add(String id, ActionForm value) {
-        put(id, value);
-    }
-
 }

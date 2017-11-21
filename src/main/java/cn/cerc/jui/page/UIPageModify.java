@@ -249,6 +249,7 @@ public class UIPageModify extends AbstractJspPage {
         UIPanelVertical form = new UIPanelVertical(this.getRequest());
         form.setId("search");
         form.setOwner(this.getContent());
+        put("search", form);
         return form;
     }
 
@@ -298,10 +299,6 @@ public class UIPageModify extends AbstractJspPage {
         if (content == null)
             content = new Component(this);
         return content;
-    }
-
-    public void add(String id, UIPanelVertical value) {
-        put(id, value);
     }
 
 }

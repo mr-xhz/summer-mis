@@ -21,11 +21,7 @@ import cn.cerc.jmis.page.IMenuBar;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.core.MutiGrid;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.grid.AbstractGrid;
-import cn.cerc.jpage.grid.MutiPage;
-import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.parts.HeaderSide;
 import cn.cerc.jui.parts.MainMenu;
@@ -39,7 +35,6 @@ import cn.cerc.jui.parts.RightMenus;
  */
 public class UIPageBill extends AbstractJspPage {
     private MainMenu mainMenu = new MainMenu();
-    private MutiPage pages;
     private String searchWaitingId = "";
     private Component content;
     private HeaderSide header;
@@ -147,19 +142,9 @@ public class UIPageBill extends AbstractJspPage {
         if (rightSite != null)
             out.print(rightSite);
 
-        // 添加分页控制
-        Component operaPages = null;
-        if (pages != null)
-            operaPages = new OperaPages(this.getForm(), pages);
-
-        if (operaPages != null)
-            out.print(operaPages.toString());
         out.println("</div>");
 
-        if (bottom == null) {
-            if (operaPages != null)
-                out.print(operaPages.toString());
-        } else {
+        if (bottom != null) {
             out.print(bottom);
             out.println("</div>");
         }
@@ -284,16 +269,6 @@ public class UIPageBill extends AbstractJspPage {
 
     public void setContent(Component content) {
         this.content = content;
-    }
-
-    public void add(String id, AbstractGrid grid) {
-        put(id, grid);
-        pages = grid.getPages();
-    }
-
-    public void add(String id, MutiGrid<?> grid) {
-        put(id, grid.getList());
-        pages = grid.getPages();
     }
 
     public void add(String id, PassportRecord value) {
