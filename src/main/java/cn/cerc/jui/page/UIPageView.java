@@ -30,10 +30,6 @@ public class UIPageView extends AbstractJspPage {
     private boolean showMenus = true; // 是否显示主菜单
     private MutiPage pages;
 
-    public UIPageView() {
-        super();
-    }
-
     public UIPageView(IForm form) {
         super(form);
     }
@@ -47,6 +43,7 @@ public class UIPageView extends AbstractJspPage {
 
     @Override
     public void execute() throws ServletException, IOException {
+        this.getStatusBar(); // 此行代码不能删除！
         IForm form = this.getForm();
         HttpServletRequest request = form.getRequest();
         CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);

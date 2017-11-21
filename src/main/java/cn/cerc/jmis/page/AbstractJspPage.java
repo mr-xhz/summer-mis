@@ -22,6 +22,7 @@ import cn.cerc.jmis.tools.R;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.StatusBar;
 import cn.cerc.jui.parts.UIComponent;
 
 public abstract class AbstractJspPage extends Component implements IPage {
@@ -30,10 +31,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
     private List<String> styleFiles = new ArrayList<>();
     private List<String> scriptFiles = new ArrayList<>();
     private List<HtmlContent> scriptCodes = new ArrayList<>();
-
-    public AbstractJspPage() {
-        super();
-    }
+    private StatusBar statusBar;
 
     public AbstractJspPage(IForm form) {
         super();
@@ -238,4 +236,23 @@ public abstract class AbstractJspPage extends Component implements IPage {
     public void add(String id, UIComponent value) {
         put(id, value);
     }
+
+    public StatusBar setStatusBar(StatusBar statusBar) {
+        this.statusBar = statusBar;
+        statusBar.init(this);
+        statusBar.setId("bottom");
+        this.put("bottom", statusBar);
+        return statusBar;
+    }
+
+    public StatusBar getStatusBar() {
+        if (statusBar == null) {
+            statusBar = new StatusBar();
+            statusBar.init(this);
+            statusBar.setId("bottom");
+            this.put("bottom", statusBar);
+        }
+        return statusBar;
+    }
+
 }

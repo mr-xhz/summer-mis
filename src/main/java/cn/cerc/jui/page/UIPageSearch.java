@@ -34,6 +34,7 @@ import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.parts.HeaderSide;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
+import cn.cerc.jui.parts.StatusBar;
 
 /**
  * 主体子页面
@@ -102,7 +103,7 @@ public class UIPageSearch extends AbstractJspPage {
         // 右边区域
         Component rightSite = (Component) request.getAttribute("rightSide");
         // 底部
-        Component bottom = (Component) request.getAttribute("bottom");
+        StatusBar bottom = this.getStatusBar();
 
         // 开始输出
         PrintWriter out = getResponse().getWriter();
@@ -122,8 +123,7 @@ public class UIPageSearch extends AbstractJspPage {
         out.println("var Application = new TApplication();");
         out.printf("Application.device = '%s';\n", form.getClient().getDevice());
 
-        if (bottom != null)
-            out.printf("Application.bottom = '%s';\n", bottom.getId());
+        out.printf("Application.bottom = '%s';\n", bottom.getId());
 
         String msg = form.getParam("message", "");
         msg = msg == null ? "" : msg.replaceAll("\r\n", "<br/>");
@@ -139,13 +139,9 @@ public class UIPageSearch extends AbstractJspPage {
         out.println(header);
 
         out.write("<div class=\"main\">\n");
-        if (bottom != null)
-            out.write("<div class=\"info-newStyle\">\n");
+        out.write("<div class=\"info-newStyle\">\n");
 
-        if (!form.getClient().isPhone()) {
-            if (bottom == null)
-                out.println("<div id='msg'></div>");
-        } else {
+        if (form.getClient().isPhone()) {
             out.println("<div id='msg'></div>");
             out.println("<span id='back-top' style='display: none'>顶部</span>");
             out.println("<span id='back-bottom' style='display: none'>底部</span>");
@@ -165,13 +161,8 @@ public class UIPageSearch extends AbstractJspPage {
             out.print(operaPages.toString());
         out.println("</div>");
 
-        if (bottom == null) {
-            if (operaPages != null)
-                out.print(operaPages.toString());
-        } else {
-            out.print(bottom);
-            out.println("</div>");
-        }
+        out.print(bottom);
+        out.println("</div>");
         out.println("</div>\n");
         out.println("<div class='bottom-space'></div>");
         out.print(this.getContents());

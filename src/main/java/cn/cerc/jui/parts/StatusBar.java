@@ -13,9 +13,14 @@ public class StatusBar extends Component {
     private IForm form;
     private static final int MAX_MENUS = 6;
     protected UrlRecord checkAll;
+    private boolean flag = false;
 
-    public StatusBar(IPage owner) {
-        super((Component) owner);
+    public StatusBar() {
+        super();
+    }
+
+    public void init(IPage owner) {
+        setOwner((Component) owner);
         this.form = owner.getForm();
         this.setId("bottom");
     }
@@ -74,5 +79,13 @@ public class StatusBar extends Component {
 
     public IForm getForm() {
         return form;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 }

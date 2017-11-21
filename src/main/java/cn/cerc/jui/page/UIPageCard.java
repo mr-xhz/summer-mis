@@ -36,11 +36,6 @@ public class UIPageCard extends AbstractJspPage {
     private MainMenu mainMenu = new MainMenu();
     private UIContentCard content;
 
-    public UIPageCard() {
-        super();
-        this.init();
-    }
-
     public UIPageCard(IForm form) {
         super(form);
         this.init();
@@ -64,6 +59,8 @@ public class UIPageCard extends AbstractJspPage {
 
     @Override
     public void execute() throws ServletException, IOException {
+        this.getStatusBar(); // 此行代码不能删除！
+
         IForm form = this.getForm();
         HttpServletRequest request = form.getRequest();
         CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
