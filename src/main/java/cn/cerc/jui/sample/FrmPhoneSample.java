@@ -1,13 +1,58 @@
-package cn.cerc.jui.phone;
+package cn.cerc.jui.sample;
 
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jmis.form.AbstractForm;
+import cn.cerc.jui.page.UIPagePhone;
+import cn.cerc.jui.phone.Block101;
+import cn.cerc.jui.phone.Block102;
+import cn.cerc.jui.phone.Block103;
+import cn.cerc.jui.phone.Block104;
+import cn.cerc.jui.phone.Block105;
+import cn.cerc.jui.phone.Block106;
+import cn.cerc.jui.phone.Block107;
+import cn.cerc.jui.phone.Block108;
+import cn.cerc.jui.phone.Block109;
+import cn.cerc.jui.phone.Block110;
+import cn.cerc.jui.phone.Block111;
+import cn.cerc.jui.phone.Block112;
+import cn.cerc.jui.phone.Block113;
+import cn.cerc.jui.phone.Block114;
+import cn.cerc.jui.phone.Block115;
+import cn.cerc.jui.phone.Block116;
+import cn.cerc.jui.phone.Block117;
+import cn.cerc.jui.phone.Block118;
+import cn.cerc.jui.phone.Block119;
+import cn.cerc.jui.phone.Block120;
+import cn.cerc.jui.phone.Block121;
+import cn.cerc.jui.phone.Block123;
+import cn.cerc.jui.phone.Block124;
+import cn.cerc.jui.phone.Block125;
+import cn.cerc.jui.phone.Block126;
+import cn.cerc.jui.phone.Block127;
+import cn.cerc.jui.phone.Block201;
+import cn.cerc.jui.phone.Block301;
+import cn.cerc.jui.phone.Block302;
+import cn.cerc.jui.phone.Block303;
+import cn.cerc.jui.phone.Block304;
+import cn.cerc.jui.phone.Block305;
+import cn.cerc.jui.phone.Block306;
+import cn.cerc.jui.phone.Block307;
+import cn.cerc.jui.phone.Block401;
+import cn.cerc.jui.phone.Block402;
+import cn.cerc.jui.phone.Block601;
+import cn.cerc.jui.phone.Block602;
+import cn.cerc.jui.phone.Block603;
+import cn.cerc.jui.phone.Block604;
+import cn.cerc.jui.phone.Block901;
+import cn.cerc.jui.phone.Block902;
+import cn.cerc.jui.phone.Block991;
+import cn.cerc.jui.phone.Block992;
 
 public class FrmPhoneSample extends AbstractForm {
 
     @Override
     public IPage execute() throws Exception {
-        PhonePage page = new PhonePage(this);
+        UIPagePhone page = new UIPagePhone(this);
 
         new Block101(page.getContent());
         new Block102(page.getContent());
