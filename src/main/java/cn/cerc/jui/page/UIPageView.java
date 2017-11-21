@@ -62,26 +62,7 @@ public class UIPageView extends AbstractJspPage {
 
     @Override
     public void execute() throws ServletException, IOException {
-        UIPageView.ready(this, null, mainMenu);
-
-        // 添加分页控制
-        Component operaPages = null;
-        if (pages != null) {
-            this.add("pages", pages);
-            operaPages = new OperaPages(this.getForm(), pages);
-            this.add("_operaPages_", operaPages);
-        }
-
-        String url = String.format("/WEB-INF/%s/%s", Application.getAppConfig().getPathForms(), this.getViewFile());
-        getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
-    }
-
-    public MainMenu getMainMenu() {
-        return mainMenu;
-    }
-
-    public static void ready(AbstractJspPage page, Component content, MainMenu mainMenu) {
-        IForm form = page.getForm();
+        IForm form = this.getForm();
         HttpServletRequest request = form.getRequest();
         CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
         request.setAttribute("passport", sess.logon());
@@ -102,15 +83,31 @@ public class UIPageView extends AbstractJspPage {
             request.setAttribute("message", "");
 
         if (form instanceof AbstractForm) {
-            page.add("barMenus", mainMenu.getBarMenus(page.getForm()));
+            this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
-                page.add("subMenus", mainMenu.getRightMenus());
-            UIPageSearch.registerContent(page, content);
+                this.add("subMenus", mainMenu.getRightMenus());
+            UIPageSearch.registerContent(this, null);
         }
         String msg = form.getParam("message", "");
         request.setAttribute("msg", msg == null ? "" : msg.replaceAll("\r\n", "<br/>"));
         request.setAttribute("formno", form.getParam("formNo", "000"));
         request.setAttribute("form", form);
+
+        // 添加分页控制
+        Component operaPages = null;
+        if (pages != null) {
+            this.add("pages", pages);
+            operaPages = new OperaPages(this.getForm(), pages);
+            this.add("_operaPages_", operaPages);
+        }
+
+        // 输出jsp模版
+        String url = String.format("/WEB-INF/%s/%s", Application.getAppConfig().getPathForms(), this.getViewFile());
+        getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
+    }
+
+    public MainMenu getMainMenu() {
+        return mainMenu;
     }
 
     public void installAD() {
