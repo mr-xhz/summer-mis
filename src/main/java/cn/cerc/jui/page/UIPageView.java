@@ -28,6 +28,7 @@ import cn.cerc.jui.parts.RightMenus;
 
 public class UIPageView extends AbstractJspPage {
     private MainMenu mainMenu = new MainMenu();
+    private boolean showMenus = true; // 是否显示主菜单
     private MutiPage pages;
 
     public UIPageView() {
@@ -86,7 +87,8 @@ public class UIPageView extends AbstractJspPage {
             this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
                 this.add("subMenus", mainMenu.getRightMenus());
-            UIPageSearch.registerContent(this, null);
+            if (this.isShowMenus())
+                UIPageSearch.buildHeaderSide(this);
         }
         String msg = form.getParam("message", "");
         request.setAttribute("msg", msg == null ? "" : msg.replaceAll("\r\n", "<br/>"));
@@ -125,5 +127,14 @@ public class UIPageView extends AbstractJspPage {
             html.println("</div>");
             html.println("</div>");
         }
+    }
+
+    public boolean isShowMenus() {
+        return showMenus;
+    }
+
+    public void setShowMenus(boolean showMenus) {
+        // this.setParam("showMenus", "false");
+        this.showMenus = showMenus;
     }
 }

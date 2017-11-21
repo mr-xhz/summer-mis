@@ -20,9 +20,9 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.other.HeaderSide;
 import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.UIConfig;
+import cn.cerc.jui.parts.HeaderSide;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
@@ -88,7 +88,11 @@ public class UIPageCard extends AbstractJspPage {
             this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
                 this.add("subMenus", mainMenu.getRightMenus());
-            UIPageSearch.registerContent(this, content);
+            UIPageSearch.buildHeaderSide(this);
+            request.setAttribute(content.getId(), content);
+            for (Component component : content.getComponents()) {
+                request.setAttribute(component.getId(), component);
+            }
         }
         String msg = form.getParam("message", "");
         request.setAttribute("msg", msg == null ? "" : msg.replaceAll("\r\n", "<br/>"));

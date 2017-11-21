@@ -29,9 +29,9 @@ import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.DataGrid;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.grid.PhoneGrid;
-import cn.cerc.jpage.other.HeaderSide;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jpage.other.UrlMenu;
+import cn.cerc.jui.parts.HeaderSide;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
@@ -107,7 +107,11 @@ public class UIPageSearch extends AbstractJspPage {
             this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
                 this.add("subMenus", mainMenu.getRightMenus());
-            this.header = registerContent(this, content);
+            this.header = buildHeaderSide(this);
+            request.setAttribute(content.getId(), content);
+            for (Component component : content.getComponents()) {
+                request.setAttribute(component.getId(), component);
+            }
         }
 
         // 右边区域
@@ -216,41 +220,31 @@ public class UIPageSearch extends AbstractJspPage {
         return html;
     }
 
-    public static HeaderSide registerContent(AbstractJspPage page, Component content) {
+    public static HeaderSide buildHeaderSide(AbstractJspPage page) {
         HeaderSide header = null;
         HttpServletRequest request = page.getRequest();
-        boolean _showMenu_ = "true".equals(page.getForm().getParam("showMenus", "true"));
-        if (_showMenu_) {
-            header = new HeaderSide();
-            Component left = header.getLeft();
-            @SuppressWarnings("unchecked")
-            List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
-            if (barMenus == null) {
-                new UrlMenu(left, "首页", "/");
-                new UrlMenu(left, "刷新", "javascript:history.go(-1);");
-            } else {
-                for (UrlRecord menu : barMenus) {
-                    new UrlMenu(left, menu.getName(), menu.getUrl());
-                }
-            }
-
-            Component right = header.getRight();
-            @SuppressWarnings("unchecked")
-            List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
-            if (subMenus != null) {
-                int i = subMenus.size() - 1;
-                while (i > -1) {
-                    UrlRecord menu = subMenus.get(i);
-                    new UrlMenu(right, menu.getName(), menu.getUrl());
-                    i--;
-                }
+        header = new HeaderSide();
+        Component left = header.getLeft();
+        @SuppressWarnings("unchecked")
+        List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
+        if (barMenus == null) {
+            new UrlMenu(left, "首页", "/");
+            new UrlMenu(left, "刷新", "javascript:history.go(-1);");
+        } else {
+            for (UrlRecord menu : barMenus) {
+                new UrlMenu(left, menu.getName(), menu.getUrl());
             }
         }
 
-        if (content != null) {
-            request.setAttribute(content.getId(), content);
-            for (Component component : content.getComponents()) {
-                request.setAttribute(component.getId(), component);
+        Component right = header.getRight();
+        @SuppressWarnings("unchecked")
+        List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
+        if (subMenus != null) {
+            int i = subMenus.size() - 1;
+            while (i > -1) {
+                UrlRecord menu = subMenus.get(i);
+                new UrlMenu(right, menu.getName(), menu.getUrl());
+                i--;
             }
         }
         return header;
