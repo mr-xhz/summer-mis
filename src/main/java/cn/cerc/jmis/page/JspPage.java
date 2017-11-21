@@ -12,4 +12,8 @@ public class JspPage extends AbstractJspPage {
         super(form);
         this.setJspFile(jspFile);
     }
+
+    public void add(String id, Object value) {
+        put(id, value);
+    }
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jbean.rds.PassportRecord;
 import cn.cerc.jmis.form.AbstractForm;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
@@ -55,23 +56,8 @@ public class UIPageBill extends AbstractJspPage {
     public void addExportFile(String service, String key) {
         if (device_ee.equals(this.getForm().getClient().getDevice())) {
             ExportFile item = new ExportFile(service, key);
-            this.add("export", item);
+            this.put("export", item);
         }
-    }
-
-    @Override
-    public void add(String id, Object value) {
-        HttpServletRequest request = getRequest();
-        if (value instanceof AbstractGrid) {
-            AbstractGrid grid = (AbstractGrid) value;
-            request.setAttribute(id, value);
-            pages = grid.getPages();
-        } else if (value instanceof MutiGrid) {
-            MutiGrid<?> grid = (MutiGrid<?>) value;
-            request.setAttribute(id, grid.getList());
-            pages = grid.getPages();
-        } else
-            request.setAttribute(id, value);
     }
 
     @Override
@@ -298,5 +284,23 @@ public class UIPageBill extends AbstractJspPage {
 
     public void setContent(Component content) {
         this.content = content;
+    }
+
+    public void add(String id, AbstractGrid grid) {
+        put(id, grid);
+        pages = grid.getPages();
+    }
+
+    public void add(String id, MutiGrid<?> grid) {
+        put(id, grid.getList());
+        pages = grid.getPages();
+    }
+
+    public void add(String id, PassportRecord value) {
+        put(id, value);
+    }
+
+    public void add(String id, UIPanelVertical value) {
+        put(id, value);
     }
 }

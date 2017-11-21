@@ -48,13 +48,13 @@ public class UIPageCard extends AbstractJspPage {
 
     protected void init() {
         this.content = new UIContentCard(this);
-        this.add("document", this.content);
+        this.put("document", this.content);
     }
 
     public void addExportFile(String service, String key) {
         if (device_ee.equals(this.getForm().getClient().getDevice())) {
             ExportFile item = new ExportFile(service, key);
-            this.add("export", item);
+            this.put("export", item);
         }
     }
 
@@ -85,9 +85,9 @@ public class UIPageCard extends AbstractJspPage {
             request.setAttribute("message", "");
 
         if (form instanceof AbstractForm) {
-            this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
+            this.put("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
-                this.add("subMenus", mainMenu.getRightMenus());
+                this.put("subMenus", mainMenu.getRightMenus());
             UIPageSearch.buildHeaderSide(this);
             request.setAttribute(content.getId(), content);
             for (Component component : content.getComponents()) {
@@ -109,7 +109,7 @@ public class UIPageCard extends AbstractJspPage {
     }
 
     public void installAD() {
-        super.add("_showAd_", new AdHeader());
+        super.put("_showAd_", new AdHeader());
     }
 
     private class AdHeader extends Component {

@@ -17,12 +17,11 @@ import cn.cerc.jmis.form.AbstractForm;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
+import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.core.MutiGrid;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jpage.other.UrlMenu;
@@ -60,23 +59,8 @@ public class UIPagePhone extends AbstractJspPage {
     public void addExportFile(String service, String key) {
         if (device_ee.equals(this.getForm().getClient().getDevice())) {
             ExportFile item = new ExportFile(service, key);
-            this.add("export", item);
+            this.put("export", item);
         }
-    }
-
-    @Override
-    public void add(String id, Object value) {
-        HttpServletRequest request = getRequest();
-        if (value instanceof AbstractGrid) {
-            AbstractGrid grid = (AbstractGrid) value;
-            request.setAttribute(id, value);
-            pages = grid.getPages();
-        } else if (value instanceof MutiGrid) {
-            MutiGrid<?> grid = (MutiGrid<?>) value;
-            request.setAttribute(id, grid.getList());
-            pages = grid.getPages();
-        } else
-            request.setAttribute(id, value);
     }
 
     @Override
@@ -98,9 +82,9 @@ public class UIPagePhone extends AbstractJspPage {
         // 系统通知消息
         Component content = this.getContent();
         if (form instanceof AbstractForm) {
-            this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
+            this.put("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
-                this.add("subMenus", mainMenu.getRightMenus());
+                this.put("subMenus", mainMenu.getRightMenus());
             if (this.defaultHeader)
                 loadDefaultHeader();
         }
@@ -322,6 +306,10 @@ public class UIPagePhone extends AbstractJspPage {
             }
         }
         this.setHeader(header);
+    }
+
+    public void add(String id, ActionForm value) {
+        put(id, value);
     }
 
 }

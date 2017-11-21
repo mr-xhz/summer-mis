@@ -14,15 +14,15 @@ public class UIPageMenu extends UIPageView {
     }
 
     public void setDisableAccountSave(boolean value) {
-        super.add("disableAccountSave", value);
+        super.put("disableAccountSave", value);
     }
 
     public void setDisablePasswordSave(boolean value) {
-        super.add("DisablePasswordSave", value);
+        super.put("DisablePasswordSave", value);
     }
 
     public void setStartVine(boolean value) {
-        super.add("startVine", value);
+        super.put("startVine", value);
     }
 
     public void setStartHost(String value) {
@@ -30,15 +30,15 @@ public class UIPageMenu extends UIPageView {
     }
 
     public void setSessionKey(Object value) {
-        super.add(RequestData.appSession_Key, value);
+        super.put(RequestData.appSession_Key, value);
     }
 
     public void setMenus(Object value) {
-        super.add("menus", value);
+        super.put("menus", value);
     }
 
     public void setOnlineUsers(int value) {
-        super.add("onlineUsers", value);
+        super.put("onlineUsers", value);
     }
 
     public void setCurrentUserCode(String value) {
@@ -54,10 +54,10 @@ public class UIPageMenu extends UIPageView {
     }
 
     public void setIsViewOldMenu(boolean value) {
-        super.add("isViewOldMenu", value);
+        super.put("isViewOldMenu", value);
     }
 
     public void setUnReadMessage(int value) {
-        super.add("unReadMessage", value);
+        super.put("unReadMessage", value);
     }
 }

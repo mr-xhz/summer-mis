@@ -1,4 +1,4 @@
-package cn.cerc.jmis.tools;
+package cn.cerc.jui.parts;
 
 import javax.servlet.http.HttpServletRequest;
 

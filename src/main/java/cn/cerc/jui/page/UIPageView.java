@@ -42,23 +42,8 @@ public class UIPageView extends AbstractJspPage {
     public void addExportFile(String service, String key) {
         if (device_ee.equals(this.getForm().getClient().getDevice())) {
             ExportFile item = new ExportFile(service, key);
-            this.add("export", item);
+            this.put("export", item);
         }
-    }
-
-    @Override
-    public void add(String id, Object value) {
-        HttpServletRequest request = getRequest();
-        if (value instanceof AbstractGrid) {
-            AbstractGrid grid = (AbstractGrid) value;
-            request.setAttribute(id, value);
-            pages = grid.getPages();
-        } else if (value instanceof MutiGrid) {
-            MutiGrid<?> grid = (MutiGrid<?>) value;
-            request.setAttribute(id, grid.getList());
-            pages = grid.getPages();
-        } else
-            request.setAttribute(id, value);
     }
 
     @Override
@@ -84,9 +69,9 @@ public class UIPageView extends AbstractJspPage {
             request.setAttribute("message", "");
 
         if (form instanceof AbstractForm) {
-            this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
+            this.put("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
-                this.add("subMenus", mainMenu.getRightMenus());
+                this.put("subMenus", mainMenu.getRightMenus());
             if (this.isShowMenus())
                 UIPageSearch.buildHeaderSide(this);
         }
@@ -98,9 +83,9 @@ public class UIPageView extends AbstractJspPage {
         // 添加分页控制
         Component operaPages = null;
         if (pages != null) {
-            this.add("pages", pages);
+            this.put("pages", pages);
             operaPages = new OperaPages(this.getForm(), pages);
-            this.add("_operaPages_", operaPages);
+            this.put("_operaPages_", operaPages);
         }
 
         // 输出jsp模版
@@ -113,7 +98,7 @@ public class UIPageView extends AbstractJspPage {
     }
 
     public void installAD() {
-        super.add("_showAd_", new AdHeader());
+        super.put("_showAd_", new AdHeader());
     }
 
     private class AdHeader extends Component {
@@ -136,5 +121,15 @@ public class UIPageView extends AbstractJspPage {
     public void setShowMenus(boolean showMenus) {
         // this.setParam("showMenus", "false");
         this.showMenus = showMenus;
+    }
+
+    public void add(String id, MutiGrid<?> grid) {
+        put(id, grid.getList());
+        pages = grid.getPages();
+    }
+
+    public void add(String id, AbstractGrid grid) {
+        put(id, grid);
+        pages = grid.getPages();
     }
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -12,11 +13,16 @@ import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
+import cn.cerc.jdb.core.DataSet;
+import cn.cerc.jdb.core.Record;
+import cn.cerc.jdb.core.TDate;
+import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.other.utils;
 import cn.cerc.jmis.tools.R;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 public abstract class AbstractJspPage extends Component implements IPage {
     private String jspFile;
@@ -38,7 +44,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
     public final void setForm(IForm form) {
         this.form = form;
         if (form != null)
-            this.add("jspPage", this);
+            this.put("jspPage", this);
     }
 
     @Override
@@ -49,10 +55,11 @@ public abstract class AbstractJspPage extends Component implements IPage {
     @Override
     public void addComponent(Component component) {
         if (component.getId() != null)
-            this.add(component.getId(), component);
+            this.put(component.getId(), component);
         super.addComponent(component);
     }
 
+    @Override
     public void execute() throws ServletException, IOException {
         String url = String.format("/WEB-INF/%s/%s", Application.getAppConfig().getPathForms(), this.getViewFile());
         getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
@@ -66,7 +73,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
         this.jspFile = jspFile;
     }
 
-    public void add(String id, Object value) {
+    protected void put(String id, Object value) {
         getRequest().setAttribute(id, value);
     }
 
@@ -192,4 +199,43 @@ public abstract class AbstractJspPage extends Component implements IPage {
         return html;
     }
 
+    public void add(String id, String value) {
+        getRequest().setAttribute(id, value);
+    }
+
+    public void add(String id, boolean value) {
+        put(id, value);
+    }
+
+    public void add(String id, double value) {
+        put(id, value);
+    }
+
+    public void add(String id, List<?> value) {
+        put(id, value);
+    }
+
+    public void add(String id, Map<?, ?> value) {
+        put(id, value);
+    }
+
+    public void add(String id, DataSet value) {
+        put(id, value);
+    }
+
+    public void add(String id, Record value) {
+        put(id, value);
+    }
+
+    public void add(String id, TDate value) {
+        put(id, value);
+    }
+
+    public void add(String id, TDateTime value) {
+        put(id, value);
+    }
+
+    public void add(String id, UIComponent value) {
+        put(id, value);
+    }
 }
