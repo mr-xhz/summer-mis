@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jmis.form.MainMenu;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jpage.core.Component;
@@ -25,6 +24,7 @@ import cn.cerc.jpage.other.HeaderSide;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.UIConfig;
+import cn.cerc.jui.parts.MainMenu;
 
 /**
  * 数据卡片

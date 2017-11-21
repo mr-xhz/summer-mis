@@ -1,4 +1,4 @@
-package cn.cerc.jmis.form;
+package cn.cerc.jui.parts;
 
 import java.util.ArrayList;
 import java.util.List;

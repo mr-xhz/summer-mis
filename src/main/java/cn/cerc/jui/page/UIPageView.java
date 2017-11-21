@@ -12,8 +12,6 @@ import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jmis.form.AbstractForm;
-import cn.cerc.jmis.form.MainMenu;
-import cn.cerc.jmis.form.RightMenus;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
@@ -25,6 +23,8 @@ import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.UIConfig;
+import cn.cerc.jui.parts.MainMenu;
+import cn.cerc.jui.parts.RightMenus;
 
 public class UIPageView extends AbstractJspPage {
     private MainMenu mainMenu = new MainMenu();

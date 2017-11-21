@@ -17,8 +17,6 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jmis.form.AbstractForm;
-import cn.cerc.jmis.form.MainMenu;
-import cn.cerc.jmis.form.RightMenus;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
@@ -34,6 +32,8 @@ import cn.cerc.jpage.grid.PhoneGrid;
 import cn.cerc.jpage.other.HeaderSide;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jpage.other.UrlMenu;
+import cn.cerc.jui.parts.MainMenu;
+import cn.cerc.jui.parts.RightMenus;
 
 /**
  * 主体子页面
