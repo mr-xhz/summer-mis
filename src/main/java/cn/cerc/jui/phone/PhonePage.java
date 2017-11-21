@@ -139,12 +139,6 @@ public class PhonePage extends AbstractJspPage {
 
         out.println("$(document).ready(function() {");
         out.println("Application.init();");
-        out.println("if (Application.onready)");
-        out.println("	Application.onready();");
-        out.println("if (!localStorage) {");
-        out.println("	$('.main').attr('display', 'block');");
-        out.println("}");
-        out.println("head_main();");
         out.println("});");
         out.println("</script>");
         out.println("</head>");
