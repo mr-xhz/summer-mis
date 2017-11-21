@@ -9,12 +9,12 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.other.UrlMenu;
 
-public class StatuaBar extends Component {
+public class StatusBar extends Component {
     private IForm form;
     private static final int MAX_MENUS = 6;
     protected UrlRecord checkAll;
 
-    public StatuaBar(IPage owner) {
+    public StatusBar(IPage owner) {
         super((Component) owner);
         this.form = owner.getForm();
         this.setId("bottom");
