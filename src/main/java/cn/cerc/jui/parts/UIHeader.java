@@ -3,18 +3,17 @@ package cn.cerc.jui.parts;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class HeaderSide extends Component {
+public class UIHeader extends UIComponent {
     private Component left = new Component();
     private Component right = new Component();
+    // 主菜单
+    private MainMenu mainMenu = new MainMenu();
 
-    public Component getLeft() {
-        return left;
+    public UIHeader(Component owner) {
+        super(owner);
     }
 
-    public Component getRight() {
-        return right;
-    }
-
+    @Override
     public void output(HtmlWriter html) {
         html.println("<header>");
         html.println("<nav class=\"navigation\">");
@@ -34,5 +33,17 @@ public class HeaderSide extends Component {
         html.println("</div>");
         html.println("</nav>");
         html.println("</header>");
+    }
+
+    public Component getLeft() {
+        return left;
+    }
+
+    public Component getRight() {
+        return right;
+    }
+
+    public MainMenu getMainMenu() {
+        return mainMenu;
     }
 }

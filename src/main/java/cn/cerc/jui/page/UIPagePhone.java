@@ -23,8 +23,6 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.OperaPages;
-import cn.cerc.jpage.other.UrlMenu;
-import cn.cerc.jui.parts.HeaderSide;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 import cn.cerc.jui.parts.StatusBar;
@@ -36,11 +34,9 @@ import cn.cerc.jui.parts.StatusBar;
  *
  */
 public class UIPagePhone extends AbstractJspPage {
-    private MainMenu mainMenu = new MainMenu();
     private MutiPage pages;
     private String searchWaitingId = "";
     private Component content;
-    private Component header;
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
     private Component body;
@@ -66,6 +62,7 @@ public class UIPagePhone extends AbstractJspPage {
     @Override
     public void execute() throws ServletException, IOException {
         HttpServletRequest request = getRequest();
+        MainMenu mainMenu = getMainMenu();
 
         IForm form = this.getForm();
         CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
@@ -85,8 +82,13 @@ public class UIPagePhone extends AbstractJspPage {
             this.put("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
                 this.put("subMenus", mainMenu.getRightMenus());
-            if (this.defaultHeader)
-                loadDefaultHeader();
+            if (this.defaultHeader) {
+                this.initHeader();
+                request.setAttribute(content.getId(), content);
+                for (Component component : content.getComponents()) {
+                    request.setAttribute(component.getId(), component);
+                }
+            }
         }
 
         // 右边区域
@@ -126,8 +128,8 @@ public class UIPagePhone extends AbstractJspPage {
         out.println("</script>");
         out.println("</head>");
         out.println("<body>");
-        if (header != null)
-            out.println(header);
+        if (this.header != null)
+            out.println(getHeader());
 
         out.write("<div class=\"main\">\n");
         if (bottom != null)
@@ -223,10 +225,6 @@ public class UIPagePhone extends AbstractJspPage {
         return codes1;
     }
 
-    public MainMenu getMainMenu() {
-        return mainMenu;
-    }
-
     public String getSearchWaitingId() {
         return searchWaitingId;
     }
@@ -245,57 +243,8 @@ public class UIPagePhone extends AbstractJspPage {
         this.content = content;
     }
 
-    public Component getHeader() {
-        return header;
-    }
-
-    public void setHeader(Component header) {
-        this.header = header;
-    }
-
     public void addDefaultHeader() {
         defaultHeader = true;
     }
 
-    private void loadDefaultHeader() {
-        HeaderSide header = null;
-        HttpServletRequest request = this.getRequest();
-        boolean _showMenu_ = "true".equals(this.getForm().getParam("showMenus", "true"));
-        if (_showMenu_) {
-            header = new HeaderSide();
-            Component left = header.getLeft();
-            @SuppressWarnings("unchecked")
-            List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
-            if (barMenus == null) {
-                new UrlMenu(left, "首页", "/");
-                new UrlMenu(left, "刷新", "javascript:history.go(-1);");
-                // new GoBackButton(left);
-            } else {
-                // new GoBackButton(left);
-                for (UrlRecord menu : barMenus) {
-                    new UrlMenu(left, menu.getName(), menu.getUrl());
-                }
-            }
-
-            Component right = header.getRight();
-            @SuppressWarnings("unchecked")
-            List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
-            if (subMenus != null) {
-                int i = subMenus.size() - 1;
-                while (i > -1) {
-                    UrlRecord menu = subMenus.get(i);
-                    new UrlMenu(right, menu.getName(), menu.getUrl());
-                    i--;
-                }
-            }
-        }
-
-        if (content != null) {
-            request.setAttribute(content.getId(), content);
-            for (Component component : content.getComponents()) {
-                request.setAttribute(component.getId(), component);
-            }
-        }
-        this.setHeader(header);
-    }
 }

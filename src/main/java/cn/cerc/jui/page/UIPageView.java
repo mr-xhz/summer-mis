@@ -26,7 +26,6 @@ import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
 public class UIPageView extends AbstractJspPage {
-    private MainMenu mainMenu = new MainMenu();
     private boolean showMenus = true; // 是否显示主菜单
     private MutiPage pages;
 
@@ -44,6 +43,8 @@ public class UIPageView extends AbstractJspPage {
     @Override
     public void execute() throws ServletException, IOException {
         this.getStatusBar(); // 此行代码不能删除！
+        MainMenu mainMenu = getMainMenu();
+
         IForm form = this.getForm();
         HttpServletRequest request = form.getRequest();
         CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
@@ -69,7 +70,7 @@ public class UIPageView extends AbstractJspPage {
             if (mainMenu.getRightMenus().size() > 0)
                 this.put("subMenus", mainMenu.getRightMenus());
             if (this.isShowMenus())
-                UIPageSearch.buildHeaderSide(this);
+                this.initHeader();
         }
         String msg = form.getParam("message", "");
         request.setAttribute("msg", msg == null ? "" : msg.replaceAll("\r\n", "<br/>"));
@@ -87,10 +88,6 @@ public class UIPageView extends AbstractJspPage {
         // 输出jsp模版
         String url = String.format("/WEB-INF/%s/%s", Application.getAppConfig().getPathForms(), this.getViewFile());
         getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
-    }
-
-    public MainMenu getMainMenu() {
-        return mainMenu;
     }
 
     public void installAD() {

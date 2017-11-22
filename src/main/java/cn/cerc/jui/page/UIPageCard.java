@@ -22,7 +22,6 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.parts.AdHeader;
-import cn.cerc.jui.parts.HeaderSide;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
@@ -33,7 +32,6 @@ import cn.cerc.jui.parts.RightMenus;
  *
  */
 public class UIPageCard extends AbstractJspPage {
-    private MainMenu mainMenu = new MainMenu();
     private UIContentCard content;
 
     public UIPageCard(IForm form) {
@@ -60,6 +58,7 @@ public class UIPageCard extends AbstractJspPage {
     @Override
     public void execute() throws ServletException, IOException {
         this.getStatusBar(); // 此行代码不能删除！
+        MainMenu mainMenu = getMainMenu();
 
         IForm form = this.getForm();
         HttpServletRequest request = form.getRequest();
@@ -85,7 +84,7 @@ public class UIPageCard extends AbstractJspPage {
             this.put("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
                 this.put("subMenus", mainMenu.getRightMenus());
-            UIPageSearch.buildHeaderSide(this);
+            this.initHeader();
             request.setAttribute(content.getId(), content);
             for (Component component : content.getComponents()) {
                 request.setAttribute(component.getId(), component);
@@ -101,16 +100,11 @@ public class UIPageCard extends AbstractJspPage {
         getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
     }
 
-    public MainMenu getMainMenu() {
-        return mainMenu;
-    }
-
     public void installAD() {
         super.put("_showAd_", new AdHeader());
     }
 
     public class UIContentCard extends Component {
-        private HeaderSide header;
         private List<HtmlContent> codes1 = new ArrayList<>();
         private List<HtmlContent> contents = new ArrayList<>();
         private AbstractJspPage page;
@@ -148,50 +142,6 @@ public class UIPageCard extends AbstractJspPage {
                 html.println("</script>");
             }
             return html;
-        }
-
-        /*
-         * 注册到jsp文件中
-         */
-        public void register() {
-            HttpServletRequest request = page.getRequest();
-            Boolean _showMenu_ = (Boolean) request.getAttribute("_showMenu_");
-            if (_showMenu_ != null && _showMenu_) {
-                header = new HeaderSide();
-
-                Component left = header.getLeft();
-                @SuppressWarnings("unchecked")
-                List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
-                if (barMenus == null) {
-                    new UrlMenu(left, "首页", "/");
-                    new UrlMenu(left, "刷新", "javascript:history.go(-1);");
-                    // new GoBackButton(left);
-                } else {
-                    // new GoBackButton(left);
-                    for (UrlRecord menu : barMenus) {
-                        new UrlMenu(left, menu.getName(), menu.getUrl());
-                    }
-                }
-
-                Component right = header.getRight();
-                @SuppressWarnings("unchecked")
-                List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
-                int i = subMenus.size() - 1;
-                while (i > -1) {
-                    UrlRecord menu = subMenus.get(i);
-                    new UrlMenu(right, menu.getName(), menu.getUrl());
-                    i--;
-                }
-            }
-
-            request.setAttribute(this.getId(), this);
-            for (Component component : getComponents()) {
-                request.setAttribute(component.getId(), component);
-            }
-        }
-
-        public String getHeader() {
-            return header != null ? header.getHtml() : null;
         }
 
         @Deprecated

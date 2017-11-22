@@ -30,11 +30,10 @@ import cn.cerc.jpage.grid.DataGrid;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.grid.PhoneGrid;
 import cn.cerc.jpage.other.OperaPages;
-import cn.cerc.jpage.other.UrlMenu;
-import cn.cerc.jui.parts.HeaderSide;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 import cn.cerc.jui.parts.StatusBar;
+import cn.cerc.jui.parts.UIHeader;
 
 /**
  * 主体子页面
@@ -43,11 +42,10 @@ import cn.cerc.jui.parts.StatusBar;
  *
  */
 public class UIPageSearch extends AbstractJspPage {
-    private MainMenu mainMenu = new MainMenu();
     private MutiPage pages;
     private String searchWaitingId = "";
     private Component content;
-    private HeaderSide header;
+    private UIHeader header;
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
 
@@ -68,6 +66,8 @@ public class UIPageSearch extends AbstractJspPage {
     @Override
     public void execute() throws ServletException, IOException {
         HttpServletRequest request = getRequest();
+        MainMenu mainMenu = getMainMenu();
+
         // 添加分页控制
         Component operaPages = null;
         if (pages != null) {
@@ -93,7 +93,7 @@ public class UIPageSearch extends AbstractJspPage {
             this.put("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
                 this.put("subMenus", mainMenu.getRightMenus());
-            this.header = buildHeaderSide(this);
+            this.initHeader();
             request.setAttribute(content.getId(), content);
             for (Component component : content.getComponents()) {
                 request.setAttribute(component.getId(), component);
@@ -196,36 +196,6 @@ public class UIPageSearch extends AbstractJspPage {
         return html;
     }
 
-    public static HeaderSide buildHeaderSide(AbstractJspPage page) {
-        HeaderSide header = null;
-        HttpServletRequest request = page.getRequest();
-        header = new HeaderSide();
-        Component left = header.getLeft();
-        @SuppressWarnings("unchecked")
-        List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
-        if (barMenus == null) {
-            new UrlMenu(left, "首页", "/");
-            new UrlMenu(left, "刷新", "javascript:history.go(-1);");
-        } else {
-            for (UrlRecord menu : barMenus) {
-                new UrlMenu(left, menu.getName(), menu.getUrl());
-            }
-        }
-
-        Component right = header.getRight();
-        @SuppressWarnings("unchecked")
-        List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
-        if (subMenus != null) {
-            int i = subMenus.size() - 1;
-            while (i > -1) {
-                UrlRecord menu = subMenus.get(i);
-                new UrlMenu(right, menu.getName(), menu.getUrl());
-                i--;
-            }
-        }
-        return header;
-    }
-
     public void appendContent(HtmlContent content) {
         contents.add(content);
     }
@@ -260,10 +230,6 @@ public class UIPageSearch extends AbstractJspPage {
 
     public List<HtmlContent> getCodes1() {
         return codes1;
-    }
-
-    public MainMenu getMainMenu() {
-        return mainMenu;
     }
 
     public String getSearchWaitingId() {

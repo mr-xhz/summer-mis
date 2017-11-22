@@ -24,11 +24,10 @@ import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.OperaPages;
-import cn.cerc.jpage.other.UrlMenu;
-import cn.cerc.jui.parts.HeaderSide;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 import cn.cerc.jui.parts.StatusBar;
+import cn.cerc.jui.parts.UIHeader;
 
 /**
  * 主体子页面(公用)
@@ -37,11 +36,10 @@ import cn.cerc.jui.parts.StatusBar;
  *
  */
 public class UIPageModify extends AbstractJspPage {
-    private MainMenu mainMenu = new MainMenu();
     private MutiPage pages;
     private String searchWaitingId = "";
     private Component content;
-    private HeaderSide header;
+    private UIHeader header;
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
     private Component body;
@@ -63,6 +61,7 @@ public class UIPageModify extends AbstractJspPage {
     @Override
     public void execute() throws ServletException, IOException {
         HttpServletRequest request = getRequest();
+        MainMenu mainMenu = getMainMenu();
 
         IForm form = this.getForm();
         CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
@@ -83,7 +82,11 @@ public class UIPageModify extends AbstractJspPage {
             if (mainMenu.getRightMenus().size() > 0)
                 this.put("subMenus", mainMenu.getRightMenus());
 
-            this.header = registerContent(this, content);
+            this.initHeader();
+            request.setAttribute(content.getId(), content);
+            for (Component component : content.getComponents()) {
+                request.setAttribute(component.getId(), component);
+            }
         }
 
         // 右边区域
@@ -194,48 +197,6 @@ public class UIPageModify extends AbstractJspPage {
         return html;
     }
 
-    public static HeaderSide registerContent(AbstractJspPage page, Component content) {
-        HeaderSide header = null;
-        HttpServletRequest request = page.getRequest();
-        boolean _showMenu_ = "true".equals(page.getForm().getParam("showMenus", "true"));
-        if (_showMenu_) {
-            header = new HeaderSide();
-            Component left = header.getLeft();
-            @SuppressWarnings("unchecked")
-            List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
-            if (barMenus == null) {
-                new UrlMenu(left, "首页", "/");
-                new UrlMenu(left, "刷新", "javascript:history.go(-1);");
-                // new GoBackButton(left);
-            } else {
-                // new GoBackButton(left);
-                for (UrlRecord menu : barMenus) {
-                    new UrlMenu(left, menu.getName(), menu.getUrl());
-                }
-            }
-
-            Component right = header.getRight();
-            @SuppressWarnings("unchecked")
-            List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
-            if (subMenus != null) {
-                int i = subMenus.size() - 1;
-                while (i > -1) {
-                    UrlRecord menu = subMenus.get(i);
-                    new UrlMenu(right, menu.getName(), menu.getUrl());
-                    i--;
-                }
-            }
-        }
-
-        if (content != null) {
-            request.setAttribute(content.getId(), content);
-            for (Component component : content.getComponents()) {
-                request.setAttribute(component.getId(), component);
-            }
-        }
-        return header;
-    }
-
     public UIPanelVertical createForm() {
         UIPanelVertical form = new UIPanelVertical(this.getRequest());
         form.setId("search");
@@ -272,10 +233,6 @@ public class UIPageModify extends AbstractJspPage {
 
     public List<HtmlContent> getCodes1() {
         return codes1;
-    }
-
-    public MainMenu getMainMenu() {
-        return mainMenu;
     }
 
     public String getSearchWaitingId() {

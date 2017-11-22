@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
@@ -22,8 +23,12 @@ import cn.cerc.jmis.tools.R;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jpage.other.UrlMenu;
+import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.StatusBar;
 import cn.cerc.jui.parts.UIComponent;
+import cn.cerc.jui.parts.UIHeader;
 
 public abstract class AbstractJspPage extends Component implements IPage {
     private String jspFile;
@@ -31,6 +36,13 @@ public abstract class AbstractJspPage extends Component implements IPage {
     private List<String> styleFiles = new ArrayList<>();
     private List<String> scriptFiles = new ArrayList<>();
     private List<HtmlContent> scriptCodes = new ArrayList<>();
+    //
+    protected UIHeader header;
+    //
+    private UIComponent document;
+    //
+    private UIComponent toolBar;
+    // 状态栏
     private StatusBar statusBar;
 
     public AbstractJspPage(IForm form) {
@@ -253,6 +265,58 @@ public abstract class AbstractJspPage extends Component implements IPage {
             this.put("bottom", statusBar);
         }
         return statusBar;
+    }
+
+    public MainMenu getMainMenu() {
+        return getHeader().getMainMenu();
+    }
+
+    public UIHeader getHeader() {
+        if (header == null) {
+            header = new UIHeader(this);
+        }
+        return header;
+    }
+
+    public UIComponent getDocument() {
+        if (document == null) {
+            document = new UIComponent(this);
+        }
+        return document;
+    }
+
+    public UIComponent getToolBar() {
+        if (toolBar == null) {
+            toolBar = new UIComponent(this);
+        }
+        return toolBar;
+    }
+
+    protected final void initHeader() {
+        HttpServletRequest request = this.getRequest();
+        Component left = header.getLeft();
+        @SuppressWarnings("unchecked")
+        List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
+        if (barMenus == null) {
+            new UrlMenu(left, "首页", "/");
+            new UrlMenu(left, "刷新", "javascript:history.go(-1);");
+        } else {
+            for (UrlRecord menu : barMenus) {
+                new UrlMenu(left, menu.getName(), menu.getUrl());
+            }
+        }
+
+        Component right = header.getRight();
+        @SuppressWarnings("unchecked")
+        List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
+        if (subMenus != null) {
+            int i = subMenus.size() - 1;
+            while (i > -1) {
+                UrlRecord menu = subMenus.get(i);
+                new UrlMenu(right, menu.getName(), menu.getUrl());
+                i--;
+            }
+        }
     }
 
 }
