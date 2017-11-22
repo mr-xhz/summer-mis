@@ -136,7 +136,7 @@ public class UIPageSearch extends AbstractJspPage {
         out.println("</script>");
         out.println("</head>");
         out.println("<body>");
-        out.println(header);
+        out.println(this.getHeader());
 
         out.write("<div class=\"main\">\n");
         out.write("<div class=\"info-newStyle\">\n");

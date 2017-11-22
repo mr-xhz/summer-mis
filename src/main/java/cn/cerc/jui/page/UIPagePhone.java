@@ -126,8 +126,7 @@ public class UIPagePhone extends AbstractJspPage {
         out.println("</script>");
         out.println("</head>");
         out.println("<body>");
-        if (this.header != null)
-            out.println(getHeader());
+        out.println(getHeader());
 
         out.write("<div class=\"main\">\n");
         if (bottom != null)

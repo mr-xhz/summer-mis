@@ -118,7 +118,7 @@ public class UIPageBill extends AbstractJspPage {
         out.println("</script>");
         out.println("</head>");
         out.println("<body>");
-        out.println(header);
+        out.println(this.getHeader());
 
         out.write("<div class=\"main\">\n");
         if (bottom != null)

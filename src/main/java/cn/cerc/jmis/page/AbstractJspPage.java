@@ -39,7 +39,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
     private List<String> scriptFiles = new ArrayList<>();
     private List<HtmlContent> scriptCodes = new ArrayList<>();
     // 头部：广告+菜单
-    protected UIHeader header;
+    private UIHeader header;
     // 主体: 控制区(可选)+内容+消息区
     private UIDocument document;
     // 工具面板：多页形式
