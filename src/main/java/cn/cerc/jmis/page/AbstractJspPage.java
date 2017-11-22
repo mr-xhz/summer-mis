@@ -30,6 +30,7 @@ import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.parts.UIDocument;
 import cn.cerc.jui.parts.UIFooter;
 import cn.cerc.jui.parts.UIHeader;
+import cn.cerc.jui.parts.UIToolBar;
 
 public abstract class AbstractJspPage extends Component implements IPage {
     private String jspFile;
@@ -37,13 +38,13 @@ public abstract class AbstractJspPage extends Component implements IPage {
     private List<String> styleFiles = new ArrayList<>();
     private List<String> scriptFiles = new ArrayList<>();
     private List<HtmlContent> scriptCodes = new ArrayList<>();
-    //
+    // 头部：广告+菜单
     protected UIHeader header;
-    //
+    // 主体: 控制区(可选)+内容+消息区
     private UIDocument document;
-    //
-    private UIComponent toolBar;
-    // 状态栏
+    // 工具面板：多页形式
+    private UIToolBar toolBar;
+    // 状态栏：快捷操作+按钮组
     private UIFooter footer;
 
     public AbstractJspPage(IForm form) {
@@ -277,9 +278,9 @@ public abstract class AbstractJspPage extends Component implements IPage {
         return document;
     }
 
-    public UIComponent getToolBar() {
+    public UIToolBar getToolBar() {
         if (toolBar == null) {
-            toolBar = new UIComponent(this);
+            toolBar = new UIToolBar(this);
         }
         return toolBar;
     }
