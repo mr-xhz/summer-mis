@@ -22,6 +22,7 @@ import cn.cerc.jmis.tools.R;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jui.parts.StatusBar;
 import cn.cerc.jui.parts.UIComponent;
 
@@ -234,6 +235,10 @@ public abstract class AbstractJspPage extends Component implements IPage {
     }
 
     public void add(String id, UIComponent value) {
+        put(id, value);
+    }
+
+    public void add(String id, MutiPage value) {
         put(id, value);
     }
 
