@@ -57,7 +57,7 @@ public class UIPageCard extends AbstractJspPage {
 
     @Override
     public void execute() throws ServletException, IOException {
-        this.getFooter(); // 此行代码不能删除！
+        // this.getFooter(); // 此行代码不能删除！
         MainMenu mainMenu = getMainMenu();
 
         IForm form = this.getForm();

@@ -33,7 +33,6 @@ import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 import cn.cerc.jui.parts.UIFooter;
-import cn.cerc.jui.parts.UIHeader;
 
 /**
  * 主体子页面
@@ -45,7 +44,6 @@ public class UIPageSearch extends AbstractJspPage {
     private MutiPage pages;
     private String searchWaitingId = "";
     private Component content;
-    private UIHeader header;
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
 
