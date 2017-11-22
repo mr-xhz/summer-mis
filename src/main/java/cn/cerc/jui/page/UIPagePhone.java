@@ -25,7 +25,7 @@ import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
-import cn.cerc.jui.parts.StatusBar;
+import cn.cerc.jui.parts.UIFooter;
 
 /**
  * 主体子页面(公用)
@@ -94,7 +94,7 @@ public class UIPagePhone extends AbstractJspPage {
         // 右边区域
         Component rightSite = (Component) request.getAttribute("rightSide");
         // 底部
-        StatusBar bottom = this.getStatusBar();
+        UIFooter bottom = this.getStatusBar();
 
         // 开始输出
         PrintWriter out = getResponse().getWriter();

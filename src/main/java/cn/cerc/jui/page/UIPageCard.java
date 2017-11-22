@@ -21,7 +21,6 @@ import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.other.UrlMenu;
-import cn.cerc.jui.parts.AdHeader;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
@@ -101,7 +100,7 @@ public class UIPageCard extends AbstractJspPage {
     }
 
     public void installAD() {
-        super.put("_showAd_", new AdHeader());
+        super.put("_showAd_", this.getHeader().getAdvertisement());
     }
 
     public class UIContentCard extends Component {

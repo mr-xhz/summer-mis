@@ -26,8 +26,9 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.parts.MainMenu;
-import cn.cerc.jui.parts.StatusBar;
 import cn.cerc.jui.parts.UIComponent;
+import cn.cerc.jui.parts.UIDocument;
+import cn.cerc.jui.parts.UIFooter;
 import cn.cerc.jui.parts.UIHeader;
 
 public abstract class AbstractJspPage extends Component implements IPage {
@@ -39,11 +40,11 @@ public abstract class AbstractJspPage extends Component implements IPage {
     //
     protected UIHeader header;
     //
-    private UIComponent document;
+    private UIDocument document;
     //
     private UIComponent toolBar;
     // 状态栏
-    private StatusBar statusBar;
+    private UIFooter statusBar;
 
     public AbstractJspPage(IForm form) {
         super();
@@ -249,18 +250,9 @@ public abstract class AbstractJspPage extends Component implements IPage {
         put(id, value);
     }
 
-    public StatusBar setStatusBar(StatusBar statusBar) {
-        this.statusBar = statusBar;
-        statusBar.init(this);
-        statusBar.setId("bottom");
-        this.put("bottom", statusBar);
-        return statusBar;
-    }
-
-    public StatusBar getStatusBar() {
+    public UIFooter getStatusBar() {
         if (statusBar == null) {
-            statusBar = new StatusBar();
-            statusBar.init(this);
+            statusBar = new UIFooter(this);
             statusBar.setId("bottom");
             this.put("bottom", statusBar);
         }
@@ -278,9 +270,9 @@ public abstract class AbstractJspPage extends Component implements IPage {
         return header;
     }
 
-    public UIComponent getDocument() {
+    public UIDocument getDocument() {
         if (document == null) {
-            document = new UIComponent(this);
+            document = new UIDocument(this);
         }
         return document;
     }

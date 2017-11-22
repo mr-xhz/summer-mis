@@ -1,42 +1,27 @@
 package cn.cerc.jui.parts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.form.IPage;
+import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.other.UrlMenu;
 
-public class StatusBar extends Component {
-    private IForm form;
+public class UIFooter extends UIComponent {
     private static final int MAX_MENUS = 6;
     protected UrlRecord checkAll;
     private boolean flag = false;
+    private UIFooterOperation operation;
+    private List<UIButton> buttons = new ArrayList<>();
 
-    public StatusBar() {
-        super();
-    }
-
-    public void init(IPage owner) {
-        setOwner((Component) owner);
-        this.form = owner.getForm();
+    public UIFooter(Component owner) {
+        super(owner);
         this.setId("bottom");
-    }
-
-    public void addButton(String caption, String url) {
-        int count = 1;
-        for (Component obj : this.getComponents()) {
-            if (obj instanceof UrlMenu) {
-                count++;
-            }
-        }
-        UrlMenu item = new UrlMenu(this, caption, url);
-        item.setCssClass("bottomBotton");
-        item.setId("button" + count);
-        if (!form.getClient().isPhone())
-            item.setName(String.format("F%s:%s", count, item.getName()));
     }
 
     public UrlRecord getCheckAll() {
@@ -65,7 +50,7 @@ public class StatusBar extends Component {
         super.output(html);
         HttpServletRequest request = getForm().getRequest();
         if (request != null) {
-            if (!form.getClient().isPhone()) {
+            if (!getForm().getClient().isPhone()) {
                 String msg = request.getParameter("msg");
                 html.print("<div class=\"bottom-message\"");
                 html.print(" id=\"msg\">");
@@ -77,8 +62,8 @@ public class StatusBar extends Component {
         html.println("</div>");
     }
 
-    public IForm getForm() {
-        return form;
+    private IForm getForm() {
+        return ((AbstractJspPage) this.getOwner()).getForm();
     }
 
     public boolean isFlag() {
@@ -87,5 +72,35 @@ public class StatusBar extends Component {
 
     public void setFlag(boolean flag) {
         this.flag = flag;
+    }
+
+    public List<UIButton> getButtons() {
+        return buttons;
+    }
+
+    public UIButton addButton() {
+        UIButton button = new UIButton(this);
+        buttons.add(button);
+        return button;
+    }
+
+    public void addButton(String caption, String url) {
+        int count = 1;
+        for (Component obj : this.getComponents()) {
+            if (obj instanceof UrlMenu) {
+                count++;
+            }
+        }
+        UrlMenu item = new UrlMenu(this, caption, url);
+        item.setCssClass("bottomBotton");
+        item.setId("button" + count);
+        if (!getForm().getClient().isPhone())
+            item.setName(String.format("F%s:%s", count, item.getName()));
+    }
+
+    public UIFooterOperation getOperation() {
+        if (operation == null)
+            operation = new UIFooterOperation(this);
+        return operation;
     }
 }

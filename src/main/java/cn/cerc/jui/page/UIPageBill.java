@@ -25,7 +25,7 @@ import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
-import cn.cerc.jui.parts.StatusBar;
+import cn.cerc.jui.parts.UIFooter;
 import cn.cerc.jui.parts.UIHeader;
 
 /**
@@ -83,7 +83,7 @@ public class UIPageBill extends AbstractJspPage {
         // 右边区域
         Component rightSite = (Component) request.getAttribute("rightSide");
         // 底部
-        StatusBar bottom = this.getStatusBar();
+        UIFooter bottom = this.getStatusBar();
 
         // 开始输出
         PrintWriter out = getResponse().getWriter();

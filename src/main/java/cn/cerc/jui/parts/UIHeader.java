@@ -4,6 +4,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class UIHeader extends UIComponent {
+    private UIAdvertisement advertisement;
     private Component left = new Component();
     private Component right = new Component();
     // 主菜单
@@ -45,5 +46,11 @@ public class UIHeader extends UIComponent {
 
     public MainMenu getMainMenu() {
         return mainMenu;
+    }
+
+    public UIAdvertisement getAdvertisement() {
+        if (advertisement == null)
+            advertisement = new UIAdvertisement(this);
+        return advertisement;
     }
 }

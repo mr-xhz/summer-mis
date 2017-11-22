@@ -26,7 +26,7 @@ import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
-import cn.cerc.jui.parts.StatusBar;
+import cn.cerc.jui.parts.UIFooter;
 import cn.cerc.jui.parts.UIHeader;
 
 /**
@@ -96,7 +96,7 @@ public class UIPageModify extends AbstractJspPage {
         // 表格
         AbstractGrid grid = (AbstractGrid) request.getAttribute("grid");
         // 底部
-        StatusBar bottom = this.getStatusBar();
+        UIFooter bottom = this.getStatusBar();
 
         // 开始输出
         PrintWriter out = getResponse().getWriter();

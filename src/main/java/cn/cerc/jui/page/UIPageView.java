@@ -21,7 +21,6 @@ import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.OperaPages;
-import cn.cerc.jui.parts.AdHeader;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
@@ -91,7 +90,7 @@ public class UIPageView extends AbstractJspPage {
     }
 
     public void installAD() {
-        super.put("_showAd_", new AdHeader());
+        super.put("_showAd_", this.getHeader().getAdvertisement());
     }
 
     public boolean isShowMenus() {
