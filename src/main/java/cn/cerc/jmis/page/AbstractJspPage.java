@@ -44,7 +44,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
     //
     private UIComponent toolBar;
     // 状态栏
-    private UIFooter statusBar;
+    private UIFooter footer;
 
     public AbstractJspPage(IForm form) {
         super();
@@ -250,13 +250,13 @@ public abstract class AbstractJspPage extends Component implements IPage {
         put(id, value);
     }
 
-    public UIFooter getStatusBar() {
-        if (statusBar == null) {
-            statusBar = new UIFooter(this);
-            statusBar.setId("bottom");
-            this.put("bottom", statusBar);
+    public UIFooter getFooter() {
+        if (footer == null) {
+            footer = new UIFooter(this);
+            footer.setId("bottom");
+            this.put("bottom", footer);
         }
-        return statusBar;
+        return footer;
     }
 
     public MainMenu getMainMenu() {

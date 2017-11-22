@@ -96,7 +96,7 @@ public class UIPageModify extends AbstractJspPage {
         // 表格
         AbstractGrid grid = (AbstractGrid) request.getAttribute("grid");
         // 底部
-        UIFooter bottom = this.getStatusBar();
+        UIFooter bottom = this.getFooter();
 
         // 开始输出
         PrintWriter out = getResponse().getWriter();

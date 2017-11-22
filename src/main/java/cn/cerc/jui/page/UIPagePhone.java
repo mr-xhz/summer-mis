@@ -94,7 +94,7 @@ public class UIPagePhone extends AbstractJspPage {
         // 右边区域
         Component rightSite = (Component) request.getAttribute("rightSide");
         // 底部
-        UIFooter bottom = this.getStatusBar();
+        UIFooter bottom = this.getFooter();
 
         // 开始输出
         PrintWriter out = getResponse().getWriter();

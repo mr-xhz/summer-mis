@@ -10,7 +10,6 @@ import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.other.UrlMenu;
 
 public class UIFooter extends UIComponent {
     private static final int MAX_MENUS = 6;
@@ -62,7 +61,7 @@ public class UIFooter extends UIComponent {
         html.println("</div>");
     }
 
-    private IForm getForm() {
+    public IForm getForm() {
         return ((AbstractJspPage) this.getOwner()).getForm();
     }
 
@@ -87,15 +86,18 @@ public class UIFooter extends UIComponent {
     public void addButton(String caption, String url) {
         int count = 1;
         for (Component obj : this.getComponents()) {
-            if (obj instanceof UrlMenu) {
+            if (obj instanceof UIButton) {
                 count++;
             }
         }
-        UrlMenu item = new UrlMenu(this, caption, url);
+        UIButton item = addButton();
+        item.setCaption(caption);
+        item.setUrl(url);
+
         item.setCssClass("bottomBotton");
         item.setId("button" + count);
         if (!getForm().getClient().isPhone())
-            item.setName(String.format("F%s:%s", count, item.getName()));
+            item.setCaption(String.format("F%s:%s", count, item.getName()));
     }
 
     public UIFooterOperation getOperation() {
