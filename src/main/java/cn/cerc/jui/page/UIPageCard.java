@@ -50,6 +50,7 @@ public class UIPageCard extends AbstractJspPage {
         }
     }
 
+    @Deprecated // 请使用：getDocument().getContext()
     public UIContentCard getContent() {
         return content;
     }
@@ -97,10 +98,6 @@ public class UIPageCard extends AbstractJspPage {
         // 输出jsp模版
         String url = String.format("/WEB-INF/%s/%s", Application.getAppConfig().getPathForms(), this.getViewFile());
         getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
-    }
-
-    public void installAD() {
-        super.put("_showAd_", this.getHeader().getAdvertisement());
     }
 
     public class UIContentCard extends Component {

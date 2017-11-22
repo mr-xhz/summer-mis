@@ -40,7 +40,6 @@ public class UIPagePhone extends AbstractJspPage {
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
     private Component body;
-    private boolean defaultHeader = false;
 
     public UIPagePhone(IForm form) {
         super(form);
@@ -82,12 +81,11 @@ public class UIPagePhone extends AbstractJspPage {
             this.put("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
                 this.put("subMenus", mainMenu.getRightMenus());
-            if (this.defaultHeader) {
-                this.initHeader();
-                request.setAttribute(content.getId(), content);
-                for (Component component : content.getComponents()) {
-                    request.setAttribute(component.getId(), component);
-                }
+
+            this.initHeader();
+            request.setAttribute(content.getId(), content);
+            for (Component component : content.getComponents()) {
+                request.setAttribute(component.getId(), component);
             }
         }
 
@@ -195,6 +193,7 @@ public class UIPagePhone extends AbstractJspPage {
         return html;
     }
 
+    @Deprecated // 请使用：getDocument().getContext()
     public Component getBody() {
         if (body == null) {
             body = new Component();
@@ -204,10 +203,12 @@ public class UIPagePhone extends AbstractJspPage {
         return body;
     }
 
+    @Deprecated // 请使用：getDocument().getContext()
     public void appendContent(HtmlContent content) {
         contents.add(content);
     }
 
+    @Deprecated // 请使用：getDocument().getContext()
     public HtmlWriter getContents() {
         HtmlWriter html = new HtmlWriter();
         if (contents.size() == 0)
@@ -215,6 +216,13 @@ public class UIPagePhone extends AbstractJspPage {
         for (HtmlContent content : contents)
             content.output(html);
         return html;
+    }
+
+    @Deprecated // 请使用：getDocument().getContext()
+    public Component getContent() {
+        if (content == null)
+            content = new Component(this);
+        return content;
     }
 
     public void addDefineScript(HtmlContent scriptCode) {
@@ -231,20 +239,6 @@ public class UIPagePhone extends AbstractJspPage {
 
     public void setSearchWaitingId(String searchWaitingId) {
         this.searchWaitingId = searchWaitingId;
-    }
-
-    public Component getContent() {
-        if (content == null)
-            content = new Component(this);
-        return content;
-    }
-
-    public void setContent(Component content) {
-        this.content = content;
-    }
-
-    public void addDefaultHeader() {
-        defaultHeader = true;
     }
 
 }

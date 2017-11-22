@@ -196,10 +196,12 @@ public class UIPageSearch extends AbstractJspPage {
         return html;
     }
 
+    @Deprecated
     public void appendContent(HtmlContent content) {
         contents.add(content);
     }
 
+    @Deprecated
     public HtmlWriter getContents() {
         HtmlWriter html = new HtmlWriter();
         if (contents.size() == 0)
@@ -207,6 +209,13 @@ public class UIPageSearch extends AbstractJspPage {
         for (HtmlContent content : contents)
             content.output(html);
         return html;
+    }
+
+    @Deprecated // 请使用：getDocument().getContext()
+    public Component getContent() {
+        if (content == null)
+            content = new Component(this);
+        return content;
     }
 
     public UIPanelHorizontal createSearch(MemoryBuffer buff) {
@@ -238,16 +247,6 @@ public class UIPageSearch extends AbstractJspPage {
 
     public void setSearchWaitingId(String searchWaitingId) {
         this.searchWaitingId = searchWaitingId;
-    }
-
-    public Component getContent() {
-        if (content == null)
-            content = new Component(this);
-        return content;
-    }
-
-    public void setContent(Component content) {
-        this.content = content;
     }
 
     public void add(String id, AbstractGrid grid) {

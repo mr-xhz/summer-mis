@@ -89,7 +89,7 @@ public class UIPageView extends AbstractJspPage {
         getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
     }
 
-    public void installAD() {
+    public void installAdvertisement() {
         super.put("_showAd_", this.getHeader().getAdvertisement());
     }
 

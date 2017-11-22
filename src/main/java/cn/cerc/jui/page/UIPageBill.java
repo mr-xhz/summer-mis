@@ -22,11 +22,9 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 import cn.cerc.jui.parts.UIFooter;
-import cn.cerc.jui.parts.UIHeader;
 
 /**
  * 主体子页面
@@ -37,7 +35,6 @@ import cn.cerc.jui.parts.UIHeader;
 public class UIPageBill extends AbstractJspPage {
     private String searchWaitingId = "";
     private Component content;
-    private UIHeader header;
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
 
@@ -77,7 +74,11 @@ public class UIPageBill extends AbstractJspPage {
             this.add("barMenus", mainMenu.getBarMenus(this.getForm()));
             if (mainMenu.getRightMenus().size() > 0)
                 this.add("subMenus", mainMenu.getRightMenus());
-            iniHeader(this, content);
+            this.initHeader();
+            request.setAttribute(content.getId(), content);
+            for (Component component : content.getComponents()) {
+                request.setAttribute(component.getId(), component);
+            }
         }
 
         // 右边区域
@@ -181,45 +182,12 @@ public class UIPageBill extends AbstractJspPage {
         return html;
     }
 
-    private void iniHeader(AbstractJspPage page, Component content) {
-        UIHeader header = page.getHeader();
-        HttpServletRequest request = page.getRequest();
-        Component left = header.getLeft();
-        @SuppressWarnings("unchecked")
-        List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
-        if (barMenus == null) {
-            new UrlMenu(left, "首页", "/");
-            new UrlMenu(left, "刷新", "javascript:history.go(-1);");
-        } else {
-            for (UrlRecord menu : barMenus) {
-                new UrlMenu(left, menu.getName(), menu.getUrl());
-            }
-        }
-
-        Component right = header.getRight();
-        @SuppressWarnings("unchecked")
-        List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
-        if (subMenus != null) {
-            int i = subMenus.size() - 1;
-            while (i > -1) {
-                UrlRecord menu = subMenus.get(i);
-                new UrlMenu(right, menu.getName(), menu.getUrl());
-                i--;
-            }
-        }
-
-        if (content != null) {
-            request.setAttribute(content.getId(), content);
-            for (Component component : content.getComponents()) {
-                request.setAttribute(component.getId(), component);
-            }
-        }
-    }
-
+    @Deprecated // 请使用：getDocument().getContext()
     public void appendContent(HtmlContent content) {
         contents.add(content);
     }
 
+    @Deprecated // 请使用：getDocument().getContext()
     public HtmlWriter getContents() {
         HtmlWriter html = new HtmlWriter();
         if (contents.size() == 0)
@@ -229,6 +197,14 @@ public class UIPageBill extends AbstractJspPage {
         return html;
     }
 
+    @Deprecated // 请使用：getDocument().getContext()
+    public Component getContent() {
+        if (content == null)
+            content = new Component(this);
+        return content;
+    }
+
+    @Deprecated // 请使用：getDocument().getContext()
     public UIPanelHorizontal createSearch() {
         UIPanelHorizontal search = new UIPanelHorizontal(this.getContent(), this.getRequest());
         search.setCSSClass("modify");
@@ -250,16 +226,6 @@ public class UIPageBill extends AbstractJspPage {
 
     public void setSearchWaitingId(String searchWaitingId) {
         this.searchWaitingId = searchWaitingId;
-    }
-
-    public Component getContent() {
-        if (content == null)
-            content = new Component(this);
-        return content;
-    }
-
-    public void setContent(Component content) {
-        this.content = content;
     }
 
     public void add(String id, PassportRecord value) {

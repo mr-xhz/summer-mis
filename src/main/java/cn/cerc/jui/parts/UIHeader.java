@@ -4,7 +4,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class UIHeader extends UIComponent {
-    private UIAdvertisement advertisement;
+    private UIAdvertisement advertisement; // 可选
     private Component left = new Component();
     private Component right = new Component();
     // 主菜单

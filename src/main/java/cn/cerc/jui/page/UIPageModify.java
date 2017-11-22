@@ -27,7 +27,6 @@ import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 import cn.cerc.jui.parts.UIFooter;
-import cn.cerc.jui.parts.UIHeader;
 
 /**
  * 主体子页面(公用)
@@ -39,7 +38,6 @@ public class UIPageModify extends AbstractJspPage {
     private MutiPage pages;
     private String searchWaitingId = "";
     private Component content;
-    private UIHeader header;
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
     private Component body;
@@ -197,6 +195,7 @@ public class UIPageModify extends AbstractJspPage {
         return html;
     }
 
+    @Deprecated
     public UIPanelVertical createForm() {
         UIPanelVertical form = new UIPanelVertical(this.getRequest());
         form.setId("search");
@@ -205,6 +204,7 @@ public class UIPageModify extends AbstractJspPage {
         return form;
     }
 
+    @Deprecated // 请使用：getDocument().getContext()
     public Component getBody() {
         if (body == null) {
             body = new Component();
@@ -214,10 +214,12 @@ public class UIPageModify extends AbstractJspPage {
         return body;
     }
 
+    @Deprecated // 请使用：getDocument().getContext()
     public void appendContent(HtmlContent content) {
         contents.add(content);
     }
 
+    @Deprecated // 请使用：getDocument().getContext()
     public HtmlWriter getContents() {
         HtmlWriter html = new HtmlWriter();
         if (contents.size() == 0)
@@ -225,6 +227,13 @@ public class UIPageModify extends AbstractJspPage {
         for (HtmlContent content : contents)
             content.output(html);
         return html;
+    }
+
+    @Deprecated // 请使用：getDocument().getContext()
+    public Component getContent() {
+        if (content == null)
+            content = new Component(this);
+        return content;
     }
 
     public void addDefineScript(HtmlContent scriptCode) {
@@ -241,12 +250,6 @@ public class UIPageModify extends AbstractJspPage {
 
     public void setSearchWaitingId(String searchWaitingId) {
         this.searchWaitingId = searchWaitingId;
-    }
-
-    public Component getContent() {
-        if (content == null)
-            content = new Component(this);
-        return content;
     }
 
 }
