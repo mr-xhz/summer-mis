@@ -11,11 +11,12 @@ public class UIToolBar extends UIComponent {
 
     public UIToolBar(Component owner) {
         super(owner);
+        this.setId("rightSide");
     }
 
     @Override
     public void output(HtmlWriter html) {
-        html.print("\n<aside role='toolBar'>");
+        html.print("\n<aside role='toolBar' id='%s'>", this.getId());
         if (sheets.size() > 0) {
             for (UIToolSheet sheet : sheets) {
                 html.print(sheet.toString());
