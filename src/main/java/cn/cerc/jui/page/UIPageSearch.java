@@ -32,7 +32,6 @@ import cn.cerc.jpage.grid.PhoneGrid;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
-import cn.cerc.jui.parts.UIFooter;
 
 /**
  * 主体子页面
@@ -43,7 +42,6 @@ import cn.cerc.jui.parts.UIFooter;
 public class UIPageSearch extends AbstractJspPage {
     private MutiPage pages;
     private String searchWaitingId = "";
-    private Component content;
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
 
@@ -98,11 +96,6 @@ public class UIPageSearch extends AbstractJspPage {
             }
         }
 
-        // 右边区域
-        Component rightSite = (Component) request.getAttribute("rightSide");
-        // 底部
-        UIFooter bottom = this.getFooter();
-
         // 开始输出
         PrintWriter out = getResponse().getWriter();
         out.println("<!DOCTYPE html>");
@@ -121,50 +114,18 @@ public class UIPageSearch extends AbstractJspPage {
         out.println("var Application = new TApplication();");
         out.printf("Application.device = '%s';\n", form.getClient().getDevice());
 
-        out.printf("Application.bottom = '%s';\n", bottom.getId());
+        out.printf("Application.bottom = '%s';\n", this.getFooter().getId());
 
         String msg = form.getParam("message", "");
         msg = msg == null ? "" : msg.replaceAll("\r\n", "<br/>");
         out.printf("Application.message = '%s';\n", msg.replace("'", "\\'"));
         out.printf("Application.searchFormId = '%s';\n", this.searchWaitingId);
-
         out.println("$(document).ready(function() {");
         out.println("Application.init();");
         out.println("});");
         out.println("</script>");
         out.println("</head>");
-        out.println("<body>");
-        out.println(this.getHeader());
-
-        out.write("<div class=\"main\">\n");
-        out.write("<div class=\"info-newStyle\">\n");
-
-        if (form.getClient().isPhone()) {
-            out.println("<div id='msg'></div>");
-            out.println("<span id='back-top' style='display: none'>顶部</span>");
-            out.println("<span id='back-bottom' style='display: none'>底部</span>");
-        }
-        out.println("<div class='leftSide'>");
-
-        if (this.content != null)
-            out.print(this.content);
-
-        out.println("</div>");
-        out.println("<div class='rightSide'>");
-
-        if (rightSite != null)
-            out.print(rightSite);
-
-        if (operaPages != null)
-            out.print(operaPages.toString());
-        out.println("</div>");
-
-        out.print(bottom);
-        out.println("</div>");
-        out.println("</div>\n");
-        out.println("<div class='bottom-space'></div>");
-        out.print(this.getContents());
-        out.println("</body>");
+        outBody(out);
         out.println("</html>");
     }
 
@@ -194,9 +155,8 @@ public class UIPageSearch extends AbstractJspPage {
         return html;
     }
 
-    @Deprecated
     public void appendContent(HtmlContent content) {
-        contents.add(content);
+        this.getDocument().getContent().append(content);
     }
 
     @Deprecated
@@ -209,15 +169,12 @@ public class UIPageSearch extends AbstractJspPage {
         return html;
     }
 
-    @Deprecated // 请使用：getDocument().getContext()
     public Component getContent() {
-        if (content == null)
-            content = new Component(this);
-        return content;
+        return this.getDocument().getContent();
     }
 
     public UIPanelHorizontal createSearch(MemoryBuffer buff) {
-        UIPanelHorizontal search = new UIPanelHorizontal(this.getContent(), this.getRequest());
+        UIPanelHorizontal search = new UIPanelHorizontal(this.getDocument().getContent(), this.getRequest());
         search.setBuffer(buff);
         this.setSearchWaitingId(search.getId());
         return search;

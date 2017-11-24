@@ -59,6 +59,7 @@ public class Component {
         }
     }
 
+    @Deprecated
     public final String getHtml() {
         HtmlWriter html = new HtmlWriter();
         output(html);

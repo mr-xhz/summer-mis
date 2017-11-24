@@ -37,7 +37,7 @@ public class ChildGridLine extends AbstractGridLine {
             else if (item.getFields().get(0).getField() != null)
                 html.print(" role=\"%s\"", item.getFields().get(0).getField());
 
-            html.println(">");
+            html.print(">");
             for (IField obj : item.getFields()) {
                 if (obj instanceof AbstractField) {
                     AbstractField field = (AbstractField) obj;

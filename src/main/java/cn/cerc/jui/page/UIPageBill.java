@@ -182,9 +182,8 @@ public class UIPageBill extends AbstractJspPage {
         return html;
     }
 
-    @Deprecated // 请使用：getDocument().getContext()
     public void appendContent(HtmlContent content) {
-        contents.add(content);
+        this.getDocument().getContent().append(content);
     }
 
     @Deprecated // 请使用：getDocument().getContext()
@@ -197,16 +196,12 @@ public class UIPageBill extends AbstractJspPage {
         return html;
     }
 
-    @Deprecated // 请使用：getDocument().getContext()
     public Component getContent() {
-        if (content == null)
-            content = new Component(this);
-        return content;
+        return this.getDocument().getContent();
     }
 
-    @Deprecated // 请使用：getDocument().getContext()
     public UIPanelHorizontal createSearch() {
-        UIPanelHorizontal search = new UIPanelHorizontal(this.getContent(), this.getRequest());
+        UIPanelHorizontal search = new UIPanelHorizontal(this.getDocument().getContent(), this.getRequest());
         search.setCSSClass("modify");
         this.setSearchWaitingId(search.getId());
         return search;

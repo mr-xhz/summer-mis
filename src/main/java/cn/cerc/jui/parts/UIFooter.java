@@ -39,26 +39,31 @@ public class UIFooter extends UIComponent {
     public void output(HtmlWriter html) {
         if (this.getComponents().size() > MAX_MENUS)
             throw new RuntimeException(String.format("底部菜单区最多只支持 %d 个菜单项", MAX_MENUS));
-        html.println("<div class=\"operaBottom\">");
+
+        html.println("\n<footer role='footer' class=\"operaBottom\">");
         if (this.checkAll != null) {
+            html.println("<section role='operation'>");
             html.print("<input type=\"checkbox\"");
             html.print(" id=\"selectAll\"");
             html.print(" onclick=\"%s\"/>", checkAll.getUrl());
             html.println("<label for=\"selectAll\">全选</label>");
+            html.println("</section>");
         }
+        html.println("<section role='buttons'>");
         super.output(html);
+        html.println("</section>");
         HttpServletRequest request = getForm().getRequest();
         if (request != null) {
             if (!getForm().getClient().isPhone()) {
-                String msg = request.getParameter("msg");
                 html.print("<div class=\"bottom-message\"");
                 html.print(" id=\"msg\">");
+                String msg = request.getParameter("msg");
                 if (msg != null)
                     html.print(msg.replaceAll("\r\n", "<br/>"));
                 html.println("</div>");
             }
         }
-        html.println("</div>");
+        html.print("</footer>");
     }
 
     public IForm getForm() {

@@ -4,12 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 
 public class UIToolBar extends UIComponent {
     private List<UIToolSheet> sheets = new ArrayList<>();
 
     public UIToolBar(Component owner) {
         super(owner);
+    }
+
+    @Override
+    public void output(HtmlWriter html) {
+        html.print("\n<aside role='toolBar'>");
+        if (sheets.size() > 0) {
+            for (UIToolSheet sheet : sheets) {
+                html.print(sheet.toString());
+            }
+        } else {
+            super.output(html);
+        }
+        html.print("</aside>");
     }
 
     public List<UIToolSheet> getSheets() {

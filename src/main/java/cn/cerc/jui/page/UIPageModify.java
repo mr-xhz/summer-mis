@@ -23,7 +23,6 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
-import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 import cn.cerc.jui.parts.UIFooter;
@@ -37,7 +36,6 @@ import cn.cerc.jui.parts.UIFooter;
 public class UIPageModify extends AbstractJspPage {
     private MutiPage pages;
     private String searchWaitingId = "";
-    private Component content;
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
     private Component body;
@@ -126,46 +124,8 @@ public class UIPageModify extends AbstractJspPage {
         out.println("});");
         out.println("</script>");
         out.println("</head>");
-        out.println("<body>");
-        out.println(getHeader());
+        outBody(out);
 
-        out.write("<div class=\"main\">\n");
-        out.write("<div class=\"info-newStyle\">\n");
-
-        if (form.getClient().isPhone()) {
-            out.println("<div id='msg'></div>");
-            out.println("<span id='back-top' style='display: none'>顶部</span>");
-            out.println("<span id='back-bottom' style='display: none'>底部</span>");
-        }
-        out.println("<div class='leftSide'>");
-
-        if (search != null)
-            out.print(search);
-
-        if (grid != null)
-            out.print(grid);
-
-        out.println("</div>");
-        out.println("<div class='rightSide'>");
-
-        if (rightSite != null)
-            out.print(rightSite);
-
-        // 添加分页控制
-        Component operaPages = null;
-        if (pages != null)
-            operaPages = new OperaPages(this.getForm(), pages);
-
-        if (operaPages != null)
-            out.print(operaPages.toString());
-        out.println("</div>");
-
-        out.print(bottom);
-        out.println("</div>");
-        out.println("</div>\n");
-        out.println("<div class='bottom-space'></div>");
-        out.print(this.getContents());
-        out.println("</body>");
         out.println("</html>");
     }
 
@@ -195,28 +155,25 @@ public class UIPageModify extends AbstractJspPage {
         return html;
     }
 
-    @Deprecated
     public UIPanelVertical createForm() {
         UIPanelVertical form = new UIPanelVertical(this.getRequest());
         form.setId("search");
-        form.setOwner(this.getContent());
+        form.setOwner(this.getDocument().getContent());
         put("search", form);
         return form;
     }
 
-    @Deprecated // 请使用：getDocument().getContext()
     public Component getBody() {
         if (body == null) {
             body = new Component();
-            body.setOwner(this.getContent());
+            body.setOwner(this.getDocument().getContent());
             body.setId("search");
         }
         return body;
     }
 
-    @Deprecated // 请使用：getDocument().getContext()
     public void appendContent(HtmlContent content) {
-        contents.add(content);
+        this.getDocument().getContent().append(content);
     }
 
     @Deprecated // 请使用：getDocument().getContext()
@@ -229,11 +186,8 @@ public class UIPageModify extends AbstractJspPage {
         return html;
     }
 
-    @Deprecated // 请使用：getDocument().getContext()
     public Component getContent() {
-        if (content == null)
-            content = new Component(this);
-        return content;
+        return this.getDocument().getContent();
     }
 
     public void addDefineScript(HtmlContent scriptCode) {

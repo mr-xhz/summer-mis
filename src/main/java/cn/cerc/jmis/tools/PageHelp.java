@@ -22,6 +22,6 @@ public class PageHelp {
 
     public static void main(String[] args) {
         HelpSide help = get(null, "TFrmTranBG");
-        System.out.println(help.getHtml());
+        System.out.println(help.toString());
     }
 }

@@ -16,8 +16,13 @@ public class UIHeader extends UIComponent {
 
     @Override
     public void output(HtmlWriter html) {
-        html.println("<header>");
-        html.println("<nav class=\"navigation\">");
+        html.println("<header role='header'>");
+        if (advertisement != null) {
+            html.println("<section role='advertisement'>");
+            html.println(advertisement.toString());
+            html.println("</section>");
+        }
+        html.println("<nav role='mainMenu' class=\"navigation\">");
         int i = 0;
         html.println("<div class=\"menu\">");
         for (Component item : left.getComponents()) {

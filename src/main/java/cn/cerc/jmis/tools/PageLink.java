@@ -22,6 +22,6 @@ public class PageLink {
 
     public static void main(String[] args) {
         UrlSide help = get(null, "TFrmPartBrand");
-        System.out.println(help.getHtml());
+        System.out.println(help.toString());
     }
 }
