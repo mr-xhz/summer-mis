@@ -1,4 +1,4 @@
-package cn.cerc.jui.page;
+package cn.cerc.jui.parts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,6 @@ import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 import cn.cerc.jpage.other.SearchItem;
-import cn.cerc.jui.parts.UIComponent;
-import cn.cerc.jui.parts.UIContent;
 
 public class UIPanelHorizontal extends UIComponent implements DataSource {
     private DataSet dataSet;

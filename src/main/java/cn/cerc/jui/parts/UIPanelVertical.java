@@ -1,4 +1,4 @@
-package cn.cerc.jui.page;
+package cn.cerc.jui.parts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,6 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jui.UIConfig;
-import cn.cerc.jui.parts.UIComponent;
-import cn.cerc.jui.parts.UIContent;
 
 public class UIPanelVertical extends UIComponent implements DataSource {
     private UIContent content;

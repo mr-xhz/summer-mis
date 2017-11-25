@@ -30,6 +30,8 @@ import cn.cerc.jpage.grid.PhoneGrid;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
+import cn.cerc.jui.parts.UIPanelHorizontal;
+import cn.cerc.jui.parts.UIPanelVertical;
 
 /**
  * 主体子页面

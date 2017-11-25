@@ -21,6 +21,8 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
+import cn.cerc.jui.parts.UIPanelHorizontal;
+import cn.cerc.jui.parts.UIPanelVertical;
 
 /**
  * 主体子页面

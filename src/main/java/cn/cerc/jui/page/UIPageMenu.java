@@ -10,7 +10,6 @@ public class UIPageMenu extends UIPageView {
 
     public UIPageMenu(IForm form) {
         super(form);
-        super.setJspFile("jui/vine/Vine005.jsp");
     }
 
     public void setDisableAccountSave(boolean value) {
