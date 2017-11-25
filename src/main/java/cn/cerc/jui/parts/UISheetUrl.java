@@ -1,13 +1,17 @@
 package cn.cerc.jui.parts;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 
 public class UISheetUrl extends UISheet {
     private List<UrlRecord> urls = new ArrayList<>();
+    // 使用于page-link.xml中
+    private Map<String, String> items = new LinkedHashMap<>();
 
     public UISheetUrl(UIToolBar owner) {
         super(owner);
@@ -35,6 +39,8 @@ public class UISheetUrl extends UISheet {
             }
             html.println(">%s</a>", url.getName());
         }
+        for (String key : items.keySet())
+            html.println("<a href=\"%s\">%s</a>", key, items.get(key));
         html.println("</div>");
         html.println("</section>");
     }
@@ -48,5 +54,13 @@ public class UISheetUrl extends UISheet {
     public UrlRecord addUrl(UrlRecord url) {
         urls.add(url);
         return url;
+    }
+
+    public Map<String, String> getItems() {
+        return items;
+    }
+
+    public void setItems(Map<String, String> items) {
+        this.items = items;
     }
 }
