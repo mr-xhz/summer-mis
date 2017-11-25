@@ -38,6 +38,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
     private IForm form;
     private List<String> styleFiles = new ArrayList<>();
     private List<String> scriptFiles = new ArrayList<>();
+    private List<HtmlContent> scriptFunctions = new ArrayList<>();
     private List<HtmlContent> scriptCodes = new ArrayList<>();
     // 头部：广告+菜单
     private UIHeader header;
@@ -181,6 +182,10 @@ public abstract class AbstractJspPage extends Component implements IPage {
         scriptCodes.add(scriptCode);
     }
 
+    public void addScriptFunction(HtmlContent scriptCode) {
+        scriptFunctions.add(scriptCode);
+    }
+
     // 返回所有的样式定义，供jsp中使用 ${jspPage.css}调用
     public final HtmlWriter getCss() {
         HtmlWriter html = new HtmlWriter();
@@ -198,9 +203,15 @@ public abstract class AbstractJspPage extends Component implements IPage {
             html.println("<script src=\"%s\"></script>", file);
         }
         // 加入脚本代码
-        if (scriptCodes.size() > 0) {
+        List<HtmlContent> scriptCode1 = getScriptCodes();
+        if (scriptFunctions.size() > 0 || scriptCode1.size() > 0) {
             html.println("<script>");
-            if (scriptCodes.size() > 0) {
+            // 输出自定义的函数
+            for (HtmlContent func : scriptFunctions) {
+                func.output(html);
+            }
+            // 输出立即执行的代码
+            if (scriptCode1.size() > 0) {
                 html.println("$(function(){");
                 for (HtmlContent func : scriptCodes) {
                     func.output(html);
@@ -326,4 +337,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
         out.println("</body>");
     }
 
+    public final Component getContent() {
+        return this.getDocument().getContent();
+    }
 }

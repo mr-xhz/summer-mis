@@ -171,10 +171,6 @@ public class UIPageSearch extends AbstractJspPage {
         return html;
     }
 
-    public Component getContent() {
-        return this.getDocument().getContent();
-    }
-
     public UIPanelHorizontal createSearch(MemoryBuffer buff) {
         UIPanelHorizontal search = new UIPanelHorizontal(this.getDocument().getContent(), this.getRequest());
         search.setBuffer(buff);
@@ -190,7 +186,7 @@ public class UIPageSearch extends AbstractJspPage {
         return grid;
     }
 
-    public void addDefineScript(HtmlContent scriptCode) {
+    public void addScriptFunction(HtmlContent scriptCode) {
         codes1.add(scriptCode);
     }
 

@@ -21,10 +21,8 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
-import cn.cerc.jui.parts.UIFooter;
 
 /**
  * 主体子页面(公用)
@@ -33,7 +31,6 @@ import cn.cerc.jui.parts.UIFooter;
  *
  */
 public class UIPagePhone extends AbstractJspPage {
-    private MutiPage pages;
     private String searchWaitingId = "";
     private List<HtmlContent> contents = new ArrayList<>();
     private List<HtmlContent> codes1 = new ArrayList<>();
@@ -89,11 +86,6 @@ public class UIPagePhone extends AbstractJspPage {
             }
         }
 
-        // 右边区域
-        Component rightSite = (Component) request.getAttribute("rightSide");
-        // 底部
-        UIFooter bottom = this.getFooter();
-
         // 开始输出
         PrintWriter out = getResponse().getWriter();
         out.println("<!DOCTYPE html>");
@@ -113,7 +105,7 @@ public class UIPagePhone extends AbstractJspPage {
         out.println("var Application = new TApplication();");
         out.printf("Application.device = '%s';\n", form.getClient().getDevice());
 
-        out.printf("Application.bottom = '%s';\n", bottom.getId());
+        out.printf("Application.bottom = '%s';\n", this.getFooter().getId());
 
         String msg = form.getParam("message", "");
         msg = msg == null ? "" : msg.replaceAll("\r\n", "<br/>");
@@ -180,11 +172,7 @@ public class UIPagePhone extends AbstractJspPage {
         return html;
     }
 
-    public Component getContent() {
-        return getDocument().getContent();
-    }
-
-    public void addDefineScript(HtmlContent scriptCode) {
+    public void addScriptFunction(HtmlContent scriptCode) {
         codes1.add(scriptCode);
     }
 
