@@ -23,6 +23,12 @@ public class UIFooter extends UIComponent {
         this.setId("bottom");
     }
 
+    @Override
+    @Deprecated
+    public void setOwner(Component owner) {
+        super.setOwner(owner);
+    }
+
     public UrlRecord getCheckAll() {
         return checkAll;
     }

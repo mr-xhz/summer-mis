@@ -4,7 +4,6 @@ import static cn.cerc.jmis.core.ClientDevice.device_ee;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,7 +17,6 @@ import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
 import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
@@ -31,7 +29,6 @@ import cn.cerc.jui.parts.RightMenus;
  */
 public class UIPageModify extends AbstractJspPage {
     private String searchWaitingId = "";
-    private List<HtmlContent> contents = new ArrayList<>();
     private Component body;
 
     public UIPageModify(IForm form) {
@@ -114,9 +111,8 @@ public class UIPageModify extends AbstractJspPage {
     }
 
     public UIPanelVertical createForm() {
-        UIPanelVertical form = new UIPanelVertical(this.getRequest());
+        UIPanelVertical form = new UIPanelVertical(this.getDocument().getContent());
         form.setId("search");
-        form.setOwner(this.getDocument().getContent());
         put("search", form);
         return form;
     }

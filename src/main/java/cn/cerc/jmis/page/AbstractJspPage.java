@@ -28,6 +28,7 @@ import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.UIComponent;
+import cn.cerc.jui.parts.UIContent;
 import cn.cerc.jui.parts.UIDocument;
 import cn.cerc.jui.parts.UIFooter;
 import cn.cerc.jui.parts.UIHeader;
@@ -337,7 +338,7 @@ public abstract class AbstractJspPage extends Component implements IPage {
         out.println("</body>");
     }
 
-    public final Component getContent() {
+    public final UIContent getContent() {
         return this.getDocument().getContent();
     }
 }

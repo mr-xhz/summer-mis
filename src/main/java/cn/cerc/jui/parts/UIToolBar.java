@@ -15,6 +15,12 @@ public class UIToolBar extends UIComponent {
     }
 
     @Override
+    @Deprecated
+    public void setOwner(Component owner) {
+        super.setOwner(owner);
+    }
+
+    @Override
     public void output(HtmlWriter html) {
         html.print("\n<aside role='toolBar' id='%s'>", this.getId());
         if (sheets.size() > 0) {

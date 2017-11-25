@@ -3,14 +3,16 @@ package cn.cerc.jui.parts;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
+import javax.servlet.http.HttpServletRequest;
+
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class UIContent extends UIComponent {
     private List<HtmlContent> contents = new ArrayList<>();
+    private HttpServletRequest request;
 
-    public UIContent(Component owner) {
+    public UIContent(UIDocument owner) {
         super(owner);
     }
 
@@ -26,5 +28,13 @@ public class UIContent extends UIComponent {
         for (HtmlContent content : contents)
             content.output(html);
         html.println("</section>");
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
     }
 }

@@ -1,5 +1,6 @@
 package cn.cerc.jui.parts;
 
+import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
@@ -8,10 +9,17 @@ public class UIDocument extends UIComponent {
     private UIContent content; // 必须存在
     private UIMessage message; // 必须存在
 
-    public UIDocument(Component owner) {
+    public UIDocument(AbstractJspPage owner) {
         super(owner);
         content = new UIContent(this);
+        content.setRequest(owner.getRequest());
         message = new UIMessage(this);
+    }
+
+    @Override
+    @Deprecated
+    public void setOwner(Component owner) {
+        super.setOwner(owner);
     }
 
     @Override

@@ -15,6 +15,12 @@ public class UIHeader extends UIComponent {
     }
 
     @Override
+    @Deprecated
+    public void setOwner(Component owner) {
+        super.setOwner(owner);
+    }
+
+    @Override
     public void output(HtmlWriter html) {
         html.println("<header role='header'>");
         if (advertisement != null) {

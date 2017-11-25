@@ -23,7 +23,7 @@ public class Component {
         setOwner(owner);
     }
 
-    public final void setOwner(Component owner) {
+    public void setOwner(Component owner) {
         this.owner = owner;
         if (owner != null)
             owner.addComponent(this);

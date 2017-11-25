@@ -3,8 +3,6 @@ package cn.cerc.jui.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
@@ -14,11 +12,13 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jui.UIConfig;
+import cn.cerc.jui.parts.UIComponent;
+import cn.cerc.jui.parts.UIContent;
 
-public class UIPanelVertical extends Component implements DataSource {
+public class UIPanelVertical extends UIComponent implements DataSource {
+    private UIContent content;
     protected String CSSClass = "info";
     protected String method = "post";
-    protected HttpServletRequest request;
     protected DataSet dataSet;
     protected List<AbstractField> fields = new ArrayList<>();
     protected String action;
@@ -26,12 +26,18 @@ public class UIPanelVertical extends Component implements DataSource {
     private String submit;
     private boolean readAll;
 
-    public UIPanelVertical(HttpServletRequest request) {
-        super(null);
+    public UIPanelVertical(UIContent owner) {
+        super(owner);
         this.setId("form1");
-        this.request = request;
         this.dataSet = new DataSet();
+        this.content = owner;
         dataSet.append();
+    }
+
+    @Override
+    @Deprecated
+    public void setOwner(Component owner) {
+        super.setOwner(owner);
     }
 
     public String getCSSClass() {
@@ -125,7 +131,7 @@ public class UIPanelVertical extends Component implements DataSource {
         if (readAll)
             return submit;
 
-        submit = request.getParameter("opera");
+        submit = content.getRequest().getParameter("opera");
 
         // 将用户值或缓存值存入到dataSet中
         for (AbstractField field : this.fields) {
@@ -138,7 +144,7 @@ public class UIPanelVertical extends Component implements DataSource {
 
     @Override
     public void updateValue(String id, String code) {
-        String val = request.getParameter(id);
+        String val = content.getRequest().getParameter(id);
         if (submit != null) {
             dataSet.setField(code, val);
         } else {
