@@ -21,8 +21,8 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
-import cn.cerc.jui.parts.UIPanelHorizontal;
-import cn.cerc.jui.parts.UIPanelVertical;
+import cn.cerc.jui.parts.UIFormHorizontal;
+import cn.cerc.jui.parts.UIFormVertical;
 
 /**
  * 主体子页面
@@ -109,8 +109,8 @@ public class UIPageBill extends AbstractJspPage {
         out.println("</html>");
     }
 
-    public UIPanelHorizontal createSearch() {
-        UIPanelHorizontal search = new UIPanelHorizontal(this.getDocument().getContent(), this.getRequest());
+    public UIFormHorizontal createSearch() {
+        UIFormHorizontal search = new UIFormHorizontal(this.getDocument().getContent(), this.getRequest());
         search.setCSSClass("modify");
         this.setSearchWaitingId(search.getId());
         return search;
@@ -128,7 +128,7 @@ public class UIPageBill extends AbstractJspPage {
         put(id, value);
     }
 
-    public void add(String id, UIPanelVertical value) {
+    public void add(String id, UIFormVertical value) {
         put(id, value);
     }
 }

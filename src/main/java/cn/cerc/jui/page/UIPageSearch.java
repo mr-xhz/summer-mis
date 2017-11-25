@@ -30,8 +30,8 @@ import cn.cerc.jpage.grid.PhoneGrid;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
-import cn.cerc.jui.parts.UIPanelHorizontal;
-import cn.cerc.jui.parts.UIPanelVertical;
+import cn.cerc.jui.parts.UIFormHorizontal;
+import cn.cerc.jui.parts.UIFormVertical;
 
 /**
  * 主体子页面
@@ -133,8 +133,8 @@ public class UIPageSearch extends AbstractJspPage {
         this.getDocument().getContent().append(content);
     }
 
-    public UIPanelHorizontal createSearch(MemoryBuffer buff) {
-        UIPanelHorizontal search = new UIPanelHorizontal(this.getDocument().getContent(), this.getRequest());
+    public UIFormHorizontal createSearch(MemoryBuffer buff) {
+        UIFormHorizontal search = new UIFormHorizontal(this.getDocument().getContent(), this.getRequest());
         search.setBuffer(buff);
         this.setSearchWaitingId(search.getId());
         return search;
@@ -161,11 +161,11 @@ public class UIPageSearch extends AbstractJspPage {
         pages = grid.getPages();
     }
 
-    public void add(String id, UIPanelHorizontal value) {
+    public void add(String id, UIFormHorizontal value) {
         put(id, value);
     }
 
-    public void add(String id, UIPanelVertical value) {
+    public void add(String id, UIFormVertical value) {
         put(id, value);
     }
 

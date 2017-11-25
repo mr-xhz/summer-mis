@@ -20,7 +20,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
-import cn.cerc.jui.parts.UIPanelVertical;
+import cn.cerc.jui.parts.UIFormVertical;
 
 /**
  * 主体子页面(公用)
@@ -111,8 +111,8 @@ public class UIPageModify extends AbstractJspPage {
         out.println("</html>");
     }
 
-    public UIPanelVertical createForm() {
-        UIPanelVertical form = new UIPanelVertical(this.getDocument().getContent());
+    public UIFormVertical createForm() {
+        UIFormVertical form = new UIFormVertical(this.getDocument().getContent());
         form.setId("search");
         put("search", form);
         return form;

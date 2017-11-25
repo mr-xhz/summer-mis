@@ -13,7 +13,7 @@ import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jui.UIConfig;
 
-public class UIPanelVertical extends UIComponent implements DataSource {
+public class UIFormVertical extends UIComponent implements DataSource {
     private UIContent content;
     protected String CSSClass = "info";
     protected String method = "post";
@@ -24,7 +24,7 @@ public class UIPanelVertical extends UIComponent implements DataSource {
     private String submit;
     private boolean readAll;
 
-    public UIPanelVertical(UIContent owner) {
+    public UIFormVertical(UIContent owner) {
         super(owner);
         this.setId("form1");
         this.dataSet = new DataSet();

@@ -19,7 +19,7 @@ import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 import cn.cerc.jpage.other.SearchItem;
 
-public class UIPanelHorizontal extends UIComponent implements DataSource {
+public class UIFormHorizontal extends UIComponent implements DataSource {
     private DataSet dataSet;
     protected String CSSClass = "search";
     protected String method = "post";
@@ -35,7 +35,7 @@ public class UIPanelHorizontal extends UIComponent implements DataSource {
     private boolean readAll;
     private AbstractGridLine expender;
 
-    public UIPanelHorizontal(UIContent owner, HttpServletRequest request) {
+    public UIFormHorizontal(UIContent owner, HttpServletRequest request) {
         super(owner);
         this.request = request;
         this.setId("form1");
