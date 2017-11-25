@@ -1,4 +1,4 @@
-package cn.cerc.jpage.other;
+package cn.cerc.jui.parts;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -9,17 +9,13 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 
-public class UrlSide extends Component {
+public class UISheetUrl extends Component {
 
     private String title = "相关操作";
     private List<UrlRecord> urls = new ArrayList<>();
     private Map<String, String> items = new LinkedHashMap<>();
 
-    public UrlSide() {
-        super();
-    }
-
-    public UrlSide(Component owner) {
+    public UISheetUrl(UIToolBar owner) {
         super(owner);
     }
 
@@ -27,7 +23,7 @@ public class UrlSide extends Component {
         return title;
     }
 
-    public UrlSide setTitle(String title) {
+    public UISheetUrl setTitle(String title) {
         this.title = title;
         return this;
     }

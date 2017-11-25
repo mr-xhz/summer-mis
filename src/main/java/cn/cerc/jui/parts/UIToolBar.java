@@ -7,7 +7,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class UIToolBar extends UIComponent {
-    private List<UIToolSheet> sheets = new ArrayList<>();
+    private List<UISheet> sheets = new ArrayList<>();
 
     public UIToolBar(Component owner) {
         super(owner);
@@ -18,7 +18,7 @@ public class UIToolBar extends UIComponent {
     public void output(HtmlWriter html) {
         html.print("\n<aside role='toolBar' id='%s'>", this.getId());
         if (sheets.size() > 0) {
-            for (UIToolSheet sheet : sheets) {
+            for (UISheet sheet : sheets) {
                 html.print(sheet.toString());
             }
         } else {
@@ -27,7 +27,7 @@ public class UIToolBar extends UIComponent {
         html.print("</aside>");
     }
 
-    public List<UIToolSheet> getSheets() {
+    public List<UISheet> getSheets() {
         return sheets;
     }
 
@@ -35,8 +35,8 @@ public class UIToolBar extends UIComponent {
         return sheets.size();
     }
 
-    public UIToolSheet addSheet() {
-        UIToolSheet sheet = new UIToolSheet(this);
+    public UISheet addSheet() {
+        UISheet sheet = new UISheet(this);
         sheets.add(sheet);
         return sheet;
     }

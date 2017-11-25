@@ -7,17 +7,17 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.other.UrlMenu;
 
-public class UIToolHelp extends Component {
+public class UISheetHelp extends Component {
     private String title = "操作提示";
     private String content;
     private UrlMenu operaUrl;
     private List<String> lines = new ArrayList<>();
 
-    public UIToolHelp() {
+    public UISheetHelp() {
         super();
     }
 
-    public UIToolHelp(UIToolBar owner) {
+    public UISheetHelp(UIToolBar owner) {
         super(owner);
     }
 

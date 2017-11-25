@@ -3,10 +3,10 @@ package cn.cerc.jui.parts;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class UIToolSheet extends UIComponent {
+public class UISheet extends UIComponent {
     private String caption = "(无标题)";
 
-    public UIToolSheet(Component owner) {
+    public UISheet(Component owner) {
         super(owner);
     }
 

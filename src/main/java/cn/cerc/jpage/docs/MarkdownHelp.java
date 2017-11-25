@@ -1,10 +1,10 @@
 package cn.cerc.jpage.docs;
 
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jui.parts.UIToolHelp;
+import cn.cerc.jui.parts.UISheetHelp;
 import cn.cerc.jui.parts.UIToolBar;
 
-public class MarkdownHelp extends UIToolHelp {
+public class MarkdownHelp extends UISheetHelp {
 
     public MarkdownHelp(UIToolBar owner) {
         super(owner);
