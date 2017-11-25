@@ -1,16 +1,16 @@
 package cn.cerc.jpage.grid;
 
-import cn.cerc.jmis.page.AbstractJspPage;
+import cn.cerc.jbean.form.IForm;
 import cn.cerc.jui.parts.UIComponent;
 
 public class GridFactory {
 
-    public static AbstractGrid build(AbstractJspPage jspPage, UIComponent owner) {
+    public static AbstractGrid build(IForm form, UIComponent owner) {
         AbstractGrid grid;
-        if (jspPage.getForm().getClient().isPhone())
-            grid = new PhoneGrid(jspPage.getForm(), owner);
+        if (form.getClient().isPhone())
+            grid = new PhoneGrid(form, owner);
         else
-            grid = new DataGrid(jspPage.getForm(), owner);
+            grid = new DataGrid(form, owner);
         return grid;
     }
 }

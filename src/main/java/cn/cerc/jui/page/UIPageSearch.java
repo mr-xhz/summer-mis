@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomHandle;
-import cn.cerc.jbean.form.IClient;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jbean.rds.PassportRecord;
@@ -24,12 +23,12 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.grid.AbstractGrid;
-import cn.cerc.jpage.grid.DataGrid;
+import cn.cerc.jpage.grid.GridFactory;
 import cn.cerc.jpage.grid.MutiPage;
-import cn.cerc.jpage.grid.PhoneGrid;
 import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.parts.UIFormHorizontal;
 import cn.cerc.jui.parts.UIFormVertical;
 
@@ -140,9 +139,8 @@ public class UIPageSearch extends AbstractJspPage {
         return search;
     }
 
-    public AbstractGrid createGrid(Component owner, DataSet dataSet) {
-        IClient info = this.getForm().getClient();
-        AbstractGrid grid = info.isPhone() ? new PhoneGrid(this.getForm(), owner) : new DataGrid(this.getForm(), owner);
+    public AbstractGrid createGrid(UIComponent owner, DataSet dataSet) {
+        AbstractGrid grid = GridFactory.build(this.getForm(), owner);
         grid.setDataSet(dataSet);
         pages = grid.getPages();
         return grid;
