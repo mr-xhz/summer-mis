@@ -21,7 +21,7 @@ import cn.cerc.jpage.other.SearchItem;
 
 public class UIFormHorizontal extends UIComponent implements DataSource {
     private DataSet dataSet;
-    protected String CSSClass = "search";
+    protected String cssClass = "search";
     protected String method = "post";
     protected HttpServletRequest request;
     protected List<AbstractField> fields = new ArrayList<>();
@@ -39,17 +39,17 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
         super(owner);
         this.request = request;
         this.setId("form1");
-        this.setCSSClass("search");
+        this.setCssClass("search");
         this.dataSet = new DataSet();
         dataSet.append();
     }
 
-    public String getCSSClass() {
-        return CSSClass;
+    public String getCssClass() {
+        return cssClass;
     }
 
-    public void setCSSClass(String cSSClass) {
-        CSSClass = cSSClass;
+    public void setCssClass(String cssClass) {
+        this.cssClass = cssClass;
     }
 
     public Record getRecord() {
@@ -87,8 +87,8 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
         html.print("<form method=\"%s\" id=\"%s\"", this.method, this.getId());
         if (this.action != null)
             html.print(" action=\"%s\"", this.action);
-        if (this.CSSClass != null)
-            html.print(" class=\"%s\"", this.CSSClass);
+        if (this.cssClass != null)
+            html.print(" class=\"%s\"", this.cssClass);
         if (this.enctype != null)
             html.print(" enctype=\"%s\"", this.enctype);
         html.println(">");

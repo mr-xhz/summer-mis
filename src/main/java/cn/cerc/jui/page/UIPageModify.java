@@ -34,8 +34,8 @@ public class UIPageModify extends AbstractJspPage {
 
     public UIPageModify(IForm form) {
         super(form);
-        this.addStyleFile("css/summer.css");
-        this.addStyleFile("css/summer-pc.css");
+        this.addCssFile("css/summer.css");
+        this.addCssFile("css/summer-pc.css");
         this.addScriptFile("js/jquery.js");
         this.addScriptFile("js/summer.js");
         this.addScriptFile("js/myapp.js");
@@ -91,8 +91,8 @@ public class UIPageModify extends AbstractJspPage {
         out.printf("<link href=\"css/style-phone.css\" rel=\"stylesheet\">\n");
         if (!form.getClient().isPhone())
             out.printf("<link href=\"css/style-pc.css\" rel=\"stylesheet\">\n");
-        out.print(this.getCss());
-        out.print(getScript());
+        out.print(this.getCssHtml());
+        out.print(getScriptHtml());
         out.println("<script>");
         out.println("var Application = new TApplication();");
         out.printf("Application.device = '%s';\n", form.getClient().getDevice());

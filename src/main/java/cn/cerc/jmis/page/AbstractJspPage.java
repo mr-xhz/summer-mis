@@ -37,7 +37,7 @@ import cn.cerc.jui.parts.UIToolBar;
 public abstract class AbstractJspPage extends Component implements IPage {
     private String jspFile;
     private IForm form;
-    private List<String> styleFiles = new ArrayList<>();
+    private List<String> cssFiles = new ArrayList<>();
     private List<String> scriptFiles = new ArrayList<>();
     private List<HtmlContent> scriptFunctions = new ArrayList<>();
     private List<HtmlContent> scriptCodes = new ArrayList<>();
@@ -159,8 +159,8 @@ public abstract class AbstractJspPage extends Component implements IPage {
         return result;
     }
 
-    public final List<String> getStyleFiles() {
-        return styleFiles;
+    public final List<String> getCssFiles() {
+        return cssFiles;
     }
 
     public final List<String> getScriptFiles() {
@@ -171,8 +171,8 @@ public abstract class AbstractJspPage extends Component implements IPage {
         return scriptCodes;
     }
 
-    public final void addStyleFile(String file) {
-        styleFiles.add(file);
+    public final void addCssFile(String file) {
+        cssFiles.add(file);
     }
 
     public final void addScriptFile(String scriptFile) {
@@ -188,15 +188,15 @@ public abstract class AbstractJspPage extends Component implements IPage {
     }
 
     // 返回所有的样式定义，供jsp中使用 ${jspPage.css}调用
-    public final HtmlWriter getCss() {
+    public final HtmlWriter getCssHtml() {
         HtmlWriter html = new HtmlWriter();
-        for (String file : styleFiles)
+        for (String file : cssFiles)
             html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
         return html;
     }
 
     // 返回所有的脚本，供jsp中使用 ${jspPage.script}调用
-    public final HtmlWriter getScript() {
+    public final HtmlWriter getScriptHtml() {
         HtmlWriter html = new HtmlWriter();
 
         // 加入脚本文件
