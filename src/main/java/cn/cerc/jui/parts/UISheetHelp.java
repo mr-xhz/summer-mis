@@ -67,7 +67,7 @@ public class UISheetHelp extends UISheet {
     public UrlMenu getOperaUrl() {
         if (operaUrl == null) {
             operaUrl = new UrlMenu(null);
-            operaUrl.setStyle("float:right;margin-bottom:0.25em");
+            operaUrl.setCssStyle("float:right;margin-bottom:0.25em");
         }
         return operaUrl;
     }

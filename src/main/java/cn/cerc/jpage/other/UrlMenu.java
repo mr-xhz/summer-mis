@@ -7,7 +7,7 @@ public class UrlMenu extends Component {
     private String name;
     private String url;
     private String cssClass;
-    private String style;
+    private String cssStyle;
 
     public UrlMenu(Component owner) {
         super(owner);
@@ -40,8 +40,8 @@ public class UrlMenu extends Component {
     @Override
     public void output(HtmlWriter html) {
         html.print("<a href=\"%s\"", this.url);
-        if (this.style != null)
-            html.print(" style=\"%s\"", this.style);
+        if (this.cssStyle != null)
+            html.print(" style=\"%s\"", this.cssStyle);
         if (this.cssClass != null)
             html.print(" class=\"%s\"", this.cssClass);
         if (this.getId() != null)
@@ -50,12 +50,12 @@ public class UrlMenu extends Component {
         html.println(">%s</a>", this.name);
     }
 
-    public String getStyle() {
-        return style;
+    public String getCssStyle() {
+        return cssStyle;
     }
 
-    public void setStyle(String style) {
-        this.style = style;
+    public void setCssStyle(String style) {
+        this.cssStyle = style;
     }
 
     public String getCssClass() {
