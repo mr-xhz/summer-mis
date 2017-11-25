@@ -7,7 +7,7 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.GroupBox;
 
-public class UIActionForm extends Component {
+public class UIActionForm extends UIComponent {
     private String action;
     private String method = "post";
     private Map<String, String> items = new HashMap<>();
@@ -15,7 +15,7 @@ public class UIActionForm extends Component {
 
     @Deprecated
     public UIActionForm() {
-
+        super(null);
     }
 
     public UIActionForm(GroupBox owner) {
@@ -28,7 +28,8 @@ public class UIActionForm extends Component {
 
     @Deprecated
     public UIActionForm(UIContent owner, String id) {
-        super(owner, id);
+        super(owner);
+        this.setId(id);
     }
 
     @Override

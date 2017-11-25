@@ -6,6 +6,10 @@ public class UIComponent extends Component {
     protected String cssClass;
     protected String cssStyle;
 
+    public UIComponent() {
+        super();
+    }
+
     public UIComponent(Component owner) {
         super(owner);
     }
