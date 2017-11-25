@@ -5,6 +5,7 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIToolBar;
 
 public class HelpSide extends Component {
     private String title = "操作提示";
@@ -16,7 +17,7 @@ public class HelpSide extends Component {
         super();
     }
 
-    public HelpSide(Component owner) {
+    public HelpSide(UIToolBar owner) {
         super(owner);
     }
 

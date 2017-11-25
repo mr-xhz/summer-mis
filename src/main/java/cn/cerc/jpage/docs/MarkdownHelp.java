@@ -1,12 +1,12 @@
 package cn.cerc.jpage.docs;
 
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.other.HelpSide;
+import cn.cerc.jui.parts.UIToolBar;
 
 public class MarkdownHelp extends HelpSide {
 
-    public MarkdownHelp(Component owner) {
+    public MarkdownHelp(UIToolBar owner) {
         super(owner);
     }
 

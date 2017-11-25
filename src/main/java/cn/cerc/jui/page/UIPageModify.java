@@ -87,8 +87,6 @@ public class UIPageModify extends AbstractJspPage {
             }
         }
 
-        // 右边区域
-        Component rightSite = (Component) request.getAttribute("rightSide");
         // 查询区域
         Component search = (Component) request.getAttribute("search");
         // 表格
