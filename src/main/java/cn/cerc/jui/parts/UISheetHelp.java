@@ -3,22 +3,17 @@ package cn.cerc.jui.parts;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.other.UrlMenu;
 
-public class UISheetHelp extends Component {
-    private String title = "操作提示";
+public class UISheetHelp extends UISheet {
     private String content;
     private UrlMenu operaUrl;
     private List<String> lines = new ArrayList<>();
 
-    public UISheetHelp() {
-        super();
-    }
-
     public UISheetHelp(UIToolBar owner) {
         super(owner);
+        this.setCaption("操作提示");
     }
 
     public String getContent() {
@@ -37,19 +32,11 @@ public class UISheetHelp extends Component {
         lines.add(String.format(format, args));
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     @Override
     public void output(HtmlWriter html) {
         html.println("<section>");
         html.print("<div class=\"title\">");
-        html.print(this.title);
+        html.print(this.getCaption());
         if (operaUrl != null) {
             operaUrl.output(html);
         }
