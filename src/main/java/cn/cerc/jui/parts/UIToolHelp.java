@@ -1,23 +1,23 @@
-package cn.cerc.jpage.other;
+package cn.cerc.jui.parts;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.parts.UIToolBar;
+import cn.cerc.jpage.other.UrlMenu;
 
-public class HelpSide extends Component {
+public class UIToolHelp extends Component {
     private String title = "操作提示";
     private String content;
     private UrlMenu operaUrl;
     private List<String> lines = new ArrayList<>();
 
-    public HelpSide() {
+    public UIToolHelp() {
         super();
     }
 
-    public HelpSide(UIToolBar owner) {
+    public UIToolHelp(UIToolBar owner) {
         super(owner);
     }
 
