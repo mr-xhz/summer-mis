@@ -24,11 +24,11 @@ import cn.cerc.jpage.other.OperaPages;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
-public class UIPageView extends AbstractJspPage {
+public class UIPageDialog extends AbstractJspPage {
     private boolean showMenus = true; // 是否显示主菜单
     private MutiPage pages;
 
-    public UIPageView(IForm form) {
+    public UIPageDialog(IForm form) {
         super(form);
     }
 

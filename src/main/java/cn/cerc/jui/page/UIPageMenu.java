@@ -6,7 +6,7 @@ import cn.cerc.jmis.core.RequestData;
 /**
  * 系统登录页
  */
-public class UIPageMenu extends UIPageView {
+public class UIPageMenu extends UIPageDialog {
 
     public UIPageMenu(IForm form) {
         super(form);
