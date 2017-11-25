@@ -6,6 +6,11 @@ import cn.cerc.jpage.core.HtmlWriter;
 public class UISheet extends UIComponent {
     private String caption = "(无标题)";
 
+    @Deprecated
+    public UISheet() {
+        super(null);
+    }
+
     public UISheet(Component owner) {
         super(owner);
     }

@@ -11,6 +11,12 @@ public class UISheetHelp extends UISheet {
     private UrlMenu operaUrl;
     private List<String> lines = new ArrayList<>();
 
+    @Deprecated
+    public UISheetHelp() {
+        super();
+        this.setCaption("操作提示");
+    }
+
     public UISheetHelp(UIToolBar owner) {
         super(owner);
         this.setCaption("操作提示");
