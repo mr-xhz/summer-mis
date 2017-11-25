@@ -19,7 +19,6 @@ import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
-import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
@@ -129,20 +128,6 @@ public class UIPageModify extends AbstractJspPage {
             body.setId("search");
         }
         return body;
-    }
-
-    public void appendContent(HtmlContent content) {
-        this.getDocument().getContent().append(content);
-    }
-
-    @Deprecated // 请使用：getDocument().getContext()
-    public HtmlWriter getContents() {
-        HtmlWriter html = new HtmlWriter();
-        if (contents.size() == 0)
-            return html;
-        for (HtmlContent content : contents)
-            content.output(html);
-        return html;
     }
 
     public String getSearchWaitingId() {

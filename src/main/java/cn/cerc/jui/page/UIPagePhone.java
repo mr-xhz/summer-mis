@@ -4,7 +4,6 @@ import static cn.cerc.jmis.core.ClientDevice.device_ee;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,8 +17,6 @@ import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
 import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlContent;
-import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
@@ -32,8 +29,6 @@ import cn.cerc.jui.parts.RightMenus;
  */
 public class UIPagePhone extends AbstractJspPage {
     private String searchWaitingId = "";
-    private List<HtmlContent> contents = new ArrayList<>();
-    private List<HtmlContent> codes1 = new ArrayList<>();
     private Component body;
 
     public UIPagePhone(IForm form) {
@@ -100,7 +95,7 @@ public class UIPagePhone extends AbstractJspPage {
         if (!form.getClient().isPhone())
             out.printf("<link href=\"css/style-pc.css\" rel=\"stylesheet\">\n");
         out.print(this.getCss());
-        out.print(getScript2(this));
+        out.print(getScript());
         out.println("<script>");
         out.println("var Application = new TApplication();");
         out.printf("Application.device = '%s';\n", form.getClient().getDevice());
@@ -121,32 +116,6 @@ public class UIPagePhone extends AbstractJspPage {
         out.println("</html>");
     }
 
-    private HtmlWriter getScript2(AbstractJspPage page) {
-        HtmlWriter html = new HtmlWriter();
-
-        // 加入脚本文件
-        for (String file : page.getScriptFiles()) {
-            html.println("<script src=\"%s\"></script>", file);
-        }
-        // 加入脚本代码
-        List<HtmlContent> scriptCodes = page.getScriptCodes();
-        if (codes1.size() > 0 || scriptCodes.size() > 0) {
-            html.println("<script>");
-            for (HtmlContent func : codes1) {
-                func.output(html);
-            }
-            if (scriptCodes.size() > 0) {
-                html.println("$(function(){");
-                for (HtmlContent func : scriptCodes) {
-                    func.output(html);
-                }
-                html.println("});");
-            }
-            html.println("</script>");
-        }
-        return html;
-    }
-
     @Deprecated // 请使用：getDocument().getContext()
     public Component getBody() {
         if (body == null) {
@@ -155,29 +124,6 @@ public class UIPagePhone extends AbstractJspPage {
             body.setId("search");
         }
         return body;
-    }
-
-    @Deprecated // 请使用：getDocument().getContext()
-    public void appendContent(HtmlContent content) {
-        contents.add(content);
-    }
-
-    @Deprecated // 请使用：getDocument().getContext()
-    public HtmlWriter getContents() {
-        HtmlWriter html = new HtmlWriter();
-        if (contents.size() == 0)
-            return html;
-        for (HtmlContent content : contents)
-            content.output(html);
-        return html;
-    }
-
-    public void addScriptFunction(HtmlContent scriptCode) {
-        codes1.add(scriptCode);
-    }
-
-    public List<HtmlContent> getCodes1() {
-        return codes1;
     }
 
     public String getSearchWaitingId() {

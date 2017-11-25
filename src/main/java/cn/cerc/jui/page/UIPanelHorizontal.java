@@ -18,6 +18,7 @@ import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 import cn.cerc.jpage.other.SearchItem;
+import cn.cerc.jui.parts.UIContent;
 
 public class UIPanelHorizontal extends Component implements DataSource {
     private DataSet dataSet;
@@ -35,7 +36,7 @@ public class UIPanelHorizontal extends Component implements DataSource {
     private boolean readAll;
     private AbstractGridLine expender;
 
-    public UIPanelHorizontal(Component owner, HttpServletRequest request) {
+    public UIPanelHorizontal(UIContent owner, HttpServletRequest request) {
         super(owner);
         this.request = request;
         this.setId("form1");
