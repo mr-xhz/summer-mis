@@ -13,6 +13,7 @@ public class UIActionForm extends Component {
     private Map<String, String> items = new HashMap<>();
     private String enctype;
 
+    @Deprecated
     public UIActionForm() {
 
     }
@@ -25,25 +26,15 @@ public class UIActionForm extends Component {
         super.setOwner(owner);
     }
 
+    @Deprecated
     public UIActionForm(UIContent owner, String id) {
         super(owner, id);
-    }
-
-    public UIActionForm(String id) {
-        super();
-        this.setId(id);
     }
 
     @Override
     @Deprecated
     public void setOwner(Component owner) {
         super.setOwner(owner);
-    }
-
-    @Deprecated
-    public UIActionForm(String id, String action) {
-        this.setId(id);
-        this.setAction(action);
     }
 
     public String getAction() {

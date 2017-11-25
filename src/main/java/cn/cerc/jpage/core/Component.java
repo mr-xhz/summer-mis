@@ -18,6 +18,7 @@ public class Component {
         setOwner(owner);
     }
 
+    @Deprecated
     public Component(Component owner, String id) {
         this.id = id;
         setOwner(owner);
