@@ -13,6 +13,12 @@ public class UISheetUrl extends UISheet {
     // 使用于page-link.xml中
     private Map<String, String> items = new LinkedHashMap<>();
 
+    @Deprecated
+    public UISheetUrl() {
+        super();
+        this.setCaption("相关操作");
+    }
+
     public UISheetUrl(UIToolBar owner) {
         super(owner);
         this.setCaption("相关操作");
@@ -20,7 +26,7 @@ public class UISheetUrl extends UISheet {
 
     @Override
     public void output(HtmlWriter html) {
-        if (urls.size() == 0)
+        if (urls.size() == 0 && items.size() == 0)
             return;
 
         html.println("<section>");
