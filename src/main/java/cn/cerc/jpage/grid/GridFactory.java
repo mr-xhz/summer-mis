@@ -5,12 +5,12 @@ import cn.cerc.jui.parts.UIComponent;
 
 public class GridFactory {
 
-    public static AbstractGrid build(AbstractJspPage page, UIComponent owner) {
+    public static AbstractGrid build(AbstractJspPage jspPage, UIComponent owner) {
         AbstractGrid grid;
-        if (page.getForm().getClient().isPhone())
-            grid = new PhoneGrid(page.getForm(), owner);
+        if (jspPage.getForm().getClient().isPhone())
+            grid = new PhoneGrid(jspPage.getForm(), owner);
         else
-            grid = new DataGrid(page.getForm(), owner);
+            grid = new DataGrid(jspPage.getForm(), owner);
         return grid;
     }
 }
