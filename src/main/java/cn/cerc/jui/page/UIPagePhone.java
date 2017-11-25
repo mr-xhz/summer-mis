@@ -41,6 +41,8 @@ public class UIPagePhone extends AbstractJspPage {
 
     public UIPagePhone(IForm form) {
         super(form);
+        this.addStyleFile("css/summer.css");
+        this.addStyleFile("css/summer-pc.css");
         this.addScriptFile("js/jquery.js");
         this.addScriptFile("js/summer.js");
         this.addScriptFile("js/myapp.js");

@@ -109,6 +109,8 @@ public class UIPageCard extends AbstractJspPage {
             super(owner);
             this.page = owner;
             owner.setJspFile("jui/vine/document-card.jsp");
+            owner.addStyleFile("css/summer.css");
+            owner.addStyleFile("css/summer-pc.css");
             owner.addScriptFile("js/jquery.js");
             owner.addScriptFile("js/summer.js");
             owner.addScriptFile("js/myapp.js");
