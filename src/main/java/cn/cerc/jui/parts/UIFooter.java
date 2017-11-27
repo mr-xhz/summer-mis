@@ -46,7 +46,7 @@ public class UIFooter extends UIComponent {
         if (this.getComponents().size() > MAX_MENUS)
             throw new RuntimeException(String.format("底部菜单区最多只支持 %d 个菜单项", MAX_MENUS));
 
-        html.println("\n<footer role='footer' class=\"operaBottom\">");
+        html.println("\n<footer role='footer'>");
         if (this.checkAll != null) {
             html.println("<section role='operation'>");
             html.print("<input type=\"checkbox\"");

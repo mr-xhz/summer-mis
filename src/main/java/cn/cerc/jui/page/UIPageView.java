@@ -23,7 +23,9 @@ public class UIPageView extends AbstractJspPage {
     public UIPageView(IForm form) {
         super(form);
         this.addCssFile("css/summer.css");
-        this.addCssFile("css/summer-pc.css");
+        if (!form.getClient().isPhone()) {
+            this.addCssFile("css/summer-pc.css");
+        }
         this.addScriptFile("js/jquery.js");
         this.addScriptFile("js/summer.js");
         this.addScriptFile("js/myapp.js");

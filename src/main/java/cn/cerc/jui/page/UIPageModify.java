@@ -35,7 +35,9 @@ public class UIPageModify extends AbstractJspPage {
     public UIPageModify(IForm form) {
         super(form);
         this.addCssFile("css/summer.css");
-        this.addCssFile("css/summer-pc.css");
+        if (!form.getClient().isPhone()) {
+            this.addCssFile("css/summer-pc.css");
+        }
         this.addScriptFile("js/jquery.js");
         this.addScriptFile("js/summer.js");
         this.addScriptFile("js/myapp.js");
@@ -84,9 +86,6 @@ public class UIPageModify extends AbstractJspPage {
         out.printf("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n");
         out.printf(
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\"/>\n");
-        out.printf("<link href=\"css/style-phone.css\" rel=\"stylesheet\">\n");
-        if (!form.getClient().isPhone())
-            out.printf("<link href=\"css/style-pc.css\" rel=\"stylesheet\">\n");
         out.print(this.getCssHtml());
         out.print(getScriptHtml());
         out.println("<script>");
