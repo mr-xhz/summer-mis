@@ -9,7 +9,6 @@ import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.other.UrlMenu;
 
 public class UIHeader extends UIComponent {
     private UIAdvertisement advertisement; // 可选
@@ -48,23 +47,41 @@ public class UIHeader extends UIComponent {
             html.println(advertisement.toString());
             html.println("</section>");
         }
-        html.println("<nav role='mainMenu' class=\"navigation\">");
-        int i = 0;
-        html.println("<div class=\"menu\">");
+        html.println("<nav role='mainMenu'>");
 
-        for (UrlRecord menu : leftMenus) {
-            UrlMenu item = new UrlMenu(null, menu.getName(), menu.getUrl());
-            if (i > 1)
-                html.println("<a style=\"padding: 0.5em 0\">→</a>");
-            item.output(html);
-            i++;
+        // 输出：左边
+        html.println("<section role='leftMenu'>");
+        if (leftMenus.size() > 0) {
+            html.print("<ul>");
+            int i = 0;
+            for (UrlRecord menu : leftMenus) {
+                html.print("<li>");
+                if (i > 1)
+                    html.println("<span>→</span>");
+                html.print("<a href=\"%s\">%s</a>", menu.getUrl(), menu.getName());
+                i++;
+                html.print("</li>");
+            }
+            html.print("</ul>");
         }
-        html.println("</div>");
-        html.println("<div class=\"menu\" style=\"float: right;\">");
-        for (Component item : right.getComponents()) {
-            item.output(html);
+        html.println("</section>");
+
+        // 降序输出：右边
+        html.println("<section role='rightMenu'");
+        if (rightMenus.size() > 0) {
+            html.print("<ul>");
+            int i = rightMenus.size() - 1;
+            while (i > -1) {
+                UrlRecord menu = rightMenus.get(i);
+                html.print("<li>");
+                html.print("<a href=\"%s\">%s</a>", menu.getUrl(), menu.getName());
+                html.print("</li>");
+                i--;
+            }
+            html.print("</ul>");
         }
-        html.println("</div>");
+        html.println("</section>");
+
         html.println("</nav>");
         html.println("</header>");
     }
@@ -98,21 +115,9 @@ public class UIHeader extends UIComponent {
             leftMenus.add(new UrlRecord("/", "首页"));
             leftMenus.add(new UrlRecord("javascript:history.go(-1);", "刷新"));
         }
-
-        Component right = this.right;
-
-        List<UrlRecord> subMenus = this.mainMenu.getRightMenus();
-        if (subMenus.size() > 0) {
-            int i = subMenus.size() - 1;
-            while (i > -1) {
-                UrlRecord menu = subMenus.get(i);
-                new UrlMenu(right, menu.getName(), menu.getUrl());
-                i--;
-            }
-        }
         // 兼容老的jsp文件使用
         form.getRequest().setAttribute("barMenus", leftMenus);
-        form.getRequest().setAttribute("subMenus", subMenus);
+        form.getRequest().setAttribute("subMenus", rightMenus);
     }
 
     public String getPageTitle() {
