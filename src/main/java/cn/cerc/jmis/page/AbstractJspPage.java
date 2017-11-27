@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.form.IForm;
@@ -24,8 +23,6 @@ import cn.cerc.jmis.tools.R;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.other.UrlMenu;
 import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.parts.UIContent;
@@ -296,33 +293,6 @@ public abstract class AbstractJspPage extends Component implements IPage {
             toolBar = new UIToolBar(this);
         }
         return toolBar;
-    }
-
-    protected final void initHeader() {
-        HttpServletRequest request = this.getRequest();
-        Component left = header.getLeft();
-        @SuppressWarnings("unchecked")
-        List<UrlRecord> barMenus = (List<UrlRecord>) request.getAttribute("barMenus");
-        if (barMenus == null) {
-            new UrlMenu(left, "首页", "/");
-            new UrlMenu(left, "刷新", "javascript:history.go(-1);");
-        } else {
-            for (UrlRecord menu : barMenus) {
-                new UrlMenu(left, menu.getName(), menu.getUrl());
-            }
-        }
-
-        Component right = header.getRight();
-        @SuppressWarnings("unchecked")
-        List<UrlRecord> subMenus = (List<UrlRecord>) request.getAttribute("subMenus");
-        if (subMenus != null) {
-            int i = subMenus.size() - 1;
-            while (i > -1) {
-                UrlRecord menu = subMenus.get(i);
-                new UrlMenu(right, menu.getName(), menu.getUrl());
-                i--;
-            }
-        }
     }
 
     protected void outBody(PrintWriter out) {

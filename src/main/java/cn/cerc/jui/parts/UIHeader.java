@@ -1,7 +1,13 @@
 package cn.cerc.jui.parts;
 
+import java.util.List;
+
+import cn.cerc.jbean.form.IForm;
+import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jpage.other.UrlMenu;
 
 public class UIHeader extends UIComponent {
     private UIAdvertisement advertisement; // 可选
@@ -10,7 +16,7 @@ public class UIHeader extends UIComponent {
     // 主菜单
     private MainMenu mainMenu = new MainMenu();
 
-    public UIHeader(Component owner) {
+    public UIHeader(AbstractJspPage owner) {
         super(owner);
     }
 
@@ -63,5 +69,31 @@ public class UIHeader extends UIComponent {
         if (advertisement == null)
             advertisement = new UIAdvertisement(this);
         return advertisement;
+    }
+
+    public void initHeader() {
+        IForm form = (IForm) this.getOwner();
+        Component left = this.getLeft();
+        List<UrlRecord> barMenus = mainMenu.getBarMenus(form);
+        if (barMenus == null) {
+            new UrlMenu(left, "首页", "/");
+            new UrlMenu(left, "刷新", "javascript:history.go(-1);");
+        } else {
+            for (UrlRecord menu : barMenus) {
+                new UrlMenu(left, menu.getName(), menu.getUrl());
+            }
+        }
+
+        Component right = this.getRight();
+
+        List<UrlRecord> subMenus = this.mainMenu.getRightMenus();
+        if (subMenus.size() > 0) {
+            int i = subMenus.size() - 1;
+            while (i > -1) {
+                UrlRecord menu = subMenus.get(i);
+                new UrlMenu(right, menu.getName(), menu.getUrl());
+                i--;
+            }
+        }
     }
 }

@@ -70,11 +70,7 @@ public class UIPagePhone extends AbstractJspPage {
         // 系统通知消息
         Component content = this.getContent();
         if (form instanceof AbstractForm) {
-            this.put("barMenus", mainMenu.getBarMenus(this.getForm()));
-            if (mainMenu.getRightMenus().size() > 0)
-                this.put("subMenus", mainMenu.getRightMenus());
-
-            this.initHeader();
+            this.getHeader().initHeader();
             request.setAttribute(content.getId(), content);
             for (Component component : content.getComponents()) {
                 request.setAttribute(component.getId(), component);
