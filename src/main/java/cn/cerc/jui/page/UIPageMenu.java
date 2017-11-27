@@ -1,15 +1,34 @@
 package cn.cerc.jui.page;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jmis.core.RequestData;
+import cn.cerc.jui.parts.UIMenuList;
 
 /**
  * 系统登录页
  */
 public class UIPageMenu extends UIPageDialog {
+    private UIMenuList menus;
 
     public UIPageMenu(IForm form) {
         super(form);
+    }
+
+    @Override
+    public void execute() throws ServletException, IOException {
+        if (menus != null)
+            add("menus", menus);
+        super.execute();
+    }
+
+    public UIMenuList getMenus() {
+        if (menus == null)
+            menus = new UIMenuList(this.getDocument().getContent());
+        return menus;
     }
 
     public void setDisableAccountSave(boolean value) {
