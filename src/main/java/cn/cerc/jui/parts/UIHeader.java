@@ -83,6 +83,7 @@ public class UIHeader extends UIComponent {
                 new UrlMenu(left, menu.getName(), menu.getUrl());
             }
         }
+        form.getRequest().setAttribute("barMenus", barMenus);
 
         Component right = this.getRight();
 
@@ -95,5 +96,6 @@ public class UIHeader extends UIComponent {
                 i--;
             }
         }
+        form.getRequest().setAttribute("subMenus", subMenus);
     }
 }
