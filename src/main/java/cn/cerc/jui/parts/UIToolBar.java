@@ -1,7 +1,9 @@
 package cn.cerc.jui.parts;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -24,8 +26,33 @@ public class UIToolBar extends UIComponent {
     public void output(HtmlWriter html) {
         html.print("\n<aside role='toolBar' id='%s'>", this.getId());
         if (sheets.size() > 0) {
+            // 分组归类
+            Map<String, List<UISheet>> items = new LinkedHashMap<>();
             for (UISheet sheet : sheets) {
-                html.print(sheet.toString());
+                List<UISheet> list = items.get(sheet.getGroup());
+                if (list == null) {
+                    list = new ArrayList<>();
+                    items.put(sheet.getGroup(), list);
+                }
+                list.add(sheet);
+            }
+            // 分组输出：标题
+            int groupNo = 0;
+            html.println("<ul role='toolGroup'>");
+            for (String groupCaption : items.keySet()) {
+                html.println("<ui data-id='group%d'>%s</ui>", groupNo++, groupCaption);
+            }
+            html.print("</ul>");
+            // 分组输出：内容
+            groupNo = 0;
+            for (String group : items.keySet()) {
+                html.println(String.format("<section role='toolSheet' id='group%d'>", groupNo++));
+                List<UISheet> list = items.get(group);
+                for (UISheet sheet : list) {
+                    html.println("<h2 role='sheetCaption'>%s</h2>", sheet.getCaption());
+                    html.print(sheet.toString());
+                }
+                html.println("</section>");
             }
         } else {
             super.output(html);

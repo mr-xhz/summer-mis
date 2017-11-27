@@ -5,6 +5,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 
 public class UISheet extends UIComponent {
     private String caption = "(无标题)";
+    private String group = "工具面板";
 
     @Deprecated
     public UISheet() {
@@ -17,12 +18,9 @@ public class UISheet extends UIComponent {
 
     @Override
     public void output(HtmlWriter html) {
-        html.println("<section role='toolSheet'>");
-        html.println("<h2>%s</h2>", this.caption);
         html.println("<div>");
         super.output(html);
         html.println("</div>");
-        html.println("</section>");
     }
 
     public String getCaption() {
@@ -31,5 +29,13 @@ public class UISheet extends UIComponent {
 
     public void setCaption(String caption) {
         this.caption = caption;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 }
