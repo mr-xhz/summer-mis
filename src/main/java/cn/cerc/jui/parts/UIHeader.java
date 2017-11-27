@@ -12,7 +12,6 @@ import cn.cerc.jpage.core.UrlRecord;
 
 public class UIHeader extends UIComponent {
     private UIAdvertisement advertisement; // 可选
-    private Component right = new Component();
     // 页面标题
     private String pageTitle = null;
     // 首页
@@ -97,7 +96,7 @@ public class UIHeader extends UIComponent {
     }
 
     public void initHeader() {
-        IForm form = (IForm) this.getOwner();
+        IForm form = ((AbstractJspPage) this.getOwner()).getForm();
         // 刷新
         if (this.pageTitle != null) {
             leftMenus.add(new UrlRecord("javascript:location.reload()", this.pageTitle));
