@@ -21,7 +21,6 @@ import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.grid.AbstractGrid;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jpage.other.OperaPages;
-import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
 public class UIPageDialog extends AbstractJspPage {
@@ -42,7 +41,6 @@ public class UIPageDialog extends AbstractJspPage {
     @Override
     public void execute() throws ServletException, IOException {
         this.getFooter(); // 此行代码不能删除！
-        MainMenu mainMenu = getMainMenu();
 
         IForm form = this.getForm();
         HttpServletRequest request = form.getRequest();
@@ -50,13 +48,13 @@ public class UIPageDialog extends AbstractJspPage {
         request.setAttribute("passport", sess.logon());
         request.setAttribute("logon", sess.logon());
         if (sess.logon()) {
-            List<UrlRecord> rightMenus = mainMenu.getRightMenus();
+            List<UrlRecord> rightMenus = getHeader().getRightMenus();
             RightMenus menus = Application.getBean("RightMenus", RightMenus.class);
             menus.setHandle(form.getHandle());
             for (IMenuBar item : menus.getItems())
                 item.enrollMenu(form, rightMenus);
         } else {
-            mainMenu.getHomePage().setSite(Application.getAppConfig().getFormWelcome());
+            getHeader().getHomePage().setSite(Application.getAppConfig().getFormWelcome());
         }
         // 设置首页
         request.setAttribute("_showMenu_", "true".equals(form.getParam("showMenus", "true")));

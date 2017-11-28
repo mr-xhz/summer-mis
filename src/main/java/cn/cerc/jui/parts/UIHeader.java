@@ -20,14 +20,11 @@ public class UIHeader extends UIComponent {
     private List<UrlRecord> leftMenus = new ArrayList<>();
     // 右边菜单
     private List<UrlRecord> rightMenus = new ArrayList<>();
-    // 主菜单
-    private MainMenu mainMenu;
     // 退出
     private UrlRecord exitPage = null;
 
     public UIHeader(AbstractJspPage owner) {
         super(owner);
-        mainMenu = new MainMenu(this);
         homePage = new UrlRecord(Application.getAppConfig().getFormDefault(), "<img src=\"images/Home.png\"/>");
         leftMenus.add(homePage);
     }
@@ -83,10 +80,6 @@ public class UIHeader extends UIComponent {
 
         html.println("</nav>");
         html.println("</header>");
-    }
-
-    public MainMenu getMainMenu() {
-        return mainMenu;
     }
 
     public UIAdvertisement getAdvertisement() {

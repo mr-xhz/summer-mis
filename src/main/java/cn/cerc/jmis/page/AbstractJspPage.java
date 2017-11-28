@@ -23,7 +23,6 @@ import cn.cerc.jmis.tools.R;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.parts.UIContent;
 import cn.cerc.jui.parts.UIDocument;
@@ -268,10 +267,6 @@ public abstract class AbstractJspPage extends Component implements IPage {
             this.put("bottom", footer);
         }
         return footer;
-    }
-
-    public MainMenu getMainMenu() {
-        return getHeader().getMainMenu();
     }
 
     public UIHeader getHeader() {

@@ -18,7 +18,6 @@ import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
 /**
@@ -53,18 +52,17 @@ public class UIPagePhone extends AbstractJspPage {
     @Override
     public void execute() throws ServletException, IOException {
         HttpServletRequest request = getRequest();
-        MainMenu mainMenu = getMainMenu();
 
         IForm form = this.getForm();
         CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
         if (sess.logon()) {
-            List<UrlRecord> rightMenus = mainMenu.getRightMenus();
+            List<UrlRecord> rightMenus = getHeader().getRightMenus();
             RightMenus menus = Application.getBean("RightMenus", RightMenus.class);
             menus.setHandle(form.getHandle());
             for (IMenuBar item : menus.getItems())
                 item.enrollMenu(form, rightMenus);
         } else {
-            mainMenu.getHomePage().setSite(Application.getAppConfig().getFormWelcome());
+            getHeader().getHomePage().setSite(Application.getAppConfig().getFormWelcome());
         }
 
         // 系统通知消息
