@@ -169,4 +169,8 @@ public class UIHeader extends UIComponent {
     public void addRightMenu(String url, String name) {
         addRightMenu(new UrlRecord(url, name));
     }
+
+    public void setExitUrl(String url) {
+        setExitPage(url);
+    }
 }
