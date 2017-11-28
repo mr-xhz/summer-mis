@@ -46,7 +46,14 @@ public class UIFooter extends UIComponent {
         if (this.getComponents().size() > MAX_MENUS)
             throw new RuntimeException(String.format("底部菜单区最多只支持 %d 个菜单项", MAX_MENUS));
 
-        html.println("\n<footer role='footer'>");
+        if (this.buttons.size() > MAX_MENUS)
+            throw new RuntimeException(String.format("底部菜单区最多只支持 %d 个菜单项", MAX_MENUS));
+
+        html.print("\n<footer role='footer'");
+        if (isEmpty()) {
+            html.print(" style='display:none'");
+        }
+        html.println(">");
         html.println("<section role='operation'>");
         if (this.checkAll != null) {
             html.print("<input type=\"checkbox\"");
@@ -54,7 +61,9 @@ public class UIFooter extends UIComponent {
             html.print(" onclick=\"%s\"/>", checkAll.getUrl());
             html.println("<label for=\"selectAll\">全选</label>");
         }
-        getOperation().output(html);
+        if (this.operation != null) {
+            this.operation.output(html);
+        }
         html.println("</section>");
         html.println("<section role='buttons'>");
         super.output(html);
@@ -116,5 +125,9 @@ public class UIFooter extends UIComponent {
         if (operation == null)
             operation = new UIFooterOperation(this);
         return operation;
+    }
+
+    private boolean isEmpty() {
+        return this.checkAll == null && operation == null && buttons.size() == 0;
     }
 }

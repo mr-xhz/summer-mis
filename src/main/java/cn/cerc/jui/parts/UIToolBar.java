@@ -24,7 +24,15 @@ public class UIToolBar extends UIComponent {
 
     @Override
     public void output(HtmlWriter html) {
-        html.print("\n<aside role='toolBar' id='%s'>", this.getId());
+        if (sheets.size() == 0) {
+            return;
+        }
+        html.print("\n<aside role='toolBar' id='%s'", this.getId());
+        if (isEmpty()) {
+            html.print(" style='display:none'");
+        }
+        html.println(">");
+
         if (sheets.size() > 0) {
             // 分组归类
             Map<String, List<UISheet>> items = new LinkedHashMap<>();
@@ -58,6 +66,10 @@ public class UIToolBar extends UIComponent {
             super.output(html);
         }
         html.print("</aside>");
+    }
+
+    private boolean isEmpty() {
+        return sheets.size() == 0 && this.getComponents().size() == 0;
     }
 
     public List<UISheet> getSheets() {
