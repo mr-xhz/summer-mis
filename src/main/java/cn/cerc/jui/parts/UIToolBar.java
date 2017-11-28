@@ -51,13 +51,12 @@ public class UIToolBar extends UIComponent {
             // 分组输出：内容
             groupNo = 0;
             for (String group : items.keySet()) {
-                html.println(String.format("<section role='toolSheet' id='group%d'>", groupNo++));
+                html.println(String.format("<div role='toolSheet' id='group%d'>", groupNo++));
                 List<UISheet> list = items.get(group);
                 for (UISheet sheet : list) {
-                    html.println("<h2 role='sheetCaption'>%s</h2>", sheet.getCaption());
                     html.print(sheet.toString());
                 }
-                html.println("</section>");
+                html.println("</div>");
             }
         } else {
             super.output(html);

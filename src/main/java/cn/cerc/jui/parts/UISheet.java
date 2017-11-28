@@ -1,7 +1,6 @@
 package cn.cerc.jui.parts;
 
 import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.HtmlWriter;
 
 public class UISheet extends UIComponent {
     private String caption = "(无标题)";
@@ -14,13 +13,6 @@ public class UISheet extends UIComponent {
 
     public UISheet(Component owner) {
         super(owner);
-    }
-
-    @Override
-    public void output(HtmlWriter html) {
-        html.println("<div>");
-        super.output(html);
-        html.println("</div>");
     }
 
     public String getCaption() {
