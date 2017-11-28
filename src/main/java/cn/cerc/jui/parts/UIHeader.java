@@ -66,7 +66,7 @@ public class UIHeader extends UIComponent {
         html.println("</section>");
 
         // 降序输出：右边
-        html.println("<section role='rightMenu'");
+        html.println("<section role='rightMenu'>");
         if (rightMenus.size() > 0) {
             html.print("<ul>");
             int i = rightMenus.size() - 1;

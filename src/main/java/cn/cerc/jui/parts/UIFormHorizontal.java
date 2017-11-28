@@ -35,7 +35,7 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
     private boolean readAll;
     private AbstractGridLine expender;
 
-    public UIFormHorizontal(UIContent owner, HttpServletRequest request) {
+    public UIFormHorizontal(UIComponent owner, HttpServletRequest request) {
         super(owner);
         this.request = request;
         this.setId("form1");

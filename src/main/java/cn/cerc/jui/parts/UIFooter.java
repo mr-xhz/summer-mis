@@ -47,14 +47,15 @@ public class UIFooter extends UIComponent {
             throw new RuntimeException(String.format("底部菜单区最多只支持 %d 个菜单项", MAX_MENUS));
 
         html.println("\n<footer role='footer'>");
+        html.println("<section role='operation'>");
         if (this.checkAll != null) {
-            html.println("<section role='operation'>");
             html.print("<input type=\"checkbox\"");
             html.print(" id=\"selectAll\"");
             html.print(" onclick=\"%s\"/>", checkAll.getUrl());
             html.println("<label for=\"selectAll\">全选</label>");
-            html.println("</section>");
         }
+        getOperation().output(html);
+        html.println("</section>");
         html.println("<section role='buttons'>");
         super.output(html);
         html.println("</section>");
