@@ -161,4 +161,12 @@ public class UIHeader extends UIComponent {
         exitPage.setName("<img src=\"images/return.png\"/>");
         exitPage.setSite(url);
     }
+
+    public void addLeftMenu(String url, String name) {
+        addLeftMenu(new UrlRecord(url, name));
+    }
+
+    public void addRightMenu(String url, String name) {
+        addRightMenu(new UrlRecord(url, name));
+    }
 }
