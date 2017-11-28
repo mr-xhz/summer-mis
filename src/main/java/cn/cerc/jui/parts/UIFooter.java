@@ -9,14 +9,14 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.core.UrlRecord;
 
 public class UIFooter extends UIComponent {
     private static final int MAX_MENUS = 6;
-    protected UrlRecord checkAll;
+    // protected UrlRecord checkAll;
     private boolean flag = false;
     private UIFooterOperation operation;
     private List<UIButton> buttons = new ArrayList<>();
+    private UICheckAll checkAll;
 
     public UIFooter(Component owner) {
         super(owner);
@@ -29,16 +29,10 @@ public class UIFooter extends UIComponent {
         super.setOwner(owner);
     }
 
-    public UrlRecord getCheckAll() {
-        return checkAll;
-    }
-
-    public void enableCheckAll(String targetId) {
-        if (targetId == null || "".equals(targetId))
-            throw new RuntimeException("targetId is null");
-        if (checkAll != null)
-            throw new RuntimeException("checkAll is not null");
-        checkAll = new UrlRecord(String.format("selectItems('%s')", targetId), "全选");
+    public void setCheckAllTargetId(String targetId) {
+        if (checkAll == null)
+            checkAll = new UICheckAll(this.getOperation());
+        checkAll.setTargetId(targetId);
     }
 
     @Override
@@ -55,12 +49,6 @@ public class UIFooter extends UIComponent {
         }
         html.println(">");
         html.println("<section role='operation'>");
-        if (this.checkAll != null) {
-            html.print("<input type=\"checkbox\"");
-            html.print(" id=\"selectAll\"");
-            html.print(" onclick=\"%s\"/>", checkAll.getUrl());
-            html.println("<label for=\"selectAll\">全选</label>");
-        }
         if (this.operation != null) {
             this.operation.output(html);
         }
@@ -128,6 +116,6 @@ public class UIFooter extends UIComponent {
     }
 
     private boolean isEmpty() {
-        return this.checkAll == null && operation == null && buttons.size() == 0;
+        return this.operation == null && buttons.size() == 0;
     }
 }
