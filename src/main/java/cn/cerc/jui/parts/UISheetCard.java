@@ -13,7 +13,7 @@ public class UISheetCard extends UISheet {
 
     @Override
     public void output(HtmlWriter html) {
-        html.println("<section>");
+        html.println("<section role='sheetCard'>");
         html.print("<label>");
         html.println(this.getCaption());
         if (url != null)
