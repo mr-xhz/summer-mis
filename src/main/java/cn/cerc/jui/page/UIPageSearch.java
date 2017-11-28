@@ -129,7 +129,7 @@ public class UIPageSearch extends AbstractJspPage {
     }
 
     public UIFormHorizontal createSearch(MemoryBuffer buff) {
-        UIFormHorizontal search = new UIFormHorizontal(this.getDocument().getContent(), this.getRequest());
+        UIFormHorizontal search = new UIFormHorizontal(this.getDocument().getControl(), this.getRequest());
         search.setBuffer(buff);
         this.setSearchWaitingId(search.getId());
         return search;

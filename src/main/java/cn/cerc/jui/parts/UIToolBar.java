@@ -24,9 +24,6 @@ public class UIToolBar extends UIComponent {
 
     @Override
     public void output(HtmlWriter html) {
-        if (sheets.size() == 0) {
-            return;
-        }
         html.print("\n<aside role='toolBar' id='%s'", this.getId());
         if (isEmpty()) {
             html.print(" style='display:none'");
