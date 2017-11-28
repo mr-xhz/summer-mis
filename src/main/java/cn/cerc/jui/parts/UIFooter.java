@@ -16,7 +16,6 @@ public class UIFooter extends UIComponent {
     private boolean flag = false;
     private UIFooterOperation operation;
     private List<UIButton> buttons = new ArrayList<>();
-    private UICheckAll checkAll;
 
     public UIFooter(Component owner) {
         super(owner);
@@ -30,9 +29,7 @@ public class UIFooter extends UIComponent {
     }
 
     public void setCheckAllTargetId(String targetId) {
-        if (checkAll == null)
-            checkAll = new UICheckAll(this.getOperation());
-        checkAll.setTargetId(targetId);
+        this.getOperation().getCheckAll().setTargetId(targetId);
     }
 
     @Override
