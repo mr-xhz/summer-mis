@@ -16,11 +16,11 @@ public class UIMenuItem extends UIComponent {
     @Override
     public void output(HtmlWriter html) {
         // 输出菜单图像
-        html.print("<div role='menuIcon>");
+        html.print("<div role='menuIcon'>");
         html.print("<a href='%s'><img src='%s'></a>", this.getUrl(), this.getImg());
         html.print("</div>");
         // 输出菜单名称
-        html.print("<div role='menuName>");
+        html.print("<div role='menuName'>");
         html.print("<a href='%s'>%s</a>", this.getUrl(), this.getName());
         html.print("</div>");
     }
