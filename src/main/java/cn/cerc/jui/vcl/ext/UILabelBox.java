@@ -2,8 +2,9 @@ package cn.cerc.jui.vcl.ext;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
-public class UILabelBox extends Component {
+public class UILabelBox extends UIComponent {
     private String text;
     private String role;
     private String forid;

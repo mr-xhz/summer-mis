@@ -2,8 +2,9 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
-public class UIButton extends Component {
+public class UIButton extends UIComponent {
     private String name;
     private String value;
     private String text;

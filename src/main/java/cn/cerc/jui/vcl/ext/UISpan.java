@@ -2,8 +2,9 @@ package cn.cerc.jui.vcl.ext;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
-public class UISpan extends Component {
+public class UISpan extends UIComponent {
     private String text;
     private String role;
     private String onclick;

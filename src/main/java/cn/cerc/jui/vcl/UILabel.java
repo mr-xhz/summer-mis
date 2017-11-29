@@ -2,8 +2,9 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
-public class UILabel extends Component {
+public class UILabel extends UIComponent {
     private String caption;
     private String url;
     private String focusTarget;

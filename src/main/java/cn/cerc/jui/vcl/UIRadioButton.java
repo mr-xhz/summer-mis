@@ -2,8 +2,9 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
-public class UIRadioButton extends Component {
+public class UIRadioButton extends UIComponent {
     private String name = "";
     private String value = "";
     private boolean isSelected = false;

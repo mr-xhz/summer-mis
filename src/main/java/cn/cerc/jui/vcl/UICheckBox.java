@@ -2,6 +2,7 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 /**
  * 
@@ -10,7 +11,7 @@ import cn.cerc.jpage.core.HtmlWriter;
  * @author 张弓
  *
  */
-public class UICheckBox extends Component {
+public class UICheckBox extends UIComponent {
     private String name;
     private String type;
     private String value;

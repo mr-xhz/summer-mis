@@ -1,6 +1,6 @@
 package cn.cerc.jui.vcl;
 
-import cn.cerc.jpage.core.Component;
+import cn.cerc.jui.parts.UIComponent;
 
 /**
  * 多页控制器
@@ -8,6 +8,6 @@ import cn.cerc.jpage.core.Component;
  * @author 张弓
  *
  */
-public class UIPageControl extends Component {
+public class UIPageControl extends UIComponent {
 
 }

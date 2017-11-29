@@ -2,6 +2,7 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
@@ -10,7 +11,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 黄荣君
  *
  */
-public class UITextArea extends Component {
+public class UITextArea extends UIComponent {
     private UISpan caption;
     private String name;
     private String text;

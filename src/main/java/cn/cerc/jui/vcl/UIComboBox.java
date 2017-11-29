@@ -5,8 +5,9 @@ import java.util.LinkedHashMap;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
-public class UIComboBox extends Component {
+public class UIComboBox extends UIComponent {
     private LinkedHashMap<String, String> options = new LinkedHashMap<>(6);
     private String selectId;
     private String name;

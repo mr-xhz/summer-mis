@@ -1,6 +1,6 @@
 package cn.cerc.jui.vcl;
 
-import cn.cerc.jpage.core.Component;
+import cn.cerc.jui.parts.UIComponent;
 
 /**
  * 列表选择框
@@ -8,6 +8,6 @@ import cn.cerc.jpage.core.Component;
  * @author 张弓
  *
  */
-public class UIListBox extends Component {
+public class UIListBox extends UIComponent {
 
 }

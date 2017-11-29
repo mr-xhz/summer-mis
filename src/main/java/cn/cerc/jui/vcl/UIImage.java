@@ -2,8 +2,9 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
-public class UIImage extends Component {
+public class UIImage extends UIComponent {
     private String width;
     private String height;
     private String src;
