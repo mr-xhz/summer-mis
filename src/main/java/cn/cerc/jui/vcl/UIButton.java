@@ -3,18 +3,18 @@ package cn.cerc.jui.vcl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class Button extends Component {
+public class UIButton extends Component {
     private String name;
     private String value;
     private String text;
     private String onclick;
     private String role;
 
-    public Button() {
+    public UIButton() {
         super();
     }
 
-    public Button(Component owner) {
+    public UIButton(Component owner) {
         super(owner);
     }
 

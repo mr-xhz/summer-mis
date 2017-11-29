@@ -1,14 +1,13 @@
-package cn.cerc.jui.vcl.ext;
+package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Label;
 
-public class RadioBox extends Component {
+public class UIRadioButton extends Component {
     private String name = "";
     private String value = "";
     private boolean isSelected = false;
-    private Label label;
+    private UILabel label;
 
     @Override
     public void output(HtmlWriter html) {
@@ -20,11 +19,11 @@ public class RadioBox extends Component {
         html.print(" name='%s' value='%s'>", name, value);
     }
 
-    public RadioBox(Component owner) {
+    public UIRadioButton(Component owner) {
         super(owner);
     }
 
-    public RadioBox() {
+    public UIRadioButton() {
         super();
     }
 
@@ -44,9 +43,9 @@ public class RadioBox extends Component {
         this.value = value;
     }
 
-    public Label getLabel() {
+    public UILabel getLabel() {
         if (label == null)
-            label = new Label();
+            label = new UILabel();
         return label;
     }
 

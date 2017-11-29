@@ -5,7 +5,7 @@ import java.util.Map;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.GroupBox;
+import cn.cerc.jui.vcl.UIGroupBox;
 
 public class UIActionForm extends UIComponent {
     private String action;
@@ -18,7 +18,7 @@ public class UIActionForm extends UIComponent {
         super(null);
     }
 
-    public UIActionForm(GroupBox owner) {
+    public UIActionForm(UIGroupBox owner) {
         super.setOwner(owner);
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 
@@ -13,7 +13,7 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block117 extends Component {
-    private List<Span> addBlock = new ArrayList<>();
+    private List<UISpan> addBlock = new ArrayList<>();
 
     /**
      * 以span显示内容块
@@ -34,20 +34,20 @@ public class Block117 extends Component {
             addBlock("(addBlock)");
             addBlock("(addBlock)");
         }
-        for (Span span : addBlock)
+        for (UISpan span : addBlock)
             span.output(html);
         html.println("</div>");
     }
 
-    public Span addBlock(String text) {
-        Span span = new Span(this);
+    public UISpan addBlock(String text) {
+        UISpan span = new UISpan(this);
         span.setText(text);
         addBlock.add(span);
         return span;
     }
 
-    public Span addBlock(String text, String onclick) {
-        Span span = new Span(this);
+    public UISpan addBlock(String text, String onclick) {
+        UISpan span = new UISpan(this);
         span.setText(text);
         span.setOnclick(onclick);
         addBlock.add(span);

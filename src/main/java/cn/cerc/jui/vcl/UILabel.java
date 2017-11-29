@@ -3,7 +3,7 @@ package cn.cerc.jui.vcl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class Label extends Component {
+public class UILabel extends Component {
     private String caption;
     private String url;
     private String focusTarget;
@@ -16,11 +16,11 @@ public class Label extends Component {
         this.focusTarget = focusTarget;
     }
 
-    public Label(Component component) {
+    public UILabel(Component component) {
         super(component);
     }
 
-    public Label() {
+    public UILabel() {
         super();
     }
 
@@ -35,13 +35,13 @@ public class Label extends Component {
             html.print("<a href='%s'>%s</a>", this.url, this.caption);
     }
 
-    public Label(String caption, String url) {
+    public UILabel(String caption, String url) {
         super();
         this.caption = caption;
         this.url = url;
     }
 
-    public Label(String caption) {
+    public UILabel(String caption) {
         super();
         this.caption = caption;
     }

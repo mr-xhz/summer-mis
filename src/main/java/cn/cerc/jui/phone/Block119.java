@@ -5,8 +5,8 @@ import org.apache.commons.lang.StringUtils;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 两组左边图标右边文字
@@ -15,10 +15,10 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block119 extends Component {
-    private Span leftTitle = new Span();
-    private Image leftImage = new Image();
-    private Span rightTitle = new Span();
-    private Image rightImage = new Image();
+    private UISpan leftTitle = new UISpan();
+    private UIImage leftImage = new UIImage();
+    private UISpan rightTitle = new UISpan();
+    private UIImage rightImage = new UIImage();
     private UrlRecord leftUrl = new UrlRecord();
     private UrlRecord rightUrl = new UrlRecord();
 
@@ -61,19 +61,19 @@ public class Block119 extends Component {
         return rightUrl;
     }
 
-    public Span getRightTitle() {
+    public UISpan getRightTitle() {
         return rightTitle;
     }
 
-    public Span getLeftTitle() {
+    public UISpan getLeftTitle() {
         return leftTitle;
     }
 
-    public Image getLeftImage() {
+    public UIImage getLeftImage() {
         return leftImage;
     }
 
-    public Image getRightImage() {
+    public UIImage getRightImage() {
         return rightImage;
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.UIImage;
 
 /**
  * 
@@ -13,7 +13,7 @@ import cn.cerc.jui.vcl.Image;
  *
  */
 public class Block601 extends Component {
-    private List<Image> items = new ArrayList<>();
+    private List<UIImage> items = new ArrayList<>();
 
     /**
      * 多图片显示，左右滑动更换
@@ -28,7 +28,7 @@ public class Block601 extends Component {
     @Override
     public void output(HtmlWriter html) {
         if (items.size() == 0) {
-            Image image = new Image();
+            UIImage image = new UIImage();
             image.setAlt("(image)");
             image.setWidth("100%").setHeight("192px");
             image.setSrc("");
@@ -37,7 +37,7 @@ public class Block601 extends Component {
         html.println("<!-- %s -->", this.getClass().getName());
         html.println("<div class=\"block601\">");
         html.println("<div class=\"swiper-wrapper\">");
-        for (Image image : items) {
+        for (UIImage image : items) {
             html.println("<div class=\"swiper-slide\">");
             image.output(html);
             html.println("</div>");
@@ -47,8 +47,8 @@ public class Block601 extends Component {
         html.println("</div>");
     }
 
-    public Image addImage(String imgUrl) {
-        Image image = new Image();
+    public UIImage addImage(String imgUrl) {
+        UIImage image = new UIImage();
         image.setSrc(imgUrl);
         items.add(image);
         return image;

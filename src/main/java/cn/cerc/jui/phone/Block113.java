@@ -2,12 +2,12 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.TextArea;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UITextArea;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class Block113 extends Component {
-    private Span label = new Span();
-    private TextArea input = new TextArea();
+    private UISpan label = new UISpan();
+    private UITextArea input = new UITextArea();
 
     /**
      * 文本 + 长文本消息
@@ -31,11 +31,11 @@ public class Block113 extends Component {
         html.println("</div>");
     }
 
-    public Span getLabel() {
+    public UISpan getLabel() {
         return label;
     }
 
-    public TextArea getInput() {
+    public UITextArea getInput() {
         return input;
     }
 

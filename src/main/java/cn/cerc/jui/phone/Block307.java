@@ -6,8 +6,8 @@ import java.util.List;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 三行文字列表显示，右侧带导航栏箭头
@@ -18,14 +18,14 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block307 extends Component {
-    private Span title;
+    private UISpan title;
     private UrlRecord url;
-    private Image icon = new Image();
+    private UIImage icon = new UIImage();
     private List<String> items = new ArrayList<>();
 
     public Block307(Component owner) {
         super(owner);
-        title = new Span();
+        title = new UISpan();
         title.setText("(title)");
         title.setRole("title");
 
@@ -60,7 +60,7 @@ public class Block307 extends Component {
         html.print("</div>");
     }
 
-    public Span getTitle() {
+    public UISpan getTitle() {
         return title;
     }
 
@@ -72,11 +72,11 @@ public class Block307 extends Component {
         this.url = url;
     }
 
-    public Image getIcon() {
+    public UIImage getIcon() {
         return icon;
     }
 
-    public void setIcon(Image icon) {
+    public void setIcon(UIImage icon) {
         this.icon = icon;
     }
 

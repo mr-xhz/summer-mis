@@ -6,7 +6,7 @@ import java.util.List;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 提示块
@@ -15,7 +15,7 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block125 extends Component {
-    private List<Span> items = new ArrayList<>();
+    private List<UISpan> items = new ArrayList<>();
     private List<UrlRecord> urlRecords = new ArrayList<>();
 
     public Block125(Component owner) {
@@ -40,7 +40,7 @@ public class Block125 extends Component {
     }
 
     public void addItems(String text, UrlRecord url) {
-        Span span = new Span();
+        UISpan span = new UISpan();
         span.setText(text);
         this.items.add(span);
         this.urlRecords.add(url);

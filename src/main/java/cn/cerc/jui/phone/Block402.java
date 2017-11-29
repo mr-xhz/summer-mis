@@ -2,9 +2,9 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.TextBox;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.UITextBox;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 
@@ -13,12 +13,12 @@ import cn.cerc.jui.vcl.ext.Span;
  */
 public class Block402 extends Component {
     private String title = "(title)";
-    private Image product = new Image();
-    private Image add = new Image();
-    private Image diff = new Image();
-    private Span describe = new Span();
-    private Span remark = new Span();
-    private TextBox input = new TextBox();
+    private UIImage product = new UIImage();
+    private UIImage add = new UIImage();
+    private UIImage diff = new UIImage();
+    private UISpan describe = new UISpan();
+    private UISpan remark = new UISpan();
+    private UITextBox input = new UITextBox();
     private String role = new String();
     private String dataName = new String();
     private String dataJson = new String();
@@ -81,19 +81,19 @@ public class Block402 extends Component {
         html.println("</section>");
     }
 
-    public Span getDescribe() {
+    public UISpan getDescribe() {
         return describe;
     }
 
-    public void setDescribe(Span describe) {
+    public void setDescribe(UISpan describe) {
         this.describe = describe;
     }
 
-    public TextBox getInput() {
+    public UITextBox getInput() {
         return input;
     }
 
-    public Image getProduct() {
+    public UIImage getProduct() {
         return product;
     }
 
@@ -105,15 +105,15 @@ public class Block402 extends Component {
         this.title = title;
     }
 
-    public Span getRemark() {
+    public UISpan getRemark() {
         return remark;
     }
 
-    public Image getAdd() {
+    public UIImage getAdd() {
         return add;
     }
 
-    public Image getDiff() {
+    public UIImage getDiff() {
         return diff;
     }
 

@@ -5,9 +5,9 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.TextBox;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.UITextBox;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 
@@ -15,8 +15,8 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block107 extends Component {
-    private TextBox input = new TextBox();
-    private Image image = new Image();
+    private UITextBox input = new UITextBox();
+    private UIImage image = new UIImage();
     private List<String> items = new ArrayList<>();
     private String childPage = "";
     private String dataUrl = "";
@@ -58,11 +58,11 @@ public class Block107 extends Component {
         html.println("</div>");
     }
 
-    public TextBox getInput() {
+    public UITextBox getInput() {
         return input;
     }
 
-    public Span getCaption() {
+    public UISpan getCaption() {
         return input.getCaption();
     }
 

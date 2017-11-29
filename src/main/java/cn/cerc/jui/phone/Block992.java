@@ -5,7 +5,7 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Button;
+import cn.cerc.jui.vcl.UIButton;
 
 /**
  * 
@@ -13,7 +13,7 @@ import cn.cerc.jui.vcl.Button;
  *
  */
 public class Block992 extends Component {
-    private List<Button> items = new ArrayList<>();
+    private List<UIButton> items = new ArrayList<>();
 
     /**
      * 底部状态栏：1个功能按钮+提示文字
@@ -29,13 +29,13 @@ public class Block992 extends Component {
     public void output(HtmlWriter html) {
         html.println("<!-- %s -->", this.getClass().getName());
         html.println("<div class=\"block992\">");
-        for (Button button : items)
+        for (UIButton button : items)
             button.output(html);
         html.println("</div>");
     }
 
-    public Button addButton(String caption) {
-        Button button = new Button();
+    public UIButton addButton(String caption) {
+        UIButton button = new UIButton();
         button.setText(caption);
         items.add(button);
         return button;

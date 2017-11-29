@@ -3,9 +3,9 @@ package cn.cerc.jui.phone;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jui.parts.UIActionForm;
-import cn.cerc.jui.vcl.Button;
-import cn.cerc.jui.vcl.TextBox;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIButton;
+import cn.cerc.jui.vcl.UITextBox;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 一组左边图标右边文字
@@ -14,9 +14,9 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block123 extends Component {
-    private Span title = new Span();
-    private TextBox textBox = new TextBox();
-    private Button button = new Button();
+    private UISpan title = new UISpan();
+    private UITextBox textBox = new UITextBox();
+    private UIButton button = new UIButton();
     private UIActionForm form = new UIActionForm();
 
     public Block123(Component owner) {
@@ -37,11 +37,11 @@ public class Block123 extends Component {
         html.print("</div>");
     }
 
-    public Span getTitle() {
+    public UISpan getTitle() {
         return title;
     }
 
-    public TextBox getTextBox() {
+    public UITextBox getTextBox() {
         return textBox;
     }
 
@@ -50,7 +50,7 @@ public class Block123 extends Component {
         return form;
     }
 
-    public Button getButton() {
+    public UIButton getButton() {
         return button;
     }
 }

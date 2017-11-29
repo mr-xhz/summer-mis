@@ -6,7 +6,7 @@ import java.util.Map;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.UIImage;
 
 /**
  * 可用菜单 图标 + 文字
@@ -17,7 +17,7 @@ import cn.cerc.jui.vcl.Image;
  *
  */
 public class Block303 extends Component {
-    private Map<UrlRecord, Image> items = new LinkedHashMap<>();
+    private Map<UrlRecord, UIImage> items = new LinkedHashMap<>();
 
     public Block303(Component owner) {
         super(owner);
@@ -30,7 +30,7 @@ public class Block303 extends Component {
                 UrlRecord url = new UrlRecord();
                 url.setName("(名称)");
                 url.setSite("#");
-                Image img = new Image();
+                UIImage img = new UIImage();
                 img.setSrc("jui/phone/block301-leftIcon.png");
                 this.addItem(url, img);
             }
@@ -51,7 +51,7 @@ public class Block303 extends Component {
         html.println("</div>");
     }
 
-    public void addItem(UrlRecord url, Image image) {
+    public void addItem(UrlRecord url, UIImage image) {
         if (items.size() > 3) {
             throw new RuntimeException("一个菜单组件最多容纳4个对象");
         }

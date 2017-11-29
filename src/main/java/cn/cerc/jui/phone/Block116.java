@@ -2,18 +2,18 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Button;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIButton;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * @author 善贵
  *
  */
 public class Block116 extends Component {
-    private Span title = new Span();
-    private Image image = new Image();
-    private Button button = new Button();
+    private UISpan title = new UISpan();
+    private UIImage image = new UIImage();
+    private UIButton button = new UIButton();
 
     /**
      * 分段标题，带一个图标及按钮
@@ -39,15 +39,15 @@ public class Block116 extends Component {
         html.println("</div>");
     }
 
-    public Span getTitle() {
+    public UISpan getTitle() {
         return title;
     }
 
-    public Image getImage() {
+    public UIImage getImage() {
         return image;
     }
 
-    public Button getButton() {
+    public UIButton getButton() {
         return button;
     }
 }

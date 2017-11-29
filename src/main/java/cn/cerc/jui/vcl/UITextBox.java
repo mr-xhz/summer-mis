@@ -2,7 +2,7 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 
@@ -11,8 +11,8 @@ import cn.cerc.jui.vcl.ext.Span;
  * @author 张弓
  *
  */
-public class TextBox extends Component {
-    private Span caption;
+public class UITextBox extends Component {
+    private UISpan caption;
     private String name;
     private String type;
     private String value;
@@ -28,11 +28,11 @@ public class TextBox extends Component {
     private String onclick;
     private String oninput;
 
-    public TextBox() {
+    public UITextBox() {
         super();
     }
 
-    public TextBox(Component owner) {
+    public UITextBox(Component owner) {
         super(owner);
     }
 
@@ -75,13 +75,13 @@ public class TextBox extends Component {
         html.println(" />");
     }
 
-    public Span getCaption() {
+    public UISpan getCaption() {
         if (caption == null)
-            caption = new Span();
+            caption = new UISpan();
         return caption;
     }
 
-    public void setCaption(Span caption) {
+    public void setCaption(UISpan caption) {
         this.caption = caption;
     }
 
@@ -153,7 +153,7 @@ public class TextBox extends Component {
         return type;
     }
 
-    public TextBox setType(String type) {
+    public UITextBox setType(String type) {
         this.type = type;
         return this;
     }

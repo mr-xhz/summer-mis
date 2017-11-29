@@ -10,20 +10,20 @@ import cn.cerc.jpage.core.HtmlWriter;
  * @author 张弓
  *
  */
-public class CheckBox extends Component {
+public class UICheckBox extends Component {
     private String name;
     private String type;
     private String value;
     private String role;
     private boolean checked;
 
-    public CheckBox() {
+    public UICheckBox() {
         super();
         type = "checkbox";
         checked = false;
     }
 
-    public CheckBox(Component owner) {
+    public UICheckBox(Component owner) {
         super(owner);
         type = "checkbox";
         checked = false;

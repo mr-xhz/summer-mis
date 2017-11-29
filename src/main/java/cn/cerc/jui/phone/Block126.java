@@ -2,7 +2,7 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 提示块
@@ -11,7 +11,7 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block126 extends Component {
-    private Span title = new Span();
+    private UISpan title = new UISpan();
 
     public Block126(Component owner) {
         super(owner);
@@ -26,7 +26,7 @@ public class Block126 extends Component {
         html.print("</div>");
     }
 
-    public Span getTitle() {
+    public UISpan getTitle() {
         return title;
     }
 

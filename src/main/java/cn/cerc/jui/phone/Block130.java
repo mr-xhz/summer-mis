@@ -2,12 +2,12 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.CheckBox;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UICheckBox;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class Block130 extends Component {
-    private Span label = new Span();
-    private CheckBox checkBox = new CheckBox();
+    private UISpan label = new UISpan();
+    private UICheckBox checkBox = new UICheckBox();
 
     /**
      * 多选框 + 文本
@@ -31,11 +31,11 @@ public class Block130 extends Component {
         html.println("</div>");
     }
 
-    public Span getLabel() {
+    public UISpan getLabel() {
         return label;
     }
 
-    public CheckBox getCheckBox() {
+    public UICheckBox getCheckBox() {
         return checkBox;
     }
 }

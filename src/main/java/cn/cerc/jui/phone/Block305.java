@@ -2,7 +2,7 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.UIImage;
 
 /**
  * 用于显示简介，说明等
@@ -16,12 +16,12 @@ import cn.cerc.jui.vcl.Image;
  */
 public class Block305 extends Component {
     private String title = "(title)";
-    private Image icon;
+    private UIImage icon;
     private String describe = "(describe)";
 
     public Block305(Component owner) {
         super(owner);
-        icon = new Image();
+        icon = new UIImage();
         icon.setSrc("jui/phone/block305-icon.png");
     }
 
@@ -51,11 +51,11 @@ public class Block305 extends Component {
         this.title = title;
     }
 
-    public Image getIcon() {
+    public UIImage getIcon() {
         return icon;
     }
 
-    public void setIcon(Image icon) {
+    public void setIcon(UIImage icon) {
         this.icon = icon;
     }
 

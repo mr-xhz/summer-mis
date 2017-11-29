@@ -2,14 +2,14 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.TextBox;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.UITextBox;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class Block109 extends Component {
-    private Span label = new Span();
-    private TextBox input = new TextBox();
-    private Image select = new Image();
+    private UISpan label = new UISpan();
+    private UITextBox input = new UITextBox();
+    private UIImage select = new UIImage();
 
     /**
      * 文本 + 输入框 + 弹窗选择按钮
@@ -33,15 +33,15 @@ public class Block109 extends Component {
         html.println("</div>");
     }
 
-    public Span getLabel() {
+    public UISpan getLabel() {
         return label;
     }
 
-    public TextBox getInput() {
+    public UITextBox getInput() {
         return input;
     }
 
-    public Image getSelect() {
+    public UIImage getSelect() {
         return select;
     }
 }

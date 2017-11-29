@@ -2,14 +2,14 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Button;
-import cn.cerc.jui.vcl.TextBox;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIButton;
+import cn.cerc.jui.vcl.UITextBox;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class Block110 extends Component {
-    private Span label = new Span();
-    private TextBox input = new TextBox();
-    private Button search = new Button();
+    private UISpan label = new UISpan();
+    private UITextBox input = new UITextBox();
+    private UIButton search = new UIButton();
 
     /**
      * 文本 + 输入框 + 查询按钮
@@ -33,15 +33,15 @@ public class Block110 extends Component {
         html.println("</div>");
     }
 
-    public Span getLabel() {
+    public UISpan getLabel() {
         return label;
     }
 
-    public TextBox getInput() {
+    public UITextBox getInput() {
         return input;
     }
 
-    public Button getSearch() {
+    public UIButton getSearch() {
         return search;
     }
 }

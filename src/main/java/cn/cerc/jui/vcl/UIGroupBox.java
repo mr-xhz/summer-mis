@@ -3,11 +3,11 @@ package cn.cerc.jui.vcl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class GroupBox extends Component {
+public class UIGroupBox extends Component {
 
     private String cssClass;
 
-    public GroupBox(Component content) {
+    public UIGroupBox(Component content) {
         super(content);
     }
 

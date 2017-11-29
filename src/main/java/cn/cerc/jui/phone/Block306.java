@@ -5,7 +5,7 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 三行文字列表显示
@@ -16,12 +16,12 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block306 extends Component {
-    private Span title;
+    private UISpan title;
     private List<String> items = new ArrayList<>();
 
     public Block306(Component owner) {
         super(owner);
-        title = new Span();
+        title = new UISpan();
         title.setText("(title)");
         title.setRole("title");
     }
@@ -45,7 +45,7 @@ public class Block306 extends Component {
         html.print("</div>");
     }
 
-    public Span getTitle() {
+    public UISpan getTitle() {
         return title;
     }
 

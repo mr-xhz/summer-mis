@@ -6,10 +6,10 @@ import java.util.List;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class Block118 extends Component {
-    private Span left = new Span();
+    private UISpan left = new UISpan();
     private List<UrlRecord> urls = new ArrayList<>();
 
     /**

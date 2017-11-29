@@ -3,7 +3,7 @@ package cn.cerc.jui.vcl;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class Image extends Component {
+public class UIImage extends Component {
     private String width;
     private String height;
     private String src;
@@ -11,11 +11,11 @@ public class Image extends Component {
     private String onclick;
     private String alt;
 
-    public Image() {
+    public UIImage() {
         super();
     }
 
-    public Image(Component owner) {
+    public UIImage(Component owner) {
         super(owner);
     }
 
@@ -39,7 +39,7 @@ public class Image extends Component {
         return width;
     }
 
-    public Image setWidth(String width) {
+    public UIImage setWidth(String width) {
         this.width = width;
         return this;
     }
@@ -48,7 +48,7 @@ public class Image extends Component {
         return height;
     }
 
-    public Image setHeight(String height) {
+    public UIImage setHeight(String height) {
         this.height = height;
         return this;
     }
@@ -57,7 +57,7 @@ public class Image extends Component {
         return src;
     }
 
-    public Image setSrc(String src) {
+    public UIImage setSrc(String src) {
         this.src = src;
         return this;
     }
@@ -74,7 +74,7 @@ public class Image extends Component {
         return onclick;
     }
 
-    public Image setOnclick(String onclick) {
+    public UIImage setOnclick(String onclick) {
         this.onclick = onclick;
         return this;
     }
@@ -83,7 +83,7 @@ public class Image extends Component {
         return alt;
     }
 
-    public Image setAlt(String alt) {
+    public UIImage setAlt(String alt) {
         this.alt = alt;
         return this;
     }

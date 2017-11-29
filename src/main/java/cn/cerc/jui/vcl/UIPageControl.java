@@ -3,11 +3,11 @@ package cn.cerc.jui.vcl;
 import cn.cerc.jpage.core.Component;
 
 /**
- * 列表选择框
+ * 多页控制器
  * 
  * @author 张弓
  *
  */
-public class ListBox extends Component {
+public class UIPageControl extends Component {
 
 }

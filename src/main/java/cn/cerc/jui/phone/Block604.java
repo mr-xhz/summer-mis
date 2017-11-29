@@ -6,7 +6,7 @@ import java.util.Map;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Label;
+import cn.cerc.jui.vcl.UILabel;
 
 /**
  * 用于卡片资料显示
@@ -16,13 +16,13 @@ import cn.cerc.jui.vcl.Label;
  * 文字信息（最多6行）
  */
 public class Block604 extends Component {
-    private Label title;
+    private UILabel title;
     private UrlRecord url;
     private Map<String, Object> items = new LinkedHashMap<>();
 
     public Block604(Component owner) {
         super(owner);
-        title = new Label();
+        title = new UILabel();
         title.setCaption("(title)");
     }
 
@@ -51,11 +51,11 @@ public class Block604 extends Component {
         html.println("</div>");
     }
 
-    public Label getTitle() {
+    public UILabel getTitle() {
         return title;
     }
 
-    public void setTitle(Label title) {
+    public void setTitle(UILabel title) {
         this.title = title;
     }
 

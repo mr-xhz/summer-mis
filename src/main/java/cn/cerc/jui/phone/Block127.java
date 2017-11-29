@@ -3,7 +3,7 @@ package cn.cerc.jui.phone;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.UIImage;
 
 /**
  * 右侧带数据角标 + 导航链接
@@ -15,7 +15,7 @@ import cn.cerc.jui.vcl.Image;
 public class Block127 extends Component {
     private String text;
     private int number;
-    private Image icon = new Image();
+    private UIImage icon = new UIImage();
     private UrlRecord url;
 
     public Block127(Component owner) {
@@ -58,7 +58,7 @@ public class Block127 extends Component {
         this.number = number;
     }
 
-    public Image getIcon() {
+    public UIImage getIcon() {
         return icon;
     }
 

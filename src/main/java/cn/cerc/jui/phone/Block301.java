@@ -8,16 +8,16 @@ import java.util.Map;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.UIImage;
 
 /**
  * 用于生成厂商、客户、帐套选择
  */
 public class Block301 extends Component {
-    private Image leftIcon = new Image();
+    private UIImage leftIcon = new UIImage();
     private String title = "(title)";
-    List<Image> list = new ArrayList<>();
-    private Image rightIcon = new Image();
+    List<UIImage> list = new ArrayList<>();
+    private UIImage rightIcon = new UIImage();
     private UrlRecord operator;
     private Map<String, String> items = new LinkedHashMap<>();
 
@@ -41,7 +41,7 @@ public class Block301 extends Component {
 
         html.print("<div role='title'>");
         html.print("<span role='title'>");
-        for (Image image : list) {
+        for (UIImage image : list) {
             html.print(image.toString());
         }
         html.print("%s</span>", title);
@@ -66,7 +66,7 @@ public class Block301 extends Component {
         html.println("</div>");
     }
 
-    public Image getLeftIcon() {
+    public UIImage getLeftIcon() {
         return leftIcon;
     }
 
@@ -88,11 +88,11 @@ public class Block301 extends Component {
         return this;
     }
 
-    public Image getRightIcon() {
+    public UIImage getRightIcon() {
         return rightIcon;
     }
 
-    public Block301 addIcon(Image img) {
+    public Block301 addIcon(UIImage img) {
         list.add(img);
         return this;
     }

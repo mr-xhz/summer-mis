@@ -3,12 +3,12 @@ package cn.cerc.jui.phone;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class Block101 extends Component {
-    private Span title = new Span();
-    private Image image = new Image();
+    private UISpan title = new UISpan();
+    private UIImage image = new UIImage();
     private UrlRecord url = new UrlRecord();
 
     /**
@@ -36,11 +36,11 @@ public class Block101 extends Component {
         html.println("</div>");
     }
 
-    public Span getTitle() {
+    public UISpan getTitle() {
         return title;
     }
 
-    public Image getImage() {
+    public UIImage getImage() {
         return image;
     }
 

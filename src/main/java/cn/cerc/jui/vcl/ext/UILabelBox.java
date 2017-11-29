@@ -3,31 +3,32 @@ package cn.cerc.jui.vcl.ext;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class Span extends Component {
+public class UILabelBox extends Component {
     private String text;
     private String role;
-    private String onclick;
+    private String forid;
 
-    public Span() {
+    public UILabelBox() {
         super();
     }
 
-    public Span(Component owner) {
+    public UILabelBox(Component owner) {
         super(owner);
     }
 
     @Override
     public void output(HtmlWriter html) {
-        html.print("<span");
+        html.print("<label");
         if (getId() != null)
             html.print(" id='%s'", this.getId());
         if (role != null)
             html.print(" role='%s'", this.role);
-        if (onclick != null)
-            html.print(" onclick='%s'", this.onclick);
+        if (forid != null) {
+            html.print(" for='%s'", this.forid);
+        }
         html.print(">");
         html.print(text);
-        html.println("</span>");
+        html.println("</label>");
     }
 
     public String getText() {
@@ -38,10 +39,6 @@ public class Span extends Component {
         this.text = text;
     }
 
-    public void setText(String format, Object... args) {
-        this.text = String.format(format, args);
-    }
-
     public String getRole() {
         return role;
     }
@@ -50,11 +47,12 @@ public class Span extends Component {
         this.role = role;
     }
 
-    public String getOnclick() {
-        return onclick;
+    public String getForid() {
+        return forid;
     }
 
-    public void setOnclick(String onclick) {
-        this.onclick = onclick;
+    public void setForid(String forid) {
+        this.forid = forid;
     }
+
 }

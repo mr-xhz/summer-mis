@@ -2,7 +2,7 @@ package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 多行文本输入框
@@ -10,8 +10,8 @@ import cn.cerc.jui.vcl.ext.Span;
  * @author 黄荣君
  *
  */
-public class TextArea extends Component {
-    private Span caption;
+public class UITextArea extends Component {
+    private UISpan caption;
     private String name;
     private String text;
     private String placeholder;
@@ -19,10 +19,10 @@ public class TextArea extends Component {
     private int rows;
     private boolean readonly;
 
-    public TextArea() {
+    public UITextArea() {
     }
 
-    public TextArea(Component owner) {
+    public UITextArea(Component owner) {
         super(owner);
     }
 
@@ -59,13 +59,13 @@ public class TextArea extends Component {
         html.print("</textarea>");
     }
 
-    public Span getCaption() {
+    public UISpan getCaption() {
         if (caption == null)
-            caption = new Span();
+            caption = new UISpan();
         return caption;
     }
 
-    public void setCaption(Span caption) {
+    public void setCaption(UISpan caption) {
         this.caption = caption;
     }
 

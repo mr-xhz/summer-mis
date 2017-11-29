@@ -2,12 +2,12 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Button;
-import cn.cerc.jui.vcl.TextBox;
+import cn.cerc.jui.vcl.UIButton;
+import cn.cerc.jui.vcl.UITextBox;
 
 public class Block104 extends Component {
-    private TextBox input;
-    private Button submit;
+    private UITextBox input;
+    private UIButton submit;
 
     /**
      * 通用搜索条件框
@@ -17,9 +17,9 @@ public class Block104 extends Component {
      */
     public Block104(Component owner) {
         super(owner);
-        input = new TextBox(this);
+        input = new UITextBox(this);
         input.setPlaceholder("请输入搜索条件");
-        submit = new Button(this);
+        submit = new UIButton(this);
         submit.setText("搜索");
     }
 
@@ -34,11 +34,11 @@ public class Block104 extends Component {
         html.println("</div>");
     }
 
-    public TextBox getInput() {
+    public UITextBox getInput() {
         return input;
     }
 
-    public Button getSubmit() {
+    public UIButton getSubmit() {
         return submit;
     }
 }

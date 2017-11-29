@@ -2,7 +2,7 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.UIImage;
 
 /**
  * 
@@ -10,7 +10,7 @@ import cn.cerc.jui.vcl.Image;
  *
  */
 public class Block603 extends Component {
-    private Image image = new Image();
+    private UIImage image = new UIImage();
 
     /**
      * 单图片显示
@@ -32,7 +32,7 @@ public class Block603 extends Component {
         html.println("</div>");
     }
 
-    public Image getImage() {
+    public UIImage getImage() {
         return image;
     }
 

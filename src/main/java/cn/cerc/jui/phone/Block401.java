@@ -5,17 +5,17 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Button;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIButton;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class Block401 extends Component {
     private String title = "(title)";
-    private Image product = new Image();
-    private List<Image> images = new ArrayList<>();
-    private Span remark = new Span();
-    private Span describe = new Span();
-    private Button button = new Button();
+    private UIImage product = new UIImage();
+    private List<UIImage> images = new ArrayList<>();
+    private UISpan remark = new UISpan();
+    private UISpan describe = new UISpan();
+    private UIButton button = new UIButton();
 
     /**
      * 显示商品摘要，方便加入购物车
@@ -45,7 +45,7 @@ public class Block401 extends Component {
         html.print("<div role='title'>%s</div>", this.title);
         html.print("<div role='operation'>");
 
-        for (Image image : images) {
+        for (UIImage image : images) {
             html.print("<span role='image'>");
             image.output(html);
             html.print("</span>");
@@ -73,29 +73,29 @@ public class Block401 extends Component {
         this.title = String.format(format, args);
     }
 
-    public Button getButton() {
+    public UIButton getButton() {
         return button;
     }
 
-    public void setButton(Button button) {
+    public void setButton(UIButton button) {
         this.button = button;
     }
 
     public void addImage(String imgUrl) {
-        Image image = new Image();
+        UIImage image = new UIImage();
         image.setSrc(imgUrl);
         images.add(image);
     }
 
-    public Image getProduct() {
+    public UIImage getProduct() {
         return product;
     }
 
-    public Span getRemark() {
+    public UISpan getRemark() {
         return remark;
     }
 
-    public Span getDescribe() {
+    public UISpan getDescribe() {
         return describe;
     }
 }

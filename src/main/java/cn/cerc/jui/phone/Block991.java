@@ -2,9 +2,9 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.Button;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIButton;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 
@@ -12,9 +12,9 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block991 extends Component {
-    private Image image = new Image();
-    private Button button = new Button(this);
-    private Span remark = new Span(this);
+    private UIImage image = new UIImage();
+    private UIButton button = new UIButton(this);
+    private UISpan remark = new UISpan(this);
 
     /**
      * 底部状态栏：1个功能按钮+提示文字
@@ -39,15 +39,15 @@ public class Block991 extends Component {
         html.println("</div>");
     }
 
-    public Span getRemark() {
+    public UISpan getRemark() {
         return remark;
     }
 
-    public Button getButton() {
+    public UIButton getButton() {
         return button;
     }
 
-    public Image getImage() {
+    public UIImage getImage() {
         return image;
     }
 }

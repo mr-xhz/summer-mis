@@ -2,11 +2,11 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class Block112 extends Component {
-    private Span left = new Span();
-    private Span right = new Span();
+    private UISpan left = new UISpan();
+    private UISpan right = new UISpan();
 
     /**
      * 简单显示文字类信息，仅用于显示，不可修改
@@ -31,11 +31,11 @@ public class Block112 extends Component {
         html.println("</div>");
     }
 
-    public Span getLeft() {
+    public UISpan getLeft() {
         return left;
     }
 
-    public Span getRight() {
+    public UISpan getRight() {
         return right;
     }
 

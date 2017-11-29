@@ -3,7 +3,7 @@ package cn.cerc.jui.phone;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.UIImage;
 
 /**
  * 
@@ -13,7 +13,7 @@ import cn.cerc.jui.vcl.Image;
 public class Block302 extends Component {
     private String title = "(title)";
     private String describe = "(describe)";
-    private Image rightIcon = new Image();
+    private UIImage rightIcon = new UIImage();
     private UrlRecord url;
 
     /**
@@ -70,7 +70,7 @@ public class Block302 extends Component {
         this.url = url;
     }
 
-    public Image getRightIcon() {
+    public UIImage getRightIcon() {
         return rightIcon;
     }
 }

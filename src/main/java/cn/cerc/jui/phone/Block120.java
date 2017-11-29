@@ -3,8 +3,8 @@ package cn.cerc.jui.phone;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Image;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 部门管理
@@ -13,11 +13,11 @@ import cn.cerc.jui.vcl.ext.Span;
  *
  */
 public class Block120 extends Component {
-    private Span title = new Span();
-    private Image rightImage = new Image();
-    private Image leftImage = new Image();
-    private Span leftText = new Span();
-    private Span rightText = new Span();
+    private UISpan title = new UISpan();
+    private UIImage rightImage = new UIImage();
+    private UIImage leftImage = new UIImage();
+    private UISpan leftText = new UISpan();
+    private UISpan rightText = new UISpan();
     private UrlRecord rightUrl = new UrlRecord();
     private UrlRecord leftUrl = new UrlRecord();
 
@@ -51,23 +51,23 @@ public class Block120 extends Component {
         html.print("</div>");
     }
 
-    public Span getTitle() {
+    public UISpan getTitle() {
         return title;
     }
 
-    public Image getRightImage() {
+    public UIImage getRightImage() {
         return rightImage;
     }
 
-    public Image getLeftImage() {
+    public UIImage getLeftImage() {
         return leftImage;
     }
 
-    public Span getLeftText() {
+    public UISpan getLeftText() {
         return leftText;
     }
 
-    public Span getRightText() {
+    public UISpan getRightText() {
         return rightText;
     }
 

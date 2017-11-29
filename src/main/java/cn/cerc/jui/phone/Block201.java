@@ -6,7 +6,7 @@ import java.util.List;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.UIImage;
 
 /**
  * 两行文字列表描述，右侧带导航栏箭头
@@ -16,7 +16,7 @@ import cn.cerc.jui.vcl.Image;
  */
 public class Block201 extends Component {
     private List<String> items = new ArrayList<>();
-    private Image icon = new Image();
+    private UIImage icon = new UIImage();
     private UrlRecord url;
 
     public Block201(Component owner) {
@@ -56,7 +56,7 @@ public class Block201 extends Component {
         this.url = url;
     }
 
-    public Image getIcon() {
+    public UIImage getIcon() {
         return icon;
     }
 

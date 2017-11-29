@@ -5,10 +5,10 @@ import java.util.List;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jui.vcl.ext.Span;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class Block901 extends Component {
-    private List<Span> items = new ArrayList<>();
+    private List<UISpan> items = new ArrayList<>();
 
     /**
      * 带图标的多行内容显示，如采购成功确认讯息显示
@@ -24,13 +24,13 @@ public class Block901 extends Component {
     public void output(HtmlWriter html) {
         html.println("<!-- %s -->", this.getClass().getName());
         html.println("<div class='block901'>");
-        for (Span item : items)
+        for (UISpan item : items)
             item.output(html);
         html.println("</div>");
     }
 
-    public Span addLine(String text) {
-        Span item = new Span();
+    public UISpan addLine(String text) {
+        UISpan item = new UISpan();
         item.setText(text);
         items.add(item);
         return item;
