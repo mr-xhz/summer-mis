@@ -53,7 +53,10 @@ public class UIFooter extends UIComponent {
         } else {
             html.println("<section role='footerButtons'>");
         }
-        super.output(html);
+        for (Component component : this.getComponents()) {
+            if (component != this.operation)
+                component.output(html);
+        }
         html.println("</section>");
         HttpServletRequest request = getForm().getRequest();
         if (request != null) {
