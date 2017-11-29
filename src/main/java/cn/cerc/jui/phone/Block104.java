@@ -1,11 +1,11 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIButton;
 import cn.cerc.jui.vcl.UITextBox;
 
-public class Block104 extends Component {
+public class Block104 extends UIComponent {
     private UITextBox input;
     private UIButton submit;
 
@@ -15,7 +15,7 @@ public class Block104 extends Component {
      * @param owner
      *            内容显示区域
      */
-    public Block104(Component owner) {
+    public Block104(UIComponent owner) {
         super(owner);
         input = new UITextBox(this);
         input.setPlaceholder("请输入搜索条件");

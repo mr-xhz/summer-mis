@@ -1,7 +1,5 @@
 package cn.cerc.jui.parts;
 
-import cn.cerc.jpage.core.Component;
-
 public class UISheet extends UIComponent {
     private String caption = "(无标题)";
     private String group = "工具面板";
@@ -11,7 +9,7 @@ public class UISheet extends UIComponent {
         super(null);
     }
 
-    public UISheet(Component owner) {
+    public UISheet(UIComponent owner) {
         super(owner);
     }
 

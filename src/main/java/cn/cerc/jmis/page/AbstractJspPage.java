@@ -30,7 +30,7 @@ import cn.cerc.jui.parts.UIFooter;
 import cn.cerc.jui.parts.UIHeader;
 import cn.cerc.jui.parts.UIToolBar;
 
-public abstract class AbstractJspPage extends Component implements IPage {
+public abstract class AbstractJspPage extends UIComponent implements IPage {
     private String jspFile;
     private IForm form;
     private List<String> cssFiles = new ArrayList<>();

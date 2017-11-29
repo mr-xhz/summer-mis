@@ -1,7 +1,7 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIButton;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.ext.UISpan;
@@ -11,7 +11,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 张弓
  *
  */
-public class Block991 extends Component {
+public class Block991 extends UIComponent {
     private UIImage image = new UIImage();
     private UIButton button = new UIButton(this);
     private UISpan remark = new UISpan(this);
@@ -22,7 +22,7 @@ public class Block991 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block991(Component owner) {
+    public Block991(UIComponent owner) {
         super(owner);
         image.setSrc("jui/phone/block991_back.png");
         button.setText("(button)");

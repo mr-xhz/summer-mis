@@ -1,6 +1,5 @@
 package cn.cerc.jui.vcl.ext;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jui.parts.UIComponent;
 
@@ -13,7 +12,7 @@ public class UILabelBox extends UIComponent {
         super();
     }
 
-    public UILabelBox(Component owner) {
+    public UILabelBox(UIComponent owner) {
         super(owner);
     }
 

@@ -1,6 +1,5 @@
 package cn.cerc.jui.vcl;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jui.parts.UIComponent;
 
@@ -24,7 +23,7 @@ public class UICheckBox extends UIComponent {
         checked = false;
     }
 
-    public UICheckBox(Component owner) {
+    public UICheckBox(UIComponent owner) {
         super(owner);
         type = "checkbox";
         checked = false;

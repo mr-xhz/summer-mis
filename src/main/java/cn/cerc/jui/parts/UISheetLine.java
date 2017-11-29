@@ -7,7 +7,7 @@ import cn.cerc.jpage.other.UrlMenu;
 public class UISheetLine extends UISheet {
     private UrlMenu operaUrl;
 
-    public UISheetLine(Component owner) {
+    public UISheetLine(UIComponent owner) {
         super(owner);
         this.setCaption("数据合计");
     }

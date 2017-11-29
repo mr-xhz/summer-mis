@@ -11,7 +11,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 public class UIToolBar extends UIComponent {
     private List<UISheet> sheets = new ArrayList<>();
 
-    public UIToolBar(Component owner) {
+    public UIToolBar(UIComponent owner) {
         super(owner);
         this.setId("rightSide");
     }

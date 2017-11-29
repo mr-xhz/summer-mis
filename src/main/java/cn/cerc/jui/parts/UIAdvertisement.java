@@ -1,12 +1,11 @@
 package cn.cerc.jui.parts;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jui.UIConfig;
 
 public class UIAdvertisement extends UIComponent {
 
-    public UIAdvertisement(Component owner) {
+    public UIAdvertisement(UIComponent owner) {
         super(owner);
     }
 

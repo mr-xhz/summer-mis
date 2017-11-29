@@ -3,8 +3,8 @@ package cn.cerc.jui.phone;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
@@ -12,7 +12,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 善贵
  *
  */
-public class Block117 extends Component {
+public class Block117 extends UIComponent {
     private List<UISpan> addBlock = new ArrayList<>();
 
     /**
@@ -22,7 +22,7 @@ public class Block117 extends Component {
      *            内容显示区
      * 
      */
-    public Block117(Component owner) {
+    public Block117(UIComponent owner) {
         super(owner);
     }
 

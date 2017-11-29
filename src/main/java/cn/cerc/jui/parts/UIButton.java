@@ -1,13 +1,12 @@
 package cn.cerc.jui.parts;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class UIButton extends UIComponent {
     private String caption;
     private String url;
 
-    public UIButton(Component owner) {
+    public UIButton(UIComponent owner) {
         super(owner);
     }
 

@@ -3,7 +3,6 @@ package cn.cerc.jui.vcl;
 import java.util.LinkedHashMap;
 
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jui.parts.UIComponent;
 
@@ -33,8 +32,8 @@ public class UIComboBox extends UIComponent {
         }
     }
 
-    public UIComboBox(Component component) {
-        super(component);
+    public UIComboBox(UIComponent owner) {
+        super(owner);
     }
 
     public LinkedHashMap<String, String> getOptions() {

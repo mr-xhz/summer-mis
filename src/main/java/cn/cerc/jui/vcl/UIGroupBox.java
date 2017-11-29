@@ -1,6 +1,5 @@
 package cn.cerc.jui.vcl;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jui.parts.UIComponent;
 
@@ -8,7 +7,7 @@ public class UIGroupBox extends UIComponent {
 
     private String cssClass;
 
-    public UIGroupBox(Component content) {
+    public UIGroupBox(UIComponent content) {
         super(content);
     }
 
@@ -24,10 +23,12 @@ public class UIGroupBox extends UIComponent {
         html.println("</div>");
     }
 
+    @Override
     public String getCssClass() {
         return cssClass;
     }
 
+    @Override
     public void setCssClass(String cssClass) {
         this.cssClass = cssClass;
     }

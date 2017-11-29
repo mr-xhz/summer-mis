@@ -3,7 +3,6 @@ package cn.cerc.jui.vcl;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jui.parts.UIComponent;
 
@@ -18,10 +17,11 @@ public class UIText extends UIComponent {
         super();
     }
 
-    public UIText(Component owner) {
+    public UIText(UIComponent owner) {
         super(owner);
     }
 
+    @Override
     public void output(HtmlWriter html) {
         if (content != null)
             html.print(content);

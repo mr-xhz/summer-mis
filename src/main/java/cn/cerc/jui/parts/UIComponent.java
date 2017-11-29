@@ -11,7 +11,7 @@ public class UIComponent extends Component {
         super();
     }
 
-    public UIComponent(Component owner) {
+    public UIComponent(UIComponent owner) {
         super(owner);
     }
 

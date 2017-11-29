@@ -1,12 +1,11 @@
 package cn.cerc.jui.parts;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class UIMessage extends UIComponent {
     private String text = "";
 
-    public UIMessage(Component owner) {
+    public UIMessage(UIComponent owner) {
         super(owner);
     }
 

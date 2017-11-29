@@ -17,7 +17,7 @@ public class UIFooter extends UIComponent {
     private UIFooterOperation operation;
     private List<UIButton> buttons = new ArrayList<>();
 
-    public UIFooter(Component owner) {
+    public UIFooter(UIComponent owner) {
         super(owner);
         this.setId("bottom");
     }
