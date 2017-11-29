@@ -24,7 +24,7 @@ public class UIDocument extends UIComponent {
 
     @Override
     public void output(HtmlWriter html) {
-        html.println("\n<article role='document'>");
+        html.println("<article role='document'>");
         // 可选
         if (control != null) {
             html.println("<section role='control'>");
