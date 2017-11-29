@@ -40,17 +40,19 @@ public class UIFooter extends UIComponent {
         if (this.buttons.size() > MAX_MENUS)
             throw new RuntimeException(String.format("底部菜单区最多只支持 %d 个菜单项", MAX_MENUS));
 
-        html.print("\n<footer role='footer'");
+        html.println("<footer role='footer'");
         if (isEmpty()) {
             html.print(" style='display:none'");
         }
         html.println(">");
-        html.println("<section role='operation'>");
         if (this.operation != null) {
+            html.println("<section role='footerOperation'>");
             this.operation.output(html);
+            html.println("</section>");
+            html.println("<section role='footerTools'>");
+        } else {
+            html.println("<section role='footerButtons'>");
         }
-        html.println("</section>");
-        html.println("<section role='buttons'>");
         super.output(html);
         html.println("</section>");
         HttpServletRequest request = getForm().getRequest();
