@@ -1,35 +1,27 @@
-package cn.cerc.jpage.other;
+package cn.cerc.jui.parts;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 
-public class UrlSide extends Component {
-
-    private String title = "相关操作";
+public class UISheetUrl extends UISheet {
     private List<UrlRecord> urls = new ArrayList<>();
+    // 使用于page-link.xml中
     private Map<String, String> items = new LinkedHashMap<>();
 
-    public UrlSide() {
+    @Deprecated
+    public UISheetUrl() {
         super();
+        this.setCaption("相关操作");
     }
 
-    public UrlSide(Component owner) {
+    public UISheetUrl(UIToolBar owner) {
         super(owner);
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public UrlSide setTitle(String title) {
-        this.title = title;
-        return this;
+        this.setCaption("相关操作");
     }
 
     @Override
@@ -38,7 +30,7 @@ public class UrlSide extends Component {
             return;
 
         html.println("<section>");
-        html.println("<div class=\"title\">%s</div>", this.title);
+        html.println("<div class=\"title\">%s</div>", this.getCaption());
         html.println("<div class=\"contents\">");
         for (UrlRecord url : urls) {
             html.print("<a href=\"%s\"", url.getUrl());

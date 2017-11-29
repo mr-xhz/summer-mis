@@ -49,13 +49,13 @@ public class MasterGridLine extends AbstractGridLine {
             else if (obj.getField() != null)
                 html.print(" role=\"%s\"", obj.getField());
 
-            html.println(">");
+            html.print(">");
             if (obj instanceof AbstractField) {
                 AbstractField field = (AbstractField) obj;
                 if (field instanceof IColumn)
                     html.print(((IColumn) field).format(dataSource.getDataSet().getCurrent()));
                 else if (field instanceof AbstractField)
-                    outputField(html, (AbstractField) field);
+                    outputField(html, field);
                 else
                     throw new RuntimeException("暂不支持的数据类型：" + field.getClass().getName());
             }

@@ -51,7 +51,7 @@ public class ExpenderGridLine extends AbstractGridLine {
             if (item.getRole() != null)
                 html.print(" role=\"%s\"", item.getRole());
 
-            html.println(">");
+            html.print(">");
             for (IField obj : item.getFields()) {
                 if (obj instanceof AbstractField) {
                     AbstractField field = (AbstractField) obj;
@@ -63,7 +63,7 @@ public class ExpenderGridLine extends AbstractGridLine {
                     if (field instanceof IColumn)
                         html.print(((IColumn) field).format(dataSource.getDataSet().getCurrent()));
                     else if (field instanceof AbstractField)
-                        outputField(html, (AbstractField) field);
+                        outputField(html, field);
                     else
                         throw new RuntimeException("暂不支持的数据类型：" + field.getClass().getName());
                     html.println("</span>");

@@ -4,7 +4,11 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jui.UIConfig;
 
-public class AdHeader extends Component {
+public class UIAdvertisement extends UIComponent {
+
+    public UIAdvertisement(Component owner) {
+        super(owner);
+    }
 
     @Override
     public void output(HtmlWriter html) {

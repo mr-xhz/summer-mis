@@ -5,7 +5,6 @@ import java.util.List;
 
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
@@ -14,6 +13,7 @@ import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ChildGridLine;
 import cn.cerc.jpage.grid.lines.MasterGridLine;
+import cn.cerc.jui.parts.UIActionForm;
 
 public abstract class AbstractGrid extends Component implements DataSource {
     // 数据源
@@ -25,7 +25,7 @@ public abstract class AbstractGrid extends Component implements DataSource {
     // 主行
     protected MasterGridLine masterLine;
     // 表单，后不得再使用
-    protected ActionForm form;
+    protected UIActionForm form;
 
     public AbstractGrid(IForm form, Component owner) {
         super(owner);
@@ -68,12 +68,12 @@ public abstract class AbstractGrid extends Component implements DataSource {
     }
 
     @Deprecated
-    public ActionForm getForm() {
+    public UIActionForm getForm() {
         return form;
     }
 
     @Deprecated
-    public void setForm(ActionForm form) {
+    public void setForm(UIActionForm form) {
         this.form = form;
     }
 

@@ -1,11 +1,11 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.ActionForm;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.vcl.Button;
 import cn.cerc.jpage.vcl.Span;
 import cn.cerc.jpage.vcl.TextBox;
+import cn.cerc.jui.parts.UIActionForm;
 
 /**
  * 一组左边图标右边文字
@@ -17,7 +17,7 @@ public class Block123 extends Component {
     private Span title = new Span();
     private TextBox textBox = new TextBox();
     private Button button = new Button();
-    private ActionForm form = new ActionForm();
+    private UIActionForm form = new UIActionForm();
 
     public Block123(Component owner) {
         super(owner);
@@ -45,7 +45,7 @@ public class Block123 extends Component {
         return textBox;
     }
 
-    public ActionForm getForm(String id) {
+    public UIActionForm getForm(String id) {
         form.setId(id);
         return form;
     }

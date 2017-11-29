@@ -18,12 +18,13 @@ public class Component {
         setOwner(owner);
     }
 
+    @Deprecated
     public Component(Component owner, String id) {
         this.id = id;
         setOwner(owner);
     }
 
-    public final void setOwner(Component owner) {
+    public void setOwner(Component owner) {
         this.owner = owner;
         if (owner != null)
             owner.addComponent(this);
@@ -59,6 +60,7 @@ public class Component {
         }
     }
 
+    @Deprecated
     public final String getHtml() {
         HtmlWriter html = new HtmlWriter();
         output(html);

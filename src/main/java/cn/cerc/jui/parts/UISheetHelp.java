@@ -1,23 +1,25 @@
-package cn.cerc.jpage.other;
+package cn.cerc.jui.parts;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.other.UrlMenu;
 
-public class HelpSide extends Component {
-    private String title = "操作提示";
+public class UISheetHelp extends UISheet {
     private String content;
     private UrlMenu operaUrl;
     private List<String> lines = new ArrayList<>();
 
-    public HelpSide() {
+    @Deprecated
+    public UISheetHelp() {
         super();
+        this.setCaption("操作提示");
     }
 
-    public HelpSide(Component owner) {
+    public UISheetHelp(UIToolBar owner) {
         super(owner);
+        this.setCaption("操作提示");
     }
 
     public String getContent() {
@@ -36,19 +38,11 @@ public class HelpSide extends Component {
         lines.add(String.format(format, args));
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     @Override
     public void output(HtmlWriter html) {
         html.println("<section>");
         html.print("<div class=\"title\">");
-        html.print(this.title);
+        html.print(this.getCaption());
         if (operaUrl != null) {
             operaUrl.output(html);
         }
@@ -73,7 +67,7 @@ public class HelpSide extends Component {
     public UrlMenu getOperaUrl() {
         if (operaUrl == null) {
             operaUrl = new UrlMenu(null);
-            operaUrl.setStyle("float:right;margin-bottom:0.25em");
+            operaUrl.setCssStyle("float:right;margin-bottom:0.25em");
         }
         return operaUrl;
     }

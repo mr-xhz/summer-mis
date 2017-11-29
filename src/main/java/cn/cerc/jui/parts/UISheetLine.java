@@ -1,29 +1,22 @@
-package cn.cerc.jpage.other;
+package cn.cerc.jui.parts;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.other.UrlMenu;
 
-public class StrongSide extends Component {
-    private String title = "数据合计";
+public class UISheetLine extends UISheet {
     private UrlMenu operaUrl;
 
-    public StrongSide(Component owner) {
+    public UISheetLine(Component owner) {
         super(owner);
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        this.setCaption("数据合计");
     }
 
     @Override
     public void output(HtmlWriter html) {
         html.println("<section>");
         html.print("<div class=\"title\">");
-        html.print(this.title);
+        html.print(this.getCaption());
         if (operaUrl != null) {
             operaUrl.output(html);
         }
@@ -43,7 +36,7 @@ public class StrongSide extends Component {
     public UrlMenu getOperaUrl() {
         if (operaUrl == null) {
             operaUrl = new UrlMenu(null);
-            operaUrl.setStyle("float:right;line-height:1.25em;margin-bottom:0.25em");
+            operaUrl.setCssStyle("float:right;line-height:1.25em;margin-bottom:0.25em");
         }
         return operaUrl;
     }

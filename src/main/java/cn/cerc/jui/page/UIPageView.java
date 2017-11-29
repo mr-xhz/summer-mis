@@ -1,8 +1,7 @@
 package cn.cerc.jui.page;
 
-import static cn.cerc.jmis.core.ClientDevice.device_ee;
-
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,106 +12,76 @@ import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jmis.form.AbstractForm;
 import cn.cerc.jmis.page.AbstractJspPage;
-import cn.cerc.jmis.page.ExportFile;
 import cn.cerc.jmis.page.IMenuBar;
 import cn.cerc.jpage.core.Component;
-import cn.cerc.jpage.core.MutiGrid;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.grid.AbstractGrid;
-import cn.cerc.jpage.grid.MutiPage;
-import cn.cerc.jpage.other.OperaPages;
-import cn.cerc.jui.parts.AdHeader;
-import cn.cerc.jui.parts.MainMenu;
 import cn.cerc.jui.parts.RightMenus;
 
 public class UIPageView extends AbstractJspPage {
-    private MainMenu mainMenu = new MainMenu();
-    private boolean showMenus = true; // 是否显示主菜单
-    private MutiPage pages;
 
     public UIPageView(IForm form) {
         super(form);
-    }
-
-    public void addExportFile(String service, String key) {
-        if (device_ee.equals(this.getForm().getClient().getDevice())) {
-            ExportFile item = new ExportFile(service, key);
-            this.put("export", item);
+        this.addCssFile("css/summer.css");
+        if (!form.getClient().isPhone()) {
+            this.addCssFile("css/summer-pc.css");
         }
+        this.addScriptFile("js/jquery.js");
+        this.addScriptFile("js/summer.js");
+        this.addScriptFile("js/myapp.js");
     }
 
     @Override
     public void execute() throws ServletException, IOException {
-        this.getStatusBar(); // 此行代码不能删除！
+        HttpServletRequest request = getRequest();
         IForm form = this.getForm();
-        HttpServletRequest request = form.getRequest();
         CustomHandle sess = (CustomHandle) form.getHandle().getProperty(null);
-        request.setAttribute("passport", sess.logon());
-        request.setAttribute("logon", sess.logon());
         if (sess.logon()) {
-            List<UrlRecord> rightMenus = mainMenu.getRightMenus();
+            List<UrlRecord> rightMenus = getHeader().getRightMenus();
             RightMenus menus = Application.getBean("RightMenus", RightMenus.class);
             menus.setHandle(form.getHandle());
             for (IMenuBar item : menus.getItems())
                 item.enrollMenu(form, rightMenus);
         } else {
-            mainMenu.getHomePage().setSite(Application.getAppConfig().getFormWelcome());
+            getHeader().getHomePage().setSite(Application.getAppConfig().getFormWelcome());
         }
-        // 设置首页
-        request.setAttribute("_showMenu_", "true".equals(form.getParam("showMenus", "true")));
+
         // 系统通知消息
-        if (request.getAttribute("message") == null)
-            request.setAttribute("message", "");
-
+        Component content = this.getContent();
         if (form instanceof AbstractForm) {
-            this.put("barMenus", mainMenu.getBarMenus(this.getForm()));
-            if (mainMenu.getRightMenus().size() > 0)
-                this.put("subMenus", mainMenu.getRightMenus());
-            if (this.isShowMenus())
-                UIPageSearch.buildHeaderSide(this);
+            this.getHeader().initHeader();
+            request.setAttribute(content.getId(), content);
+            for (Component component : content.getComponents()) {
+                request.setAttribute(component.getId(), component);
+            }
         }
+
+        // 开始输出
+        PrintWriter out = getResponse().getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.printf("<title>%s</title>\n", this.getForm().getTitle());
+        out.printf("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n");
+        out.printf(
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\"/>\n");
+        out.printf("<link href=\"css/style-phone.css\" rel=\"stylesheet\">\n");
+        if (!form.getClient().isPhone())
+            out.printf("<link href=\"css/style-pc.css\" rel=\"stylesheet\">\n");
+        out.print(this.getCssHtml());
+        out.print(getScriptHtml());
+        out.println("<script>");
+        out.println("var Application = new TApplication();");
+        out.printf("Application.device = '%s';\n", form.getClient().getDevice());
+        out.printf("Application.bottom = '%s';\n", getFooter().getId());
         String msg = form.getParam("message", "");
-        request.setAttribute("msg", msg == null ? "" : msg.replaceAll("\r\n", "<br/>"));
-        request.setAttribute("formno", form.getParam("formNo", "000"));
-        request.setAttribute("form", form);
-
-        // 添加分页控制
-        Component operaPages = null;
-        if (pages != null) {
-            this.put("pages", pages);
-            operaPages = new OperaPages(this.getForm(), pages);
-            this.put("_operaPages_", operaPages);
-        }
-
-        // 输出jsp模版
-        String url = String.format("/WEB-INF/%s/%s", Application.getAppConfig().getPathForms(), this.getViewFile());
-        getRequest().getServletContext().getRequestDispatcher(url).forward(getRequest(), getResponse());
-    }
-
-    public MainMenu getMainMenu() {
-        return mainMenu;
-    }
-
-    public void installAD() {
-        super.put("_showAd_", new AdHeader());
-    }
-
-    public boolean isShowMenus() {
-        return showMenus;
-    }
-
-    public void setShowMenus(boolean showMenus) {
-        // this.setParam("showMenus", "false");
-        this.showMenus = showMenus;
-    }
-
-    public void add(String id, MutiGrid<?> grid) {
-        put(id, grid.getList());
-        pages = grid.getPages();
-    }
-
-    public void add(String id, AbstractGrid grid) {
-        put(id, grid);
-        pages = grid.getPages();
+        msg = msg == null ? "" : msg.replaceAll("\r\n", "<br/>");
+        out.printf("Application.message = '%s';\n", msg);
+        out.println("$(document).ready(function() {");
+        out.println("Application.init();");
+        out.println("});");
+        out.println("</script>");
+        out.println("</head>");
+        outBody(out);
+        out.println("</html>");
     }
 }

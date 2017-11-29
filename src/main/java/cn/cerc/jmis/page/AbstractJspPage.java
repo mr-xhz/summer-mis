@@ -2,6 +2,7 @@ package cn.cerc.jmis.page;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +23,28 @@ import cn.cerc.jmis.tools.R;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.grid.MutiPage;
-import cn.cerc.jui.parts.StatusBar;
 import cn.cerc.jui.parts.UIComponent;
+import cn.cerc.jui.parts.UIContent;
+import cn.cerc.jui.parts.UIDocument;
+import cn.cerc.jui.parts.UIFooter;
+import cn.cerc.jui.parts.UIHeader;
+import cn.cerc.jui.parts.UIToolBar;
 
 public abstract class AbstractJspPage extends Component implements IPage {
     private String jspFile;
     private IForm form;
-    private List<String> styleFiles = new ArrayList<>();
+    private List<String> cssFiles = new ArrayList<>();
     private List<String> scriptFiles = new ArrayList<>();
+    private List<HtmlContent> scriptFunctions = new ArrayList<>();
     private List<HtmlContent> scriptCodes = new ArrayList<>();
-    private StatusBar statusBar;
+    // 头部：广告+菜单
+    private UIHeader header;
+    // 主体: 控制区(可选)+内容+消息区
+    private UIDocument document;
+    // 工具面板：多页形式
+    private UIToolBar toolBar;
+    // 状态栏：快捷操作+按钮组
+    private UIFooter footer;
 
     public AbstractJspPage(IForm form) {
         super();
@@ -143,8 +155,8 @@ public abstract class AbstractJspPage extends Component implements IPage {
         return result;
     }
 
-    public final List<String> getStyleFiles() {
-        return styleFiles;
+    public final List<String> getCssFiles() {
+        return cssFiles;
     }
 
     public final List<String> getScriptFiles() {
@@ -155,8 +167,8 @@ public abstract class AbstractJspPage extends Component implements IPage {
         return scriptCodes;
     }
 
-    public final void addStyleFile(String file) {
-        styleFiles.add(file);
+    public final void addCssFile(String file) {
+        cssFiles.add(file);
     }
 
     public final void addScriptFile(String scriptFile) {
@@ -167,16 +179,20 @@ public abstract class AbstractJspPage extends Component implements IPage {
         scriptCodes.add(scriptCode);
     }
 
+    public void addScriptFunction(HtmlContent scriptCode) {
+        scriptFunctions.add(scriptCode);
+    }
+
     // 返回所有的样式定义，供jsp中使用 ${jspPage.css}调用
-    public final HtmlWriter getCss() {
+    public final HtmlWriter getCssHtml() {
         HtmlWriter html = new HtmlWriter();
-        for (String file : styleFiles)
+        for (String file : cssFiles)
             html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
         return html;
     }
 
     // 返回所有的脚本，供jsp中使用 ${jspPage.script}调用
-    public final HtmlWriter getScript() {
+    public final HtmlWriter getScriptHtml() {
         HtmlWriter html = new HtmlWriter();
 
         // 加入脚本文件
@@ -184,9 +200,15 @@ public abstract class AbstractJspPage extends Component implements IPage {
             html.println("<script src=\"%s\"></script>", file);
         }
         // 加入脚本代码
-        if (scriptCodes.size() > 0) {
+        List<HtmlContent> scriptCode1 = getScriptCodes();
+        if (scriptFunctions.size() > 0 || scriptCode1.size() > 0) {
             html.println("<script>");
-            if (scriptCodes.size() > 0) {
+            // 输出自定义的函数
+            for (HtmlContent func : scriptFunctions) {
+                func.output(html);
+            }
+            // 输出立即执行的代码
+            if (scriptCode1.size() > 0) {
                 html.println("$(function(){");
                 for (HtmlContent func : scriptCodes) {
                     func.output(html);
@@ -238,26 +260,50 @@ public abstract class AbstractJspPage extends Component implements IPage {
         put(id, value);
     }
 
-    public void add(String id, MutiPage value) {
-        put(id, value);
-    }
-
-    public StatusBar setStatusBar(StatusBar statusBar) {
-        this.statusBar = statusBar;
-        statusBar.init(this);
-        statusBar.setId("bottom");
-        this.put("bottom", statusBar);
-        return statusBar;
-    }
-
-    public StatusBar getStatusBar() {
-        if (statusBar == null) {
-            statusBar = new StatusBar();
-            statusBar.init(this);
-            statusBar.setId("bottom");
-            this.put("bottom", statusBar);
+    public UIFooter getFooter() {
+        if (footer == null) {
+            footer = new UIFooter(this);
+            footer.setId("bottom");
+            this.put("bottom", footer);
         }
-        return statusBar;
+        return footer;
     }
 
+    public UIHeader getHeader() {
+        if (header == null) {
+            header = new UIHeader(this);
+        }
+        return header;
+    }
+
+    public UIDocument getDocument() {
+        if (document == null) {
+            document = new UIDocument(this);
+        }
+        return document;
+    }
+
+    public UIToolBar getToolBar() {
+        if (toolBar == null) {
+            toolBar = new UIToolBar(this);
+        }
+        return toolBar;
+    }
+
+    protected void outBody(PrintWriter out) {
+        out.println("<body>");
+        out.println(this.getHeader());
+        out.println(this.getDocument());
+        out.println(this.getToolBar());
+        out.println(this.getFooter());
+        if (getForm().getClient().isPhone()) {
+            out.println("<span id='back-top' style='display: none'>顶部</span>");
+            out.println("<span id='back-bottom' style='display: none'>底部</span>");
+        }
+        out.println("</body>");
+    }
+
+    public final UIContent getContent() {
+        return this.getDocument().getContent();
+    }
 }

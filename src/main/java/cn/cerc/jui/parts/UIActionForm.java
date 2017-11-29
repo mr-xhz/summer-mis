@@ -1,31 +1,41 @@
-package cn.cerc.jpage.core;
+package cn.cerc.jui.parts;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActionForm extends Component {
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jpage.vcl.GroupBox;
+
+public class UIActionForm extends UIComponent {
     private String action;
     private String method = "post";
     private Map<String, String> items = new HashMap<>();
     private String enctype;
 
-    public ActionForm() {
-
+    @Deprecated
+    public UIActionForm() {
+        super(null);
     }
 
-    public ActionForm(Component owner, String id) {
-        super(owner, id);
+    public UIActionForm(GroupBox owner) {
+        super.setOwner(owner);
     }
 
-    public ActionForm(String id) {
-        super();
-        this.setId(id);
+    public UIActionForm(UIContent owner) {
+        super.setOwner(owner);
     }
 
     @Deprecated
-    public ActionForm(String id, String action) {
+    public UIActionForm(UIContent owner, String id) {
+        super(owner);
         this.setId(id);
-        this.setAction(action);
+    }
+
+    @Override
+    @Deprecated
+    public void setOwner(Component owner) {
+        super.setOwner(owner);
     }
 
     public String getAction() {
