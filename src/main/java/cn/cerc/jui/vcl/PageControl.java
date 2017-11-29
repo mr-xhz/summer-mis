@@ -1,4 +1,4 @@
-package cn.cerc.jpage.vcl;
+package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 
@@ -8,6 +8,6 @@ import cn.cerc.jpage.core.Component;
  * @author 张弓
  *
  */
-public class TabControl extends Component {
+public class PageControl extends Component {
 
 }

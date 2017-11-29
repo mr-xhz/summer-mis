@@ -5,7 +5,7 @@ import java.util.Map;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.GroupBox;
+import cn.cerc.jui.vcl.GroupBox;
 
 public class UIActionForm extends UIComponent {
     private String action;

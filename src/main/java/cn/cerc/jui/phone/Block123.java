@@ -2,10 +2,10 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.Button;
-import cn.cerc.jpage.vcl.Span;
-import cn.cerc.jpage.vcl.TextBox;
 import cn.cerc.jui.parts.UIActionForm;
+import cn.cerc.jui.vcl.Button;
+import cn.cerc.jui.vcl.TextBox;
+import cn.cerc.jui.vcl.ext.Span;
 
 /**
  * 一组左边图标右边文字

@@ -6,8 +6,8 @@ import java.util.List;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Span;
+import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.ext.Span;
 
 /**
  * 三行文字列表显示，右侧带导航栏箭头

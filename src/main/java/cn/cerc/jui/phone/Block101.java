@@ -3,8 +3,8 @@ package cn.cerc.jui.phone;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Span;
+import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.ext.Span;
 
 public class Block101 extends Component {
     private Span title = new Span();

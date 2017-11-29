@@ -6,7 +6,7 @@ import java.util.Map;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.vcl.Label;
+import cn.cerc.jui.vcl.Label;
 
 /**
  * 用于卡片资料显示

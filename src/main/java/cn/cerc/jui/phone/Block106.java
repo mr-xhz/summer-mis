@@ -2,7 +2,7 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.Span;
+import cn.cerc.jui.vcl.ext.Span;
 
 public class Block106 extends Component {
     private Span content = new Span();

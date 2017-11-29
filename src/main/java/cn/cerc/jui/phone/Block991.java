@@ -2,9 +2,9 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.Button;
-import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Span;
+import cn.cerc.jui.vcl.Button;
+import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.ext.Span;
 
 /**
  * 

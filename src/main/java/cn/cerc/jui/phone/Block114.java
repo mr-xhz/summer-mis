@@ -2,9 +2,9 @@ package cn.cerc.jui.phone;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
-import cn.cerc.jpage.vcl.CheckBox;
-import cn.cerc.jpage.vcl.LabelBox;
-import cn.cerc.jpage.vcl.Span;
+import cn.cerc.jui.vcl.CheckBox;
+import cn.cerc.jui.vcl.ext.LabelBox;
+import cn.cerc.jui.vcl.ext.Span;
 
 public class Block114 extends Component {
     private Span label = new Span();

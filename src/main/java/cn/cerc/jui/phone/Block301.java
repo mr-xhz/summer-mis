@@ -8,7 +8,7 @@ import java.util.Map;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.vcl.Image;
+import cn.cerc.jui.vcl.Image;
 
 /**
  * 用于生成厂商、客户、帐套选择

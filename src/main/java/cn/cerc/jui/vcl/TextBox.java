@@ -1,7 +1,8 @@
-package cn.cerc.jpage.vcl;
+package cn.cerc.jui.vcl;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.vcl.ext.Span;
 
 /**
  * 

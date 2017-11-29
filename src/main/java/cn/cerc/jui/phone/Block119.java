@@ -5,8 +5,8 @@ import org.apache.commons.lang.StringUtils;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Span;
+import cn.cerc.jui.vcl.Image;
+import cn.cerc.jui.vcl.ext.Span;
 
 /**
  * 两组左边图标右边文字

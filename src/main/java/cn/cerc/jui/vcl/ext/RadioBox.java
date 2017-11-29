@@ -1,7 +1,8 @@
-package cn.cerc.jpage.vcl;
+package cn.cerc.jui.vcl.ext;
 
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.vcl.Label;
 
 public class RadioBox extends Component {
     private String name = "";
