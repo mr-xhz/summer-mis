@@ -19,6 +19,9 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
     private IClient client;
     private IMenu menu;
     private Map<String, String> params = new HashMap<>();
+    private String caption;
+    private String parent;
+    private String permission;
 
     public Map<String, String> getParams() {
         return params;
@@ -118,5 +121,29 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
     @Override
     public void setMenu(IMenu menu) {
         this.menu = menu;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 }
