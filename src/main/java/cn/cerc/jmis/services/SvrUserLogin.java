@@ -546,8 +546,8 @@ public class SvrUserLogin extends CustomService {
 
     private void updateCurrentUser(String computer, String screen, String language) {
         getConnection().execute(String.format(
-                "Update %s Set Viability_=0 Where Viability_>0 and (TIME_TO_SEC(TIMEDIFF(LogoutTime_,now())))>%d",
-                SystemTable.get(SystemTable.getCurrentUser), 3600));
+                "Update %s Set Viability_=0 Where Viability_>0 and LogoutTime_>'%s'",
+                SystemTable.get(SystemTable.getCurrentUser), TDateTime.Now().incHour(-1)));
         String SQLCmd = String.format("update %s set Viability_=-1 where Account_='%s' and Viability_>-1",
                 SystemTable.get(SystemTable.getCurrentUser), getUserCode());
         getConnection().execute(SQLCmd);
