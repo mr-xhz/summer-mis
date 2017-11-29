@@ -20,9 +20,11 @@ public class UISheetCard extends UISheet {
             url.output(html);
         html.println("</label>");
         for (Component component : this.getComponents()) {
-            html.print("<div>");
-            component.output(html);
-            html.print("</div>");
+            if (component instanceof UIComponent) {
+                html.print("<div>");
+                ((UIComponent) component).output(html);
+                html.print("</div>");
+            }
         }
         html.println("</section>");
     }

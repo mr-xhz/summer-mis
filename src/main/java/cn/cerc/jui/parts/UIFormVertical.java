@@ -7,11 +7,11 @@ import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
-import cn.cerc.jpage.core.HtmlText;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jui.UIConfig;
+import cn.cerc.jui.vcl.UIText;
 
 public class UIFormVertical extends UIComponent implements DataSource {
     private UIContent content;
@@ -103,7 +103,7 @@ public class UIFormVertical extends UIComponent implements DataSource {
                 html.print(">");
                 field.output(html);
 
-                HtmlText mark = field.getMark();
+                UIText mark = field.getMark();
                 if (mark != null) {
                     html.println("<a href=\"javascript:displaySwitch('%s')\">", field.getId());
                     html.println("<img src=\"%s\" />", UIConfig.GUIDE);

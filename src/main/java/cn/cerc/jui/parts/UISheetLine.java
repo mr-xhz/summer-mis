@@ -24,9 +24,11 @@ public class UISheetLine extends UISheet {
         html.println("<div class=\"contents\">");
         html.println("<ul>");
         for (Component component : getComponents()) {
-            html.print("<li>");
-            component.output(html);
-            html.print("</li>");
+            if (component instanceof UIComponent) {
+                html.print("<li>");
+                ((UIComponent) component).output(html);
+                html.print("</li>");
+            }
         }
         html.println("</ul>");
         html.println("</div>");

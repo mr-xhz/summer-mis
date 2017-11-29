@@ -30,7 +30,7 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
 
     private ButtonsFields buttons;
     private MemoryBuffer buff;
-    private Component levelSide;
+    private UIComponent levelSide;
     private ButtonField submit;
     private boolean readAll;
     private AbstractGridLine expender;
@@ -44,10 +44,12 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
         dataSet.append();
     }
 
+    @Override
     public String getCssClass() {
         return cssClass;
     }
 
+    @Override
     public void setCssClass(String cssClass) {
         this.cssClass = cssClass;
     }
@@ -174,7 +176,7 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
         return buttons;
     }
 
-    public void setLevelSide(Component levelSide) {
+    public void setLevelSide(UIComponent levelSide) {
         this.levelSide = levelSide;
     }
 

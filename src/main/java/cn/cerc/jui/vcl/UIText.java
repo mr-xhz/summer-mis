@@ -1,20 +1,24 @@
-package cn.cerc.jpage.core;
+package cn.cerc.jui.vcl;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
+
 /*
  * 专用于简单或原始文字输出
  */
-public class HtmlText extends Component {
+public class UIText extends UIComponent {
     private String content;
     private List<String> lines;
 
-    public HtmlText() {
+    public UIText() {
         super();
     }
 
-    public HtmlText(Component owner) {
+    public UIText(Component owner) {
         super(owner);
     }
 
@@ -31,7 +35,7 @@ public class HtmlText extends Component {
         return content;
     }
 
-    public HtmlText setContent(String content) {
+    public UIText setContent(String content) {
         this.content = content;
         return this;
     }
@@ -42,7 +46,7 @@ public class HtmlText extends Component {
         return lines;
     }
 
-    public HtmlText setLines(List<String> lines) {
+    public UIText setLines(List<String> lines) {
         this.lines = lines;
         return this;
     }

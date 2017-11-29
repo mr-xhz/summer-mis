@@ -5,11 +5,11 @@ import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
-import cn.cerc.jpage.core.HtmlText;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.other.BuildText;
 import cn.cerc.jpage.other.BuildUrl;
+import cn.cerc.jui.vcl.UIText;
 import net.sf.json.JSONObject;
 
 public abstract class AbstractField extends Component implements IField {
@@ -51,7 +51,7 @@ public abstract class AbstractField extends Component implements IField {
     // dialog 小图标
     protected String icon;
     // 栏位说明
-    private HtmlText mark;
+    private UIText mark;
     //
     protected BuildUrl buildUrl;
     //
@@ -86,11 +86,11 @@ public abstract class AbstractField extends Component implements IField {
         this.width = width;
     }
 
-    public HtmlText getMark() {
+    public UIText getMark() {
         return mark;
     }
 
-    public AbstractField setMark(HtmlText mark) {
+    public AbstractField setMark(UIText mark) {
         this.mark = mark;
         return this;
     }

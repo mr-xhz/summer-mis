@@ -1,6 +1,7 @@
 package cn.cerc.jui.parts;
 
 import cn.cerc.jpage.core.Component;
+import cn.cerc.jpage.core.HtmlWriter;
 
 public class UIComponent extends Component {
     protected String cssClass;
@@ -28,6 +29,21 @@ public class UIComponent extends Component {
 
     public void setCssStyle(String cssStyle) {
         this.cssStyle = cssStyle;
+    }
+
+    @Override
+    public void output(HtmlWriter html) {
+        for (Component component : this.getComponents()) {
+            if (component instanceof UIComponent)
+                ((UIComponent) component).output(html);
+        }
+    }
+
+    @Override
+    public final String toString() {
+        HtmlWriter html = new HtmlWriter();
+        output(html);
+        return html.toString();
     }
 
 }

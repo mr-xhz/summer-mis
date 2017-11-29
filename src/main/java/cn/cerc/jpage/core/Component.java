@@ -54,6 +54,7 @@ public class Component {
         return components;
     }
 
+    @Deprecated
     public void output(HtmlWriter html) {
         for (Component component : components) {
             component.output(html);
@@ -68,7 +69,7 @@ public class Component {
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         HtmlWriter html = new HtmlWriter();
         output(html);
         return html.toString();
