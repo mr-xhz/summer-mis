@@ -3,6 +3,7 @@ package cn.cerc.jmis.core;
 import java.util.HashMap;
 import java.util.Map;
 
+// 此对象应该换为 MenuItem
 public class MenuItem {
     // 菜单代码
     private String id;
@@ -74,16 +75,22 @@ public class MenuItem {
         params.put(key, value);
     }
 
-    public String getParam(String key) {
+    private String getParam(String key) {
         return params.get(key);
     }
 
+    @Deprecated
     public Map<String, String> getParams() {
         return params;
     }
 
+    @Deprecated
     public void setParams(Map<String, String> params) {
         this.params = params;
+    }
+
+    public int getHrip() {
+        return Integer.parseInt(getParam(this.getId()));
     }
 
 }

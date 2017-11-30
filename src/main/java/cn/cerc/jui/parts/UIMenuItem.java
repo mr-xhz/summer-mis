@@ -33,7 +33,7 @@ public class UIMenuItem extends UIComponent {
     }
 
     public UIMenuItem init(MenuItem item) {
-        setHrip(Integer.parseInt(item.getParam(item.getId())));
+        setHrip(item.getHrip());
         setUrl(item.getId());
 
         String str = item.getTitle();
