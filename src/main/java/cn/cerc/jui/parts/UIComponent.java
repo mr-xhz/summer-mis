@@ -31,7 +31,6 @@ public class UIComponent extends Component {
         this.cssStyle = cssStyle;
     }
 
-    @Override
     public void output(HtmlWriter html) {
         for (Component component : this.getComponents()) {
             if (component instanceof UIComponent)

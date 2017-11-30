@@ -54,27 +54,6 @@ public class Component {
         return components;
     }
 
-    @Deprecated
-    public void output(HtmlWriter html) {
-        for (Component component : components) {
-            component.output(html);
-        }
-    }
-
-    @Deprecated
-    public final String getHtml() {
-        HtmlWriter html = new HtmlWriter();
-        output(html);
-        return html.toString();
-    }
-
-    @Override
-    public String toString() {
-        HtmlWriter html = new HtmlWriter();
-        output(html);
-        return html.toString();
-    }
-
     public final String getId() {
         return id;
     }
