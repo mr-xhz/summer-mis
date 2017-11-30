@@ -40,13 +40,11 @@ public class ProcessService extends TimerTask {
         if (!isRunning) {
             isRunning = true;
             if (C_SCHEDULE_HOUR == c.get(Calendar.HOUR_OF_DAY)) {
-                context.log("开始执行定时任务");
                 try {
                     report();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                context.log("定时任务执行结束");
             } else if (ServerConfig.enableTaskService()) {
                 try {
                     StubHandle handle = new StubHandle();
