@@ -14,6 +14,7 @@ import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.other.BuildUrl;
+import cn.cerc.jui.parts.UIComponent;
 
 // 手机专用表格
 public class PhoneGrid extends AbstractGrid {
@@ -21,7 +22,7 @@ public class PhoneGrid extends AbstractGrid {
     private String CSSClass = "scrollArea";
     private List<PhoneLine> lines = new ArrayList<>();
 
-    public PhoneGrid(IForm form, Component owner) {
+    public PhoneGrid(IForm form, UIComponent owner) {
         super(form, owner);
     }
 

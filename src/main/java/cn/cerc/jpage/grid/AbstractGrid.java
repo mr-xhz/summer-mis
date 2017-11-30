@@ -14,8 +14,9 @@ import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ChildGridLine;
 import cn.cerc.jpage.grid.lines.MasterGridLine;
 import cn.cerc.jui.parts.UIActionForm;
+import cn.cerc.jui.parts.UIComponent;
 
-public abstract class AbstractGrid extends Component implements DataSource {
+public abstract class AbstractGrid extends UIComponent implements DataSource {
     // 数据源
     private DataSet dataSet;
     // 支持表格分页
@@ -27,7 +28,7 @@ public abstract class AbstractGrid extends Component implements DataSource {
     // 表单，后不得再使用
     protected UIActionForm form;
 
-    public AbstractGrid(IForm form, Component owner) {
+    public AbstractGrid(IForm form, UIComponent owner) {
         super(owner);
         this.setId("grid");
         masterLine = new MasterGridLine(this);
