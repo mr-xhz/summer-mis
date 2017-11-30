@@ -14,7 +14,7 @@ public class UICheckAll extends UIComponent {
     @Override
     public void output(HtmlWriter html) {
         html.print("<input type='checkbox' id='selectAll'");
-        html.print(" onclick='%s'/>", this.getOnclick());
+        html.print(" onclick=\"%s\"/>", this.getOnclick());
         html.println("<label for=\"selectAll\">%s</label>", this.getCaption());
     }
 
