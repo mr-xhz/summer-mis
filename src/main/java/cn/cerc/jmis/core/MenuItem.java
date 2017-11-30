@@ -3,9 +3,7 @@ package cn.cerc.jmis.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.cerc.jbean.form.IMenu;
-
-public class MenuItem implements IMenu {
+public class MenuItem {
     // 菜单代码
     private String id;
     // 菜单标题
@@ -29,7 +27,6 @@ public class MenuItem implements IMenu {
 
     }
 
-    @Override
     public String getId() {
         return id;
     }
@@ -38,54 +35,45 @@ public class MenuItem implements IMenu {
         this.id = id;
     }
 
-    @Override
     public String getTitle() {
         String result = this.getParam(TITLE);
         return result != null ? result : "";
     }
 
-    @Override
     public String getPageNo() {
         String result = this.getParam(PAGENO);
         return result != null ? result : "";
     }
 
-    @Override
     public boolean isSecurityEnabled() {
         String result = this.getParam(SECURITY);
         return result != null ? "true".equals(result) : true;
     }
 
-    @Override
     public String getPermissionCode() {
         String result = this.getParam(PERMISSION);
         return result != null ? result : "";
     }
 
-    @Override
     public String getSoftwareList() {
         String result = this.getParam(SOFTWARE);
         return result != null ? result : "";
     }
 
-    @Override
     public String getParentId() {
         String result = this.getParam(PARENT);
         return result != null ? result : "";
     }
 
-    @Override
     public String getImage() {
         String result = this.getParam(IMAGE);
         return result != null ? result : "";
     }
 
-    @Override
     public void setParam(String key, String value) {
         params.put(key, value);
     }
 
-    @Override
     public String getParam(String key) {
         return params.get(key);
     }

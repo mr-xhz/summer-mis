@@ -1,6 +1,6 @@
 package cn.cerc.jui.parts;
 
-import cn.cerc.jbean.form.IMenu;
+import cn.cerc.jmis.core.MenuItem;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class UIMenuItem extends UIComponent {
@@ -32,7 +32,7 @@ public class UIMenuItem extends UIComponent {
         return this;
     }
 
-    public UIMenuItem init(IMenu item) {
+    public UIMenuItem init(MenuItem item) {
         setHrip(Integer.parseInt(item.getParam(item.getId())));
         setUrl(item.getId());
 

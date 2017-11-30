@@ -22,7 +22,6 @@ import cn.cerc.jbean.core.AppHandle;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.PageException;
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jbean.form.IMenu;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.BufferType;
 import cn.cerc.jbean.other.HistoryLevel;
@@ -94,13 +93,6 @@ public class StartForms implements Filter {
             info.setRequest(req);
             req.setAttribute("_showMenu_", !ClientDevice.device_ee.equals(info.getDevice()));
             form.setClient(info);
-            // 查找菜单定义
-            IMenu menu = form.getMenu();
-            if (menu == null) {
-                IAppMenus menus = Application.getBean("AppMenus", IAppMenus.class);
-                if (menus != null)
-                    form.setMenu(menus.getItem(formId));
-            }
 
             // 建立数据库资源
             try (AppHandle handle = new AppHandle()) {
@@ -140,11 +132,12 @@ public class StartForms implements Filter {
     }
 
     /*
-     * private boolean checkEnableTime() { Calendar cal = Calendar.getInstance(); //
-     * 月底最后一天 if (TDate.Today().compareTo(TDate.Today().monthEof()) == 0) { if
+     * private boolean checkEnableTime() { Calendar cal =
+     * Calendar.getInstance(); // 月底最后一天 if
+     * (TDate.Today().compareTo(TDate.Today().monthEof()) == 0) { if
      * (cal.get(Calendar.HOUR_OF_DAY) >= 23) throw new
-     * RuntimeException("系统现正在进行月初例行维护，维护时间为月底晚上23点至月初早上5点，请您在这段时间内不要使用系统，谢谢！"); }
-     * // 月初第一天 if (TDate.Today().compareTo(TDate.Today().monthBof()) == 0) if
+     * RuntimeException("系统现正在进行月初例行维护，维护时间为月底晚上23点至月初早上5点，请您在这段时间内不要使用系统，谢谢！");
+     * } // 月初第一天 if (TDate.Today().compareTo(TDate.Today().monthBof()) == 0) if
      * (cal.get(Calendar.HOUR_OF_DAY) < 5) throw new
      * RuntimeException("系统现正在进行月初例行维护，维护时间为月底晚上23点至月初早上5点，请您在这段时间内不要使用系统，谢谢！");
      * return true; }
