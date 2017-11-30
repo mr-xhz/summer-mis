@@ -245,7 +245,7 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
         return expender;
     }
 
-    public class ButtonsFields extends Component implements DataSource {
+    public class ButtonsFields extends UIComponent implements DataSource {
         private DataSource dataSource;
         private List<AbstractField> fields = new ArrayList<>();
 

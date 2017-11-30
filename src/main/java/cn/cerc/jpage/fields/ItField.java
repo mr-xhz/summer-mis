@@ -1,11 +1,11 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 public class ItField extends AbstractField {
-    public ItField(Component owner) {
+    public ItField(UIComponent owner) {
         super(owner, "序", 2);
         this.setReadonly(true);
         this.setShortName("");

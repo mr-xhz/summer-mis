@@ -3,8 +3,8 @@ package cn.cerc.jui.phone;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.UITextBox;
 import cn.cerc.jui.vcl.ext.UISpan;
@@ -14,7 +14,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 张弓
  *
  */
-public class Block107 extends Component {
+public class Block107 extends UIComponent {
     private UITextBox input = new UITextBox();
     private UIImage image = new UIImage();
     private List<String> items = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Block107 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block107(Component owner) {
+    public Block107(UIComponent owner) {
         super(owner);
         input.setPlaceholder("当前条件：");
         input.setReadonly(true);

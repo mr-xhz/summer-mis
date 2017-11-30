@@ -2,9 +2,9 @@ package cn.cerc.jui.phone;
 
 import org.apache.commons.lang.StringUtils;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.ext.UISpan;
 
@@ -14,7 +14,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 郭向军
  *
  */
-public class Block119 extends Component {
+public class Block119 extends UIComponent {
     private UISpan leftTitle = new UISpan();
     private UIImage leftImage = new UIImage();
     private UISpan rightTitle = new UISpan();
@@ -22,7 +22,7 @@ public class Block119 extends Component {
     private UrlRecord leftUrl = new UrlRecord();
     private UrlRecord rightUrl = new UrlRecord();
 
-    public Block119(Component owner) {
+    public Block119(UIComponent owner) {
         super(owner);
     }
 

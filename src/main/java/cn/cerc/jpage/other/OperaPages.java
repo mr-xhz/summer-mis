@@ -3,11 +3,11 @@ package cn.cerc.jpage.other;
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.form.IForm;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.grid.MutiPage;
+import cn.cerc.jui.parts.UIComponent;
 
-public class OperaPages extends Component {
+public class OperaPages extends UIComponent {
     private IForm form;
     private MutiPage pages;
 

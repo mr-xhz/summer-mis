@@ -1,8 +1,8 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 public class ButtonField extends AbstractField {
     private String data;
@@ -12,7 +12,7 @@ public class ButtonField extends AbstractField {
         super(null, null, 0);
     }
 
-    public ButtonField(Component owner, String name, String id, String data) {
+    public ButtonField(UIComponent owner, String name, String id, String data) {
         super(owner, name, 0);
         this.setField(id);
         this.data = data;

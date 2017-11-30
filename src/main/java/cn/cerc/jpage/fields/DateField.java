@@ -1,12 +1,12 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 public class DateField extends AbstractField {
 
-    public DateField(Component owner, String name, String field) {
+    public DateField(UIComponent owner, String name, String field) {
         super(owner, name, 5);
         this.setField(field);
         this.setDialog("showDateDialog");

@@ -1,7 +1,7 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
@@ -9,7 +9,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 张弓
  *
  */
-public class Block105 extends Component {
+public class Block105 extends UIComponent {
     private UISpan title = new UISpan();
 
     /**
@@ -19,7 +19,7 @@ public class Block105 extends Component {
      *            内容显示区
      * 
      */
-    public Block105(Component owner) {
+    public Block105(UIComponent owner) {
         super(owner);
         title.setText("(title)");
     }

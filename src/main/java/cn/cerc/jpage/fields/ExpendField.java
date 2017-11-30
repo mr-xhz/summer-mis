@@ -1,23 +1,23 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.other.SearchItem;
+import cn.cerc.jui.parts.UIComponent;
 
 public class ExpendField extends AbstractField implements SearchItem {
     private boolean search;
     private String hiddenId = "hidden";
 
-    public ExpendField(Component owner) {
+    public ExpendField(UIComponent owner) {
         this(owner, "", "_opera_", 5);
     }
 
-    public ExpendField(Component owner, String name, String field) {
+    public ExpendField(UIComponent owner, String name, String field) {
         this(owner, name, field, 0);
     }
 
-    public ExpendField(Component owner, String name, String field, int width) {
+    public ExpendField(UIComponent owner, String name, String field, int width) {
         super(owner, name, width);
         this.setField(field);
         this.setAlign("center");

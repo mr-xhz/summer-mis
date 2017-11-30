@@ -13,8 +13,9 @@ import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.AbstractField;
 import cn.cerc.jpage.grid.RowCell;
 import cn.cerc.jpage.other.BuildUrl;
+import cn.cerc.jui.parts.UIComponent;
 
-public abstract class AbstractGridLine extends Component implements DataSource {
+public abstract class AbstractGridLine extends UIComponent implements DataSource {
     private List<IField> fields = new ArrayList<>();
     private List<RowCell> cells = new ArrayList<>();
     protected DataSource dataSource;

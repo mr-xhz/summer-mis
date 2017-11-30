@@ -4,7 +4,6 @@ import static cn.cerc.jdb.other.utils.roundTo;
 
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
@@ -96,7 +95,7 @@ public class DataGrid extends AbstractGrid {
     }
 
     @Override
-    public Component getExpender() {
+    public UIComponent getExpender() {
         if (expender == null) {
             expender = new ExpenderGridLine(this);
             this.getLines().add(expender);

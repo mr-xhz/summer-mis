@@ -3,8 +3,8 @@ package cn.cerc.jui.phone;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.UITextBox;
 import cn.cerc.jui.vcl.ext.UISpan;
@@ -14,7 +14,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 善贵
  *
  */
-public class Block122 extends Component {
+public class Block122 extends UIComponent {
     private UITextBox input = new UITextBox();
     private UIImage image = new UIImage();
     private String content = new String();
@@ -27,7 +27,7 @@ public class Block122 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block122(Component owner) {
+    public Block122(UIComponent owner) {
         super(owner);
         input.setReadonly(true);
         input.setType("hidden");

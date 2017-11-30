@@ -1,12 +1,12 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.UITextBox;
 import cn.cerc.jui.vcl.ext.UISpan;
 
-public class Block109 extends Component {
+public class Block109 extends UIComponent {
     private UISpan label = new UISpan();
     private UITextBox input = new UITextBox();
     private UIImage select = new UIImage();
@@ -17,7 +17,7 @@ public class Block109 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block109(Component owner) {
+    public Block109(UIComponent owner) {
         super(owner);
         label.setText("(label)");
         select.setSrc("jui/phone/block109-select.png");

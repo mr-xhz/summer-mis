@@ -4,20 +4,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 public class OptionField extends AbstractField {
     private String defaultValue;
     private int size;// 默认显示行数
     private Map<String, String> items = new LinkedHashMap<>();
 
-    public OptionField(Component owner, String name, String field) {
+    public OptionField(UIComponent owner, String name, String field) {
         super(owner, name, 0);
         this.setField(field);
     }
 
-    public OptionField(Component owner, String name, String field, int width) {
+    public OptionField(UIComponent owner, String name, String field, int width) {
         super(owner, name, width);
         this.setField(field);
     }

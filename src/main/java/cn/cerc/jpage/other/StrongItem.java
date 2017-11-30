@@ -2,14 +2,14 @@ package cn.cerc.jpage.other;
 
 import java.text.DecimalFormat;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
-public class StrongItem extends Component {
+public class StrongItem extends UIComponent {
     private String name;
     private Double value;
 
-    public StrongItem(Component owner) {
+    public StrongItem(UIComponent owner) {
         super(owner);
     }
 

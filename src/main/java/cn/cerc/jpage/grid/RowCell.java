@@ -3,10 +3,10 @@ package cn.cerc.jpage.grid;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.IField;
+import cn.cerc.jui.parts.UIComponent;
 
-public class RowCell extends Component {
+public class RowCell extends UIComponent {
     private List<IField> fields = new ArrayList<>();
     private int colSpan = 1;
     private String align;

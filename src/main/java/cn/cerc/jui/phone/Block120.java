@@ -1,8 +1,8 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.ext.UISpan;
 
@@ -12,7 +12,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 郭向军
  *
  */
-public class Block120 extends Component {
+public class Block120 extends UIComponent {
     private UISpan title = new UISpan();
     private UIImage rightImage = new UIImage();
     private UIImage leftImage = new UIImage();
@@ -21,7 +21,7 @@ public class Block120 extends Component {
     private UrlRecord rightUrl = new UrlRecord();
     private UrlRecord leftUrl = new UrlRecord();
 
-    public Block120(Component owner) {
+    public Block120(UIComponent owner) {
         super(owner);
         title.setText("item");
         leftText.setText("修改");

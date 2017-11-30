@@ -1,7 +1,7 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
@@ -10,10 +10,10 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 郭向军
  *
  */
-public class Block126 extends Component {
+public class Block126 extends UIComponent {
     private UISpan title = new UISpan();
 
-    public Block126(Component owner) {
+    public Block126(UIComponent owner) {
         super(owner);
         title.setText("部门一");
     }

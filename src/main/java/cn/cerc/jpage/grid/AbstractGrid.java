@@ -5,7 +5,6 @@ import java.util.List;
 
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
@@ -80,7 +79,7 @@ public abstract class AbstractGrid extends UIComponent implements DataSource {
 
     public abstract void outputGrid(HtmlWriter html);
 
-    public abstract Component getExpender();
+    public abstract UIComponent getExpender();
 
     public List<AbstractGridLine> getLines() {
         return lines;

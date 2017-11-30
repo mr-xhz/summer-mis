@@ -3,9 +3,9 @@ package cn.cerc.jui.phone;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 
 /**
@@ -14,12 +14,12 @@ import cn.cerc.jui.vcl.UIImage;
  * @author HuangRongjun
  *
  */
-public class Block201 extends Component {
+public class Block201 extends UIComponent {
     private List<String> items = new ArrayList<>();
     private UIImage icon = new UIImage();
     private UrlRecord url;
 
-    public Block201(Component owner) {
+    public Block201(UIComponent owner) {
         super(owner);
         url = new UrlRecord();
         icon.setSrc("jui/phone/block301-rightIcon.png");

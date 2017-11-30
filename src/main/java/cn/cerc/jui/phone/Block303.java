@@ -3,9 +3,9 @@ package cn.cerc.jui.phone;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 
 /**
@@ -16,10 +16,10 @@ import cn.cerc.jui.vcl.UIImage;
  * @author HuangRongjun
  *
  */
-public class Block303 extends Component {
+public class Block303 extends UIComponent {
     private Map<UrlRecord, UIImage> items = new LinkedHashMap<>();
 
-    public Block303(Component owner) {
+    public Block303(UIComponent owner) {
         super(owner);
     }
 

@@ -1,8 +1,8 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jui.parts.UIActionForm;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIButton;
 import cn.cerc.jui.vcl.UITextBox;
 import cn.cerc.jui.vcl.ext.UISpan;
@@ -13,13 +13,13 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 郭向军
  *
  */
-public class Block123 extends Component {
+public class Block123 extends UIComponent {
     private UISpan title = new UISpan();
     private UITextBox textBox = new UITextBox();
     private UIButton button = new UIButton();
     private UIActionForm form = new UIActionForm();
 
-    public Block123(Component owner) {
+    public Block123(UIComponent owner) {
         super(owner);
         this.textBox.setMaxlength("20");
         this.textBox.setPlaceholder("请输入");

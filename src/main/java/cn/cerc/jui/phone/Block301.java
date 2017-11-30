@@ -5,15 +5,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 
 /**
  * 用于生成厂商、客户、帐套选择
  */
-public class Block301 extends Component {
+public class Block301 extends UIComponent {
     private UIImage leftIcon = new UIImage();
     private String title = "(title)";
     List<UIImage> list = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Block301 extends Component {
     private UrlRecord operator;
     private Map<String, String> items = new LinkedHashMap<>();
 
-    public Block301(Component owner) {
+    public Block301(UIComponent owner) {
         super(owner);
         operator = new UrlRecord();
         leftIcon.setSrc("jui/phone/block301-leftIcon.jpg");

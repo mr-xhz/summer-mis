@@ -3,9 +3,9 @@ package cn.cerc.jui.phone;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
@@ -14,11 +14,11 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 郭向军
  *
  */
-public class Block125 extends Component {
+public class Block125 extends UIComponent {
     private List<UISpan> items = new ArrayList<>();
     private List<UrlRecord> urlRecords = new ArrayList<>();
 
-    public Block125(Component owner) {
+    public Block125(UIComponent owner) {
         super(owner);
     }
 

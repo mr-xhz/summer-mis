@@ -2,12 +2,12 @@ package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.fields.editor.CheckEditor;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.other.SearchItem;
+import cn.cerc.jui.parts.UIComponent;
 
 public class BooleanField extends AbstractField implements SearchItem, IColumn {
     private String trueText = "是";
@@ -16,11 +16,11 @@ public class BooleanField extends AbstractField implements SearchItem, IColumn {
     private boolean search;
     private CheckEditor editor;
 
-    public BooleanField(Component owner, String title, String field) {
+    public BooleanField(UIComponent owner, String title, String field) {
         this(owner, title, field, 0);
     }
 
-    public BooleanField(Component owner, String title, String field, int width) {
+    public BooleanField(UIComponent owner, String title, String field, int width) {
         super(owner, title, width);
         this.setField(field);
         this.setAlign("center");

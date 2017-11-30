@@ -3,8 +3,8 @@ package cn.cerc.jui.phone;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.UITextBox;
 import cn.cerc.jui.vcl.ext.UISpan;
@@ -12,7 +12,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
 /**
  * 用户下拉选择框，选中立即提交参数
  */
-public class Block129 extends Component {
+public class Block129 extends UIComponent {
     private UITextBox input = new UITextBox();
     private UIImage image = new UIImage();
     private String content = new String();
@@ -26,7 +26,7 @@ public class Block129 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block129(Component owner) {
+    public Block129(UIComponent owner) {
         super(owner);
         input.setReadonly(true);
         input.setType("hidden");

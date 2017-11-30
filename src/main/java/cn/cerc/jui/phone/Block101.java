@@ -1,12 +1,12 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.ext.UISpan;
 
-public class Block101 extends Component {
+public class Block101 extends UIComponent {
     private UISpan title = new UISpan();
     private UIImage image = new UIImage();
     private UrlRecord url = new UrlRecord();
@@ -17,7 +17,7 @@ public class Block101 extends Component {
      * @param owner
      *            所在内容显示区
      */
-    public Block101(Component owner) {
+    public Block101(UIComponent owner) {
         super(owner);
         title.setText("(title)");
         image.setSrc("jui/phone/block101-go.png");

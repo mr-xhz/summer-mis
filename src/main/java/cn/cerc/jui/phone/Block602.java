@@ -3,8 +3,8 @@ package cn.cerc.jui.phone;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 
 /**
@@ -12,7 +12,7 @@ import cn.cerc.jui.vcl.UIImage;
  * @author 张弓
  *
  */
-public class Block602 extends Component {
+public class Block602 extends UIComponent {
     private List<UIImage> items = new ArrayList<>();
 
     /**
@@ -21,7 +21,7 @@ public class Block602 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block602(Component owner) {
+    public Block602(UIComponent owner) {
         super(owner);
     }
 

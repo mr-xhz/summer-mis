@@ -1,12 +1,12 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 public class CustomField extends AbstractField {
 
-    public CustomField(Component dataView, String name, int width) {
+    public CustomField(UIComponent dataView, String name, int width) {
         super(dataView, name, width);
     }
 

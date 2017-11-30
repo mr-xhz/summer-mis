@@ -1,17 +1,17 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 public class DateTimeField extends AbstractField {
 
-    public DateTimeField(Component owner, String name, String field) {
+    public DateTimeField(UIComponent owner, String name, String field) {
         super(owner, name, 10);
         this.setField(field);
     }
 
-    public DateTimeField(Component owner, String name, String field, int width) {
+    public DateTimeField(UIComponent owner, String name, String field, int width) {
         super(owner, name, width);
         this.setField(field);
     }

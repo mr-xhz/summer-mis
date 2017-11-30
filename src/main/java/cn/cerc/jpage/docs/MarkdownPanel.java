@@ -1,13 +1,13 @@
 package cn.cerc.jpage.docs;
 
 import cn.cerc.jbean.form.IPage;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.other.OperaPanel;
+import cn.cerc.jui.parts.UIComponent;
 
 public class MarkdownPanel extends OperaPanel {
     private String fileName;
 
-    public MarkdownPanel(Component owner) {
+    public MarkdownPanel(UIComponent owner) {
         super(owner);
     }
 

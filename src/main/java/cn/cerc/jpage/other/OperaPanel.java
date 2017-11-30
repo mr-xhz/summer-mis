@@ -3,10 +3,10 @@ package cn.cerc.jpage.other;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 
-public class OperaPanel extends Component {
+public class OperaPanel extends UIComponent {
     // 操作提示
     private String readme;
     // 基本资料
@@ -14,7 +14,7 @@ public class OperaPanel extends Component {
     // 相关链接
     private List<UrlRecord> menus;
 
-    public OperaPanel(Component owner) {
+    public OperaPanel(UIComponent owner) {
         super(owner);
         this.setId("right");
     }

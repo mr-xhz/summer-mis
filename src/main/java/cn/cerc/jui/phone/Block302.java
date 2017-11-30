@@ -1,8 +1,8 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 
 /**
@@ -10,7 +10,7 @@ import cn.cerc.jui.vcl.UIImage;
  * @author 张弓
  *
  */
-public class Block302 extends Component {
+public class Block302 extends UIComponent {
     private String title = "(title)";
     private String describe = "(describe)";
     private UIImage rightIcon = new UIImage();
@@ -22,7 +22,7 @@ public class Block302 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block302(Component owner) {
+    public Block302(UIComponent owner) {
         super(owner);
         url = new UrlRecord();
         rightIcon.setSrc("jui/phone/block301-rightIcon.png");

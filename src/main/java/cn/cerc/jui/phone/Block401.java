@@ -3,13 +3,13 @@ package cn.cerc.jui.phone;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIButton;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.ext.UISpan;
 
-public class Block401 extends Component {
+public class Block401 extends UIComponent {
     private String title = "(title)";
     private UIImage product = new UIImage();
     private List<UIImage> images = new ArrayList<>();
@@ -23,7 +23,7 @@ public class Block401 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block401(Component owner) {
+    public Block401(UIComponent owner) {
         super(owner);
         product.setRole("product");
         product.setAlt("(product)");

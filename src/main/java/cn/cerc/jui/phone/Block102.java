@@ -1,7 +1,7 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 import cn.cerc.jui.vcl.ext.UISpan;
 
@@ -9,7 +9,7 @@ import cn.cerc.jui.vcl.ext.UISpan;
  * @author 善贵
  *
  */
-public class Block102 extends Component {
+public class Block102 extends UIComponent {
     private UISpan title = new UISpan();
     private UIImage image = new UIImage();
     private String onclick;
@@ -20,7 +20,7 @@ public class Block102 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block102(Component owner) {
+    public Block102(UIComponent owner) {
         super(owner);
         title.setText("(title)");
         image.setRole("image");

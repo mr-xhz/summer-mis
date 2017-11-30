@@ -1,21 +1,21 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 /**
  * 
  * @author 张弓
  *
  */
-public class Block103 extends Component {
+public class Block103 extends UIComponent {
     /**
      * 显示商品详情，方便加入购物车
      * 
      * @param owner
      *            内容显示区
      */
-    public Block103(Component owner) {
+    public Block103(UIComponent owner) {
         super(owner);
     }
 

@@ -6,7 +6,6 @@ import java.util.List;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
@@ -88,7 +87,7 @@ public class PhoneGrid extends AbstractGrid {
         return line;
     }
 
-    public class PhoneLine extends Component implements DataSource {
+    public class PhoneLine extends UIComponent implements DataSource {
         private DataSource dataSource;
         private boolean Table = false;
         private String style;
@@ -241,7 +240,7 @@ public class PhoneGrid extends AbstractGrid {
     }
 
     @Override
-    public Component getExpender() {
+    public UIComponent getExpender() {
         return this;
     }
 

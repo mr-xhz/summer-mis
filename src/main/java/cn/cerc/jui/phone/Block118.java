@@ -3,12 +3,12 @@ package cn.cerc.jui.phone;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.ext.UISpan;
 
-public class Block118 extends Component {
+public class Block118 extends UIComponent {
     private UISpan left = new UISpan();
     private List<UrlRecord> urls = new ArrayList<>();
 
@@ -18,7 +18,7 @@ public class Block118 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block118(Component owner) {
+    public Block118(UIComponent owner) {
         super(owner);
         left.setText("(leftText)");
         left.setRole("left");

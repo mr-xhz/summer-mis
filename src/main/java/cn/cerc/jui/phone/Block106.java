@@ -1,10 +1,10 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.ext.UISpan;
 
-public class Block106 extends Component {
+public class Block106 extends UIComponent {
     private UISpan content = new UISpan();
 
     /**
@@ -13,7 +13,7 @@ public class Block106 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block106(Component owner) {
+    public Block106(UIComponent owner) {
         super(owner);
         content.setText("(content)");
     }

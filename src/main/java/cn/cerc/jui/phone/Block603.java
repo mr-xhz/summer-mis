@@ -1,7 +1,7 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 
 /**
@@ -9,7 +9,7 @@ import cn.cerc.jui.vcl.UIImage;
  * @author 张弓
  *
  */
-public class Block603 extends Component {
+public class Block603 extends UIComponent {
     private UIImage image = new UIImage();
 
     /**
@@ -18,7 +18,7 @@ public class Block603 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block603(Component owner) {
+    public Block603(UIComponent owner) {
         super(owner);
         image.setAlt("(image)");
         image.setSrc("jui/phone/block603_image.png");

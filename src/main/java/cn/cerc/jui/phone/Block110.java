@@ -1,12 +1,12 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIButton;
 import cn.cerc.jui.vcl.UITextBox;
 import cn.cerc.jui.vcl.ext.UISpan;
 
-public class Block110 extends Component {
+public class Block110 extends UIComponent {
     private UISpan label = new UISpan();
     private UITextBox input = new UITextBox();
     private UIButton search = new UIButton();
@@ -17,7 +17,7 @@ public class Block110 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block110(Component owner) {
+    public Block110(UIComponent owner) {
         super(owner);
         label.setText("(label)");
         search.setText("查询");

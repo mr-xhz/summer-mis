@@ -1,8 +1,8 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIImage;
 
 /**
@@ -12,13 +12,13 @@ import cn.cerc.jui.vcl.UIImage;
  *
  */
 
-public class Block127 extends Component {
+public class Block127 extends UIComponent {
     private String text;
     private int number;
     private UIImage icon = new UIImage();
     private UrlRecord url;
 
-    public Block127(Component owner) {
+    public Block127(UIComponent owner) {
         super(owner);
         url = new UrlRecord();
         text = "(text)";

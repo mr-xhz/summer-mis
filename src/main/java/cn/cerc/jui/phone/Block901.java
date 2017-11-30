@@ -3,11 +3,11 @@ package cn.cerc.jui.phone;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.ext.UISpan;
 
-public class Block901 extends Component {
+public class Block901 extends UIComponent {
     private List<UISpan> items = new ArrayList<>();
 
     /**
@@ -16,7 +16,7 @@ public class Block901 extends Component {
      * @param content
      *            所在显示区域
      */
-    public Block901(Component content) {
+    public Block901(UIComponent content) {
         super(content);
     }
 

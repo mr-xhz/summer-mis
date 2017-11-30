@@ -3,16 +3,16 @@ package cn.cerc.jpage.fields;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.core.TDateTime;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.other.BuildText;
 import cn.cerc.jpage.other.BuildUrl;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UIText;
 import net.sf.json.JSONObject;
 
-public abstract class AbstractField extends Component implements IField {
+public abstract class AbstractField extends UIComponent implements IField {
     private String htmlTag = "input";
     private String htmType;
     private String name;
@@ -73,7 +73,7 @@ public abstract class AbstractField extends Component implements IField {
     // 是否禁用
     private boolean resize = true;
 
-    public AbstractField(Component owner, String name, int width) {
+    public AbstractField(UIComponent owner, String name, int width) {
         super(owner);
         if (owner != null) {
             if ((owner instanceof DataSource)) {

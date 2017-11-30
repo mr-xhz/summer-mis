@@ -3,24 +3,24 @@ package cn.cerc.jpage.fields;
 import java.text.DecimalFormat;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jpage.fields.editor.ColumnEditor;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
+import cn.cerc.jui.parts.UIComponent;
 
 public class DoubleField extends AbstractField implements IColumn {
     private ColumnEditor editor;
     private String format = "0.####";
 
-    public DoubleField(Component owner, String title, String field) {
+    public DoubleField(UIComponent owner, String title, String field) {
         super(owner, title, 4);
         this.setField(field);
         this.setAlign("right");
     }
 
-    public DoubleField(Component owner, String title, String field, int width) {
+    public DoubleField(UIComponent owner, String title, String field, int width) {
         super(owner, title, width);
         this.setField(field);
         this.setAlign("right");

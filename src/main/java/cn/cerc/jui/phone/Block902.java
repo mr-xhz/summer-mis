@@ -1,7 +1,7 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 /**
  * 用于消息明细显示
@@ -11,11 +11,11 @@ import cn.cerc.jpage.core.HtmlWriter;
  * @author HuangRongjun
  *
  */
-public class Block902 extends Component {
+public class Block902 extends UIComponent {
     private String title = "(title)";
     private String content = "(content)";
 
-    public Block902(Component owner) {
+    public Block902(UIComponent owner) {
         super(owner);
     }
 

@@ -1,11 +1,11 @@
 package cn.cerc.jpage.fields;
 
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jpage.core.Component;
+import cn.cerc.jui.parts.UIComponent;
 
 public class UploadField extends AbstractField {
 
-    public UploadField(Component owner, String name, String field) {
+    public UploadField(UIComponent owner, String name, String field) {
         super(owner, name, 5);
         this.setField(field);
         this.setHtmType("file");

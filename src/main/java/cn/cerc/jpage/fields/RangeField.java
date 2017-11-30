@@ -6,10 +6,11 @@ import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.DataSource;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IField;
+import cn.cerc.jui.parts.UIComponent;
 
 public class RangeField extends AbstractField implements DataSource {
 
-    public RangeField(Component dataView, String name) {
+    public RangeField(UIComponent dataView, String name) {
         super(dataView, name, 0);
     }
 

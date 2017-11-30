@@ -1,12 +1,12 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UICheckBox;
 import cn.cerc.jui.vcl.ext.UILabelBox;
 import cn.cerc.jui.vcl.ext.UISpan;
 
-public class Block114 extends Component {
+public class Block114 extends UIComponent {
     private UISpan label = new UISpan();
     private UICheckBox checkBox = new UICheckBox();
     private UILabelBox labelBox = new UILabelBox();
@@ -19,7 +19,7 @@ public class Block114 extends Component {
      * @param owner
      *            内容显示区
      */
-    public Block114(Component owner) {
+    public Block114(UIComponent owner) {
         super(owner);
         label.setText("(label)");
         labelBox.setText("(label)");

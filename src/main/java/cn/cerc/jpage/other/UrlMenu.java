@@ -1,19 +1,19 @@
 package cn.cerc.jpage.other;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
-public class UrlMenu extends Component {
+public class UrlMenu extends UIComponent {
     private String name;
     private String url;
     private String cssClass;
     private String cssStyle;
 
-    public UrlMenu(Component owner) {
+    public UrlMenu(UIComponent owner) {
         super(owner);
     }
 
-    public UrlMenu(Component owner, String name, String url) {
+    public UrlMenu(UIComponent owner, String name, String url) {
         super(owner);
         this.name = name;
         this.url = url;

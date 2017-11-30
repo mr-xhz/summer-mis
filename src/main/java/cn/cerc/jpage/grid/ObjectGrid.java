@@ -8,8 +8,9 @@ import java.util.Map;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.IColumn;
+import cn.cerc.jui.parts.UIComponent;
 
-public class ObjectGrid extends Component {
+public class ObjectGrid extends UIComponent {
     private List<IColumn> columns = new ArrayList<>();
     private List<RowData> rows = new ArrayList<>();
     private RowData current;

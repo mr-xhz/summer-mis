@@ -3,9 +3,9 @@ package cn.cerc.jui.phone;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
+import cn.cerc.jui.parts.UIComponent;
 import cn.cerc.jui.vcl.UILabel;
 
 /**
@@ -15,12 +15,12 @@ import cn.cerc.jui.vcl.UILabel;
  * <p>
  * 文字信息（最多6行）
  */
-public class Block604 extends Component {
+public class Block604 extends UIComponent {
     private UILabel title;
     private UrlRecord url;
     private Map<String, Object> items = new LinkedHashMap<>();
 
-    public Block604(Component owner) {
+    public Block604(UIComponent owner) {
         super(owner);
         title = new UILabel();
         title.setCaption("(title)");
