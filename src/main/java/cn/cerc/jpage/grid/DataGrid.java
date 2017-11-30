@@ -10,9 +10,10 @@ import cn.cerc.jpage.core.IField;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ChildGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
+import cn.cerc.jui.parts.UIComponent;
 
 public class DataGrid extends AbstractGrid {
-    public DataGrid(IForm form, Component owner) {
+    public DataGrid(IForm form, UIComponent owner) {
         super(form, owner);
     }
 
