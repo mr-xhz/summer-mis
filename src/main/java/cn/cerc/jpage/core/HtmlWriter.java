@@ -1,28 +1,30 @@
 package cn.cerc.jpage.core;
 
+import cn.cerc.jdb.other.utils;
+
 public class HtmlWriter {
-    private StringBuffer sl = new StringBuffer();
+    private StringBuilder builder = new StringBuilder();
 
     public void print(String value) {
-        sl.append(value);
+        builder.append(value);
     }
 
     public void print(String format, Object... args) {
-        sl.append(String.format(format, args));
+        builder.append(String.format(format, args));
     }
 
     public void println(String value) {
-        sl.append(value);
-        sl.append(cn.cerc.jdb.other.utils.vbCrLf);
+        builder.append(value);
+        builder.append(utils.vbCrLf);
     }
 
     public void println(String format, Object... args) {
-        sl.append(String.format(format, args));
-        sl.append(cn.cerc.jdb.other.utils.vbCrLf);
+        builder.append(String.format(format, args));
+        builder.append(utils.vbCrLf);
     }
 
     @Override
     public String toString() {
-        return sl.toString();
+        return builder.toString();
     }
 }
