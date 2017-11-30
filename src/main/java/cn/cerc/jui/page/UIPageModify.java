@@ -100,7 +100,6 @@ public class UIPageModify extends AbstractJspPage {
         out.println("</script>");
         out.println("</head>");
         outBody(out);
-
         out.println("</html>");
     }
 

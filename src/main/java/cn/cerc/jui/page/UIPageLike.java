@@ -11,6 +11,7 @@ import cn.cerc.jui.parts.UIMenuList;
 /**
  * 系统登录页
  */
+@Deprecated
 public class UIPageLike extends UIPageDialog {
     private UIMenuList menus;
 
