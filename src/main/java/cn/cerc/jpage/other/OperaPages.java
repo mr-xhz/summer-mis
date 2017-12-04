@@ -6,12 +6,14 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.grid.MutiPage;
 import cn.cerc.jui.parts.UIComponent;
+import cn.cerc.jui.parts.UISheet;
 
-public class OperaPages extends UIComponent {
+public class OperaPages extends UISheet {
     private IForm form;
     private MutiPage pages;
 
-    public OperaPages(IForm form, MutiPage pages) {
+    public OperaPages(UIComponent owner, IForm form, MutiPage pages) {
+        super(owner);
         this.form = form;
         this.pages = pages;
     }
