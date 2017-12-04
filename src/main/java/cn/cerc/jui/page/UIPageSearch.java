@@ -67,7 +67,7 @@ public class UIPageSearch extends AbstractJspPage {
         Component operaPages = null;
         if (pages != null) {
             this.put("pages", pages);
-            operaPages = new OperaPages(this.getForm(), pages);
+            operaPages = new OperaPages(this.getToolBar(), this.getForm(), pages);
             this.put("_operaPages_", operaPages);
         }
         IForm form = this.getForm();
