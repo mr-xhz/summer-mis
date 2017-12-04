@@ -3,6 +3,8 @@ package cn.cerc.jui.parts;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jpage.core.Component;
@@ -56,6 +58,17 @@ public class UIFooter extends UIComponent {
                 ((UIComponent) component).output(html);
         }
         html.println("</section>");
+        HttpServletRequest request = getForm().getRequest();
+        if (request != null) {
+            if (!getForm().getClient().isPhone()) {
+                html.print("<div class=\"bottom-message\"");
+                html.print(" id=\"msg\">");
+                String msg = request.getParameter("msg");
+                if (msg != null)
+                    html.print(msg.replaceAll("\r\n", "<br/>"));
+                html.println("</div>");
+            }
+        }
         html.print("</footer>");
     }
 
