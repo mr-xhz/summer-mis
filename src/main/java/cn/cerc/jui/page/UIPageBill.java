@@ -104,7 +104,7 @@ public class UIPageBill extends AbstractJspPage {
     }
 
     public UIFormHorizontal createSearch() {
-        UIFormHorizontal search = new UIFormHorizontal(this.getDocument().getContent(), this.getRequest());
+        UIFormHorizontal search = new UIFormHorizontal(this.getDocument().getControl(), this.getRequest());
         search.setCssClass("modify");
         this.setSearchWaitingId(search.getId());
         return search;
