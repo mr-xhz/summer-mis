@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomHandle;
+import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jmis.form.AbstractForm;
 import cn.cerc.jmis.page.AbstractJspPage;
@@ -32,10 +33,11 @@ public class UIPagePhone extends AbstractJspPage {
 
     public UIPagePhone(IForm form) {
         super(form);
+        ServerConfig config = ServerConfig.getInstance();
         initCssFile();
-        this.addCssFile("jui/phone/phone-block.css");
+        this.addCssFile(config.getProperty("phone-block.css", "jui/phone/phone-block.css"));
         initJsFile();
-        this.addScriptFile("jui/phone/phone-block.js");
+        this.addScriptFile(config.getProperty("phone-block.js", "jui/phone/phone-block.js"));
     }
 
     public void addExportFile(String service, String key) {
