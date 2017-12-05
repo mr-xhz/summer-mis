@@ -29,6 +29,7 @@ public class UIToolBar extends UIComponent {
             html.print(" style='display:none'");
         }
         html.println(">");
+        html.println("<div style='overflow-y: auto; height: 100%;'>");
 
         if (sheets.size() > 0) {
             // 分组归类
@@ -61,6 +62,7 @@ public class UIToolBar extends UIComponent {
         } else {
             super.output(html);
         }
+        html.println("</div>");
         html.print("</aside>");
     }
 
