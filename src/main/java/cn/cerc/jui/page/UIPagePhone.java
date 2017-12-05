@@ -32,16 +32,10 @@ public class UIPagePhone extends AbstractJspPage {
 
     public UIPagePhone(IForm form) {
         super(form);
-        this.addCssFile("css/summer.css");
-        if (!form.getClient().isPhone()) {
-            this.addCssFile("css/summer-pc.css");
-        }
-        this.addScriptFile("js/jquery.js");
-        this.addScriptFile("js/summer.js");
-        this.addScriptFile("js/myapp.js");
-        this.addScriptFile("jui/phone/phone-block.js");
-        //
+        initCssFile();
         this.addCssFile("jui/phone/phone-block.css");
+        initJsFile();
+        this.addScriptFile("jui/phone/phone-block.js");
     }
 
     public void addExportFile(String service, String key) {

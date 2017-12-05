@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import cn.cerc.jbean.core.Application;
+import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
@@ -306,4 +307,20 @@ public abstract class AbstractJspPage extends UIComponent implements IPage {
     public final UIContent getContent() {
         return this.getDocument().getContent();
     }
+
+    protected void initCssFile() {
+        ServerConfig config = ServerConfig.getInstance();
+        this.addCssFile(config.getProperty("summer.css", "css/summer.css"));
+        if (!getForm().getClient().isPhone()) {
+            this.addCssFile(config.getProperty("summer-pc.css", "css/summer-pc.css"));
+        }
+    }
+
+    protected void initJsFile() {
+        ServerConfig config = ServerConfig.getInstance();
+        this.addScriptFile(config.getProperty("jquery.js", "js/jquery.js"));
+        this.addScriptFile(config.getProperty("summer.js", "js/summer.js"));
+        this.addScriptFile(config.getProperty("myapp.js", "js/myapp.js"));
+    }
+
 }
