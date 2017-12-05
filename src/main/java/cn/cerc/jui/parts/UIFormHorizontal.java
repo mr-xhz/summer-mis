@@ -40,6 +40,7 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
         this.request = request;
         this.setId("form1");
         this.setCssClass("search");
+        request.setAttribute(this.getId(), this);
         this.dataSet = new DataSet();
         dataSet.append();
     }
