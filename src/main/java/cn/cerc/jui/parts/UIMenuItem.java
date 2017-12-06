@@ -25,7 +25,7 @@ public class UIMenuItem extends UIComponent {
         // 输出菜单名称
         html.println("<div role='menuName'>");
         if (getHrip() == 2 && isDelphi()) {
-            html.println("<a href=\"hrip:%s\" onclick=\"updateUserHit('%s')\">", this.getCode());
+            html.println("<a href=\"hrip:%s\" onclick=\"updateUserHit('%s')\">", this.getCode(), this.getCode());
             // 闪电 ⚡ 标记
             html.println("<img src=\"%s\"/>", "images/lightning.png");
             html.println("</a>");
