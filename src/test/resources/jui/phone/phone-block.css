@@ -273,6 +273,7 @@ em, i {
     top: 50%;
     overflow: hidden;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 .block107 .choice4 ul {
@@ -309,6 +310,7 @@ em, i {
     top: 50%;
     left: 0.75em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
     width: 5.5em;
 }
 
@@ -339,6 +341,7 @@ em, i {
     top: 50%;
     left: 0.75em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 .block109 input {
@@ -366,6 +369,7 @@ em, i {
     top: 50%;
     left: 0.75em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 .block112 span[role='right'] {
@@ -391,6 +395,7 @@ em, i {
     top: 50%;
     left: 0.75em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
     width: 5.5em;
 }
 
