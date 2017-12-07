@@ -187,6 +187,7 @@
     top: 50%;
     overflow: hidden;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 .block107 .choice4 ul {
@@ -223,6 +224,7 @@
     top: 50%;
     left: 0.5em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
     width: 5.5em;
 }
 
@@ -253,6 +255,7 @@
     top: 50%;
     left: 0.5em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 .block109 input {
@@ -281,6 +284,7 @@
     top: 50%;
     left: 0.1em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
     width: 5.5em;
 }
 
@@ -378,6 +382,7 @@
     top: 50%;
     left: 0.75em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 .block112 span[role='right'] {
@@ -408,6 +413,7 @@
     top: 50%;
     left: 0.75em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
     width: 5.5em;
 }
 
@@ -508,6 +514,7 @@
     top: 50%;
     left: 0.75em;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 .block118 span[role='right'] {
@@ -592,6 +599,7 @@
     top: 50%;
     overflow: hidden;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 .block122 .choice4 ul {
@@ -711,6 +719,7 @@
     top: 50%;
     overflow: hidden;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
 
 .block129 .choice4 ul {
