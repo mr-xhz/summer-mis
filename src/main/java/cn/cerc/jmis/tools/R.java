@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jdb.core.IHandle;
+import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.core.Utils;
 import cn.cerc.jdb.mysql.SqlQuery;
 
@@ -56,4 +57,48 @@ public class R {
         return text;
     }
 
+    public static String get(IHandle handle, String text) {
+        String language = getLanguage(handle);
+        if ("cn".equals(language))
+            return text;
+
+        // 处理英文界面
+        SqlQuery ds = new SqlQuery(handle);
+        ds.add("select value_ from %s", SystemTable.getLanguage);
+        ds.add("where key_='%s'", Utils.safeString(text));
+        if (!"en".equals(language)) {
+            ds.add("and (lang_='en' or lang_='%s')", language);
+            ds.add("order by value_ desc");
+        } else {
+            ds.add("and lang_='en'", language);
+        }
+        ds.open();
+        if (ds.eof()) {
+            ds.append();
+            ds.setField("key_", text);
+            ds.setField("lang_", language);
+            ds.setField("value_", "");
+            ds.setField("updateUser_", handle.getUserCode());
+            ds.setField("updateTime_", TDateTime.Now());
+            ds.setField("createUser_", handle.getUserCode());
+            ds.setField("createTime_", TDateTime.Now());
+            ds.post();
+            return text;
+        }
+        String result = "";
+        String en_result = ""; // 默认英文
+        while (ds.fetch()) {
+            if ("en".equals(ds.getString("lang_")))
+                en_result = ds.getString("value_");
+            else
+                result = ds.getString("value_");
+        }
+        if (!"".equals(result)) {
+            return result;
+        }
+        if (!"".equals(en_result)) {
+            return en_result;
+        }
+        return text;
+    }
 }
