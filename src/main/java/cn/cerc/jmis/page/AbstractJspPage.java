@@ -238,6 +238,10 @@ public abstract class AbstractJspPage extends UIComponent implements IPage {
         put(id, value);
     }
 
+    public void add(String id, int value) {
+        put(id, value);
+    }
+
     public void add(String id, List<?> value) {
         put(id, value);
     }
