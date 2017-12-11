@@ -99,6 +99,7 @@ public class StartForms implements Filter {
                 try {
                     handle.setProperty(Application.sessionId, req.getSession().getId());
                     handle.setProperty(Application.deviceLanguage, info.getLanguage());
+                    handle.setProperty("myappHandle", handle);
                     form.setHandle(handle);
                     log.debug("进行安全检查，若未登录则显示登录对话框");
                     IAppLogin page = Application.getAppLogin(form);
@@ -132,12 +133,11 @@ public class StartForms implements Filter {
     }
 
     /*
-     * private boolean checkEnableTime() { Calendar cal =
-     * Calendar.getInstance(); // 月底最后一天 if
-     * (TDate.Today().compareTo(TDate.Today().monthEof()) == 0) { if
+     * private boolean checkEnableTime() { Calendar cal = Calendar.getInstance(); //
+     * 月底最后一天 if (TDate.Today().compareTo(TDate.Today().monthEof()) == 0) { if
      * (cal.get(Calendar.HOUR_OF_DAY) >= 23) throw new
-     * RuntimeException("系统现正在进行月初例行维护，维护时间为月底晚上23点至月初早上5点，请您在这段时间内不要使用系统，谢谢！");
-     * } // 月初第一天 if (TDate.Today().compareTo(TDate.Today().monthBof()) == 0) if
+     * RuntimeException("系统现正在进行月初例行维护，维护时间为月底晚上23点至月初早上5点，请您在这段时间内不要使用系统，谢谢！"); }
+     * // 月初第一天 if (TDate.Today().compareTo(TDate.Today().monthBof()) == 0) if
      * (cal.get(Calendar.HOUR_OF_DAY) < 5) throw new
      * RuntimeException("系统现正在进行月初例行维护，维护时间为月底晚上23点至月初早上5点，请您在这段时间内不要使用系统，谢谢！");
      * return true; }
