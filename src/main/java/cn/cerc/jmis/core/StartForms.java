@@ -99,7 +99,7 @@ public class StartForms implements Filter {
                 try {
                     handle.setProperty(Application.sessionId, req.getSession().getId());
                     handle.setProperty(Application.deviceLanguage, info.getLanguage());
-                    handle.setProperty("myappHandle", handle);
+                    req.setAttribute("myappHandle", handle);
                     form.setHandle(handle);
                     log.debug("进行安全检查，若未登录则显示登录对话框");
                     IAppLogin page = Application.getAppLogin(form);
