@@ -55,39 +55,39 @@ public class R {
     }
 
     private static void validateKey(IHandle handle, String text, String language) {
-        SqlQuery ds1 = new SqlQuery(handle);
-        ds1.add("select value_ from %s", SystemTable.getLanguage);
-        ds1.add("where key_='%s'", Utils.safeString(text));
-        ds1.add("and lang_='%s'", language);
-        ds1.open();
-        if (ds1.eof()) {
-            ds1.append();
-            ds1.setField("key_", Utils.safeString(text));
-            ds1.setField("lang_", language);
-            ds1.setField("value_", "");
-            ds1.setField("supportAndroid_", false);
-            ds1.setField("supportIphone_", false);
-            ds1.setField("enable_", true);
-            ds1.setField("createDate_", TDateTime.Now());
-            ds1.setField("createUser_", handle.getUserCode());
-            ds1.setField("updateDate_", TDateTime.Now());
-            ds1.setField("updateUser_", handle.getUserCode());
-            ds1.post();
+        SqlQuery dsLang = new SqlQuery(handle);
+        dsLang.add("select value_ from %s", SystemTable.getLanguage);
+        dsLang.add("where key_='%s'", Utils.safeString(text));
+        dsLang.add("and lang_='%s'", language);
+        dsLang.open();
+        if (dsLang.eof()) {
+            dsLang.append();
+            dsLang.setField("key_", Utils.safeString(text));
+            dsLang.setField("lang_", language);
+            dsLang.setField("value_", "");
+            dsLang.setField("supportAndroid_", false);
+            dsLang.setField("supportIphone_", false);
+            dsLang.setField("enable_", true);
+            dsLang.setField("createDate_", TDateTime.Now());
+            dsLang.setField("createUser_", handle.getUserCode());
+            dsLang.setField("updateDate_", TDateTime.Now());
+            dsLang.setField("updateUser_", handle.getUserCode());
+            dsLang.post();
         }
     }
 
     private static String getValue(IHandle handle, String text, String language) {
-        SqlQuery ds2 = new SqlQuery(handle);
-        ds2.add("select key_,max(value_) as value from %s", SystemTable.getLanguage);
-        ds2.add("where key_='%s'", Utils.safeString(text));
+        SqlQuery dsLang = new SqlQuery(handle);
+        dsLang.add("select key_,max(value_) as value from %s", SystemTable.getLanguage);
+        dsLang.add("where key_='%s'", Utils.safeString(text));
         if ("en".equals(language)) {
-            ds2.add("and (lang_='%s')", language);
+            dsLang.add("and (lang_='%s')", language);
         } else {
-            ds2.add("and (lang_='%s' or lang_='en')", language);
+            dsLang.add("and (lang_='%s' or lang_='en')", language);
         }
-        ds2.add("group by key_");
-        ds2.open();
-        String result = ds2.getString("value_");
+        dsLang.add("group by key_");
+        dsLang.open();
+        String result = dsLang.getString("value_");
         return result.length() > 0 ? result : text;
     }
 
