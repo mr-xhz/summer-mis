@@ -45,7 +45,7 @@ public class R {
         // 校验key
         validateKey(handle, text, language);
         // 将翻译内容返回前台
-        return getValue(handle, text, language);
+        return language + ":" + getValue(handle, text, language);
     }
 
     private static void validateKey(IHandle handle, String text, String language) {
