@@ -38,6 +38,11 @@ public class R {
         if (Application.LangageDefault.equals(language))
             return text;
 
+        if (text == null || "".equals(text.trim())) {
+            log.error("字符串为空");
+            return "file error";
+        }
+
         if (text.length() > 150) {
             log.error("字符串长度超过150，key:" + text);
             return text;
@@ -45,6 +50,7 @@ public class R {
         // 校验key
         validateKey(handle, text, language);
         // 将翻译内容返回前台
+        // TODO 添加前缀，发布时需去掉前缀，lyy - 2017-12-12
         return language + ":" + getValue(handle, text, language);
     }
 
