@@ -34,27 +34,55 @@ public class R {
     }
 
     public static String asString(IHandle handle, String text) {
-        String langage = getLanguage(handle);
-        if (Application.LangageDefault.equals(langage))
+        String language = getLanguage(handle);
+        if (Application.LangageDefault.equals(language))
             return text;
 
-        // 处理英文界面
-        if ("en".equals(langage)) {
-            SqlQuery ds = new SqlQuery(handle);
-            ds.add("select en_ from %s", SystemTable.getLangDict);
-            ds.add("where cn_='%s'", Utils.safeString(text));
-            ds.open();
-            if (ds.eof()) {
-                ds.append();
-                ds.setField("cn_", text);
-                ds.post();
-                return text;
-            }
-            String result = ds.getString("en_");
-            return result.length() > 0 ? result : text;
+        if (text.length() > 150) {
+            log.error("字符串长度超过150，key:" + text);
+            return text;
         }
+        // 校验key
+        validateKey(handle, text, language);
+        // 将翻译内容返回前台
+        return getValue(handle, text, language);
+    }
 
-        return text;
+    private static void validateKey(IHandle handle, String text, String language) {
+        SqlQuery ds1 = new SqlQuery(handle);
+        ds1.add("select value_ from %s", SystemTable.getLanguage);
+        ds1.add("where key_='%s'", Utils.safeString(text));
+        ds1.add("and lang_='%s'", language);
+        ds1.open();
+        if (ds1.eof()) {
+            ds1.append();
+            ds1.setField("key_", Utils.safeString(text));
+            ds1.setField("lang_", language);
+            ds1.setField("value_", "");
+            ds1.setField("supportAndroid_", false);
+            ds1.setField("supportIphone_", false);
+            ds1.setField("enable_", true);
+            ds1.setField("createDate_", TDateTime.Now());
+            ds1.setField("createUser_", handle.getUserCode());
+            ds1.setField("updateDate_", TDateTime.Now());
+            ds1.setField("updateUser_", handle.getUserCode());
+            ds1.post();
+        }
+    }
+
+    private static String getValue(IHandle handle, String text, String language) {
+        SqlQuery ds2 = new SqlQuery(handle);
+        ds2.add("select key_,max(value_) as value from %s", SystemTable.getLanguage);
+        ds2.add("where key_='%s'", Utils.safeString(text));
+        if ("en".equals(language)) {
+            ds2.add("and (lang_='%s')", language);
+        } else {
+            ds2.add("and (lang_='%s' or lang_='en')", language);
+        }
+        ds2.add("group by key_");
+        ds2.open();
+        String result = ds2.getString("value_");
+        return result.length() > 0 ? result : text;
     }
 
     public static String get(IHandle handle, String text) {
