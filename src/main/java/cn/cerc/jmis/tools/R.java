@@ -34,27 +34,61 @@ public class R {
     }
 
     public static String asString(IHandle handle, String text) {
-        String langage = getLanguage(handle);
-        if (Application.LangageDefault.equals(langage))
+        String language = getLanguage(handle);
+        if (Application.LangageDefault.equals(language))
             return text;
 
-        // 处理英文界面
-        if ("en".equals(langage)) {
-            SqlQuery ds = new SqlQuery(handle);
-            ds.add("select en_ from %s", SystemTable.getLangDict);
-            ds.add("where cn_='%s'", Utils.safeString(text));
-            ds.open();
-            if (ds.eof()) {
-                ds.append();
-                ds.setField("cn_", text);
-                ds.post();
-                return text;
-            }
-            String result = ds.getString("en_");
-            return result.length() > 0 ? result : text;
+        if (text == null || "".equals(text.trim())) {
+            log.error("字符串为空");
+            return "file error";
         }
 
-        return text;
+        if (text.length() > 150) {
+            log.error("字符串长度超过150，key:" + text);
+            return text;
+        }
+        // 校验key
+        validateKey(handle, text, language);
+        // 将翻译内容返回前台
+        // TODO 添加前缀，发布时需去掉前缀，lyy - 2017-12-12
+        return language + ":" + getValue(handle, text, language);
+    }
+
+    private static void validateKey(IHandle handle, String text, String language) {
+        SqlQuery dsLang = new SqlQuery(handle);
+        dsLang.add("select value_ from %s", SystemTable.getLanguage);
+        dsLang.add("where key_='%s'", Utils.safeString(text));
+        dsLang.add("and lang_='%s'", language);
+        dsLang.open();
+        if (dsLang.eof()) {
+            dsLang.append();
+            dsLang.setField("key_", Utils.safeString(text));
+            dsLang.setField("lang_", language);
+            dsLang.setField("value_", "");
+            dsLang.setField("supportAndroid_", false);
+            dsLang.setField("supportIphone_", false);
+            dsLang.setField("enable_", true);
+            dsLang.setField("createDate_", TDateTime.Now());
+            dsLang.setField("createUser_", handle.getUserCode());
+            dsLang.setField("updateDate_", TDateTime.Now());
+            dsLang.setField("updateUser_", handle.getUserCode());
+            dsLang.post();
+        }
+    }
+
+    private static String getValue(IHandle handle, String text, String language) {
+        SqlQuery dsLang = new SqlQuery(handle);
+        dsLang.add("select key_,max(value_) as value from %s", SystemTable.getLanguage);
+        dsLang.add("where key_='%s'", Utils.safeString(text));
+        if ("en".equals(language)) {
+            dsLang.add("and (lang_='%s')", language);
+        } else {
+            dsLang.add("and (lang_='%s' or lang_='en')", language);
+        }
+        dsLang.add("group by key_");
+        dsLang.open();
+        String result = dsLang.getString("value_");
+        return result.length() > 0 ? result : text;
     }
 
     public static String get(IHandle handle, String text) {
