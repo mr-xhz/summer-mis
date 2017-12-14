@@ -24,6 +24,7 @@ public class DirectoryTest {
             return file.getName().endsWith(".java");
         });
 
+        int count = 0;
         if (dir.list("C:\\Users\\10914\\Documents\\iWork\\ufamily\\src\\main") > 0) {
             for (String fileName : dir.getFiles()) {
                 StringList src = new StringList();
@@ -31,19 +32,20 @@ public class DirectoryTest {
                 for (String line : src.getItems()) {
                     String text = processString(line);
                     if (text != null) {
-                        WriteLine(text);
+                        count += WriteLine(text);
                     }
                 }
             }
         } else {
             System.out.println("没有找到任何目录与文件");
         }
+        System.out.println(count);
     }
 
-    private void WriteLine(String text) {
+    private int WriteLine(String text) {
         if (text.length() > 150) {
             System.err.println(text);
-            return;
+            return 0;
         }
         SqlQuery dsLang = new SqlQuery(handle);
         dsLang.add("select * from %s", SystemTable.getLanguage);
@@ -63,7 +65,9 @@ public class DirectoryTest {
             dsLang.setField("createUser_", handle.getUserCode());
             dsLang.setField("createDate_", TDateTime.Now());
             dsLang.post();
+            return 1;
         }
+        return 0;
     }
 
     private String processString(String text) {
