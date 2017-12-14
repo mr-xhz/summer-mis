@@ -68,17 +68,17 @@ public class R {
             dsLang.setField("supportAndroid_", false);
             dsLang.setField("supportIphone_", false);
             dsLang.setField("enable_", true);
-            dsLang.setField("createDate_", TDateTime.Now());
-            dsLang.setField("createUser_", handle.getUserCode());
-            dsLang.setField("updateDate_", TDateTime.Now());
             dsLang.setField("updateUser_", handle.getUserCode());
+            dsLang.setField("updateDate_", TDateTime.Now());
+            dsLang.setField("createUser_", handle.getUserCode());
+            dsLang.setField("createDate_", TDateTime.Now());
             dsLang.post();
         }
     }
 
     private static String getValue(IHandle handle, String text, String language) {
         SqlQuery dsLang = new SqlQuery(handle);
-        dsLang.add("select key_,max(value_) as value from %s", SystemTable.getLanguage);
+        dsLang.add("select key_,max(value_) as value_ from %s", SystemTable.getLanguage);
         dsLang.add("where key_='%s'", Utils.safeString(text));
         if ("en".equals(language)) {
             dsLang.add("and (lang_='%s')", language);
