@@ -1,6 +1,7 @@
 package cn.cerc.jmis.tools;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import cn.cerc.jbean.core.AppHandle;
@@ -17,6 +18,7 @@ public class DirectoryTest {
     }
 
     @Test
+    @Ignore
     public void test() {
         Directory dir = new Directory();
         dir.setOnFilter(file -> {
