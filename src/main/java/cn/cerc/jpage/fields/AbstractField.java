@@ -282,6 +282,9 @@ public abstract class AbstractField extends UIComponent implements IField {
         } else {
             html.println("<label for=\"%s\">%s</label>", this.getId(), this.getName() + "：");
             outputInput(html, record);
+            if (this.showStar) {
+                html.println("<font>*</font>");
+            }
             if (this.dialog != null && this.dialog.isOpen()) {
                 html.print("<span>");
                 html.print("<a href=\"%s\">", dialog.getUrl());
@@ -293,8 +296,6 @@ public abstract class AbstractField extends UIComponent implements IField {
 
                 html.print("</a>");
                 html.println("</span>");
-            } else if (this.showStar) {
-                html.println("<font>*</font>");
             } else {
                 html.println("<span></span>");
             }
