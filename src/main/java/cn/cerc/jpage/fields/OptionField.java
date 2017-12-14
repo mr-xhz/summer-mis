@@ -81,6 +81,9 @@ public class OptionField extends AbstractField {
             html.println(String.format("%s</option>", value));
         }
         html.println("</select>");
+        if (this.isShowStar()) {
+            html.print("<font>*</font>");
+        }
         html.print("<span></span>");
     }
 
