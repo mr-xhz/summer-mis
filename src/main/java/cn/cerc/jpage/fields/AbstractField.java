@@ -72,6 +72,8 @@ public abstract class AbstractField extends UIComponent implements IField {
     private int cols;
     // 是否禁用
     private boolean resize = true;
+    // 是否显示*号
+    private boolean showStar = false;
 
     public AbstractField(UIComponent owner, String name, int width) {
         super(owner);
@@ -291,6 +293,8 @@ public abstract class AbstractField extends UIComponent implements IField {
 
                 html.print("</a>");
                 html.println("</span>");
+            } else if (this.showStar) {
+                html.println("<font>*</font>");
             } else {
                 html.println("<span></span>");
             }
@@ -485,6 +489,15 @@ public abstract class AbstractField extends UIComponent implements IField {
 
     public AbstractField setVisible(boolean visible) {
         this.visible = visible;
+        return this;
+    }
+
+    public boolean isShowStar() {
+        return showStar;
+    }
+
+    public AbstractField setShowStar(boolean showStar) {
+        this.showStar = showStar;
         return this;
     }
 
