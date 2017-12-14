@@ -50,8 +50,7 @@ public class R {
         // 校验key
         validateKey(handle, text, language);
         // 将翻译内容返回前台
-        // TODO 添加前缀，发布时需去掉前缀，lyy - 2017-12-12
-        return language + ":" + getValue(handle, text, language);
+        return getValue(handle, text, language);
     }
 
     private static void validateKey(IHandle handle, String text, String language) {
