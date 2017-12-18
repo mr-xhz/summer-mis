@@ -1,5 +1,7 @@
 package cn.cerc.jmis.form;
 
+import java.math.BigInteger;
+
 import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jdb.core.IRecord;
@@ -45,6 +47,11 @@ public class RequestRecord implements IRecord {
     @Override
     public int getInt(String field) {
         return Integer.parseInt(req.getParameter(field));
+    }
+
+    @Override
+    public BigInteger getBigInteger(String field) {
+        return new BigInteger(req.getParameter(field));
     }
 
     public boolean hasDouble(String field) {
