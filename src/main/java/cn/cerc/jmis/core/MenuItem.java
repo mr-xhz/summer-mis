@@ -14,7 +14,7 @@ public class MenuItem {
     // 软件类别，如 1,2,，其中1及2各代表一种软件
     public static final String SOFTWARE = "versions";
     // 菜单授权码
-    public static final String PERMISSION = "procCode";
+    public static final String PERMISSION = "permission";
     // true: 需要登录方可使用
     public static final String SECURITY = "security";
     // 上级菜单，若无，则为""
