@@ -214,7 +214,7 @@ public class StartForms implements Filter {
                 request.getSession().setAttribute("CLIENTVER", CLIENTVER);
 
             // 是否拥有此菜单调用权限
-            if ("true".equals(form.getParam("security", "false"))) {
+            if ("true".equals(form.getParam("security", "true"))) {
                 if (!Application.getPassport(form.getHandle()).passProc(form.getParam("verlist", null),
                         form.getPermission()))
                     throw new RuntimeException("对不起，您没有权限执行此功能！");
