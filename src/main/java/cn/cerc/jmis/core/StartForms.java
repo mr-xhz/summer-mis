@@ -216,7 +216,7 @@ public class StartForms implements Filter {
             // 是否拥有此菜单调用权限
             if ("true".equals(form.getParam("security", "false"))) {
                 if (!Application.getPassport(form.getHandle()).passProc(form.getParam("versions", null),
-                        form.getParam("procCode", null)))
+                        form.getParam("permission", null)))
                     throw new RuntimeException("对不起，您没有权限执行此功能！");
             }
             // 增加15202406账号跳过设备认证的判断，用于地藤专用测试账号
