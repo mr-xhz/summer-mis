@@ -17,20 +17,20 @@ public class R {
     public static String getLanguage(IHandle handle) {
         Object temp = handle.getProperty(Application.deviceLanguage);
         if (temp == null || "".equals(temp)) {
-            log.info("handle langage is null");
+            log.info("handle language is null");
             Object request = handle.getProperty("request");
             if (request != null) {
                 log.info(request.getClass().getName());
                 if (request instanceof HttpServletRequest) {
                     HttpServletRequest req = (HttpServletRequest) request;
                     temp = req.getSession().getAttribute(Application.deviceLanguage);
-                    log.info("session langage value " + temp);
+                    log.info("session language value " + temp);
                 }
             }
         }
-        String langage = temp == null ? Application.getLangage() : (String) temp;
-        log.info("application langage: " + langage);
-        return langage;
+        String language = temp == null ? Application.getLangage() : (String) temp;
+        log.info("application language: " + language);
+        return language;
     }
 
     public static String asString(IHandle handle, String text) {
