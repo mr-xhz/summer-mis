@@ -123,6 +123,7 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
         this.parent = parent;
     }
 
+    @Override
     public String getPermission() {
         return permission;
     }
