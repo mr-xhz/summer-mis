@@ -33,7 +33,7 @@ public class TaskTrackCurrentUser extends AbstractTask {
         }
 
         // 已登出超过4小时的用户
-        sql2.append(" or (hour(timediff(now(),LogoutTime_)))");
+        sql2.append(" or (hour(timediff(now(),LogoutTime_)) > 4)");
         sql2.append(")");
         conn.execute(sql2.toString());
     }
