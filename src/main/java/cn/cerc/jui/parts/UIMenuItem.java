@@ -19,24 +19,24 @@ public class UIMenuItem extends UIComponent {
     public void output(HtmlWriter html) {
         // 输出菜单图像
         html.println("<div role='menuIcon'>");
-        html.println("<a href='%s' onclick=\"updateUserHit('%s')\" target='_blank'>", this.getCode(), this.getCode());
-        html.println("<img src='%s'></a>", this.getImg());
+        html.println("<a href='%s' onclick=\"updateUserHit('%s')\" target='_blank'>", getCode(), getCode());
+        html.println("<img src='%s'></a>", getImg());
         html.println("</div>");
 
         // 输出菜单名称
         html.println("<div role='menuName'>");
         if (getHrip() == 2 && isDelphi()) {
-            html.println("<a href=\"hrip:%s\" onclick=\"updateUserHit('%s')\">", this.getCode(), this.getCode());
+            html.println("<a href=\"hrip:%s\" onclick=\"updateUserHit('%s')\">", getCode(), getCode());
             // 闪电 ⚡ 标记
             html.println("<img src=\"%s\"/>", "images/lightning.png");
             html.println("</a>");
         }
 
         if (isBlank()) {
-            html.println("<a href='%s' onclick=\"updateUserHit('%s')\"", this.getCode(), this.getCode());
-            html.println("target='_blank'>%s</a>", this.getName());
+            html.println("<a href='%s' onclick=\"updateUserHit('%s')\"", getCode(), getCode());
+            html.println("target='_blank'>%s</a>", getName());
         } else {
-            html.println("<a href='%s'", this.getCode());
+            html.println("<a href='%s'>%s</a>", getCode(), getName());
         }
         html.println("</div>");
     }
@@ -100,16 +100,18 @@ public class UIMenuItem extends UIComponent {
         return delphi;
     }
 
-    public void setDelphi(boolean delphi) {
+    public UIMenuItem setDelphi(boolean delphi) {
         this.delphi = delphi;
+        return this;
     }
 
     public boolean isBlank() {
         return blank;
     }
 
-    public void setBlank(boolean blank) {
+    public UIMenuItem setBlank(boolean blank) {
         this.blank = blank;
+        return this;
     }
 
 }
