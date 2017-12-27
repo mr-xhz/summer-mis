@@ -9,7 +9,7 @@ public class UIMenuItem extends UIComponent {
     private String code;
     private int hrip;
     private boolean delphi;
-    private boolean blank;
+    private String target = "_blank";
 
     public UIMenuItem(UIComponent owner) {
         super(owner);
@@ -19,7 +19,11 @@ public class UIMenuItem extends UIComponent {
     public void output(HtmlWriter html) {
         // 输出菜单图像
         html.println("<div role='menuIcon'>");
-        html.println("<a href='%s' onclick=\"updateUserHit('%s')\" target='_blank'>", getCode(), getCode());
+        html.print("<a href='%s' onclick=\"updateUserHit('%s')\"", getCode(), getCode());
+        if (target != null && !"".equals(target)) {
+            html.print(" target='%s'", this.target);
+        }
+        html.println(">");
         html.println("<img src='%s'></a>", getImg());
         html.println("</div>");
 
@@ -32,12 +36,11 @@ public class UIMenuItem extends UIComponent {
             html.println("</a>");
         }
 
-        if (isBlank()) {
-            html.println("<a href='%s' onclick=\"updateUserHit('%s')\"", getCode(), getCode());
-            html.println("target='_blank'>%s</a>", getName());
-        } else {
-            html.println("<a href='%s'>%s</a>", getCode(), getName());
+        html.println("<a href='%s' onclick=\"updateUserHit('%s')\"", getCode(), getCode());
+        if (target != null && !"".equals(target)) {
+            html.print(" target='%s'", this.target);
         }
+        html.println(">%s</a>", getName());
         html.println("</div>");
     }
 
@@ -105,12 +108,12 @@ public class UIMenuItem extends UIComponent {
         return this;
     }
 
-    public boolean isBlank() {
-        return blank;
+    public String getTarget() {
+        return target;
     }
 
-    public UIMenuItem setBlank(boolean blank) {
-        this.blank = blank;
+    public UIMenuItem setTarget(String target) {
+        this.target = target;
         return this;
     }
 
