@@ -9,6 +9,7 @@ public class UIMenuItem extends UIComponent {
     private String code;
     private int hrip;
     private boolean delphi;
+    private boolean blank;
 
     public UIMenuItem(UIComponent owner) {
         super(owner);
@@ -30,8 +31,13 @@ public class UIMenuItem extends UIComponent {
             html.println("<img src=\"%s\"/>", "images/lightning.png");
             html.println("</a>");
         }
-        html.println("<a href='%s' onclick=\"updateUserHit('%s')\"", this.getCode(), this.getCode());
-        html.println("target='_blank'>%s</a>", this.getName());
+
+        if (isBlank()) {
+            html.println("<a href='%s' onclick=\"updateUserHit('%s')\"", this.getCode(), this.getCode());
+            html.println("target='_blank'>%s</a>", this.getName());
+        } else {
+            html.println("<a href='%s'", this.getCode());
+        }
         html.println("</div>");
     }
 
@@ -96,6 +102,14 @@ public class UIMenuItem extends UIComponent {
 
     public void setDelphi(boolean delphi) {
         this.delphi = delphi;
+    }
+
+    public boolean isBlank() {
+        return blank;
+    }
+
+    public void setBlank(boolean blank) {
+        this.blank = blank;
     }
 
 }
