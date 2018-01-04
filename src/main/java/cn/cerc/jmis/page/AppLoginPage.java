@@ -15,7 +15,7 @@ import cn.cerc.jbean.tools.IAppLogin;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.Utils;
-import cn.cerc.jmis.core.RequestData;
+import cn.cerc.jmis.core.ClientDevice;
 import cn.cerc.jmis.form.AbstractForm;
 
 public class AppLoginPage extends AbstractJspPage implements IAppLogin {
@@ -99,8 +99,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
             String sid = app.getDataOut().getHead().getString("SessionID_");
             if (sid != null && !sid.equals("")) {
                 log.debug(String.format("认证成功，取得sid(%s)", sid));
-                req.setAttribute(RequestData.appSession_Key, sid);
-                req.getSession().setAttribute(RequestData.appSession_Key, sid);
+                ((ClientDevice) this.getForm().getClient()).setSid(sid);
                 result = true;
             }
         } else {
