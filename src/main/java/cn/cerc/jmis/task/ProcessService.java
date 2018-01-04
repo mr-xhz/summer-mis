@@ -61,7 +61,7 @@ public class ProcessService extends TimerTask {
 
     // 每天凌晨开始执行报表或回算任务
     private void report() {
-        log.info("report: " + TDateTime.Now());
+        return;
     }
 
     private void runTask(IHandle handle) {

@@ -9,7 +9,6 @@ import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jdb.cache.IMemcache;
 import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDateTime;
-import cn.cerc.jdb.mysql.SqlOperator;
 import cn.cerc.jdb.mysql.SqlQuery;
 import cn.cerc.jmis.message.JPushRecord;
 import cn.cerc.jmis.message.MessageLevel;
@@ -63,25 +62,26 @@ public class SvrUserMessages extends CustomService {
             }
         }
 
-        // 保存到数据库
-        Record ds = new Record();
-        ds.setField("CorpNo_", corpNo);
-        ds.setField("UserCode_", userCode);
-        ds.setField("Level_", level);
-        ds.setField("Subject_", subject);
-        if (content.length() > 0)
-            ds.setField("Content_", content.toString());
-        ds.setField("AppUser_", handle.getUserCode());
-        ds.setField("AppDate_", TDateTime.Now());
-        // 日志类消息默认为已读
-        ds.setField("Status_", level == MessageLevel.Logger.ordinal() ? 1 : 0);
-        ds.setField("Process_", process);
-        ds.setField("Final_", false);
-        ds.setField("UID_", null);
+        SqlQuery cdsMsg = new SqlQuery(this);
+        cdsMsg.add("select * from %s", SystemTable.get(SystemTable.getUserMessages));
+        cdsMsg.setMaximum(0);
+        cdsMsg.open();
 
-        SqlOperator operator = new SqlOperator(handle);
-        operator.setTableName(SystemTable.get(SystemTable.getUserMessages));
-        operator.insert(ds);
+        // 保存到数据库
+        cdsMsg.append();
+        cdsMsg.setField("CorpNo_", corpNo);
+        cdsMsg.setField("UserCode_", userCode);
+        cdsMsg.setField("Level_", level);
+        cdsMsg.setField("Subject_", subject);
+        if (content.length() > 0)
+            cdsMsg.setField("Content_", content.toString());
+        cdsMsg.setField("AppUser_", handle.getUserCode());
+        cdsMsg.setField("AppDate_", TDateTime.Now());
+        // 日志类消息默认为已读
+        cdsMsg.setField("Status_", level == MessageLevel.Logger.ordinal() ? 1 : 0);
+        cdsMsg.setField("Process_", process);
+        cdsMsg.setField("Final_", false);
+        cdsMsg.post();
 
         // 清除缓存
         IMemcache buff = Application.getMemcache();
@@ -90,7 +90,7 @@ public class SvrUserMessages extends CustomService {
         buff.delete(buffKey);
 
         // 返回消息的编号
-        getDataOut().getHead().setField("msgId", ds.getInt("UID_"));
+        getDataOut().getHead().setField("msgId", cdsMsg.getBigInteger("UID_"));
         return true;
     }
 
