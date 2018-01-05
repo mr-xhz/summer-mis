@@ -8,6 +8,7 @@ public class CustomField extends AbstractField {
 
     public CustomField(UIComponent dataView, String name, int width) {
         super(dataView, name, width);
+        this.setField("_selectCheckBox_");
     }
 
     @Override
