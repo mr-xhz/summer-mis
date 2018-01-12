@@ -90,13 +90,13 @@ public class SvrUserLogin extends CustomService {
 
         boolean YGLogin = buff.getCorpType() == BookVersion.ctFree.ordinal();
         if (buff.getStatus() == 3) {
-            throw new SecurityCheckException("对不起，您的账套处于暂停录入状态，禁止登录！");
+            throw new SecurityCheckException("对不起，您的账套处于暂停录入状态，禁止登录！若需启用，请您联系客服处理！");
         }
         if (buff.getStatus() == 4) {
             throw new SecurityCheckException("对不起，您的帐套已过期，请联系客服续费！");
         }
         if (dsUser.getInt("Enabled_") < 1) {
-            throw new SecurityCheckException(String.format("该帐号(%s)被暂停使用，禁止登录！", userCode));
+            throw new SecurityCheckException(String.format("该帐号(%s)被暂停使用，禁止登录！若需启用，请您联系客服处理！", userCode));
         }
         // 判断此帐号是否为附属帐号
         if (dsUser.getString("BelongAccount_") != null && !"".equals(dsUser.getString("BelongAccount_"))) {
@@ -545,8 +545,7 @@ public class SvrUserLogin extends CustomService {
     }
 
     private void updateCurrentUser(String computer, String screen, String language) {
-        getConnection().execute(String.format(
-                "Update %s Set Viability_=0 Where Viability_>0 and LogoutTime_<'%s'",
+        getConnection().execute(String.format("Update %s Set Viability_=0 Where Viability_>0 and LogoutTime_<'%s'",
                 SystemTable.get(SystemTable.getCurrentUser), TDateTime.Now().incHour(-1)));
         String SQLCmd = String.format("update %s set Viability_=-1 where Account_='%s' and Viability_>-1",
                 SystemTable.get(SystemTable.getCurrentUser), getUserCode());
