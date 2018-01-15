@@ -40,7 +40,7 @@ public class AsyncService implements IServiceProxy {
     //
     private MessageLevel messageLevel = MessageLevel.Service;
     //
-    private int msgId;
+    private String msgId;
 
     static {
         processTiles.add("中止执行");
@@ -111,7 +111,7 @@ public class AsyncService implements IServiceProxy {
             ds.getHead().setField("_content_", this.toString());
             ds.save();
         }
-        return msgId > 0;
+        return !"".equals(msgId);
     }
 
     private void send() {
@@ -129,13 +129,6 @@ public class AsyncService implements IServiceProxy {
         msg.setProcess(this.process);
         log.debug(this.getCorpNo() + ":" + this.getUserCode() + ":" + this);
         this.msgId = msg.send(handle);
-    }
-
-    @Deprecated
-    public int send(String subject) {
-        this.setSubject(subject);
-        this.send();
-        return this.msgId;
     }
 
     @Override
@@ -261,7 +254,7 @@ public class AsyncService implements IServiceProxy {
         getDataIn().getHead().setField("_subject_", String.format(format, args));
     }
 
-    public int getMsgId() {
+    public String getMsgId() {
         return msgId;
     }
 }
