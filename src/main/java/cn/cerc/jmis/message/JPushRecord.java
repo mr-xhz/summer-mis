@@ -14,9 +14,9 @@ public class JPushRecord {
     private String userCode;
     private String title;
     private String alert;
-    private int msgId;
+    private String msgId;
 
-    public JPushRecord(String corpNo, String userCode, int msgId) {
+    public JPushRecord(String corpNo, String userCode, String msgId) {
         this.corpNo = corpNo;
         this.userCode = userCode;
         this.msgId = msgId;
@@ -101,11 +101,11 @@ public class JPushRecord {
         return this;
     }
 
-    public int getMsgId() {
+    public String getMsgId() {
         return msgId;
     }
 
-    public JPushRecord setMsgId(int msgId) {
+    public JPushRecord setMsgId(String msgId) {
         this.msgId = msgId;
         return this;
     }

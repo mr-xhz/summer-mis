@@ -2,6 +2,8 @@ package cn.cerc.jmis.services;
 
 import static cn.cerc.jdb.other.utils.copy;
 
+import java.math.BigInteger;
+
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomService;
 import cn.cerc.jbean.other.BufferType;
@@ -57,7 +59,7 @@ public class SvrUserMessages extends CustomService {
             ds2.open();
             if (ds2.size() > 0) {
                 // 返回消息的编号
-                getDataOut().getHead().setField("msgId", ds2.getInt("UID_"));
+                getDataOut().getHead().setField("msgId", ds2.getBigInteger("UID_"));
                 return true;
             }
         }
@@ -155,10 +157,11 @@ public class SvrUserMessages extends CustomService {
 
         String corpNo = cdsMsg.getString("CorpNo_");
         String userCode = cdsMsg.getString("UserCode_");
-        int msgId = cdsMsg.getInt("UID_");
+        BigInteger msgId = cdsMsg.getBigInteger("UID_");
 
-        JPushRecord jPush = new JPushRecord(corpNo, userCode, msgId);
+        JPushRecord jPush = new JPushRecord(corpNo, userCode, msgId.toString());
         jPush.setAlert(subject);
         jPush.send(this);
     }
+
 }

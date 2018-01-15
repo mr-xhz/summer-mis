@@ -43,7 +43,7 @@ public class MessageRecord {
         }
     }
 
-    public int send(IHandle handle) {
+    public String send(IHandle handle) {
         if (subject == null || "".equals(subject)) {
             throw new RuntimeException("消息标题不允许为空");
         }
@@ -70,7 +70,7 @@ public class MessageRecord {
         }
 
         // 返回消息的编号
-        return svr.getDataOut().getHead().getInt("msgId");
+        return svr.getDataOut().getHead().getString("msgId");
     }
 
     public String getContent() {
