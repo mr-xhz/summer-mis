@@ -41,7 +41,9 @@ public class Block303 extends UIComponent {
         for (UrlRecord url : items.keySet()) {
             html.println("<div role='item'>");
             html.println("<div role='image'>");
-            html.println("<a href='%s'>%s</a>", url.getUrl(), items.get(url));
+            html.println("<a href='%s'>", url.getUrl());
+            items.get(url).output(html);
+            html.println("</a>", url.getUrl());
             html.println("</div>");
             html.println("<div role='title'>");
             html.println("<a href='%s'>%s</a>", url.getUrl(), url.getName());

@@ -9,6 +9,8 @@ public class UIMenuItem extends UIComponent {
     private String code;
     private int hrip;
     private boolean delphi;
+    private boolean menuLock;
+
     private String target = "_blank";
 
     public UIMenuItem(UIComponent owner) {
@@ -24,7 +26,12 @@ public class UIMenuItem extends UIComponent {
             html.print(" target='%s'", this.target);
         }
         html.println(">");
-        html.println("<img src='%s'></a>", getImg());
+        html.println("<img src='%s'", getImg());
+        if (menuLock) {
+            html.println("role='menuLock'");
+        }
+        html.println(">");
+        html.println("</a>");
         html.println("</div>");
 
         // 输出菜单名称
@@ -117,4 +124,12 @@ public class UIMenuItem extends UIComponent {
         return this;
     }
 
+    public boolean isMenuLock() {
+        return menuLock;
+    }
+
+    public UIMenuItem setMenuLock(boolean menuLock) {
+        this.menuLock = menuLock;
+        return this;
+    }
 }
