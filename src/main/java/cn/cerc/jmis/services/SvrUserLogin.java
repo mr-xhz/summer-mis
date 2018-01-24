@@ -95,6 +95,10 @@ public class SvrUserLogin extends CustomService {
         if (buff.getStatus() == 4) {
             throw new SecurityCheckException("对不起，您的帐套已过期，请联系客服续费！");
         }
+        if (dsUser.getInt("Enabled_") < 1 && dsUser.getInt("VerifyTimes_") == 6) {
+            throw new SecurityCheckException(
+                    String.format("该帐号(%s)因输入错误密码或验证码次数达到6次，已被自动停用，禁止登录！若需启用，请您联系客服处理！", userCode));
+        }
         if (dsUser.getInt("Enabled_") < 1) {
             throw new SecurityCheckException(String.format("该帐号(%s)被暂停使用，禁止登录！若需启用，请您联系客服处理！", userCode));
         }
@@ -133,7 +137,12 @@ public class SvrUserLogin extends CustomService {
                 } else {
                     dsUser.setField("VerifyTimes_", dsUser.getInt("VerifyTimes_") + 1);
                     dsUser.post();
-                    throw new SecurityCheckException("您的登录密码错误，禁止登录！");
+                    if (dsUser.getInt("VerifyTimes_") > 3) {
+                        throw new SecurityCheckException(
+                                String.format("您输入密码的错误次数已达 %d 次，输错超过6次时，您的账号将被自动停用！", dsUser.getInt("VerifyTimes_")));
+                    } else {
+                        throw new SecurityCheckException("您的登录密码错误，禁止登录！");
+                    }
                 }
             }
         }
