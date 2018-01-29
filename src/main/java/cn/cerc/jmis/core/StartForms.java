@@ -71,10 +71,11 @@ public class StartForms implements Filter {
 
         // 验证菜单是否启停
         if (Application.containsBean("AppFormFilter")) {
-            IFormFilter ff = Application.getBean("AppFormFilter", IFormFilter.class);
-            if (ff != null) {
-                if (ff.doFilter(resp, formId, funcCode))
+            IFormFilter formFilter = Application.getBean("AppFormFilter", IFormFilter.class);
+            if (formFilter != null) {
+                if (formFilter.doFilter(resp, formId, funcCode)) {
                     return;
+                }
             }
         }
 
@@ -101,7 +102,9 @@ public class StartForms implements Filter {
                     handle.setProperty(Application.deviceLanguage, info.getLanguage());
                     req.setAttribute("myappHandle", handle);
                     form.setHandle(handle);
+
                     log.debug("进行安全检查，若未登录则显示登录对话框");
+
                     IAppLogin page = Application.getAppLogin(form);
                     if (page.checkSecurity(info.getSid())) {
                         String corpNo = handle.getCorpNo();

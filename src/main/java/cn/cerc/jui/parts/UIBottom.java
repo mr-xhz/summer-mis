@@ -2,11 +2,11 @@ package cn.cerc.jui.parts;
 
 import cn.cerc.jpage.core.HtmlWriter;
 
-public class UIButton extends UIComponent {
+public class UIBottom extends UIComponent {
     private String caption;
     private String url;
 
-    public UIButton(UIComponent owner) {
+    public UIBottom(UIComponent owner) {
         super(owner);
     }
 
@@ -14,7 +14,7 @@ public class UIButton extends UIComponent {
         return caption;
     }
 
-    public UIButton setCaption(String caption) {
+    public UIBottom setCaption(String caption) {
         this.caption = caption;
         return this;
     }
@@ -23,7 +23,7 @@ public class UIButton extends UIComponent {
         return url;
     }
 
-    public UIButton setUrl(String url) {
+    public UIBottom setUrl(String url) {
         this.url = url;
         return this;
     }

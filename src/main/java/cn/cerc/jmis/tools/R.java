@@ -29,7 +29,6 @@ public class R {
             }
         }
         String language = temp == null ? Application.getLangage() : (String) temp;
-        log.info("application language: " + language);
         return language;
     }
 

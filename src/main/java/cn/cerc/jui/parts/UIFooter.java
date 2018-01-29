@@ -15,7 +15,7 @@ public class UIFooter extends UIComponent {
     // protected UrlRecord checkAll;
     private boolean flag = false;
     private UIFooterOperation operation;
-    private List<UIButton> buttons = new ArrayList<>();
+    private List<UIBottom> buttons = new ArrayList<>();
 
     public UIFooter(UIComponent owner) {
         super(owner);
@@ -84,12 +84,12 @@ public class UIFooter extends UIComponent {
         this.flag = flag;
     }
 
-    public List<UIButton> getButtons() {
+    public List<UIBottom> getButtons() {
         return buttons;
     }
 
-    public UIButton addButton() {
-        UIButton button = new UIButton(this);
+    public UIBottom addButton() {
+        UIBottom button = new UIBottom(this);
         buttons.add(button);
         return button;
     }
@@ -97,11 +97,11 @@ public class UIFooter extends UIComponent {
     public void addButton(String caption, String url) {
         int count = 1;
         for (Component obj : this.getComponents()) {
-            if (obj instanceof UIButton) {
+            if (obj instanceof UIBottom) {
                 count++;
             }
         }
-        UIButton item = addButton();
+        UIBottom item = addButton();
         item.setCaption(caption);
         item.setUrl(url);
 

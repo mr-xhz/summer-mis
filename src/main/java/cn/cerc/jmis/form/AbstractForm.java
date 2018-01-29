@@ -38,8 +38,9 @@ public abstract class AbstractForm extends AbstractHandle implements IForm {
 
     @Override
     public boolean logon() {
-        if (getHandle() == null)
+        if (getHandle() == null) {
             return false;
+        }
         CustomHandle sess = (CustomHandle) getHandle().getProperty(null);
         return sess.logon();
     }
