@@ -26,14 +26,16 @@ public class Component {
 
     public void setOwner(Component owner) {
         this.owner = owner;
-        if (owner != null)
+        if (owner != null) {
             owner.addComponent(this);
+        }
     }
 
     public final Component setId(String id) {
         this.id = id;
-        if (owner != null && id != null)
+        if (owner != null && id != null) {
             owner.addComponent(this);
+        }
         return this;
     }
 
@@ -61,8 +63,9 @@ public class Component {
     public <T> T create(Class<T> clazz) throws InstantiationException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException, NoSuchMethodException, SecurityException {
         T obj = clazz.getDeclaredConstructor().newInstance();
-        if (!(obj instanceof Component))
+        if (!(obj instanceof Component)) {
             throw new RuntimeException("仅支持Component及其子数，不支持创建类型: " + clazz.getName());
+        }
         Component item = (Component) obj;
         item.setOwner(this);
         return obj;

@@ -45,44 +45,50 @@ public class UIButton extends UIComponent {
         return text;
     }
 
-    public void setText(String text) {
+    public UIButton setText(String text) {
         this.text = text;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public UIButton setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public UIButton setValue(String value) {
         this.value = value;
+        return this;
     }
 
     public String getOnclick() {
         return onclick;
     }
 
-    public void setOnclick(String onclick) {
+    public UIButton setOnclick(String onclick) {
         this.onclick = onclick;
+        return this;
     }
 
-    public void setClickUrl(String url) {
+    public UIButton setClickUrl(String url) {
         this.setOnclick(String.format("location.href='%s'", url));
+        return this;
     }
 
     public String getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public UIButton setRole(String role) {
         this.role = role;
+        return this;
     }
 
 }

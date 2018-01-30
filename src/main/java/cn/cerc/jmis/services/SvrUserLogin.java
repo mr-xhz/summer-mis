@@ -394,10 +394,8 @@ public class SvrUserLogin extends CustomService {
             ds2.open();
             DataValidateException.stopRun("系统出错，请您重新进入系统！", ds2.size() != 1);
 
-            String verifyCode;
-            if (ServerConfig.getAppLevel() == ServerConfig.appTest) {
-                verifyCode = "888888";
-            } else {
+            String verifyCode = "888888";
+            if (ServerConfig.getAppLevel() != ServerConfig.appTest) {
                 verifyCode = intToStr(random(900000) + 100000);
             }
             ds2.edit();

@@ -81,72 +81,81 @@ public class UITextBox extends UIComponent {
         return caption;
     }
 
-    public void setCaption(UISpan caption) {
+    public UITextBox setCaption(UISpan caption) {
         this.caption = caption;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public UITextBox setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getPlaceholder() {
         return placeholder;
     }
 
-    public void setPlaceholder(String placeholder) {
+    public UITextBox setPlaceholder(String placeholder) {
         this.placeholder = placeholder;
+        return this;
     }
 
     public String getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public UITextBox setValue(String value) {
         this.value = value;
+        return this;
     }
 
     public String getPattern() {
         return pattern;
     }
 
-    public void setPattern(String pattern) {
+    public UITextBox setPattern(String pattern) {
         this.pattern = pattern;
+        return this;
     }
 
     public boolean isReadonly() {
         return readonly;
     }
 
-    public void setReadonly(boolean readonly) {
+    public UITextBox setReadonly(boolean readonly) {
         this.readonly = readonly;
+        return this;
     }
 
     public boolean isRequired() {
         return required;
     }
 
-    public void setRequired(boolean required) {
+    public UITextBox setRequired(boolean required) {
         this.required = required;
+        return this;
     }
 
     public boolean isAutocomplete() {
         return autocomplete;
     }
 
-    public void setAutocomplete(boolean autocomplete) {
+    public UITextBox setAutocomplete(boolean autocomplete) {
         this.autocomplete = autocomplete;
+        return this;
     }
 
     public boolean isAutofocus() {
         return autofocus;
     }
 
-    public void setAutofocus(boolean autofocus) {
+    public UITextBox setAutofocus(boolean autofocus) {
         this.autofocus = autofocus;
+        return this;
     }
 
     public String getType() {
@@ -162,24 +171,27 @@ public class UITextBox extends UIComponent {
         return onclick;
     }
 
-    public void setOnclick(String onclick) {
+    public UITextBox setOnclick(String onclick) {
         this.onclick = onclick;
+        return this;
     }
 
     public String getMaxlength() {
         return maxlength;
     }
 
-    public void setMaxlength(String maxlength) {
+    public UITextBox setMaxlength(String maxlength) {
         this.maxlength = maxlength;
+        return this;
     }
 
     public String getOninput() {
         return oninput;
     }
 
-    public void setOninput(String oninput) {
+    public UITextBox setOninput(String oninput) {
         this.oninput = oninput;
+        return this;
     }
 
 }
