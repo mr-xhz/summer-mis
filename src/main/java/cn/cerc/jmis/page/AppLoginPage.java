@@ -45,6 +45,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
         String password = null;
         String userCode = null;
         try {
+            // TODO 需要统一 login_user login_pwd 与 userCode password 的名称
             if (form.getRequest().getParameter("login_usr") != null) {
                 userCode = getRequest().getParameter("login_usr");
                 password = getRequest().getParameter("login_pwd");
