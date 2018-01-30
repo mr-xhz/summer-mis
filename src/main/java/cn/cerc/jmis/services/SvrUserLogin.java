@@ -118,6 +118,8 @@ public class SvrUserLogin extends CustomService {
                 throw new RuntimeException("用户密码不允许为空！");
             }
         }
+
+        // 检查设备码
         enrollMachineInfo(dsUser.getString("CorpNo_"), userCode, deviceId, device_name);
 
         if (dsUser.getBoolean("Encrypt_")) {
@@ -154,13 +156,13 @@ public class SvrUserLogin extends CustomService {
 
         try (Transaction tx = new Transaction(this)) {
             String sql = String.format(
-                    "update %s set LastTime_=Getdate() where UserCode_='%s' and MachineCode_='%s' and Used_=1",
+                    "update %s set LastTime_=now() where UserCode_='%s' and MachineCode_='%s' and Used_=1",
                     SystemTable.get(SystemTable.getDeviceVerify), userCode, deviceId);
             getConnection().execute(sql);
 
             // 若该账套是待安装，则改为已启用
             SqlQuery dsCorp = new SqlQuery(this);
-            dsCorp.add("select * from %s ", SystemTable.getBookInfo);
+            dsCorp.add("select * from %s ", SystemTable.get(SystemTable.getBookInfo));
             dsCorp.add("where CorpNo_='%s' and Status_=1 ", corpNo);
             dsCorp.open();
             if (!dsCorp.eof()) {
