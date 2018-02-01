@@ -104,7 +104,7 @@ public class SvrUserLoginTest {
                 e.printStackTrace();
                 assertThat(e.getMessage().indexOf("5 分钟") > 0, is(true));
             }
-            Thread.sleep(1000 * 60 * SvrUserLogin.VerifyCodeTimeout);
+            Thread.sleep(1000 * 60 * SvrUserLogin.TimeOut);
             assertThat(app.sendVerifyCode(), is(true));
         }
     }
