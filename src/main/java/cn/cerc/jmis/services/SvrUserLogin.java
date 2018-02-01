@@ -28,6 +28,7 @@ import cn.cerc.jdb.mysql.SqlOperator;
 import cn.cerc.jdb.mysql.SqlQuery;
 import cn.cerc.jdb.mysql.Transaction;
 import cn.cerc.jdb.oss.OssSession;
+import cn.cerc.jmis.tools.R;
 
 /**
  * 用于用户登录
@@ -305,66 +306,55 @@ public class SvrUserLogin extends CustomService {
         return true;
     }
 
-    // return 若返回值为 true，表示已校验，否则表示需要进行认证
-    @Webfunc
-    public boolean verifyMachine() throws SecurityCheckException {
+    /**
+     * return 若返回值为 true，表示已校验，否则表示需要进行认证
+     */
+    public boolean verifyMachine() throws SecurityCheckException, DataValidateException {
         Record headIn = getDataIn().getHead();
-        String userCode = getUserCode();
+
+        DataValidateException.stopRun(R.asString(this, "设备ID不允许为空"), !headIn.hasValue("deviceId"));
         String deviceId = headIn.getString("deviceId");
-        String verifyCode = headIn.getString("verifyCode");
-        SqlQuery ds = new SqlQuery(this);
-        ds.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
-        ds.add("where UserCode_='%s' and MachineCode_='%s'", userCode, deviceId);
-        ds.open();
 
-        SqlQuery dsUser = new SqlQuery(this);
-        dsUser.add("select * from %s ", SystemTable.get(SystemTable.getUserInfo));
-        dsUser.add("where Code_='%s' ", userCode);
-        dsUser.open();
-        if (dsUser.eof()) {
-            throw new RuntimeException("没有找到用户帐号：" + userCode);
-        }
-        if (dsUser.getInt("Enabled_") < 1) {
-            throw new RuntimeException("您现登录的帐号已被停止使用，请您联系客服启用后再重新登录！");
-        }
-        if (ds.eof()) {
-            throw new RuntimeException(String.format("系统出错(id=%s)，请您重新进入系统！", deviceId));
-        }
+        // 校验帐号的可用状态
+        SqlQuery cdsUser = new SqlQuery(this);
+        cdsUser.add("select * from %s ", SystemTable.get(SystemTable.getUserInfo));
+        cdsUser.add("where Code_='%s' ", getUserCode());
+        cdsUser.open();
+        DataValidateException.stopRun(String.format(R.asString(this, "没有找到用户帐号 %s"), getUserCode()), cdsUser.eof());
+        DataValidateException.stopRun(R.asString(this, "您现登录的帐号已被停止使用，请您联系客服启用后再重新登录"), cdsUser.getInt("Enabled_") < 1);
 
-        if (ds.size() > 1) {
-            while (!ds.eof()) {
-                if (ds.getRecNo() == 1) {
-                    ds.next();
-                } else {
-                    ds.delete();
-                }
-            }
-            ds.first();
-        }
-        if (ds.getInt("Used_") == 2) {
-            throw new SecurityCheckException("您正在使用的这台设备，被管理员设置为禁止登入系统！");
-        }
-        if (ds.getInt("Used_") == 1) {
+        // 校验设备码的可用状态
+        SqlQuery cdsVer = new SqlQuery(this);
+        cdsVer.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
+        cdsVer.add("where UserCode_='%s' and MachineCode_='%s'", getUserCode(), deviceId);
+        cdsVer.open();
+        DataValidateException.stopRun(String.format(R.asString(this, "系统出错(id=%s)，请您重新进入系统"), deviceId), cdsVer.eof());
+
+        if (cdsVer.getInt("Used_") == 1) {
             return true;
         }
 
-        if ("".equals(verifyCode)) {
-            throw new RuntimeException("校验码不允许为空!");
+        // 未通过则需要检查验证码
+        DataValidateException.stopRun(R.asString(this, "验证码不允许为空"), !headIn.hasValue("verifyCode"));
+        String verifyCode = headIn.getString("verifyCode");
+
+        if (cdsVer.getInt("Used_") == 2) {
+            throw new SecurityCheckException(R.asString(this, "您正在使用的这台设备，被管理员设置为禁止登入系统！"));
         }
 
         // 更新认证码
-        if (!verifyCode.equals(ds.getString("VerifyCode_"))) {
-            updateVerifyCode(ds, verifyCode, dsUser);
+        if (!verifyCode.equals(cdsVer.getString("VerifyCode_"))) {
+            updateVerifyCode(cdsVer, verifyCode, cdsUser);
         }
 
-        ds.edit();
-        ds.setField("Used_", 1);
-        ds.setField("FirstTime_", TDateTime.Now());
-        ds.post();
+        cdsVer.edit();
+        cdsVer.setField("Used_", 1);
+        cdsVer.setField("FirstTime_", TDateTime.Now());
+        cdsVer.post();
 
-        dsUser.edit();
-        dsUser.setField("VerifyTimes_", 0);
-        dsUser.post();
+        cdsUser.edit();
+        cdsUser.setField("VerifyTimes_", 0);
+        cdsUser.post();
         return true;
     }
 
@@ -410,7 +400,7 @@ public class SvrUserLogin extends CustomService {
 
             // 发送认证码到手机上
             Record record = getDataOut().getHead();
-            LocalService svr = new LocalService(handle, "SvrNotifyMachineVerify");
+            LocalService svr = new LocalService(this, "SvrNotifyMachineVerify");
             if (svr.exec("verifyCode", verifyCode, "mobile", mobile)) {
                 record.setField("Msg_", String.format("系统已将认证码发送到您尾号为 %s 的手机上，并且该认证码 %d 分钟内有效，请注意查收！",
                         mobile.substring(mobile.length() - 4, mobile.length()), TimeOut));
@@ -525,31 +515,35 @@ public class SvrUserLogin extends CustomService {
         }
     }
 
-    private void updateVerifyCode(SqlQuery ds, String verifyCode, SqlQuery dsUser) {
-        SqlQuery ds1 = new SqlQuery(this);
-        ds1.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
-        ds1.add("where VerifyCode_='%s'", verifyCode);
-        ds1.open();
-        if (ds1.eof()) {
-            dsUser.edit();
-            if (dsUser.getInt("VerifyTimes_") == 6) {
-                // 该账号设置停用
-                dsUser.setField("Enabled_", 0);
-                dsUser.post();
-                throw new RuntimeException("您输入验证码的错误次数已超出规定次数，现账号已被自动停用，若需启用，请您联系客服处理！");
+    private void updateVerifyCode(SqlQuery dataVer, String verifyCode, SqlQuery cdsUser) {
+        SqlQuery cdsVer = new SqlQuery(this);
+        cdsVer.add("select * from %s", SystemTable.get(SystemTable.getDeviceVerify));
+        cdsVer.add("where VerifyCode_='%s'", verifyCode);
+        cdsVer.open();
+
+        if (cdsVer.eof()) {
+            cdsUser.edit();
+            // 停用帐号
+            if (cdsUser.getInt("VerifyTimes_") == 6) {
+                cdsUser.setField("Enabled_", 0);
+                cdsUser.post();
+                throw new RuntimeException(R.asString(this, "您输入验证码的错误次数已超出规定次数，现账号已被自动停用，若需启用，请您联系客服处理"));
             } else {
-                dsUser.setField("VerifyTimes_", dsUser.getInt("VerifyTimes_") + 1);
-                dsUser.post();
-                throw new RuntimeException("没有找到验证码：" + verifyCode);
+                cdsUser.setField("VerifyTimes_", cdsUser.getInt("VerifyTimes_") + 1);
+                cdsUser.post();
+                throw new RuntimeException(String.format(R.asString(this, "没有找到验证码 %s"), verifyCode));
             }
         }
-        if (ds1.getString("MachineCode_") == null || "".equals(ds1.getString("MachineCode_"))) {
-            // 先将此认证记录删除
-            ds1.delete();
-            // 再将该认证码替换之前自动生成的认证码
-            ds.edit();
-            ds.setField("VerifyCode_", verifyCode);
-            ds.post();
+
+        String machineCode = cdsVer.getString("MachineCode_");
+        if (machineCode == null || "".equals(machineCode)) {
+            // 先将此验证码的认证记录删除
+            cdsVer.delete();
+
+            // 再将该认证码替换掉之前自动生成的认证码
+            dataVer.edit();
+            dataVer.setField("VerifyCode_", verifyCode);
+            dataVer.post();
         } else {
             throw new RuntimeException("您输入的验证码有误，请重新输入！");
         }

@@ -152,6 +152,7 @@ public class StartForms implements Filter {
         if ("15202406".equals(form.getHandle().getUserCode()))
             return true;
         String deviceId = form.getClient().getId();
+        // TODO 验证码变量，需要改成静态变量，统一取值
         String verifyCode = form.getRequest().getParameter("verifyCode");
         log.debug(String.format("进行设备认证, deviceId=%s", deviceId));
         String userId = (String) form.getHandle().getProperty("UserID");
