@@ -34,7 +34,7 @@ import cn.cerc.jmis.tools.R;
  * 用于用户登录
  */
 public class SvrUserLogin extends CustomService {
-    private static final Logger log = Logger.getLogger(SqlQuery.class);
+    private static final Logger log = Logger.getLogger(SvrUserLogin.class);
     private static String GuidNull = "";
     private static int Max_Viability = 1;
     public static int TimeOut = 5; // 效验代码超时时间（分钟）
