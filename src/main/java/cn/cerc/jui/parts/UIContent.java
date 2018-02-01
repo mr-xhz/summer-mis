@@ -25,8 +25,9 @@ public class UIContent extends UIComponent {
         html.println("<section role='content'>");
         super.output(html);
         // 输出追加过来的内容
-        for (HtmlContent content : contents)
+        for (HtmlContent content : contents) {
             content.output(html);
+        }
         html.println("</section>");
     }
 

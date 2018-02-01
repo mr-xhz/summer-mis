@@ -152,6 +152,7 @@ public class StartForms implements Filter {
         if ("15202406".equals(form.getHandle().getUserCode()))
             return true;
         String deviceId = form.getClient().getId();
+        // TODO 验证码变量，需要改成静态变量，统一取值
         String verifyCode = form.getRequest().getParameter("verifyCode");
         log.debug(String.format("进行设备认证, deviceId=%s", deviceId));
         String userId = (String) form.getHandle().getProperty("UserID");
@@ -240,7 +241,7 @@ public class StartForms implements Filter {
                 }
             } else {
                 // 检验此设备是否需要设备验证码
-                if (form.getHandle().getProperty("UserID") == null || form.passDevice() || passDevice(form))
+                if (form.getHandle().getProperty("UserID") == null || form.passDevice() || passDevice(form)) {
                     try {
                         if (form.getClient().isPhone()) {
                             try {
@@ -248,14 +249,15 @@ public class StartForms implements Filter {
                             } catch (NoSuchMethodException e) {
                                 method = form.getClass().getMethod(funcCode);
                             }
-                        } else
+                        } else {
                             method = form.getClass().getMethod(funcCode);
+                        }
                         pageOutput = method.invoke(form);
                     } catch (PageException e) {
                         form.setParam("message", e.getMessage());
                         pageOutput = e.getViewFile();
                     }
-                else {
+                } else {
                     log.debug("没有进行认证过，跳转到设备认证页面");
                     pageOutput = new RedirectPage(form, Application.getAppConfig().getFormVerifyDevice());
                 }
