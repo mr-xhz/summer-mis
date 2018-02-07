@@ -45,6 +45,9 @@ public class UIPageSearch extends AbstractJspPage {
         super(form);
         initCssFile();
         initJsFile();
+        if (!this.getForm().getClient().isPhone()) {
+            this.getHeader().getAdvertisement();
+        }
     }
 
     public void addExportFile(String service, String key) {

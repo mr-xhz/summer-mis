@@ -18,6 +18,8 @@ import cn.cerc.jpage.fields.ExpendField;
 import cn.cerc.jpage.grid.lines.AbstractGridLine;
 import cn.cerc.jpage.grid.lines.ExpenderGridLine;
 import cn.cerc.jpage.other.SearchItem;
+import cn.cerc.jui.vcl.UILabel;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 public class UIFormHorizontal extends UIComponent implements DataSource {
     private DataSet dataSet;
@@ -34,6 +36,7 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
     private ButtonField submit;
     private boolean readAll;
     private AbstractGridLine expender;
+    private UILabel title;
 
     public UIFormHorizontal(UIComponent owner, HttpServletRequest request) {
         super(owner);
@@ -43,6 +46,8 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
         request.setAttribute(this.getId(), this);
         this.dataSet = new DataSet();
         dataSet.append();
+        this.title = new UILabel();
+        this.setSearchTitle("搜索查询");
     }
 
     @Override
@@ -83,10 +88,19 @@ public class UIFormHorizontal extends UIComponent implements DataSource {
         this.action = action;
     }
 
+    public void setSearchTitle(String title) {
+        UISpan span = new UISpan();
+        span.setCssClass("ui-title-operate");
+        span.setText("");
+        this.title.setCssClass("ui-title");
+        this.title.setCaption(String.format("%s%s", title, span.toString()));
+    }
+
     @Override
     public void output(HtmlWriter html) {
         readAll();
 
+        title.output(html);
         html.print("<form method=\"%s\" id=\"%s\"", this.method, this.getId());
         if (this.action != null)
             html.print(" action=\"%s\"", this.action);
