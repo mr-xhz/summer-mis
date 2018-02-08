@@ -34,6 +34,7 @@ import cn.cerc.jui.parts.UIToolBar;
 public abstract class AbstractJspPage extends UIComponent implements IPage {
     private String jspFile;
     private IForm form;
+    private String browserCacheVersion;
     private List<String> cssFiles = new ArrayList<>();
     private List<String> scriptFiles = new ArrayList<>();
     private List<HtmlContent> scriptFunctions = new ArrayList<>();
@@ -50,6 +51,7 @@ public abstract class AbstractJspPage extends UIComponent implements IPage {
     public AbstractJspPage(IForm form) {
         super();
         this.setForm(form);
+        this.browserCacheVersion = ServerConfig.getInstance().getProperty("browser.cache.version", "1.0.0.0");
     }
 
     @Override
@@ -193,7 +195,7 @@ public abstract class AbstractJspPage extends UIComponent implements IPage {
     public final HtmlWriter getCssHtml() {
         HtmlWriter html = new HtmlWriter();
         for (String file : cssFiles)
-            html.println("<link href=\"%s\" rel=\"stylesheet\">", file);
+            html.println("<link href=\"%s?v=%s\" rel=\"stylesheet\">", file, browserCacheVersion);
         return html;
     }
 
@@ -203,7 +205,7 @@ public abstract class AbstractJspPage extends UIComponent implements IPage {
 
         // 加入脚本文件
         for (String file : getScriptFiles()) {
-            html.println("<script src=\"%s\"></script>", file);
+            html.println("<script src=\"%s?v=%s\"></script>", file, browserCacheVersion);
         }
         // 加入脚本代码
         List<HtmlContent> scriptCode1 = getScriptCodes();
