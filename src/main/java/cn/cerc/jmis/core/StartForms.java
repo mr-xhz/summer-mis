@@ -155,7 +155,7 @@ public class StartForms implements Filter {
         // TODO 验证码变量，需要改成静态变量，统一取值
         String verifyCode = form.getRequest().getParameter("verifyCode");
         log.debug(String.format("进行设备认证, deviceId=%s", deviceId));
-        String userId = (String) form.getHandle().getProperty("UserID");
+        String userId = (String) form.getHandle().getProperty(Application.userId);
         try (MemoryBuffer buff = new MemoryBuffer(BufferType.getSessionInfo, userId, deviceId)) {
             if (!buff.isNull()) {
                 if (buff.getBoolean("VerifyMachine")) {
@@ -241,7 +241,7 @@ public class StartForms implements Filter {
                 }
             } else {
                 // 检验此设备是否需要设备验证码
-                if (form.getHandle().getProperty("UserID") == null || form.passDevice() || passDevice(form)) {
+                if (form.getHandle().getProperty(Application.userId) == null || form.passDevice() || passDevice(form)) {
                     try {
                         if (form.getClient().isPhone()) {
                             try {
