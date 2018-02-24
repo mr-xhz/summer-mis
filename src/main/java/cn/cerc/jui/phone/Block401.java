@@ -53,10 +53,10 @@ public class Block401 extends UIComponent {
 
         describe.output(html);
         html.print("</div>");
-        html.print("</div>");
         html.print("<div class='info'>");
         remark.output(html);
         button.output(html);
+        html.print("</div>");
         html.print("</div>");
         html.println("</section>");
     }
