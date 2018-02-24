@@ -196,7 +196,7 @@ public class SvrUserLogin extends CustomService {
                 Buff.setField("VerifyMachine", false);
             }
             // 返回值于前台
-            getDataOut().getHead().setField("SessionID_", getProperty("ID"));
+            getDataOut().getHead().setField("SessionID_", getProperty(Application.token));
             getDataOut().getHead().setField("UserID_", getProperty(Application.userId));
             getDataOut().getHead().setField("UserCode_", getUserCode());
             getDataOut().getHead().setField("CorpNo_", handle.getCorpNo());
@@ -221,7 +221,7 @@ public class SvrUserLogin extends CustomService {
             MemoryBuffer.delete(BufferType.getSessionInfo, (String) getProperty(Application.userId), "webclient");
         }
 
-        String token = (String) getProperty("ID");
+        String token = (String) getProperty(Application.token);
         getConnection().execute(String.format("Update %s Set Viability_=-1,LogoutTime_=now() where LoginID_='%s'",
                 SystemTable.get(SystemTable.getCurrentUser), token));
         return true;
@@ -561,7 +561,7 @@ public class SvrUserLogin extends CustomService {
         rs.setField("UserID_", this.getProperty(Application.userId));
         rs.setField("CorpNo_", handle.getCorpNo());
         rs.setField("Account_", getUserCode());
-        rs.setField("LoginID_", this.getProperty("ID"));
+        rs.setField("LoginID_", this.getProperty(Application.token));
         rs.setField("Computer_", computer);
         rs.setField("clientIP_", this.getProperty(Application.clientIP));
         rs.setField("LoginTime_", TDateTime.Now());
