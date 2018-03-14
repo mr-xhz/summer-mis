@@ -12,6 +12,7 @@ public class UrlRecord {
     private String target;
     private Map<String, String> params = new HashMap<>();
     private String hintMsg;
+    private String id;
 
     public UrlRecord() {
     }
@@ -97,8 +98,9 @@ public class UrlRecord {
         return target;
     }
 
-    public void setTarget(String target) {
+    public UrlRecord setTarget(String target) {
         this.target = target;
+        return this;
     }
 
     public String getHintMsg() {
@@ -109,4 +111,12 @@ public class UrlRecord {
         this.hintMsg = hintMsg;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public UrlRecord setId(String id) {
+        this.id = id;
+        return this;
+    }
 }

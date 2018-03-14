@@ -34,6 +34,9 @@ public class UISheetUrl extends UISheet {
         html.println("<div class=\"contents\">");
         for (UrlRecord url : urls) {
             html.print("<a href=\"%s\"", url.getUrl());
+            if (url.getId() != null) {
+                html.print(" id=\"%s\"", url.getId());
+            }
             if (url.getTitle() != null) {
                 html.print(" title=\"%s\"", url.getTitle());
             }
