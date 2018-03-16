@@ -28,7 +28,7 @@ import cn.cerc.jdb.mysql.SqlOperator;
 import cn.cerc.jdb.mysql.SqlQuery;
 import cn.cerc.jdb.mysql.Transaction;
 import cn.cerc.jdb.oss.OssSession;
-import cn.cerc.jmis.tools.R;
+import cn.cerc.jmis.language.R;
 
 /**
  * 用于用户登录

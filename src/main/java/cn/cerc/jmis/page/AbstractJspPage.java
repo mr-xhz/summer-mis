@@ -20,7 +20,7 @@ import cn.cerc.jdb.core.Record;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.other.utils;
-import cn.cerc.jmis.tools.R;
+import cn.cerc.jmis.language.R;
 import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlContent;
 import cn.cerc.jpage.core.HtmlWriter;
