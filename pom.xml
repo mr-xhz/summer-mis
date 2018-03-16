@@ -325,6 +325,13 @@
             <artifactId>flexmark</artifactId>
             <version>0.27.0</version>
         </dependency>
+        <!-- 增加对多语言界面的支持 -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
