@@ -213,6 +213,9 @@ public class SvrUserLogin extends CustomService {
 
     /**
      * 退出系统
+     * 
+     * @return 暂未使用
+     * 
      */
     @Webfunc
     public boolean ExitSystem() {
@@ -306,9 +309,7 @@ public class SvrUserLogin extends CustomService {
         return true;
     }
 
-    /**
-     * return 若返回值为 true，表示已校验，否则表示需要进行认证
-     */
+    // 若返回值为 true，表示已校验，否则表示需要进行认证
     public boolean verifyMachine() throws SecurityCheckException, DataValidateException {
         Record headIn = getDataIn().getHead();
 
@@ -414,12 +415,7 @@ public class SvrUserLogin extends CustomService {
         }
     }
 
-    /**
-     * 
-     * @return 获取用户的移动设备信息
-     * @throws DataValidateException
-     *             参数效验异常
-     */
+    // 获取用户的移动设备信息
     public boolean getMachInfo() throws DataValidateException {
         Record headIn = getDataIn().getHead();
         String userCode = headIn.getString("UserCode_");

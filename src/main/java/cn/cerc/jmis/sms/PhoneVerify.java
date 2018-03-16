@@ -78,11 +78,7 @@ public class PhoneVerify {
         return this;
     }
 
-    /**
-     * 发送验证码
-     * 
-     * @return 0：不需要；1：成功；２：失败
-     */
+    // 发送验证码，result = 0：不需要；1：成功；２：失败
     public SendStatus sendVerify() {
         if (isSecurity()) {
             return SendStatus.UNWANTED; // 不需要
@@ -94,11 +90,7 @@ public class PhoneVerify {
         }
     }
 
-    /**
-     * 
-     * @param 需要检验的的验证码
-     * @return 0: 通过; 1.不通过；2.无法读取
-     */
+    // 需要检验的的验证码 0: 通过; 1.不通过；2.无法读取
     public CheckStatus checkVerify(String value) {
         if (isSecurity()) {
             return CheckStatus.PASS; // 校验通过
@@ -241,7 +233,7 @@ public class PhoneVerify {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
     public static String createRandomNum(int count) {
         // 验证码
         String vcode = "";

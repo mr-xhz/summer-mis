@@ -15,11 +15,7 @@ import cn.cerc.jmis.page.AbstractJspPage;
 public class SecurityEnvironment {
     private static final Logger log = Logger.getLogger(SecurityEnvironment.class);
 
-    /**
-     * 用于Form中，向UI(jsp)传递当前是否安全，若不安全则显示输入验证码画面
-     * 
-     * @param jspPage
-     */
+    // 用于Form中，向UI(jsp)传递当前是否安全，若不安全则显示输入验证码画面
     public static boolean check(AbstractJspPage jspPage) {
         AbstractForm form = (AbstractForm) jspPage.getForm();
         boolean result = isSecurity(form);
@@ -40,9 +36,7 @@ public class SecurityEnvironment {
         return result;
     }
 
-    /**
-     * 后台环境安全检测
-     */
+    // 后台环境安全检测
     public static boolean backCheck(AbstractJspPage jspPage) {
         AbstractForm form = (AbstractForm) jspPage.getForm();
         boolean result = isSecurity(form);
@@ -95,12 +89,7 @@ public class SecurityEnvironment {
         return true;
     }
 
-    /**
-     * 用于Service中，检查若当前环境不安全时，需要检查 验证码是否正确
-     * 
-     * @param service
-     * @throws DataValidateException
-     */
+    // 用于Service中，检查若当前环境不安全时，需要检查 验证码是否正确
     public static void check(AbstractHandle service) throws DataValidateException {
         if (!(service.getHandle() instanceof AbstractForm)) {
             log.error("程序调用错误，需要修正！");
@@ -113,12 +102,7 @@ public class SecurityEnvironment {
         safetyCheck(form);
     }
 
-    /**
-     * 校验短信验证码
-     * 
-     * @param form
-     * @throws DataValidateException
-     */
+    // 校验短信验证码
     private static void safetyCheck(AbstractForm form) throws DataValidateException {
         String securityCode = form.getRequest().getParameter("securityCode");
         if (securityCode == null) {
