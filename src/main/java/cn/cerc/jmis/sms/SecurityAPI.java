@@ -23,7 +23,7 @@ public class SecurityAPI {
         Map<String, String> params = new HashMap<>();
         params.put("user", user);
         params.put("mobile", mobile);
-        String result = CURL.doPost(String.format("%s/forms/FrmSecurity.register", host), params, "UTF-8");
+        String result = CURL.doPost(String.format("%s/forms/security.register", host), params, "UTF-8");
         JSONObject json = JSONObject.fromObject(result);
         if (json.has("result")) {
             this.message = json.getString("message");
@@ -37,8 +37,12 @@ public class SecurityAPI {
     /**
      * 检测用户访问IP或者设备是否是安全
      * 
-     * @param user:访问IP
-     * @param deviceId:设备号
+     * @param user
+     *            访问IP
+     * @param remoteIP
+     *            调用者ip
+     * @param deviceId
+     *            设备号
      * @return true:成功，若失败可用getMessage取得错误信息
      */
     public boolean isSecurity(String user, String remoteIP, String deviceId) {
@@ -46,7 +50,7 @@ public class SecurityAPI {
         params.put("user", user);
         params.put("remoteIP", remoteIP);
         params.put("deviceId", deviceId);
-        String result = CURL.doPost(String.format("%s/forms/FrmSecurity.isSecurity", host), params, "UTF-8");
+        String result = CURL.doPost(String.format("%s/forms/security.isSecurity", host), params, "UTF-8");
         JSONObject json = JSONObject.fromObject(result);
         if (json.has("result")) {
             this.message = json.getString("message");
@@ -60,15 +64,20 @@ public class SecurityAPI {
     /**
      * 发送验证码
      * 
-     * @param user:用户账号
-     * @return true:成功，若失败可用getMessage取得错误信息
+     * @param user
+     *            用户账号
+     * @param remoteIP
+     *            调用者ip
+     * @param deviceId
+     *            设备号
+     * @return true 成功，若失败可用getMessage取得错误信息
      */
     public boolean sendVerify(String user, String remoteIP, String deviceId) {
         Map<String, String> params = new HashMap<>();
         params.put("user", user);
         params.put("remoteIP", remoteIP);
         params.put("deviceId", deviceId);
-        String result = CURL.doPost(String.format("%s/forms/FrmSecurity.sendVerify", host), params, "UTF-8");
+        String result = CURL.doPost(String.format("%s/forms/security.sendVerify", host), params, "UTF-8");
         JSONObject json = JSONObject.fromObject(result);
         if (json.has("result")) {
             this.message = json.getString("message");
@@ -82,17 +91,17 @@ public class SecurityAPI {
     /**
      * 检测验证码
      * 
-     * @param user:用户账号
-     * @param verifyCode:验证码
-     * @param remoteIP:访问IP
-     * @param deviceId:设备号
+     * @param user
+     *            用户账号
+     * @param verifyCode
+     *            验证码
      * @return true:成功，若失败可用getMessage取得错误信息
      */
     public boolean checkVerify(String user, String verifyCode) {
         Map<String, String> params = new HashMap<>();
         params.put("user", user);
         params.put("verifyCode", verifyCode);
-        String result = CURL.doPost(String.format("%s/forms/FrmSecurity.checkVerify", host), params, "UTF-8");
+        String result = CURL.doPost(String.format("%s/forms/security.checkVerify", host), params, "UTF-8");
         JSONObject json = JSONObject.fromObject(result);
         if (json.has("result")) {
             this.message = json.getString("message");
@@ -103,11 +112,20 @@ public class SecurityAPI {
         }
     }
 
+    /**
+     * 根据 token 获取最靠近调用者的主机IP
+     * 
+     * @param token
+     *            聚安应用令牌
+     * @param remoteIP
+     *            调用者ip
+     * @return 调用成功时返回 true
+     */
     public boolean getHostIP(String token, String remoteIP) {
         Map<String, String> params = new HashMap<>();
         params.put("token", token);
         params.put("remoteIP", remoteIP);
-        String result = CURL.doPost(String.format("%s/forms/FrmSecurity.getHostIP", host), params, "UTF-8");
+        String result = CURL.doPost(String.format("%s/forms/security.getHostIP", host), params, "UTF-8");
         JSONObject json = JSONObject.fromObject(result);
         if (json.has("result")) {
             this.message = json.getString("message");
@@ -137,7 +155,7 @@ public class SecurityAPI {
         }
         for (int i = 0; i < args.length; i++)
             params.put("arg" + i, args[0]);
-        String result = CURL.doPost(String.format("%s/forms/FrmSecurity.sendSMS", host), params, "UTF-8");
+        String result = CURL.doPost(String.format("%s/forms/security.sendSMS", host), params, "UTF-8");
         JSONObject json = JSONObject.fromObject(result);
         if (json.has("result")) {
             this.message = json.getString("message");
