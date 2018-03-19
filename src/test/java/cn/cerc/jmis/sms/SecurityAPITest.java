@@ -5,13 +5,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SeucirtyAPITest {
-    private SeucirtyAPI api;
+public class SecurityAPITest {
+    private SecurityAPI api;
 
     @Before
     public void setUp() {
-        SeucirtyAPI.setHost("http://127.0.0.1");
-        api = new SeucirtyAPI();
+        SecurityAPI.setHost("http://127.0.0.1");
+        api = new SecurityAPI();
     }
 
     @Test
@@ -30,14 +30,14 @@ public class SeucirtyAPITest {
 
     @Test
     public void testSendVerify() {
-        boolean result = api.sendVerify("jason");
+        boolean result = api.sendVerify("jason", "127.0.0.1", "abcd");
         System.out.println(api.getMessage());
         assertTrue(result);
     }
 
     @Test
     public void testCheckVerify() {
-        boolean result = api.checkVerify("jason", "246882", "127.0.0.1", "abcd");
+        boolean result = api.checkVerify("jason", "246882");
         System.out.println(api.getMessage());
         assertTrue(result);
     }
