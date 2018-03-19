@@ -16,7 +16,7 @@ public class SeucirtyAPITest {
 
     @Test
     public void testRegister() {
-        boolean result = api.register("jason", "13828832477");
+        boolean result = api.register("jason", "13812345678");
         System.out.println(api.getMessage());
         assertTrue(result);
     }
