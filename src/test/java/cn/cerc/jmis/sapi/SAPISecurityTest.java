@@ -1,17 +1,17 @@
-package cn.cerc.jmis.sms;
+package cn.cerc.jmis.sapi;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class SecurityAPITest {
-    private SecurityAPI api;
+public class SAPISecurityTest {
+    private SAPISecurity api;
 
     @Before
     public void setUp() {
-        SecurityAPI.setHost("http://127.0.0.1");
-        api = new SecurityAPI();
+        SAPISecurity.setHost("http://127.0.0.1");
+        api = new SAPISecurity();
     }
 
     @Test
