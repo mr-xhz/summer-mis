@@ -19,12 +19,14 @@ public class SAPIDDNS extends SAPICustom {
      */
     public boolean getIP(String token, String remoteIP) {
         Map<String, String> params = new HashMap<>();
-        params.put("token", token);
-        params.put("remoteIP", remoteIP);
+        params.put("appId", token);
+        params.put("ip", remoteIP);
         String result = CURL.doPost(String.format("%s/forms/ddns.getIP", getHost()), params, "UTF-8");
         JSONObject json = JSONObject.fromObject(result);
         if (json.has("result")) {
             this.setMessage(json.getString("message"));
+            if (json.getBoolean("result"))
+                this.setData(json.getString("host"));
             return json.getBoolean("result");
         } else {
             this.setMessage(result);

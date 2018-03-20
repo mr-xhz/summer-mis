@@ -1,7 +1,8 @@
 package cn.cerc.jmis.sapi;
 
 public class SAPICustom {
-    private static String host = "http://api.cerc.cn";
+//    private static String host = "http://api.cerc.cn";
+    private static String host = "http://116.62.197.234";
     private Object data;
     private String message;
 
