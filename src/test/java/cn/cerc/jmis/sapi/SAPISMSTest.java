@@ -11,7 +11,7 @@ public class SAPISMSTest {
     @Test
     @Ignore
     public void testSendSMSByMobile() {
-        boolean result = api.sendSMSByMobile("13828832477", "000001", "000000");
+        boolean result = api.sendToMobile("13828832477", "000001", "000000");
         System.out.println(api.getMessage());
         assertTrue("简讯发送失败", result);
     }

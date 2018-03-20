@@ -8,11 +8,11 @@ import net.sf.json.JSONObject;
 
 public class SAPISMS extends SAPICustom {
 
-    public boolean sendSMSByUser(String user, String templateId, String... args) {
+    public boolean sendToUser(String user, String templateId, String... args) {
         return sendSMS(true, user, templateId, args);
     }
 
-    public boolean sendSMSByMobile(String mobile, String templateId, String... args) {
+    public boolean sendToMobile(String mobile, String templateId, String... args) {
         return sendSMS(false, mobile, templateId, args);
     }
 
