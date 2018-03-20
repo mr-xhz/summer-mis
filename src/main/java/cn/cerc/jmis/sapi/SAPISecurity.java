@@ -44,7 +44,7 @@ public class SAPISecurity extends SAPICustom {
     public boolean isSecurity(String user, String remoteIP, String deviceId) {
         Map<String, String> params = new HashMap<>();
         params.put("user", user);
-        params.put("remoteIP", remoteIP);
+        params.put("ip", remoteIP);
         params.put("deviceId", deviceId);
         String result = CURL.doPost(String.format("%s/forms/security.isSecurity", getHost()), params, "UTF-8");
         JSONObject json = JSONObject.fromObject(result);
@@ -71,7 +71,7 @@ public class SAPISecurity extends SAPICustom {
     public boolean sendVerify(String user, String remoteIP, String deviceId) {
         Map<String, String> params = new HashMap<>();
         params.put("user", user);
-        params.put("remoteIP", remoteIP);
+        params.put("ip", remoteIP);
         params.put("deviceId", deviceId);
         String result = CURL.doPost(String.format("%s/forms/security.sendVerify", getHost()), params, "UTF-8");
         JSONObject json = JSONObject.fromObject(result);
