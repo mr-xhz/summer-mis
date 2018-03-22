@@ -50,7 +50,7 @@ public class SvrUserLogin extends CustomService {
         String deviceId = headIn.getString("MachineID_");
         // 判断是否为浏览器登陆
         if (Application.webclient.equals(deviceId)) {
-            throw new SecurityCheckException("系统已不再支持使用web浏览器登录，请使用地藤客户端登录系统！");
+            throw new SecurityCheckException("系统不支持使用web浏览器登录，请使用客户端登录系统！");
         }
 
         String device_name = "";
