@@ -2,7 +2,6 @@ package cn.cerc.jmis.core;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Calendar;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -29,12 +28,11 @@ import cn.cerc.jbean.other.HistoryLevel;
 import cn.cerc.jbean.other.HistoryRecord;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jbean.tools.IAppLogin;
-import cn.cerc.jdb.core.Record;
-import cn.cerc.jdb.core.TDate;
 import cn.cerc.jmis.form.Webpage;
 import cn.cerc.jmis.page.ErrorPage;
 import cn.cerc.jmis.page.JspPage;
 import cn.cerc.jmis.page.RedirectPage;
+import jxl.read.biff.Record;
 
 public class StartForms implements Filter {
 	private static final Logger log = Logger.getLogger(StartForms.class);
@@ -55,7 +53,7 @@ public class StartForms implements Filter {
 		}
 
 		log.info(uri);
-		String childCode = getRequestForm(req);
+		String childCode = getRequestCode(req);
 		if (childCode == null) {
 			req.setAttribute("message", "无效的请求：" + childCode);
 			req.getRequestDispatcher(Application.getAppConfig().getJspErrorFile()).forward(req, resp);
@@ -135,12 +133,12 @@ public class StartForms implements Filter {
 	}
 
 	// 创建登录与权限控制器
-	private IAppLogin createLogin(IForm form) {
+	protected IAppLogin createLogin(IForm form) {
 		return Application.getAppLogin(form);
 	}
 
 	// 创建环境管理控制器
-	private AppHandle createHandle(HttpServletRequest req) {
+	protected AppHandle createHandle(HttpServletRequest req) {
 		return new AppHandle();
 	}
 
@@ -314,12 +312,12 @@ public class StartForms implements Filter {
 				Webpage webpage = method.getAnnotation(Webpage.class);
 				if (webpage != null)
 					timeout = webpage.timeout();
-				saveFormTimeout(form, funcCode, startTime, timeout);
+				checkTimeout(form, funcCode, startTime, timeout);
 			}
 		}
 	}
 
-	private void saveFormTimeout(IForm form, String funcCode, long startTime, long timeout) {
+	protected void checkTimeout(IForm form, String funcCode, long startTime, long timeout) {
 		long totalTime = System.currentTimeMillis() - startTime;
 		if (totalTime > timeout) {
 
@@ -338,7 +336,7 @@ public class StartForms implements Filter {
 		}
 	}
 
-	private String getRequestForm(HttpServletRequest req) {
+	protected String getRequestCode(HttpServletRequest req) {
 		String url = null;
 		String args[] = req.getServletPath().split("/");
 		if (args.length == 2 || args.length == 3) {
