@@ -28,11 +28,11 @@ import cn.cerc.jbean.other.HistoryLevel;
 import cn.cerc.jbean.other.HistoryRecord;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jbean.tools.IAppLogin;
+import cn.cerc.jdb.core.Record;
 import cn.cerc.jmis.form.Webpage;
 import cn.cerc.jmis.page.ErrorPage;
 import cn.cerc.jmis.page.JspPage;
 import cn.cerc.jmis.page.RedirectPage;
-import jxl.read.biff.Record;
 
 public class StartForms implements Filter {
 	private static final Logger log = Logger.getLogger(StartForms.class);
