@@ -11,6 +11,7 @@ import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 
 public class UIHeader extends UIComponent {
+    private static final int MAX_MENUS = 4;
     private UIAdvertisement advertisement; // 可选
     // 页面标题
     private String pageTitle = null;
@@ -18,6 +19,8 @@ public class UIHeader extends UIComponent {
     private UrlRecord homePage;
     // 左边菜单
     private List<UrlRecord> leftMenus = new ArrayList<>();
+    // 左菜单按钮
+    private List<UIBottom> leftBottom = new ArrayList<>();
     // 右边菜单
     private List<UrlRecord> rightMenus = new ArrayList<>();
     // 退出
@@ -37,6 +40,9 @@ public class UIHeader extends UIComponent {
 
     @Override
     public void output(HtmlWriter html) {
+        if (this.leftBottom.size() > MAX_MENUS)
+            throw new RuntimeException(String.format("底部菜单区最多只支持 %d 个菜单项", MAX_MENUS));
+
         html.println("<header role='header'>");
         if (advertisement != null) {
             html.println("<section role='advertisement'>");
@@ -59,6 +65,13 @@ public class UIHeader extends UIComponent {
                 html.print("</li>");
             }
             html.print("</ul>");
+            if (leftBottom.size() > 0) {
+                html.println("<div role='headerButtons'>");
+                for (UIBottom bottom : leftBottom) {
+                    bottom.output(html);
+                }
+                html.println("</div>");
+            }
         }
         html.println("</section>");
 
@@ -165,5 +178,39 @@ public class UIHeader extends UIComponent {
 
     public void setExitUrl(String url) {
         setExitPage(url);
+    }
+
+    public UIBottom addButton() {
+        UIBottom button = new UIBottom(this);
+        leftBottom.add(button);
+        return button;
+    }
+
+    public void addButton(String caption, String url) {
+        this.addButton(caption, url, null);
+    }
+
+    public void addButton(String caption, String url, String iconUrl) {
+        int count = 1;
+        for (Component obj : this.getComponents()) {
+            if (obj instanceof UIBottom) {
+                count++;
+            }
+        }
+        UIBottom item = addButton();
+        item.setCaption(caption);
+        item.setUrl(url);
+        item.setCssClass("bottomBotton");
+        item.setId("button" + count);
+        if (!getForm().getClient().isPhone()) {
+            if (iconUrl == null || "".equals(iconUrl)) {
+                iconUrl = String.format("images/icon%s.png", count);
+            }
+            item.setCaption(String.format("<img src='%s'/>%s", iconUrl, item.getName()));
+        }
+    }
+
+    public IForm getForm() {
+        return ((AbstractJspPage) this.getOwner()).getForm();
     }
 }

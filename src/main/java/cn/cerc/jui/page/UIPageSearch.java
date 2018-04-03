@@ -96,11 +96,12 @@ public class UIPageSearch extends AbstractJspPage {
         out.println("<html>");
         out.println("<head>");
         out.printf("<title>%s</title>\n", this.getForm().getTitle());
-        out.printf("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n");
-        out.printf(
-                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\"/>\n");
-        out.print(this.getCssHtml());
-        out.print(getScriptHtml());
+        out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n");
+        out.println("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=9; IE=8; IE=7;\"/>");
+        out.println(
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0\"/>");
+        out.println(this.getCssHtml());
+        out.println(getScriptHtml());
         out.println("<script>");
         out.println("var Application = new TApplication();");
         out.printf("Application.device = '%s';\n", form.getClient().getDevice());
