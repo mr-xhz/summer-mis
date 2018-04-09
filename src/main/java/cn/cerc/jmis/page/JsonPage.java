@@ -81,8 +81,8 @@ public class JsonPage implements IPage {
     }
 
     public JsonPage setResultMessage(boolean result, String message) {
-        this.add("result", result);
-        this.add("message", message);
+        this.put("result", result);
+        this.put("message", message);
         return this;
     }
 

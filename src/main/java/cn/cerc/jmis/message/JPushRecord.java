@@ -15,6 +15,8 @@ public class JPushRecord {
     private String title;
     private String alert;
     private String msgId;
+    // 极光推送默认声音
+    private String sound = "default";
 
     public JPushRecord(String corpNo, String userCode, String msgId) {
         this.corpNo = corpNo;
@@ -41,12 +43,12 @@ public class JPushRecord {
             int machineType = dataOut.getInt("MachineType_");
             switch (machineType) {
             case 6:
-                push.send(ClientType.IOS, machineCode);
+                push.send(ClientType.IOS, machineCode, this.sound);
                 break;
             case 7:
                 // 过滤掉没有注册IMEI码的移动设备
                 if (!"n_null".equals(machineCode) && !"n_000000000000000".equals(machineCode)) {
-                    push.send(ClientType.Android, machineCode);
+                    push.send(ClientType.Android, machineCode, this.sound);
                 }
                 break;
             default:
@@ -108,6 +110,14 @@ public class JPushRecord {
     public JPushRecord setMsgId(String msgId) {
         this.msgId = msgId;
         return this;
+    }
+
+    public String getSound() {
+        return sound;
+    }
+
+    public void setSound(String sound) {
+        this.sound = sound;
     }
 
 }
