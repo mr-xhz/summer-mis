@@ -40,7 +40,6 @@ public class UIPageDialog extends AbstractJspPage {
 
     @Override
     public void execute() throws ServletException, IOException {
-        this.getFooter(); // 此行代码不能删除！
 
         IForm form = this.getForm();
         HttpServletRequest request = form.getRequest();
