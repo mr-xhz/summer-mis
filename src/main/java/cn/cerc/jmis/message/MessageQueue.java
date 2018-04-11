@@ -19,6 +19,8 @@ public class MessageQueue {
     private StringBuilder content = new StringBuilder();
     private MessageLevel level = MessageLevel.General;
     private int process;
+    // 极光推送消息提示音
+    private String sound;
 
     public MessageQueue() {
     }
@@ -69,6 +71,7 @@ public class MessageQueue {
         headIn.setField("Process_", process);
         headIn.setField("Subject_", subject);
         headIn.setField("Content_", content.toString());
+        headIn.setField("Sound_", sound);
         query.save();
     }
 
@@ -132,6 +135,14 @@ public class MessageQueue {
     public MessageQueue setProcess(int process) {
         this.process = process;
         return this;
+    }
+
+    public String getSound() {
+        return sound;
+    }
+
+    public void setSound(String sound) {
+        this.sound = sound;
     }
 
 }
