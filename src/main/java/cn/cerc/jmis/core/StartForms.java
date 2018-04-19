@@ -43,6 +43,7 @@ public class StartForms implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         String uri = req.getRequestURI();
+        log.info(uri);
 
         // 遇到静太文件直接输出
         if (isStatic(uri)) {
@@ -50,7 +51,6 @@ public class StartForms implements Filter {
             return;
         }
 
-        log.info(uri);
         String childCode = getRequestCode(req);
         if (childCode == null) {
             req.setAttribute("message", "无效的请求：" + childCode);
@@ -109,13 +109,16 @@ public class StartForms implements Filter {
                             log.info(tempStr);
                         }
                         // 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
-                        if (checkEnableTime())
+                        if (checkEnableTime()) {
                             callForm(form, funcCode);
+                        }
                     }
                 } catch (Exception e) {
                     Throwable err = e.getCause();
-                    if (err == null)
+                    if (err == null) {
                         err = e;
+                    }
+                    // 重定向到错误页面
                     req.setAttribute("msg", err.getMessage());
                     ErrorPage opera = new ErrorPage(form, err);
                     opera.execute();
@@ -125,6 +128,7 @@ public class StartForms implements Filter {
             log.error(childCode + ":" + e.getMessage());
             req.setAttribute("message", e.getMessage());
             AppConfig conf = Application.getAppConfig();
+            // 重定向到错误页面
             req.getRequestDispatcher(conf.getJspErrorFile()).forward(req, resp);
             return;
         }
@@ -181,8 +185,10 @@ public class StartForms implements Filter {
     // 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
     protected boolean passDevice(IForm form) {
         // 若是iphone应用商店测试，则跳过验证
-        if (getIphoneAppstoreAccount().equals(form.getHandle().getUserCode()))
+        if (getIphoneAppstoreAccount().equals(form.getHandle().getUserCode())) {
             return true;
+        }
+
         String deviceId = form.getClient().getId();
         // TODO 验证码变量，需要改成静态变量，统一取值
         String verifyCode = form.getRequest().getParameter("verifyCode");
