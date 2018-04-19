@@ -58,7 +58,7 @@ public class PrintQueue {
     }
 
     private String buildQueue() {
-        return userCode + "-print";
+        return "print-" + userCode;
     }
 
     public String getPrinterId() {
