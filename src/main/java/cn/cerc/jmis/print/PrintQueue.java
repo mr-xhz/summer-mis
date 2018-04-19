@@ -16,8 +16,6 @@ public class PrintQueue {
     private int reportNum = 1;
     // 打印机账号
     private String userCode;
-    // 公司别
-    private String corpNo;
 
     public PrintQueue() {
     }
@@ -39,12 +37,8 @@ public class PrintQueue {
         if (userCode == null || "".equals(userCode)) {
             throw new RuntimeException("用户代码不允许为空");
         }
-        String sendCorpNo = corpNo != null ? corpNo : handle.getCorpNo();
-        if ("".equals(sendCorpNo)) {
-            throw new RuntimeException("公司别不允许为空");
-        }
-        String queueCode = buildQueue();
 
+        String queueCode = buildQueue();
         // 将消息发送至阿里云MNS
         QueueQuery query = new QueueQuery(handle);
         query.setQueueMode(QueueMode.append);
@@ -105,13 +99,5 @@ public class PrintQueue {
 
     public void setUserCode(String userCode) {
         this.userCode = userCode;
-    }
-
-    public String getCorpNo() {
-        return corpNo;
-    }
-
-    public void setCorpNo(String corpNo) {
-        this.corpNo = corpNo;
     }
 }
