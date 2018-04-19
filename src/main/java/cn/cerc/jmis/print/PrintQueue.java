@@ -16,6 +16,8 @@ public class PrintQueue {
     private int reportNum = 1;
     // 打印机账号
     private String userCode;
+    // 打印行高
+    private int reportLineHeight = 1;
 
     public PrintQueue() {
     }
@@ -99,5 +101,13 @@ public class PrintQueue {
 
     public void setUserCode(String userCode) {
         this.userCode = userCode;
+    }
+
+    public int getReportLineHeight() {
+        return reportLineHeight;
+    }
+
+    public void setReportLineHeight(int reportLineHeight) {
+        this.reportLineHeight = reportLineHeight;
     }
 }
