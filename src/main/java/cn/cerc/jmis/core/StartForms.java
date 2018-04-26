@@ -43,13 +43,13 @@ public class StartForms implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         String uri = req.getRequestURI();
-        log.info(uri);
 
         // 遇到静太文件直接输出
         if (isStatic(uri)) {
             chain.doFilter(req, resp);
             return;
         }
+        log.info(uri);
 
         String childCode = getRequestCode(req);
         if (childCode == null) {
