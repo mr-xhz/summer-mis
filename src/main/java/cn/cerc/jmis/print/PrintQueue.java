@@ -18,6 +18,8 @@ public class PrintQueue {
     private String userCode;
     // 打印行高
     private int reportLineHeight = 1;
+    // 报表抬头
+    private String reportRptHead = "";
 
     public PrintQueue() {
     }
@@ -56,6 +58,8 @@ public class PrintQueue {
         headIn.setField("_printerId_", printerId);
         headIn.setField("_reportId_", reportId);
         headIn.setField("_reportNum_", reportNum);
+        headIn.setField("_reportLineHeight_", reportLineHeight);
+        headIn.setField("_reportRptHead_", reportRptHead);
         query.save();
     }
 
@@ -109,5 +113,13 @@ public class PrintQueue {
 
     public void setReportLineHeight(int reportLineHeight) {
         this.reportLineHeight = reportLineHeight;
+    }
+
+    public String getReportRptHead() {
+        return reportRptHead;
+    }
+
+    public void setReportRptHead(String reportRptHead) {
+        this.reportRptHead = reportRptHead;
     }
 }
