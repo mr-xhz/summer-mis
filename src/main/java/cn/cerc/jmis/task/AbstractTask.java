@@ -9,6 +9,7 @@ import cn.cerc.jbean.core.Application;
 public abstract class AbstractTask extends AbstractHandle implements Runnable {
     private static final Logger log = Logger.getLogger(AbstractTask.class);
     private String describe;
+    /** 缓存时间/秒 **/
     private int interval;
     private String time = "";
 
@@ -39,6 +40,7 @@ public abstract class AbstractTask extends AbstractHandle implements Runnable {
     /**
      * 外部执行入口
      */
+    @Override
     public void run() {
         try (AppHandle handle = new AppHandle()) {
             this.setHandle(handle);

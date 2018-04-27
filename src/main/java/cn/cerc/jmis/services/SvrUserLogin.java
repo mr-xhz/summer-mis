@@ -1,9 +1,5 @@
 package cn.cerc.jmis.services;
 
-import static cn.cerc.jdb.other.utils.intToStr;
-import static cn.cerc.jdb.other.utils.newGuid;
-import static cn.cerc.jdb.other.utils.random;
-
 import org.apache.log4j.Logger;
 
 import cn.cerc.jbean.client.LocalService;
@@ -28,6 +24,7 @@ import cn.cerc.jdb.mysql.SqlOperator;
 import cn.cerc.jdb.mysql.SqlQuery;
 import cn.cerc.jdb.mysql.Transaction;
 import cn.cerc.jdb.oss.OssSession;
+import cn.cerc.jdb.other.utils;
 import cn.cerc.jmis.language.R;
 
 /**
@@ -173,7 +170,7 @@ public class SvrUserLogin extends CustomService {
                 MemoryBookInfo.clear(corpNo);
             }
 
-            sess.setProperty(Application.token, GuidFixStr(newGuid()));
+            sess.setProperty(Application.token, guidFixStr());
             sess.setProperty(Application.userId, dsUser.getString("ID_"));
             sess.setProperty(Application.bookNo, dsUser.getString("CorpNo_"));
             sess.setProperty(Application.userCode, dsUser.getString("Code_"));
@@ -391,7 +388,7 @@ public class SvrUserLogin extends CustomService {
 
             String verifyCode = "888888";
             if (ServerConfig.getAppLevel() != ServerConfig.appTest) {
-                verifyCode = intToStr(random(900000) + 100000);
+                verifyCode = utils.intToStr(utils.random(900000) + 100000);
             }
 
             cdsVer.edit();
@@ -452,7 +449,7 @@ public class SvrUserLogin extends CustomService {
         ds.append();
         ds.setField("CorpNo_", corpNo);
         ds.setField("UserCode_", userCode);
-        ds.setField("VerifyCode_", intToStr(random(900000) + 100000));
+        ds.setField("VerifyCode_", utils.intToStr(utils.random(900000) + 100000));
         ds.setField("DeadLine_", TDateTime.Now().incDay(1));
         ds.setField("MachineCode_", deviceId);
         if (deviceId.startsWith("i_")) {
@@ -474,7 +471,7 @@ public class SvrUserLogin extends CustomService {
         ds.setField("UpdateDate_", TDateTime.Now());
         ds.setField("AppUser_", userCode);
         ds.setField("AppDate_", TDateTime.Now());
-        ds.setField("UpdateKey_", newGuid());
+        ds.setField("UpdateKey_", utils.newGuid());
         ds.post();
     }
 
@@ -492,7 +489,8 @@ public class SvrUserLogin extends CustomService {
         return true;
     }
 
-    private String GuidFixStr(String guid) {
+    private String guidFixStr() {
+        String guid = utils.newGuid();
         String str = guid.substring(1, guid.length() - 1);
         return str.replaceAll("-", "");
     }
@@ -563,7 +561,7 @@ public class SvrUserLogin extends CustomService {
         rs.setField("LoginTime_", TDateTime.Now());
         rs.setField("ParamValue_", handle.getCorpNo());
         rs.setField("KeyCardID_", GuidNull);
-        rs.setField("Viability_", intToStr(Max_Viability));
+        rs.setField("Viability_", utils.intToStr(Max_Viability));
         rs.setField("LoginServer_", ServerConfig.getAppName());
         rs.setField("Screen_", screen);
         rs.setField("Language_", language);
