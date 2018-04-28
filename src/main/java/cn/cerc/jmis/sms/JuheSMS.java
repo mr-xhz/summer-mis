@@ -12,7 +12,8 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.core.ServerConfig;
 import net.sf.json.JSONObject;
@@ -22,7 +23,7 @@ import net.sf.json.JSONObject;
  **/
 
 public class JuheSMS {
-    private static final Logger log = Logger.getLogger(JuheSMS.class);
+    private static final Logger log = LoggerFactory.getLogger(JuheSMS.class);
     public static final String DEF_CHATSET = "UTF-8";
     public static final int DEF_CONN_TIMEOUT = 5000;
     public static final int DEF_READ_TIMEOUT = 5000;
@@ -55,9 +56,9 @@ public class JuheSMS {
             result = post(url, params, "GET");
             JSONObject object = JSONObject.fromObject(result);
             if (object.getInt("error_code") == 0) {
-                log.info(object.get("result"));
+                log.info("" + object.get("result"));
             } else {
-                log.info(object.get("error_code") + ":" + object.get("reason"));
+                log.info("" + object.get("error_code") + ":" + object.get("reason"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +82,7 @@ public class JuheSMS {
             result = post(url, params, "GET");
             JSONObject object = JSONObject.fromObject(result);
             if (object.getInt("error_code") == 0) {
-                log.info(object.get("result"));
+                log.info("" + object.get("result"));
                 this.message = object.getString("result");
                 log.info(String.format("send: %s, templateId: %s, result: %s", mobile, templateId, message));
                 return true;

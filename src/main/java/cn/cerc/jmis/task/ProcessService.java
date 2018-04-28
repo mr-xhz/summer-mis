@@ -5,7 +5,8 @@ import java.util.TimerTask;
 
 import javax.servlet.ServletContext;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -18,7 +19,7 @@ import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.TDateTime;
 
 public class ProcessService extends TimerTask {
-    private static final Logger log = Logger.getLogger(ProcessService.class);
+    private static final Logger log = LoggerFactory.getLogger(ProcessService.class);
     private static ApplicationContext taskApp;
     private static String taskFile = "classpath:app-tasks.xml";
     private static boolean isRunning = false;
