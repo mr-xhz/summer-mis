@@ -5,12 +5,13 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
 public class RequestData {
-    private static final Logger log = Logger.getLogger(RequestData.class);
+    private static final Logger log = LoggerFactory.getLogger(RequestData.class);
     public static final String appSession_Key = "sid";
     public static final String webclient = "webclient";
     private String sid;

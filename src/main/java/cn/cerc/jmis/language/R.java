@@ -2,7 +2,8 @@ package cn.cerc.jmis.language;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.other.SystemTable;
@@ -12,7 +13,7 @@ import cn.cerc.jdb.core.Utils;
 import cn.cerc.jdb.mysql.SqlQuery;
 
 public class R {
-    private static final Logger log = Logger.getLogger(R.class);
+    private static final Logger log = LoggerFactory.getLogger(R.class);
 
     public static String getLanguage(IHandle handle) {
         Object temp = handle.getProperty(Application.deviceLanguage);

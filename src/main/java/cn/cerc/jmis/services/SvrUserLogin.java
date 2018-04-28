@@ -4,7 +4,8 @@ import static cn.cerc.jdb.other.utils.intToStr;
 import static cn.cerc.jdb.other.utils.newGuid;
 import static cn.cerc.jdb.other.utils.random;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.Application;
@@ -34,7 +35,7 @@ import cn.cerc.jmis.language.R;
  * 用于用户登录
  */
 public class SvrUserLogin extends CustomService {
-    private static final Logger log = Logger.getLogger(SvrUserLogin.class);
+    private static final Logger log = LoggerFactory.getLogger(SvrUserLogin.class);
     private static String GuidNull = "";
     private static int Max_Viability = 1;
     public static int TimeOut = 5; // 效验代码超时时间（分钟）

@@ -8,17 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jdb.core.IHandle;
 
 public class AlipayJs {
-    private static Logger log = Logger.getLogger(AlipayJs.class);
+    private static Logger log = LoggerFactory.getLogger(AlipayJs.class);
     // 申请支付金额
     private String amount;
     // 申请支付订单号

@@ -1,6 +1,7 @@
 package cn.cerc.jmis.queue;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.BookHandle;
@@ -14,7 +15,7 @@ import cn.cerc.jmis.task.AbstractTask;
 import net.sf.json.JSONObject;
 
 public class ProcessQueue extends AbstractTask {
-    private static final Logger log = Logger.getLogger(ProcessQueue.class);
+    private static final Logger log = LoggerFactory.getLogger(ProcessQueue.class);
 
     @Override
     public void execute() throws Exception {

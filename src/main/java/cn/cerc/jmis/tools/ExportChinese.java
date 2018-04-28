@@ -7,14 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.mysql.SqlQuery;
 
 public class ExportChinese {
-    private static final Logger log = Logger.getLogger(ExportChinese.class);
+    private static final Logger log = LoggerFactory.getLogger(ExportChinese.class);
     private List<String> items = new ArrayList<>();
 
     // 添加到数据库

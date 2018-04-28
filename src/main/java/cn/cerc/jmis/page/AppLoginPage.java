@@ -5,7 +5,8 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.AppConfig;
@@ -28,7 +29,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
         super(form);
     }
 
-    private static final Logger log = Logger.getLogger(AppLoginPage.class);
+    private static final Logger log = LoggerFactory.getLogger(AppLoginPage.class);
 
     @Override
     public void init(IForm form) {

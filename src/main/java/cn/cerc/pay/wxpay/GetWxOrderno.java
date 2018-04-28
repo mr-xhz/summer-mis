@@ -13,14 +13,15 @@ import org.apache.http.client.params.ClientPNames;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("deprecation")
 public class GetWxOrderno {
-    private static final Logger log = Logger.getLogger(GetWxOrderno.class);
+    private static final Logger log = LoggerFactory.getLogger(GetWxOrderno.class);
     public static DefaultHttpClient httpclient;
 
     static {
@@ -83,7 +84,7 @@ public class GetWxOrderno {
             String jsonStr = EntityUtils.toString(response.getEntity(), "UTF-8");
             EntityUtils.consume(httpost.getEntity());
             Map map = doXMLParse(jsonStr);
-            log.info(map);
+//            log.info(map);
             code_url = map.get("code_url").toString();
         } catch (Exception e) {
             e.printStackTrace();
