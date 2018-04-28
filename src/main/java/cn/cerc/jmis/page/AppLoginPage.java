@@ -52,12 +52,16 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
                 password = getRequest().getParameter("login_pwd");
                 return checkLogin(userCode, password);
             }
+
             log.debug(String.format("根据 token(%s) 创建 Session", token));
+
             IHandle sess = (IHandle) form.getHandle().getProperty(null);
-            if (sess.init(token))
+            if (sess.init(token)) {
                 return true;
-            if (form.logon())
+            }
+            if (form.logon()) {
                 return true;
+            }
         } catch (Exception e) {
             this.add("loginMsg", e.getMessage());
         }
@@ -146,8 +150,6 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
     }
 
     /**
-     * 
-     * 
      * @return 获取客户端IP地址
      */
     public String getIPAddress() {

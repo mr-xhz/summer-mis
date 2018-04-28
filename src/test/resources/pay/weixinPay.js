@@ -37,7 +37,7 @@ function weixinRecharge(amount, cardNo,body,notifyUrl,payType,orderId, noticeurl
 				onBridgeReady();
 			}
 			if(data.result == 'successAndroid'){
-				JSobj.wxPay(prepaid.appid.toString(), prepaid.mch_id.toString(), 
+				jsAndroid.wxPay(prepaid.appid.toString(), prepaid.mch_id.toString(), 
 						prepaid.prepay_id.toString(), prepaid.nonce_str.toString(), 
 						prepaid.timestamp.toString(), prepaid.sign.toString());
 			}

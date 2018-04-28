@@ -16,6 +16,7 @@ public class UIFooter extends UIComponent {
     private boolean flag = false;
     private UIFooterOperation operation;
     private List<UIBottom> buttons = new ArrayList<>();
+    private boolean showHotKeyName = false; // 是否显示快捷键名称
 
     public UIFooter(UIComponent owner) {
         super(owner);
@@ -107,8 +108,13 @@ public class UIFooter extends UIComponent {
 
         item.setCssClass("bottomBotton");
         item.setId("button" + count);
-        if (!getForm().getClient().isPhone())
-            item.setCaption(String.format("F%s:%s", count, item.getName()));
+        if (!getForm().getClient().isPhone()) {
+            if (showHotKeyName) {
+                item.setCaption(String.format("F%s:%s", count, item.getName()));
+            } else {
+                item.setCaption(item.getName());
+            }
+        }
     }
 
     public UIFooterOperation getOperation() {
