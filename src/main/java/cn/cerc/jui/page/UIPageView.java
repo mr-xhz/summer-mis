@@ -37,8 +37,9 @@ public class UIPageView extends AbstractJspPage {
             List<UrlRecord> rightMenus = getHeader().getRightMenus();
             RightMenus menus = Application.getBean("RightMenus", RightMenus.class);
             menus.setHandle(form.getHandle());
-            for (IMenuBar item : menus.getItems())
+            for (IMenuBar item : menus.getItems()) {
                 item.enrollMenu(form, rightMenus);
+            }
         } else {
             getHeader().getHomePage().setSite(Application.getAppConfig().getFormWelcome());
         }
