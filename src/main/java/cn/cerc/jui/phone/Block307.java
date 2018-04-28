@@ -3,11 +3,11 @@ package cn.cerc.jui.phone;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
-import cn.cerc.jpage.vcl.Image;
-import cn.cerc.jpage.vcl.Span;
+import cn.cerc.jui.parts.UIComponent;
+import cn.cerc.jui.vcl.UIImage;
+import cn.cerc.jui.vcl.ext.UISpan;
 
 /**
  * 三行文字列表显示，右侧带导航栏箭头
@@ -17,77 +17,77 @@ import cn.cerc.jpage.vcl.Span;
  * @author HuangRongjun
  *
  */
-public class Block307 extends Component {
-	private Span title;
-	private UrlRecord url;
-	private Image icon = new Image();
-	private List<String> items = new ArrayList<>();
+public class Block307 extends UIComponent {
+    private UISpan title;
+    private UrlRecord url;
+    private UIImage icon = new UIImage();
+    private List<String> items = new ArrayList<>();
 
-	public Block307(Component owner) {
-		super(owner);
-		title = new Span();
-		title.setText("(title)");
-		title.setRole("title");
+    public Block307(UIComponent owner) {
+        super(owner);
+        title = new UISpan();
+        title.setText("(title)");
+        title.setRole("title");
 
-		url = new UrlRecord();
-		url.setName("(url)");
+        url = new UrlRecord();
+        url.setName("(url)");
 
-		icon.setSrc("jui/phone/block301-rightIcon.png");
-		icon.setRole("right");
-	}
+        icon.setSrc("jui/phone/block301-rightIcon.png");
+        icon.setRole("right");
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		if (items.size() == 0) {
-			for (int i = 0; i < 3; i++) {
-				items.add("line" + i);
-			}
-		}
+    @Override
+    public void output(HtmlWriter html) {
+        if (items.size() == 0) {
+            for (int i = 0; i < 3; i++) {
+                items.add("line" + i);
+            }
+        }
 
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block307'>");
-		html.print("<a href='%s'>", url.getUrl());
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block307'>");
+        html.print("<a href='%s'>", url.getUrl());
 
-		title.output(html);
+        title.output(html);
 
-		for (String line : items) {
-			html.print("<div role='line'>%s</div>", line);
-		}
+        for (String line : items) {
+            html.print("<div role='line'>%s</div>", line);
+        }
 
-		icon.output(html);
+        icon.output(html);
 
-		html.print("</a>");
-		html.print("</div>");
-	}
+        html.print("</a>");
+        html.print("</div>");
+    }
 
-	public Span getTitle() {
-		return title;
-	}
+    public UISpan getTitle() {
+        return title;
+    }
 
-	public UrlRecord getUrl() {
-		return url;
-	}
+    public UrlRecord getUrl() {
+        return url;
+    }
 
-	public void setUrl(UrlRecord url) {
-		this.url = url;
-	}
+    public void setUrl(UrlRecord url) {
+        this.url = url;
+    }
 
-	public Image getIcon() {
-		return icon;
-	}
+    public UIImage getIcon() {
+        return icon;
+    }
 
-	public void setIcon(Image icon) {
-		this.icon = icon;
-	}
+    public void setIcon(UIImage icon) {
+        this.icon = icon;
+    }
 
-	public int size() {
-		return items.size();
-	}
+    public int size() {
+        return items.size();
+    }
 
-	public void addItem(String line) {
-		if (items.size() > 2) {
-			throw new RuntimeException("最多只能放3行信息");
-		}
-		items.add(line);
-	}
+    public void addItem(String line) {
+        if (items.size() > 2) {
+            throw new RuntimeException("最多只能放3行信息");
+        }
+        items.add(line);
+    }
 }

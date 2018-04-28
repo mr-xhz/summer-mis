@@ -1,7 +1,7 @@
 package cn.cerc.jui.phone;
 
-import cn.cerc.jpage.core.Component;
 import cn.cerc.jpage.core.HtmlWriter;
+import cn.cerc.jui.parts.UIComponent;
 
 /**
  * 用于消息明细显示
@@ -11,39 +11,39 @@ import cn.cerc.jpage.core.HtmlWriter;
  * @author HuangRongjun
  *
  */
-public class Block902 extends Component {
-	private String title = "(title)";
-	private String content = "(content)";
+public class Block902 extends UIComponent {
+    private String title = "(title)";
+    private String content = "(content)";
 
-	public Block902(Component owner) {
-		super(owner);
-	}
+    public Block902(UIComponent owner) {
+        super(owner);
+    }
 
-	@Override
-	public void output(HtmlWriter html) {
-		html.println("<!-- %s -->", this.getClass().getName());
-		html.print("<div class='block902'>");
+    @Override
+    public void output(HtmlWriter html) {
+        html.println("<!-- %s -->", this.getClass().getName());
+        html.print("<div class='block902'>");
 
-		html.print("<div role='title'>%s</div>", this.title);
-		html.print("<div role='content'>%s</div>", this.content);
+        html.print("<div role='title'>%s</div>", this.title);
+        html.print("<div role='content'>%s</div>", this.content);
 
-		html.print("</div>");
-	}
+        html.print("</div>");
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
 }

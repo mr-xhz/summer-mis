@@ -10,32 +10,32 @@ import cn.cerc.jbean.form.IPage;
 import cn.cerc.jpage.core.HtmlWriter;
 
 public class HtmlPage implements IPage {
-	private IForm form;
-	private HtmlWriter content = new HtmlWriter();
+    private IForm form;
+    private HtmlWriter content = new HtmlWriter();
 
-	public HtmlPage(IForm form) {
-		super();
-		this.setForm(form);
-	}
+    public HtmlPage(IForm form) {
+        super();
+        this.setForm(form);
+    }
 
-	@Override
-	public void setForm(IForm form) {
-		this.form = form;
-	}
+    @Override
+    public void setForm(IForm form) {
+        this.form = form;
+    }
 
-	@Override
-	public IForm getForm() {
-		return form;
-	}
+    @Override
+    public IForm getForm() {
+        return form;
+    }
 
-	@Override
-	public void execute() throws ServletException, IOException {
-		PrintWriter out = form.getResponse().getWriter();
-		out.print(content.toString());
-	}
+    @Override
+    public void execute() throws ServletException, IOException {
+        PrintWriter out = form.getResponse().getWriter();
+        out.print(content.toString());
+    }
 
-	public HtmlWriter getContent() {
-		return content;
-	}
+    public HtmlWriter getContent() {
+        return content;
+    }
 
 }

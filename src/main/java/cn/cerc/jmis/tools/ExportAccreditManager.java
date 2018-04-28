@@ -6,31 +6,31 @@ import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jexport.excel.AccreditManager;
 
 public class ExportAccreditManager implements AccreditManager {
-	private String securityCode;
-	private String describe;
+    private String securityCode;
+    private String describe;
 
-	@Override
-	public boolean isPass(Object handle) {
-		if (securityCode == null)
-			throw new RuntimeException("securityCode is null");
-		IHandle appHandle = (IHandle) handle;
-		return UserOptionEnabled(appHandle, securityCode);
-	}
+    @Override
+    public boolean isPass(Object handle) {
+        if (securityCode == null)
+            throw new RuntimeException("securityCode is null");
+        IHandle appHandle = (IHandle) handle;
+        return UserOptionEnabled(appHandle, securityCode);
+    }
 
-	public String getSecurityCode() {
-		return securityCode;
-	}
+    public String getSecurityCode() {
+        return securityCode;
+    }
 
-	public void setSecurityCode(String securityCode) {
-		this.securityCode = securityCode;
-	}
+    public void setSecurityCode(String securityCode) {
+        this.securityCode = securityCode;
+    }
 
-	public String getDescribe() {
-		return describe;
-	}
+    public String getDescribe() {
+        return describe;
+    }
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
-	}
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
 
 }

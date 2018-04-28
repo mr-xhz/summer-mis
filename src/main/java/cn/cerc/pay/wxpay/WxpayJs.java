@@ -146,15 +146,24 @@ public class WxpayJs {
     }
 
     public static void main(String[] args) {
-        WxpayJs pay = new WxpayJs(null, (key, def) -> {
-            if (config_appId.equals(key))
-                return "wx8302b6636974854e";
-            else if (config_appSecret.equals(key))
-                return "529da5a3e26339bbf960e91879dfad5c";
-            else if (config_appMachId.equals(key))
-                return "1262880401";
-            else
-                return null;
+        WxpayJs pay = new WxpayJs(null, new IConfig() {
+            
+            @Override
+            public String getProperty(String key) {
+                return this.getProperty(key, null);
+            }
+            
+            @Override
+            public String getProperty(String key, String def) {
+                if (config_appId.equals(key))
+                    return "wx8302b6636974854e";
+                else if (config_appSecret.equals(key))
+                    return "529da5a3e26339bbf960e91879dfad5c";
+                else if (config_appMachId.equals(key))
+                    return "1262880401";
+                else
+                    return null;
+            }
         });
 
         pay.setAmount("0.01");

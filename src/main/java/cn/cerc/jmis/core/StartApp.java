@@ -18,58 +18,58 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 
 public class StartApp implements Filter {
-	// private static final Logger log = Logger.getLogger(AppStart.class);
+    // private static final Logger log = Logger.getLogger(AppStart.class);
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse resp = (HttpServletResponse) response;
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
 
-		String uri = req.getRequestURI();
+        String uri = req.getRequestURI();
 
-		// 处理默认首页问题
-		if (uri.equals("/")) {
-			if (req.getParameter(ClientDevice.deviceId_key) != null)
-				req.getSession().setAttribute(ClientDevice.deviceId_key, req.getParameter(ClientDevice.deviceId_key));
-			if (req.getParameter(ClientDevice.deviceType_key) != null)
-				req.getSession().setAttribute(ClientDevice.deviceType_key,
-						req.getParameter(ClientDevice.deviceType_key));
+        // 处理默认首页问题
+        if (uri.equals("/")) {
+            if (req.getParameter(ClientDevice.deviceId_key) != null)
+                req.getSession().setAttribute(ClientDevice.deviceId_key, req.getParameter(ClientDevice.deviceId_key));
+            if (req.getParameter(ClientDevice.deviceType_key) != null)
+                req.getSession().setAttribute(ClientDevice.deviceType_key,
+                        req.getParameter(ClientDevice.deviceType_key));
 
-			AppConfig conf = Application.getAppConfig();
-			resp.sendRedirect(String.format("/%s/%s", conf.getPathForms(), conf.getFormWelcome()));
-			return;
-		} else if (uri.equals("/MobileConfig")) {
-			if (req.getParameter(ClientDevice.deviceId_key) != null)
-				req.getSession().setAttribute(ClientDevice.deviceId_key, req.getParameter(ClientDevice.deviceId_key));
-			if (req.getParameter(ClientDevice.deviceType_key) != null)
-				req.getSession().setAttribute(ClientDevice.deviceType_key,
-						req.getParameter(ClientDevice.deviceType_key));
-			try {
-				IForm form = Application.getBean("MobileConfig", IForm.class);
-				form.setRequest((HttpServletRequest) request);
-				form.setResponse((HttpServletResponse) response);
-				try (AppHandle handle = new AppHandle()) {
-					handle.setProperty(Application.sessionId, req.getSession().getId());
-					form.setHandle(handle);
-				}
-				IPage page = form.execute();
-				page.execute();
-			} catch (Exception e) {
-				resp.getWriter().print(e.getMessage());
-			}
-			return;
-		}
+            AppConfig conf = Application.getAppConfig();
+            resp.sendRedirect(String.format("/%s/%s", conf.getPathForms(), conf.getFormWelcome()));
+            return;
+        } else if (uri.equals("/MobileConfig")) {
+            if (req.getParameter(ClientDevice.deviceId_key) != null)
+                req.getSession().setAttribute(ClientDevice.deviceId_key, req.getParameter(ClientDevice.deviceId_key));
+            if (req.getParameter(ClientDevice.deviceType_key) != null)
+                req.getSession().setAttribute(ClientDevice.deviceType_key,
+                        req.getParameter(ClientDevice.deviceType_key));
+            try {
+                IForm form = Application.getBean("MobileConfig", IForm.class);
+                form.setRequest((HttpServletRequest) request);
+                form.setResponse((HttpServletResponse) response);
+                try (AppHandle handle = new AppHandle()) {
+                    handle.setProperty(Application.sessionId, req.getSession().getId());
+                    form.setHandle(handle);
+                }
+                IPage page = form.execute();
+                page.execute();
+            } catch (Exception e) {
+                resp.getWriter().print(e.getMessage());
+            }
+            return;
+        }
 
-		chain.doFilter(req, resp);
-	}
+        chain.doFilter(req, resp);
+    }
 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
 
-	}
+    }
 
-	@Override
-	public void destroy() {
+    @Override
+    public void destroy() {
 
-	}
+    }
 }
