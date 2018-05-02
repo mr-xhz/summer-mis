@@ -1,6 +1,7 @@
 package cn.cerc.jmis.sms;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.other.BufferType;
 import cn.cerc.jbean.other.MemoryBuffer;
@@ -11,7 +12,7 @@ import cn.cerc.jdb.mysql.SqlQuery;
 import cn.cerc.jmis.language.R;
 
 public class PhoneVerify {
-    private static final Logger log = Logger.getLogger(PhoneVerify.class);
+    private static final Logger log = LoggerFactory.getLogger(PhoneVerify.class);
 
     public static final String ERROR_1 = " 分钟内验证码有效，可继续使用，请勿頻繁发送";
     public static final String ERROR_2 = "没有发送验证码";

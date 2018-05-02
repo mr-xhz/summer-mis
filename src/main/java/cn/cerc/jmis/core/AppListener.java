@@ -6,11 +6,12 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebListener
 public class AppListener implements HttpSessionListener {
-    private static final Logger log = Logger.getLogger(AppListener.class);
+    private static final Logger log = LoggerFactory.getLogger(AppListener.class);
 
     @Override
     public void sessionCreated(HttpSessionEvent hse) {

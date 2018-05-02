@@ -129,8 +129,13 @@ public abstract class AbstractJspPage extends UIComponent implements IPage {
         // 检查是否存在相对应的语言版本
         String langCode = form == null ? Application.LangageDefault : R.getLanguage(form.getHandle());
         String langFile = String.format("%s-%s.%s", fileName, langCode, extName);
-        if (fileExists(rootPath + langFile))
+        if (fileExists(rootPath + langFile)) {
             return langFile;
+        }
+
+        // 发送消息
+        String msg = form.getParam("message", "");
+        getRequest().setAttribute("message", msg == null ? "" : msg.replaceAll("\r\n", "<br/>"));
 
         return jspFile;
     }

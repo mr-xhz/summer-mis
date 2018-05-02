@@ -11,11 +11,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //使用外部驱动:
 public class StartTasksExternal implements Filter {
-    private static final Logger log = Logger.getLogger(StartTasksExternal.class);
+    private static final Logger log = LoggerFactory.getLogger(StartTasksExternal.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

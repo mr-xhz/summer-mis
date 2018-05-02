@@ -3,14 +3,15 @@ package cn.cerc.jmis.language;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
 
 public class ResourceBuffer {
-    private static final Logger log = Logger.getLogger(ResourceBuffer.class);
+    private static final Logger log = LoggerFactory.getLogger(ResourceBuffer.class);
     private String lang;
     private static Map<String, String> items = new HashMap<>();
 

@@ -5,7 +5,8 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.AppConfig;
@@ -28,7 +29,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
         super(form);
     }
 
-    private static final Logger log = Logger.getLogger(AppLoginPage.class);
+    private static final Logger log = LoggerFactory.getLogger(AppLoginPage.class);
 
     @Override
     public void init(IForm form) {
@@ -51,12 +52,16 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
                 password = getRequest().getParameter("login_pwd");
                 return checkLogin(userCode, password);
             }
+
             log.debug(String.format("根据 token(%s) 创建 Session", token));
+
             IHandle sess = (IHandle) form.getHandle().getProperty(null);
-            if (sess.init(token))
+            if (sess.init(token)) {
                 return true;
-            if (form.logon())
+            }
+            if (form.logon()) {
                 return true;
+            }
         } catch (Exception e) {
             this.add("loginMsg", e.getMessage());
         }
@@ -145,8 +150,6 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
     }
 
     /**
-     * 
-     * 
      * @return 获取客户端IP地址
      */
     public String getIPAddress() {

@@ -12,7 +12,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
@@ -33,7 +34,7 @@ import cn.cerc.jmis.page.JspPage;
 import cn.cerc.jmis.page.RedirectPage;
 
 public class StartForms implements Filter {
-    private static final Logger log = Logger.getLogger(StartForms.class);
+	private static final Logger log = LoggerFactory.getLogger(StartForms.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -49,8 +50,8 @@ public class StartForms implements Filter {
             chain.doFilter(req, resp);
             return;
         }
-
         log.info(uri);
+
         String childCode = getRequestCode(req);
         if (childCode == null) {
             req.setAttribute("message", "无效的请求：" + childCode);
@@ -109,13 +110,16 @@ public class StartForms implements Filter {
                             log.info(tempStr);
                         }
                         // 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
-                        if (checkEnableTime())
+                        if (checkEnableTime()) {
                             callForm(form, funcCode);
+                        }
                     }
                 } catch (Exception e) {
                     Throwable err = e.getCause();
-                    if (err == null)
+                    if (err == null) {
                         err = e;
+                    }
+                    // 重定向到错误页面
                     req.setAttribute("msg", err.getMessage());
                     ErrorPage opera = new ErrorPage(form, err);
                     opera.execute();
@@ -125,6 +129,7 @@ public class StartForms implements Filter {
             log.error(childCode + ":" + e.getMessage());
             req.setAttribute("message", e.getMessage());
             AppConfig conf = Application.getAppConfig();
+            // 重定向到错误页面
             req.getRequestDispatcher(conf.getJspErrorFile()).forward(req, resp);
             return;
         }
@@ -181,8 +186,10 @@ public class StartForms implements Filter {
     // 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
     protected boolean passDevice(IForm form) {
         // 若是iphone应用商店测试，则跳过验证
-        if (getIphoneAppstoreAccount().equals(form.getHandle().getUserCode()))
+        if (getIphoneAppstoreAccount().equals(form.getHandle().getUserCode())) {
             return true;
+        }
+
         String deviceId = form.getClient().getId();
         // TODO 验证码变量，需要改成静态变量，统一取值
         String verifyCode = form.getRequest().getParameter("verifyCode");
@@ -362,10 +369,10 @@ public class StartForms implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
-    }
+	}
 
-    @Override
-    public void destroy() {
+	@Override
+	public void destroy() {
 
-    }
+	}
 }
