@@ -6,7 +6,7 @@
     <version>1.4.2</version>
     <properties>
         <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
-        <org.hibernate.version>4.3.5.Final</org.hibernate.version>
+        <org.hibernate.version>5.2.17.Final</org.hibernate.version>
         <org.springframework.version>5.0.5.RELEASE</org.springframework.version>
         <quartz.version>2.3.0</quartz.version>
     </properties>
@@ -286,21 +286,6 @@
             <groupId>alipay</groupId>
             <artifactId>alipay-sdk</artifactId>
             <version>java20170411150054</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.jpush.api</groupId>
-            <artifactId>jpush-client</artifactId>
-            <version>3.2.11</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jcl-over-slf4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.google.code.gson</groupId>
-                    <artifactId>gson</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- <dependency> -->
         <!-- <groupId>org.codehaus.plexus</groupId> -->
