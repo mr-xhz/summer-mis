@@ -1,7 +1,5 @@
 package cn.cerc.jui.phone;
 
-import org.apache.commons.lang.StringUtils;
-
 import cn.cerc.jpage.core.HtmlWriter;
 import cn.cerc.jpage.core.UrlRecord;
 import cn.cerc.jui.parts.UIComponent;
@@ -39,7 +37,7 @@ public class Block119 extends UIComponent {
         html.print("</a>");
         html.print("</div>");
         html.print("</li>");
-        if (!StringUtils.isBlank(this.rightImage.getSrc()) && !StringUtils.isBlank(this.rightTitle.getText())) {
+        if (!isBlank(this.rightImage.getSrc()) && !isBlank(this.rightTitle.getText())) {
             html.print("<li>");
             html.print("<div class='item'>");
             html.print("<a href='%s'>", this.rightUrl.getUrl());
@@ -51,6 +49,10 @@ public class Block119 extends UIComponent {
         }
         html.print("</ul>");
         html.print("</div>");
+    }
+
+    private boolean isBlank(String text) {
+        return text == null || "".equals(text);
     }
 
     public UrlRecord getLeftUrl() {
