@@ -120,6 +120,12 @@
             <groupId>cn.cerc</groupId>
             <artifactId>summer-bean</artifactId>
             <version>1.4.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-lang</groupId>
+                    <artifactId>commons-lang</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.jexcelapi</groupId>
@@ -172,11 +178,11 @@
             <artifactId>pinyin4j</artifactId>
             <version>2.5.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>2.0.0-RC1</version>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.dom4j</groupId> -->
+<!--             <artifactId>dom4j</artifactId> -->
+<!--             <version>2.0.0-RC1</version> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
@@ -243,6 +249,12 @@
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
             <version>${quartz.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.mchange</groupId>
+                    <artifactId>c3p0</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- end -->
         <dependency>
@@ -280,6 +292,12 @@
             <groupId>net.sf.json-lib</groupId>
             <artifactId>json-lib</artifactId>
             <version>2.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-lang</groupId>
+                    <artifactId>commons-lang</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- 支付宝支持 -->
         <dependency>
