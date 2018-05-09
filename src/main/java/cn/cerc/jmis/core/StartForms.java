@@ -12,8 +12,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 
@@ -34,7 +33,7 @@ import cn.cerc.jmis.page.JspPage;
 import cn.cerc.jmis.page.RedirectPage;
 
 public class StartForms implements Filter {
-	private static final Logger log = LoggerFactory.getLogger(StartForms.class);
+    private static final Logger log = Logger.getLogger(StartForms.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -105,8 +104,7 @@ public class StartForms implements Filter {
                     if (page.checkSecurity(info.getSid())) {
                         String corpNo = handle.getCorpNo();
                         if (null != corpNo && !"".equals(corpNo)) {
-                            String tempStr = String.format("调用菜单: %s(%s), 用户：%s", form.getTitle(), formId,
-                                    handle.getUserName());
+                            String tempStr = String.format("调用菜单: %s(%s), 帐套：%s", form.getTitle(), formId, corpNo);
                             log.info(tempStr);
                         }
                         // 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
@@ -369,10 +367,10 @@ public class StartForms implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
-	}
+    }
 
-	@Override
-	public void destroy() {
+    @Override
+    public void destroy() {
 
-	}
+    }
 }

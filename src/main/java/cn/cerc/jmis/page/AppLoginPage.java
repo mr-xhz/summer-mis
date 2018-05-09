@@ -139,14 +139,14 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
      *             异常
      */
     private String getAccountFromTel(IHandle handle, String tel) throws ServletException, IOException {
-        LocalService app = new LocalService(handle);
-        app.setService("SvrUserLogin.getUserCodeByMobile");
-        app.getDataIn().getHead().setField("UserCode_", tel);
-        if (!app.exec()) {
-            Record headOut = app.getDataOut().getHead();
+        LocalService svr = new LocalService(handle);
+        svr.setService("SvrUserLogin.getUserCodeByMobile");
+        svr.getDataIn().getHead().setField("UserCode_", tel);
+        if (!svr.exec()) {
+            Record headOut = svr.getDataOut().getHead();
             throw new RuntimeException(headOut.getString("Msg_"));
         } else
-            return app.getDataOut().getHead().getString("UserCode_");
+            return svr.getDataOut().getHead().getString("UserCode_");
     }
 
     /**
