@@ -91,4 +91,9 @@ public class JsonPage implements IPage {
             items = new HashMap<>();
         return items;
     }
+
+    public void setItems(Map<String, Object> items) {
+        this.items = items;
+    }
+
 }
