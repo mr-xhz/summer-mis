@@ -34,6 +34,7 @@ import cn.cerc.jmis.page.JspPage;
 import cn.cerc.jmis.page.RedirectPage;
 
 public class StartForms implements Filter {
+
     private static final Logger log = LoggerFactory.getLogger(StartForms.class);
 
     @Override
