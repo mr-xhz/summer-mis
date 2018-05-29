@@ -104,15 +104,7 @@ public class StartForms implements Filter {
 
                     IAppLogin page = createLogin(form);
                     if (page.checkSecurity(info.getSid())) {
-                        String corpNo = handle.getCorpNo();
-                        if (null != corpNo && !"".equals(corpNo)) {
-                            String tempStr = String.format("调用菜单: %s(%s), 帐套：%s", form.getTitle(), formId, corpNo);
-                            log.info(tempStr);
-                        }
-                        // 进行维护检查，在每月的最后一天晚上11点到下个月的第一天早上5点，不允许使用系统
-                        if (checkEnableTime()) {
-                            callForm(form, funcCode);
-                        }
+                        callForm(form, funcCode);
                     }
                 } catch (Exception e) {
                     Throwable err = e.getCause();
