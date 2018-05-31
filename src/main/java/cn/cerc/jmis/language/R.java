@@ -18,14 +18,14 @@ public class R {
     public static String getLanguage(IHandle handle) {
         Object temp = handle.getProperty(Application.deviceLanguage);
         if (temp == null || "".equals(temp)) {
-            log.info("handle language is null");
+            log.debug("handle language is null");
             Object request = handle.getProperty("request");
             if (request != null) {
-                log.info(request.getClass().getName());
+                log.debug(request.getClass().getName());
                 if (request instanceof HttpServletRequest) {
                     HttpServletRequest req = (HttpServletRequest) request;
                     temp = req.getSession().getAttribute(Application.deviceLanguage);
-                    log.info("session language value " + temp);
+                    log.debug("session language value " + temp);
                 }
             }
         }
