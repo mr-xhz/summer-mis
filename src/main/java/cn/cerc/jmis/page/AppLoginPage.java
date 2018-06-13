@@ -109,7 +109,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
                 result = true;
             }
         } else {
-            // 登陆验证失败，进行判断，手机号为空，则回到登陆页，手机不为空，密码为空，则跳到发送验证码页面
+            // 登录验证失败，进行判断，手机号为空，则回到登录页，手机不为空，密码为空，则跳到发送验证码页面
             String mobile = Utils.safeString(app.getDataOut().getHead().getString("Mobile_"));
             if (mobile == null || "".equals(mobile)) {
                 log.debug(String.format("用户帐号(%s)与密码认证失败", userCode));

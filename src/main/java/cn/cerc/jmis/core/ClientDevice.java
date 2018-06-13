@@ -144,10 +144,21 @@ public class ClientDevice implements IClient {
         return request;
     }
 
+    @Override
+    public IForm getForm() {
+        return form;
+    }
+
+    @Override
+    public void setForm(IForm form) {
+        this.form = form;
+        this.setRequest(form.getRequest());
+    }
+
     public void setRequest(HttpServletRequest request) {
         this.request = request;
         // 保存设备类型
-        deviceType = (String) request.getParameter(deviceType_key);
+        deviceType = request.getParameter(deviceType_key);
         if (deviceType == null || "".equals(deviceType))
             deviceType = (String) request.getSession().getAttribute(deviceType_key);
         if (deviceType != null && !"".equals(deviceType))
@@ -175,16 +186,5 @@ public class ClientDevice implements IClient {
             sid = (String) request.getSession().getAttribute(RequestData.appSession_Key);
         // 设置sid
         setSid(sid);
-    }
-
-    @Override
-    public IForm getForm() {
-        return form;
-    }
-
-    @Override
-    public void setForm(IForm form) {
-        this.form = form;
-        this.setRequest(form.getRequest());
     }
 }
