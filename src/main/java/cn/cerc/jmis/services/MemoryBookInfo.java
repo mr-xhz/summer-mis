@@ -3,9 +3,9 @@ package cn.cerc.jmis.services;
 import com.google.gson.Gson;
 
 import cn.cerc.jbean.client.LocalService;
-import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.other.BookVersion;
 import cn.cerc.jbean.other.BufferType;
+import cn.cerc.jdb.cache.Buffer;
 import cn.cerc.jdb.cache.IMemcache;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
@@ -14,7 +14,7 @@ public class MemoryBookInfo {
     private static final String buffVersion = "3";
 
     public static BookInfoRecord get(IHandle handle, String corpNo) {
-        IMemcache buff = Application.getMemcache();
+        IMemcache buff = Buffer.getMemcache();
 
         String tmp = (String) buff.get(getBuffKey(corpNo));
         if (tmp == null || "".equals(tmp)) {
@@ -105,7 +105,7 @@ public class MemoryBookInfo {
     }
 
     public static void clear(String corpNo) {
-        IMemcache buff = Application.getMemcache();
+        IMemcache buff = Buffer.getMemcache();
         buff.delete(getBuffKey(corpNo));
     }
 

@@ -10,10 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jbean.other.BufferType;
 import cn.cerc.jbean.rds.StubHandle;
+import cn.cerc.jdb.cache.Buffer;
 import cn.cerc.jdb.cache.IMemcache;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.TDateTime;
@@ -85,7 +85,7 @@ public class ProcessService extends TimerTask {
                 int timeOut = task.getInterval();
                 String buffKey = String.format("%d.%s.%s", BufferType.getObject.ordinal(), this.getClass().getName(),
                         task.getClass().getName());
-                IMemcache buff = Application.getMemcache();
+                IMemcache buff = Buffer.getMemcache();
                 if (buff.get(buffKey) != null)
                     continue;
 
