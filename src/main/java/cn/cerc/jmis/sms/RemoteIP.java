@@ -2,7 +2,8 @@ package cn.cerc.jmis.sms;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jdb.core.IHandle;
 
@@ -13,7 +14,7 @@ import cn.cerc.jdb.core.IHandle;
  *
  */
 public class RemoteIP {
-    private static final Logger log = Logger.getLogger(RemoteIP.class);
+    private static final Logger log = LoggerFactory.getLogger(RemoteIP.class);
 
     public static String get(IHandle handle) {
         HttpServletRequest request = (HttpServletRequest) handle.getProperty("request");

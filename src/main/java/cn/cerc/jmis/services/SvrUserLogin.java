@@ -1,6 +1,7 @@
 package cn.cerc.jmis.services;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.Application;
@@ -31,7 +32,7 @@ import cn.cerc.jmis.language.R;
  * 用于用户登录
  */
 public class SvrUserLogin extends CustomService {
-    private static final Logger log = Logger.getLogger(SvrUserLogin.class);
+    private static final Logger log = LoggerFactory.getLogger(SvrUserLogin.class);
     private static String GuidNull = "";
     private static int Max_Viability = 1;
     public static int TimeOut = 5; // 效验代码超时时间（分钟）
@@ -45,7 +46,7 @@ public class SvrUserLogin extends CustomService {
         getDataOut().getHead().setField("errorNo", 0);
 
         String deviceId = headIn.getString("MachineID_");
-        // 判断是否为浏览器登陆
+        // 判断是否为浏览器登录
         if (Application.webclient.equals(deviceId)) {
             throw new SecurityCheckException("系统不支持使用web浏览器登录，请使用客户端登录系统！");
         }
@@ -110,7 +111,7 @@ public class SvrUserLogin extends CustomService {
         String password = headIn.getString("Password_");
         if (password == null || "".equals(password)) {
             if ("".equals(dsUser.getString("Mobile_"))) {
-                throw new RuntimeException("您没有登记手机号，请您输入密码进行登陆！");
+                throw new RuntimeException("您没有登记手机号，请您输入密码进行登录！");
             } else {
                 getDataOut().getHead().setField("Mobile_", dsUser.getString("Mobile_"));
                 throw new RuntimeException("用户密码不允许为空！");
@@ -299,7 +300,7 @@ public class SvrUserLogin extends CustomService {
 
         if (ds.size() != 1) {
             headOut.setField("Msg_",
-                    String.format("您的手机绑定了多个帐号，无法登录，建议您使用主账号登陆后，在【我的账号--更改我的资料】菜单中设置主附帐号关系后再使用手机号登录！", userCode));
+                    String.format("您的手机绑定了多个帐号，无法登录，建议您使用主账号登录后，在【我的账号--更改我的资料】菜单中设置主附帐号关系后再使用手机号登录！", userCode));
             return false;
         }
         headOut.setField("UserCode_", ds.getString("Code_"));

@@ -1,6 +1,7 @@
 package cn.cerc.jmis.queue;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.AutoService;
 import cn.cerc.jbean.client.LocalService;
@@ -18,7 +19,7 @@ import cn.cerc.jmis.task.AbstractTask;
  *
  */
 public class ProcessService extends AbstractTask {
-    private static final Logger log = Logger.getLogger(ProcessService.class);
+    private static final Logger log = LoggerFactory.getLogger(ProcessService.class);
 
     @Override
     public void execute() {

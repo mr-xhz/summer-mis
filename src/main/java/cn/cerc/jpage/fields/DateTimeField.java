@@ -9,6 +9,7 @@ public class DateTimeField extends AbstractField {
     public DateTimeField(UIComponent owner, String name, String field) {
         super(owner, name, 10);
         this.setField(field);
+        this.setAlign("center");
     }
 
     public DateTimeField(UIComponent owner, String name, String field, int width) {

@@ -23,8 +23,9 @@ public class OptionField extends AbstractField {
     }
 
     public OptionField add(String key, String text) {
-        if (this.defaultValue == null)
+        if (this.defaultValue == null) {
             defaultValue = key;
+        }
         items.put(key, text);
         return this;
     }

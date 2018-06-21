@@ -3,7 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.cerc</groupId>
     <artifactId>summer-mis</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
+    <properties>
+        <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+        <org.hibernate.version>4.3.5.Final</org.hibernate.version>
+        <org.springframework.version>4.2.6.RELEASE</org.springframework.version>
+        <quartz.version>2.2.1</quartz.version>
+        <cn.cerc.summer.version>1.4.1</cn.cerc.summer.version>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -97,13 +104,6 @@
         <!-- 测试源码编译后的 class 文件的路径配置 -->
         <testOutputDirectory>target/test-classes</testOutputDirectory>
     </build>
-    <properties>
-        <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
-        <org.hibernate.version>4.3.5.Final</org.hibernate.version>
-        <org.springframework.version>4.2.6.RELEASE</org.springframework.version>
-        <quartz.version>2.2.1</quartz.version>
-        <cn.cerc.summer.version>1.4.0</cn.cerc.summer.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -133,6 +133,12 @@
             <groupId>net.sourceforge.jexcelapi</groupId>
             <artifactId>jxl</artifactId>
             <version>2.6.12</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.itextpdf</groupId>
@@ -169,11 +175,11 @@
             <artifactId>commons-pool</artifactId>
             <version>1.5.6</version>
         </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>log4j</groupId> -->
+<!--             <artifactId>log4j</artifactId> -->
+<!--             <version>1.2.17</version> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
@@ -214,27 +220,6 @@
             <artifactId>gson</artifactId>
             <version>2.6.2</version>
         </dependency>
-        <!-- spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
         <!-- spring 线程池 -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -247,21 +232,11 @@
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
             <version>${quartz.version}</version>
         </dependency>
         <!-- end -->
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
-        </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -280,17 +255,18 @@
         <dependency>
             <groupId>com.aliyun.mns</groupId>
             <artifactId>aliyun-sdk-mns</artifactId>
-            <version>1.1.0</version>
+            <version>1.1.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aliyun.openservices</groupId>
-            <artifactId>ots-public</artifactId>
-            <version>2.1.2</version>
         </dependency>
         <dependency>
             <groupId>net.sf.json-lib</groupId>

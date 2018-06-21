@@ -1,6 +1,7 @@
 package cn.cerc.jmis.sms;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.core.AbstractHandle;
 import cn.cerc.jbean.core.DataValidateException;
@@ -13,7 +14,7 @@ import cn.cerc.jmis.language.R;
 import cn.cerc.jmis.page.AbstractJspPage;
 
 public class SecurityEnvironment {
-    private static final Logger log = Logger.getLogger(SecurityEnvironment.class);
+    private static final Logger log = LoggerFactory.getLogger(SecurityEnvironment.class);
 
     // 用于Form中，向UI(jsp)传递当前是否安全，若不安全则显示输入验证码画面
     public static boolean check(AbstractJspPage jspPage) {

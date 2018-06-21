@@ -21,7 +21,8 @@ public class TaskTrackCurrentUser extends AbstractTask {
 
         // 清除所有未正常登录的用户记录
         StringBuffer sql2 = new StringBuffer();
-        sql2.append(String.format("update %s set Viability_=-1 ", SystemTable.getCurrentUser));
+        sql2.append(String.format("update %s set Viability_=-1,LogoutTime_='%s' ", SystemTable.getCurrentUser,
+                TDateTime.Now()));
 
         // 在线达24小时以上的用户
         sql2.append("where (Viability_>0) and (");

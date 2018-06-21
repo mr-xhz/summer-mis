@@ -5,7 +5,8 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.AppConfig;
@@ -28,7 +29,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
         super(form);
     }
 
-    private static final Logger log = Logger.getLogger(AppLoginPage.class);
+    private static final Logger log = LoggerFactory.getLogger(AppLoginPage.class);
 
     @Override
     public void init(IForm form) {
@@ -108,7 +109,7 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
                 result = true;
             }
         } else {
-            // 登陆验证失败，进行判断，手机号为空，则回到登陆页，手机不为空，密码为空，则跳到发送验证码页面
+            // 登录验证失败，进行判断，手机号为空，则回到登录页，手机不为空，密码为空，则跳到发送验证码页面
             String mobile = Utils.safeString(app.getDataOut().getHead().getString("Mobile_"));
             if (mobile == null || "".equals(mobile)) {
                 log.debug(String.format("用户帐号(%s)与密码认证失败", userCode));
@@ -138,14 +139,14 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
      *             异常
      */
     private String getAccountFromTel(IHandle handle, String tel) throws ServletException, IOException {
-        LocalService app = new LocalService(handle);
-        app.setService("SvrUserLogin.getUserCodeByMobile");
-        app.getDataIn().getHead().setField("UserCode_", tel);
-        if (!app.exec()) {
-            Record headOut = app.getDataOut().getHead();
+        LocalService svr = new LocalService(handle);
+        svr.setService("SvrUserLogin.getUserCodeByMobile");
+        svr.getDataIn().getHead().setField("UserCode_", tel);
+        if (!svr.exec()) {
+            Record headOut = svr.getDataOut().getHead();
             throw new RuntimeException(headOut.getString("Msg_"));
         } else
-            return app.getDataOut().getHead().getString("UserCode_");
+            return svr.getDataOut().getHead().getString("UserCode_");
     }
 
     /**
