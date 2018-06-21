@@ -112,6 +112,18 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.aliyun.openservices</groupId>
+            <artifactId>ots-public</artifactId>
+            <version>2.1.2</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
@@ -120,12 +132,6 @@
         <dependency>
             <groupId>cn.cerc</groupId>
             <artifactId>summer-db</artifactId>
-            <version>${cn.cerc.summer.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>cn.cerc</groupId>
-            <artifactId>summer-bean</artifactId>
             <version>${cn.cerc.summer.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -216,6 +222,11 @@
             <version>2.6.2</version>
         </dependency>
         <!-- spring 线程池 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
