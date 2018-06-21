@@ -6,8 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
-import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jdb.core.IHandle;
+import cn.cerc.jdb.core.ServerConfig;
 
 public class AlipayNotify {
     // 合作身份者ID

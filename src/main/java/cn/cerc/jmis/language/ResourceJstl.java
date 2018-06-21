@@ -15,8 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.core.Application;
-import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jdb.core.IHandle;
+import cn.cerc.jdb.core.ServerConfig;
 
 public class ResourceJstl extends SimpleTagSupport {
     private static final Logger log = LoggerFactory.getLogger(ResourceJstl.class);

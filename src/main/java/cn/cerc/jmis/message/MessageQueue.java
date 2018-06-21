@@ -1,8 +1,9 @@
 package cn.cerc.jmis.message;
 
-import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
+import cn.cerc.jdb.core.ServerConfig;
+import cn.cerc.jdb.core.ServerVersion;
 import cn.cerc.jdb.queue.QueueDB;
 import cn.cerc.jdb.queue.QueueMode;
 import cn.cerc.jdb.queue.QueueQuery;
@@ -12,6 +13,7 @@ import cn.cerc.jdb.queue.QueueQuery;
  * 
  * 注意：公司别和用户代码必须配套
  */
+@Deprecated
 public class MessageQueue {
     private String corpNo;
     private String userCode;
@@ -57,7 +59,7 @@ public class MessageQueue {
         // 将消息发送至阿里云MNS
         QueueQuery query = new QueueQuery(handle);
         query.setQueueMode(QueueMode.append);
-        if (ServerConfig.getAppLevel() == ServerConfig.appTest) {
+        if (ServerConfig.getVersion() == ServerVersion.develop) {
             query.add("select * from %s", QueueDB.MESSAGE_TEST);
         } else {
             query.add("select * from %s", QueueDB.MESSAGE);

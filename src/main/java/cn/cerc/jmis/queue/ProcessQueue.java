@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.BookHandle;
-import cn.cerc.jbean.core.ServerConfig;
+import cn.cerc.jdb.core.ServerConfig;
 import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.queue.QueueMode;
 import cn.cerc.jdb.queue.QueueQuery;

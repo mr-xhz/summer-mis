@@ -175,11 +175,6 @@
             <artifactId>commons-pool</artifactId>
             <version>1.5.6</version>
         </dependency>
-<!--         <dependency> -->
-<!--             <groupId>log4j</groupId> -->
-<!--             <artifactId>log4j</artifactId> -->
-<!--             <version>1.2.17</version> -->
-<!--         </dependency> -->
         <dependency>
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
@@ -290,11 +285,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- <dependency> -->
-        <!-- <groupId>org.codehaus.plexus</groupId> -->
-        <!-- <artifactId>plexus-interpolation</artifactId> -->
-        <!-- <version>1.14</version> -->
-        <!-- </dependency> -->
         <!-- 支持docs,使用markdown技术 -->
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>

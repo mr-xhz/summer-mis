@@ -5,7 +5,7 @@ import java.util.Timer;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import cn.cerc.jbean.core.ServerConfig;
+import cn.cerc.jdb.core.ServerConfig;
 
 //使用内 部驱动定时任务
 public class StartTasksInternal implements ServletContextListener {

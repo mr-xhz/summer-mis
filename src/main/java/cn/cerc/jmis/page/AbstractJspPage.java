@@ -11,12 +11,12 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import cn.cerc.jbean.core.Application;
-import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.form.IPage;
 import cn.cerc.jbean.other.MemoryBuffer;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.Record;
+import cn.cerc.jdb.core.ServerConfig;
 import cn.cerc.jdb.core.TDate;
 import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.other.utils;
@@ -51,7 +51,8 @@ public abstract class AbstractJspPage extends UIComponent implements IPage {
     public AbstractJspPage(IForm form) {
         super();
         this.setForm(form);
-        this.browserCacheVersion = ServerConfig.getInstance().getProperty("browser.cache.version", "1.0.0.0");
+        ServerConfig config = ServerConfig.getInstance();
+        this.browserCacheVersion = config.getProperty("browser.cache.version", "1.0.0.0");
     }
 
     @Override

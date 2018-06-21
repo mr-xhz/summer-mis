@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomHandle;
-import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jbean.form.IForm;
+import cn.cerc.jdb.core.ServerConfig;
 import cn.cerc.jmis.form.AbstractForm;
 import cn.cerc.jmis.page.AbstractJspPage;
 import cn.cerc.jmis.page.ExportFile;

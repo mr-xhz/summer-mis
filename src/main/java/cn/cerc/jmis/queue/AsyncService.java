@@ -7,10 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.IServiceProxy;
-import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
+import cn.cerc.jdb.core.ServerConfig;
+import cn.cerc.jdb.core.ServerVersion;
 import cn.cerc.jdb.queue.QueueDB;
 import cn.cerc.jdb.queue.QueueQuery;
 import cn.cerc.jdb.queue.QueueSession;
@@ -98,7 +99,7 @@ public class AsyncService implements IServiceProxy {
         if (this.process == 2) {
             // 返回消息的编号插入到阿里云消息队列
             QueueQuery ds = new QueueQuery(handle);
-            if (ServerConfig.getAppLevel() == ServerConfig.appTest) {
+            if (ServerConfig.getVersion() == ServerVersion.develop) {
                 ds.add("select * from %s", QueueDB.TEST);
             } else {
                 ds.add("select * from %s", QueueSession.defaultQueue);
