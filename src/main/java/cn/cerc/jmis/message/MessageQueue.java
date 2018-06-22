@@ -59,7 +59,7 @@ public class MessageQueue {
         // 将消息发送至阿里云MNS
         QueueQuery query = new QueueQuery(handle);
         query.setQueueMode(QueueMode.append);
-        if (ServerConfig.getVersion() == ServerVersion.develop) {
+        if (ServerConfig.getVersion() == ServerVersion.test) {
             query.add("select * from %s", QueueDB.MESSAGE_TEST);
         } else {
             query.add("select * from %s", QueueDB.MESSAGE);
