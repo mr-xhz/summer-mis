@@ -12,6 +12,7 @@ public class BookInfoRecord {
     private String startHost;
     private String contact;
     private boolean authentication;
+    private String industry;
 
     public int getStatus() {
         return status;
@@ -99,5 +100,13 @@ public class BookInfoRecord {
 
     public void setAuthentication(boolean authentication) {
         this.authentication = authentication;
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
     }
 }
