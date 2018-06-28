@@ -8,6 +8,7 @@ import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.core.CustomService;
 import cn.cerc.jbean.core.DataValidateException;
+import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jbean.core.Webfunc;
 import cn.cerc.jbean.other.BookVersion;
 import cn.cerc.jbean.other.BufferType;
@@ -17,7 +18,6 @@ import cn.cerc.jbean.tools.MD5;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
-import cn.cerc.jdb.core.ServerConfig;
 import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.jiguang.ClientType;
 import cn.cerc.jdb.mysql.BuildQuery;
@@ -387,7 +387,10 @@ public class SvrUserLogin extends CustomService {
             cdsVer.open();
             DataValidateException.stopRun("系统出错，请您重新进入系统！", cdsVer.size() != 1);
 
-            String verifyCode = utils.intToStr(utils.random(900000) + 100000);
+            String verifyCode = "888888";
+            if (ServerConfig.getAppLevel() != ServerConfig.appTest) {
+                verifyCode = utils.intToStr(utils.random(900000) + 100000);
+            }
 
             cdsVer.edit();
             cdsVer.setField("VerifyCode_", verifyCode);
