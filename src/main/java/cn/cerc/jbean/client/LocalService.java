@@ -69,7 +69,11 @@ public class LocalService implements IServiceProxy {
 
     @Override
     public String getMessage() {
-        return message.replaceAll("'", "\"");
+        if (message != null) {
+            return message.replaceAll("'", "\"");
+        } else {
+            return null;
+        }
     }
 
     public void setMessage(String message) {
