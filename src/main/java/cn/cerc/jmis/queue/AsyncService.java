@@ -99,7 +99,7 @@ public class AsyncService implements IServiceProxy {
         if (this.process == 2) {
             // 返回消息的编号插入到阿里云消息队列
             QueueQuery ds = new QueueQuery(handle);
-            if (ServerConfig.getVersion() == ServerVersion.develop) {
+            if (ServerConfig.getVersion() == ServerVersion.test) {
                 ds.add("select * from %s", QueueDB.TEST);
             } else {
                 ds.add("select * from %s", QueueSession.defaultQueue);

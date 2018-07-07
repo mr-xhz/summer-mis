@@ -105,7 +105,7 @@ public class LocalService implements IServiceProxy {
 
         try {
             if (!"AppSessionRestore.byUserCode".equals(this.serviceCode)
-                    || !"SvrUserMessages.getWaitList".equals(this.serviceCode)) {
+                    && !"SvrUserMessages.getWaitList".equals(this.serviceCode)) {
                 log.info(this.serviceCode);
             }
             if (ServerConfig.getVersion() == ServerVersion.master) {
