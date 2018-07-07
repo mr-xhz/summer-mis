@@ -5,8 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import cn.cerc.jbean.client.LocalService;
 import cn.cerc.jbean.core.BookHandle;
+import cn.cerc.jbean.other.SystemTable;
 import cn.cerc.jdb.core.ServerConfig;
-import cn.cerc.jdb.core.TDateTime;
+import cn.cerc.jdb.mysql.BatchScript;
 import cn.cerc.jdb.queue.QueueMode;
 import cn.cerc.jdb.queue.QueueQuery;
 import cn.cerc.jdb.queue.QueueSession;
@@ -23,9 +24,9 @@ public class ProcessQueue extends AbstractTask {
         query.setQueueMode(QueueMode.recevie);
         query.add("select * from %s ", QueueSession.defaultQueue);
         query.open();
-        if (!query.getActive())
+        if (!query.getActive()) {
             return;
-        query.remove();
+        }
 
         // 建立服务执行环境
         String corpNo = query.getHead().getString("_corpNo_");
@@ -56,18 +57,19 @@ public class ProcessQueue extends AbstractTask {
         String msgId = query.getHead().getString("_queueId_");
         JSONObject content = JSONObject.fromObject(query.getHead().getString("_content_"));
 
-        LocalService app = new LocalService(bh, "SvrUserMessages.updateAsyncService");
+        // 更新消息状态
+        BatchScript bs = new BatchScript(this);
         if (svr.exec()) {
-            content.element("processTime", TDateTime.Now());
-            content.element("dataOut", svr.getDataOut().getJSON());
-            if (!app.exec("msgId", msgId, "process", MessageProcess.ok.ordinal(), "content", content.toString()))
-                log.error(app.getMessage());
+            bs.add("update %s set Process_=%s,Content_='%s' where UID_=%s", SystemTable.getUserMessages,
+                    MessageProcess.ok.ordinal(), content.toString(), msgId);
         } else {
-            content.element("processTime", TDateTime.Now());
-            content.element("dataOut", svr.getDataOut().getJSON());
-            if (!app.exec("msgId", msgId, "process", MessageProcess.error.ordinal(), "content", content.toString()))
-                log.error(app.getMessage());
+            bs.add("update %s set Process_=%s,Content_='%s' where UID_=%s", SystemTable.getUserMessages,
+                    MessageProcess.error.ordinal(), content.toString(), msgId);
         }
+        bs.exec();
+
+        // 移除队列
+        query.remove();
     }
 
     @Override
