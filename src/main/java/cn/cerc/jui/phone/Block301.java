@@ -24,7 +24,7 @@ public class Block301 extends UIComponent {
     public Block301(UIComponent owner) {
         super(owner);
         operator = new UrlRecord();
-        leftIcon.setSrc("jui/phone/block301-leftIcon.jpg");
+        leftIcon.setSrc("images/ditenglogo.png");
         leftIcon.setRole("icon");
 
         rightIcon.setSrc("jui/phone/block301-rightIcon.png");
