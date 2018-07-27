@@ -296,7 +296,7 @@ public class SvrUserLogin extends CustomService {
             SqlQuery ds = new SqlQuery(this);
             ds.add("select oi.CorpNo_,oi.ShortName_,a.Code_,a.Name_ from %s a ", getUserInfo);
             ds.add("inner join %s oi on a.CorpNo_=oi.CorpNo_", getBookInfo);
-            ds.add("inner join %s na on na.SupCode_='%s' and na.CusCode_=oi.CorpNo_", supCorpNo);
+            ds.add("inner join scmnetaccredit na on na.SupCode_='%s' and na.CusCode_=oi.CorpNo_", supCorpNo);
             ds.add("where a.Enabled_=1 and oi.Status_<3 ");
             ds.add("and a.Mobile_='%s'", headIn.getString("Mobile_"));
             ds.open();
