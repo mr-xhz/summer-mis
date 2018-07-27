@@ -1,5 +1,8 @@
 package cn.cerc.jmis.services;
 
+import static cn.cerc.jbean.other.SystemTable.getBookInfo;
+import static cn.cerc.jbean.other.SystemTable.getUserInfo;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,7 +11,6 @@ import cn.cerc.jbean.core.Application;
 import cn.cerc.jbean.core.CustomHandle;
 import cn.cerc.jbean.core.CustomService;
 import cn.cerc.jbean.core.DataValidateException;
-import cn.cerc.jbean.core.ServerConfig;
 import cn.cerc.jbean.core.Webfunc;
 import cn.cerc.jbean.other.BookVersion;
 import cn.cerc.jbean.other.BufferType;
@@ -18,6 +20,7 @@ import cn.cerc.jbean.tools.MD5;
 import cn.cerc.jdb.core.DataSet;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
+import cn.cerc.jdb.core.ServerConfig;
 import cn.cerc.jdb.core.TDateTime;
 import cn.cerc.jdb.jiguang.ClientType;
 import cn.cerc.jdb.mysql.BuildQuery;
@@ -285,6 +288,22 @@ public class SvrUserLogin extends CustomService {
         if ("".equals(userCode)) {
             headOut.setField("Msg_", "手机号不允许为空！");
             return false;
+        }
+        ServerConfig config = new ServerConfig();
+        String supCorpNo = config.getProperty("vine.mall.supCorpNo", "");
+        // 判断该手机号绑定的账号，是否有supCorpNo的下游，专用App登录
+        if (!"".equals(supCorpNo)) {
+            SqlQuery ds = new SqlQuery(this);
+            ds.add("select oi.CorpNo_,oi.ShortName_,a.Code_,a.Name_ from %s a ", getUserInfo);
+            ds.add("inner join %s oi on a.CorpNo_=oi.CorpNo_", getBookInfo);
+            ds.add("inner join %s na on na.SupCode_='%s' and na.CusCode_=oi.CorpNo_", supCorpNo);
+            ds.add("where a.Enabled_=1 and oi.Status_<3 ");
+            ds.add("and a.Mobile_='%s'", headIn.getString("Mobile_"));
+            ds.open();
+            if (ds.eof()) {
+                headOut.setField("Msg_", String.format("您的手机号绑定的账号中，不存在该上游%s的下游账套！", supCorpNo));
+                return false;
+            }
         }
 
         SqlQuery ds = new SqlQuery(this);
