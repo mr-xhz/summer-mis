@@ -85,6 +85,22 @@ public class SvrUserLogin extends CustomService {
         }
 
         String corpNo = dsUser.getString("CorpNo_");
+        ServerConfig config = new ServerConfig();
+        String supCorpNo = config.getProperty("vine.mall.supCorpNo", "");
+        // 判断该手机号绑定的账号，是否有supCorpNo的下游，专用App登录
+        if (!"".equals(supCorpNo)) {
+            SqlQuery ds = new SqlQuery(this);
+            ds.add("select oi.CorpNo_,oi.ShortName_,a.Code_,a.Name_ from %s a ", getUserInfo);
+            ds.add("inner join %s oi on a.CorpNo_=oi.CorpNo_", getBookInfo);
+            ds.add("inner join scmnetaccredit na on na.SupCode_='%s' and na.CusCode_=oi.CorpNo_", supCorpNo);
+            ds.add("where a.Enabled_=1 and oi.Status_<3 ");
+            ds.add("and a.Mobile_='%s'", dsUser.getString("Mobile_"));
+            ds.open();
+            if (ds.eof()) {
+                throw new SecurityCheckException(String.format("您不是该上游%s的下游客户，不允许登录！", supCorpNo));
+            }
+        }
+
         BookInfoRecord buff = MemoryBookInfo.get(this, corpNo);
         if (buff == null) {
             throw new SecurityCheckException(String.format("没有找到注册的帐套  %s ", corpNo));
@@ -288,22 +304,6 @@ public class SvrUserLogin extends CustomService {
         if ("".equals(userCode)) {
             headOut.setField("Msg_", "手机号不允许为空！");
             return false;
-        }
-        ServerConfig config = new ServerConfig();
-        String supCorpNo = config.getProperty("vine.mall.supCorpNo", "");
-        // 判断该手机号绑定的账号，是否有supCorpNo的下游，专用App登录
-        if (!"".equals(supCorpNo)) {
-            SqlQuery ds = new SqlQuery(this);
-            ds.add("select oi.CorpNo_,oi.ShortName_,a.Code_,a.Name_ from %s a ", getUserInfo);
-            ds.add("inner join %s oi on a.CorpNo_=oi.CorpNo_", getBookInfo);
-            ds.add("inner join scmnetaccredit na on na.SupCode_='%s' and na.CusCode_=oi.CorpNo_", supCorpNo);
-            ds.add("where a.Enabled_=1 and oi.Status_<3 ");
-            ds.add("and a.Mobile_='%s'", userCode);
-            ds.open();
-            if (ds.eof()) {
-                headOut.setField("Msg_", String.format("您的手机号绑定的账号中，不存在该上游%s的下游账套！", supCorpNo));
-                return false;
-            }
         }
 
         SqlQuery ds = new SqlQuery(this);
