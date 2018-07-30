@@ -15,6 +15,7 @@ import cn.cerc.jbean.form.IForm;
 import cn.cerc.jbean.tools.IAppLogin;
 import cn.cerc.jdb.core.IHandle;
 import cn.cerc.jdb.core.Record;
+import cn.cerc.jdb.core.ServerConfig;
 import cn.cerc.jdb.core.Utils;
 import cn.cerc.jmis.core.ClientDevice;
 import cn.cerc.jmis.form.AbstractForm;
@@ -38,6 +39,11 @@ public class AppLoginPage extends AbstractJspPage implements IAppLogin {
         this.setJspFile(conf.getJspLoginFile());
         this.add("homePage", conf.getFormWelcome());
         this.add("needVerify", "false");
+        ServerConfig config = new ServerConfig();
+        String logoUrl = config.getProperty("vine.mall.logoUrl", "");
+        if (!"".equals(logoUrl)) {
+            this.add("logoUrl", logoUrl);
+        }
     }
 
     @Override
