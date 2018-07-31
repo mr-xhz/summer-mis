@@ -94,7 +94,11 @@ public class SvrUserLogin extends CustomService {
             ds.add("inner join %s oi on a.CorpNo_=oi.CorpNo_", getBookInfo);
             ds.add("inner join scmnetaccredit na on na.SupCode_='%s' and na.CusCode_=oi.CorpNo_", supCorpNo);
             ds.add("where a.Enabled_=1 and oi.Status_<3 ");
-            ds.add("and a.Mobile_='%s'", dsUser.getString("Mobile_"));
+            if (!"".equals(dsUser.getString("Mobile_"))) {
+                ds.add("and a.Mobile_='%s'", dsUser.getString("Mobile_"));
+            } else {
+                ds.add("and a.Code_='%s'", userCode);
+            }
             ds.open();
             if (ds.eof()) {
                 throw new SecurityCheckException(String.format("您不是该上游%s的下游客户，不允许登录！", supCorpNo));
