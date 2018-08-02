@@ -61,7 +61,7 @@ public class UrlRecord {
     }
 
     public String getUrl() {
-        StringBuffer sl = new StringBuffer();
+        StringBuilder sl = new StringBuilder();
         if (site != null)
             sl.append(site);
 

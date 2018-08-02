@@ -22,7 +22,7 @@ public class RemoteServiceTest {
     @Ignore
     public void test() {
         RemoteService app = new RemoteService();
-        // app.setHost("r1.knowall.cn");
+        // app.setHost("r1.diteng.site");
         app.setService("SvrUserLogin.check");
         DataSet datain = app.getDataIn();
         Record head = datain.getHead();

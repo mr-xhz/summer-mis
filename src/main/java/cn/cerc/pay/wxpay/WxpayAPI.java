@@ -157,7 +157,7 @@ public class WxpayAPI {
                 else if (config_appMachId.equals(key))
                     return "1262880401";
                 else if (config_appRootSite.equals(key))
-                    return "m.knowall.cn";
+                    return "m.diteng.site";
                 else
                     return null;
             }
