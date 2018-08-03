@@ -245,8 +245,8 @@ public class StartForms implements Filter {
                 throw new RuntimeException("对不起，您没有权限执行此功能！");
             }
 
-            // 若是iphone应用商店测试，则跳过设备认证的判断，用于专用测试账号
-            if (getIphoneAppstoreAccount().equals(request.getParameter("login_usr"))) {
+            // 专用测试账号则跳过设备认证的判断
+            if (isExperienceAccount(request)) {
                 try {
                     if (form.getClient().isPhone()) {
                         try {
@@ -314,6 +314,11 @@ public class StartForms implements Filter {
         }
     }
 
+    protected boolean isExperienceAccount(HttpServletRequest request) {
+        return getIphoneAppstoreAccount().equals(request.getParameter("login_usr"))
+                || "16307405".equals(request.getParameter("login_usr"));
+    }
+
     protected void checkTimeout(IForm form, String funcCode, long startTime, long timeout) {
         long totalTime = System.currentTimeMillis() - startTime;
         if (totalTime > timeout) {
@@ -353,7 +358,7 @@ public class StartForms implements Filter {
         return url;
     }
 
-    // iphone 上架时专用测试帐号
+    // iphone 上架时专用测试帐号以及专业版体验账号
     protected String getIphoneAppstoreAccount() {
         return "15202406";
     }
