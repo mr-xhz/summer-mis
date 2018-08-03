@@ -177,8 +177,8 @@ public class StartForms implements Filter {
 
     // 是否在当前设备使用此菜单，如：检验此设备是否需要设备验证码
     protected boolean passDevice(IForm form) {
-        // 若是iphone应用商店测试，则跳过验证
-        if (getIphoneAppstoreAccount().equals(form.getHandle().getUserCode())) {
+        // 若是iPhone应用商店测试或地藤体验账号则跳过验证
+        if (isExperienceAccount(form)) {
             return true;
         }
 
@@ -246,7 +246,7 @@ public class StartForms implements Filter {
             }
 
             // 专用测试账号则跳过设备认证的判断
-            if (isExperienceAccount(request)) {
+            if (isExperienceAccount(form)) {
                 try {
                     if (form.getClient().isPhone()) {
                         try {
@@ -314,9 +314,9 @@ public class StartForms implements Filter {
         }
     }
 
-    protected boolean isExperienceAccount(HttpServletRequest request) {
-        return getIphoneAppstoreAccount().equals(request.getParameter("login_usr"))
-                || "16307405".equals(request.getParameter("login_usr"));
+    protected boolean isExperienceAccount(IForm form) {
+        return getIphoneAppstoreAccount().equals(form.getHandle().getUserCode())
+                || "16307405".equals(form.getHandle().getUserCode());
     }
 
     protected void checkTimeout(IForm form, String funcCode, long startTime, long timeout) {
