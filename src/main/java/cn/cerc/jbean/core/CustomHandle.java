@@ -19,7 +19,7 @@ public class CustomHandle implements IHandle, AutoCloseable {
     private static final Logger log = LoggerFactory.getLogger(CustomHandle.class);
     private Map<String, IConnection> connections = new HashMap<>();
     private Map<String, Object> params = new HashMap<>();
-
+    
     public CustomHandle() {
         params.put(Application.sessionId, "");
         params.put(Application.ProxyUsers, "");
@@ -200,4 +200,5 @@ public class CustomHandle implements IHandle, AutoCloseable {
     public void setConnections(Map<String, IConnection> connections) {
         this.connections = connections;
     }
+    
 }
